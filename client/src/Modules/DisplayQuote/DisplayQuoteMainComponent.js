@@ -1,14 +1,13 @@
-import React from "react";
-import QuoteDisplay from "Modules/DisplayQuote/Components/QuoteDisplay/QuoteDisplay.js";
-import MoodPage from "Modules/DisplayQuote/Components/MoodPage/MoodPage.js";
-import DisplayQuoteState from "Modules/DisplayQuote/State/DisplayQuoteState.js";
+import React from 'react';
+import ToggleMoodDisplay from 'Modules/DisplayQuote/ToggleMoodDisplay.js';
+
+import DisplayQuoteState from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 const DisplayQuoteMainComponent = () => {
-	return (
-		<DisplayQuoteState>
-			<MoodPage />
-			<QuoteDisplay />
-		</DisplayQuoteState>
-	);
+  return (
+    <DisplayQuoteState>
+      <ToggleMoodDisplay />
+    </DisplayQuoteState>
+  );
 };
 
 export default DisplayQuoteMainComponent;

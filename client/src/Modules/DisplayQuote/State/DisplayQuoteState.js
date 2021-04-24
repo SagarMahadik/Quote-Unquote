@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useEffect } from 'react';
+import React, { useReducer, useContext, useEffect, useState } from 'react';
 import {
   DisplayQuoteContext,
   DisplayQuoteDispatchContext
@@ -23,11 +23,20 @@ const DisplayQuoteState = ({ children }) => {
       quotesByTag: [],
       quotesByAuthor: [],
       filterQuotesList: []
-    }
+    },
+    displayQuotes: false,
+    currentQuote: []
   };
   const [state, dispatch] = useReducer(DisplayQuoteReducer, initialState);
 
-  const { tagList, authorList, selectedData, filteredQuotes } = state;
+  const {
+    tagList,
+    authorList,
+    selectedData,
+    filteredQuotes,
+    displayQuotes,
+    currentQuote
+  } = state;
 
   const setAuthorsState = authorData => {
     if (authorData.length > 0) {
@@ -70,7 +79,14 @@ const DisplayQuoteState = ({ children }) => {
 
   return (
     <DisplayQuoteContext.Provider
-      value={{ tagList, authorList, selectedData, filteredQuotes }}
+      value={{
+        tagList,
+        authorList,
+        selectedData,
+        filteredQuotes,
+        displayQuotes,
+        currentQuote
+      }}
     >
       <DisplayQuoteDispatchContext.Provider value={dispatch}>
         {children}

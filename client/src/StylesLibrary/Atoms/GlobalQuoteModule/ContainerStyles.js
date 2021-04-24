@@ -1,49 +1,49 @@
-import styled from "styled-components/macro";
+import styled from 'styled-components/macro';
 
 export const RowContainer = styled.div`
-	max-width: 500px;
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	height: auto;
-	flex-wrap: wrap;
-	align-items: center;
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  flex-wrap: wrap;
+  align-items: center;
 `;
 
 export const ColumnContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	max-width: 600px;
-	margin: auto;
-	border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  border-radius: 5px;
 `;
 
 export const CenterAlignedColumnContainer = styled(ColumnContainer)`
-	align-items: center;
-	justify-content: center;
-	margin-top: ${(props) => props.marginTop};
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  margin-top: ${props => props.marginTop};
 `;
 
 export const CenterAlignedColumnContainerWithShadowBackground = styled(
-	CenterAlignedColumnContainer
+  CenterAlignedColumnContainer
 )`
-	height: 100vh;
-	width: 94%;
-	margin-top: 12px;
-	background: #e7eaef;
-	border: 2px solid #e7eaef;
-	box-sizing: border-box;
-	box-shadow: 4px 4px 8px 2px rgba(0, 0, 0, 0.25), -4px -4px 16px 2px #ffffff,
-		inset -2px -2px 8px 2px #ffffff,
-		inset 4px 4px 8px 2px rgba(81, 78, 78, 0.5);
-	border-radius: 5px;
+  height: 100vh;
+  width: 94%;
+  margin-top: 12px;
+  background: #e7eaef;
+  border: 2px solid #e7eaef;
+  box-sizing: border-box;
+  box-shadow: 4px 4px 8px 2px rgba(0, 0, 0, 0.25), -4px -4px 16px 2px #ffffff,
+    inset -2px -2px 8px 2px #ffffff, inset 4px 4px 8px 2px rgba(81, 78, 78, 0.5);
+  border-radius: 5px;
 `;
 
 export const PageContentContainer = styled(
-	CenterAlignedColumnContainerWithShadowBackground
+  CenterAlignedColumnContainerWithShadowBackground
 )``;
 
 export const LeftAlignedColumnContainer = styled(ColumnContainer)`
-	align-items: flex-start;
+  align-items: flex-start;
 `;

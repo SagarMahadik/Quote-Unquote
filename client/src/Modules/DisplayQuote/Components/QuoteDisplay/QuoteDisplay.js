@@ -1,39 +1,59 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import DisplayQuote from 'Modules/DisplayQuote/Components/QuoteDisplay/DisplayQuote.js';
 import DisplayTags from 'Modules/DisplayQuote/Components/QuoteDisplay/DisplayTags.js';
 import RandomButton from 'StylesLibrary/Atoms/GlobalQuoteModule/Buttons/RandomButton.js';
-import { FormContentContainer } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormContainer/FormContainer.js';
-import { DisplayQuoteState } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
+import FilterButton from 'StylesLibrary/Molecules/DisplayQuoteModule/Buttons/FilterButton.js';
 import {
   useDisplayQuoteState,
   useDisplayQuoteDispatch
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 import { generateRandomInteger } from 'Modules/DisplayQuote/State/utils.js';
 
+import { DisplayQuoteContiner } from 'StylesLibrary/Atoms/DisplayQuoteModule/DisplayQuote/DisplayQuoteContainer.js';
+
+import DisplayFilterModal from 'Modules/DisplayQuote/Components/QuoteDisplay/DisplayFilterModal.js';
+
 const QuoteDisplay = () => {
   const {
     filteredQuotes: { filterQuotesList },
-    currentQuote
+
+    refreshFIlteredQuotes,
+    displayFilterModal
   } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
 
   const selectRandomQuote = () => {
     let randomIndex = generateRandomInteger(1, filterQuotesList.length - 1);
-    console.log(randomIndex);
+
     let randomQuote = filterQuotesList[randomIndex];
     dispatch({ type: 'DQ_SET_CURRENT_QUOTE', payload: randomQuote });
   };
   useEffect(() => {
     selectRandomQuote();
-  }, []);
-  console.log(currentQuote);
+  }, [refreshFIlteredQuotes]);
+
+  const handleHideModal = () => {
+    if (displayFilterModal) {
+      dispatch({ type: 'DQ_TOGGLE_FILTERMODAL' });
+    }
+  };
 
   return (
-    <FormContentContainer>
-      <DisplayQuote />
-      <DisplayTags />
-      <RandomButton onClick={() => selectRandomQuote()} />
-    </FormContentContainer>
+    <>
+      <DisplayQuoteContiner
+        showModal={displayFilterModal}
+        onClick={() => handleHideModal()}
+      >
+        <FilterButton
+          onClick={() => dispatch({ type: 'DQ_TOGGLE_FILTERMODAL' })}
+        />
+        <DisplayQuote />
+        <DisplayTags />
+        <RandomButton onClick={() => selectRandomQuote()} />
+      </DisplayQuoteContiner>
+
+      <DisplayFilterModal />
+    </>
   );
 };
 

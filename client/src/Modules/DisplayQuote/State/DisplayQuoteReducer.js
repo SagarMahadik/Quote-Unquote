@@ -6,7 +6,9 @@ import {
   DQ_HANDLE_CLICK_AUTHOR,
   DQ_CREATE_FILTEREDQUOTES,
   DQ_TOGGLE_MOODPAGE,
-  DQ_SET_CURRENT_QUOTE
+  DQ_SET_CURRENT_QUOTE,
+  DQ_TOGGLE_FILTERMODAL,
+  DQ_REFRESH_FILTEREDQUOTES
 } from 'Modules/DisplayQuote/State/types.js';
 import { produce } from 'immer';
 
@@ -46,9 +48,20 @@ export default (state, action) => {
       return produce(state, draftState => {
         draftState.displayQuotes = !draftState.displayQuotes;
       });
+
+    case DQ_TOGGLE_FILTERMODAL:
+      return produce(state, draftState => {
+        draftState.displayFilterModal = !draftState.displayFilterModal;
+        draftState.refreshFIlteredQuotes = false;
+      });
+
     case DQ_CREATE_FILTEREDQUOTES:
       return produce(state, draftState => {
         draftState.displayQuotes = true;
+        draftState.displayFilterModal = false;
+        draftState.filteredQuotes.filterQuotesList = [];
+        draftState.selectedData.selectedTags = [];
+        draftState.selectedData.selectedAuthors = [];
         draftState.selectedTags = draftState.tagList.filter(
           tag => tag.selected
         );
@@ -81,12 +94,18 @@ export default (state, action) => {
         let finalArray = [...quotesByAuthorNames, ...quotesByTags];
         console.log(finalArray);
         draftState.filteredQuotes.filterQuotesList = [...new Set(finalArray)];
+        draftState.refreshFIlteredQuotes = true;
       });
 
     case DQ_SET_CURRENT_QUOTE:
       return produce(state, draftState => {
         draftState.currentQuote = [];
         draftState.currentQuote.push(action.payload);
+      });
+
+    case DQ_REFRESH_FILTEREDQUOTES:
+      return produce(state, draftState => {
+        draftState.refreshFIlteredQuotes = true;
       });
   }
 };

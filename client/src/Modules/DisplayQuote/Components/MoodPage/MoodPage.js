@@ -19,12 +19,12 @@ const MoodPage = () => {
   };
 
   return (
-    <FormContentContainer>
+    <>
       <AddQuoteSuccessText>Whats your mood</AddQuoteSuccessText>
       <MoodPageTags />
       <MoodPageAuthor />
       <GoButton onClick={() => createFilteredQuotes()} />
-    </FormContentContainer>
+    </>
   );
 };
 

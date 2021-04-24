@@ -1,4 +1,4 @@
-import React, { useState, CSSProperties, useEffect, useRef } from 'react';
+import React from 'react';
 import {
   QuotationRight,
   QuotationLeft,

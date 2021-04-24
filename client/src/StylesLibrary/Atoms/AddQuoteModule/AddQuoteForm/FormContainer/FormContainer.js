@@ -1,9 +1,11 @@
-import styled from "styled-components";
-import { CenterAlignedColumnContainerWithShadowBackground } from "StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles.js";
+import styled from 'styled-components';
+import { CenterAlignedColumnContainerWithShadowBackground } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles.js';
 
 export const FormContentContainer = styled(
-	CenterAlignedColumnContainerWithShadowBackground
+  CenterAlignedColumnContainerWithShadowBackground
 )`
-	justify-content: flex-start;
-	height: ${(props) => props.containerHeight};
+  justify-content: flex-start;
+  height: ${props => props.containerHeight};
+  width: 96%;
+  margin: 4px;
 `;

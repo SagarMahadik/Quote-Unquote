@@ -14,7 +14,7 @@ const DisplayFilterModal = () => {
     <>
       {displayFilterModal ? (
         <ModalWrapper>
-          <ModalContainer containerHeight="600px">
+          <ModalContainer containerHeight="auto">
             <MoodPage />
           </ModalContainer>
         </ModalWrapper>

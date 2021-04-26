@@ -6,7 +6,7 @@ import DisplayQuoteState from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 const DisplayQuoteMainComponent = () => {
   return (
     <DisplayQuoteState>
-      <FormContentContainer>
+      <FormContentContainer containerHeight="auto">
         <ToggleMoodDisplay />
       </FormContentContainer>
     </DisplayQuoteState>

@@ -12,12 +12,17 @@ import SubmitButton from 'StylesLibrary/Molecules/AddQuoteModule/AddQuoteForm/Fo
 import AddQuoteSuccess from 'Modules/AddQuote/Components/FormSections/AddQuoteSuccess/AddQuoteSuccess.js';
 import FormValidations from 'Modules/AddQuote/Components/FormSections/FormValidations/FormValidations.js';
 import CreateRequestFlow from 'Modules/AddQuote/CeateRequestFLow/CreateRequestFlow.js';
+import CreateTags from 'Modules/AddQuote/APICalls/CreateTags.js';
+import CreateQuote from 'Modules/AddQuote/APICalls/CreateQuote.js';
+
 import {
   useAddQuoteState,
   useAddQuoteDispatch
 } from 'Modules/AddQuote/State/AddQuoteState.js';
+
+import CreateAuthor from 'Modules/AddQuote/APICalls/CreateAuthor.js';
 const AddQuote = () => {
-  const { addQuoteSuccess } = useAddQuoteState();
+  const { quoteCreatedSuccessfully, quoteAuthor } = useAddQuoteState();
   const dispatch = useAddQuoteDispatch();
 
   const handleAddQuoteSubmit = e => {
@@ -27,8 +32,8 @@ const AddQuote = () => {
       type: 'AQ_INITIATE_VALIDATIONS'
     });
   };
-  if (addQuoteSuccess) {
-    return <AddQuoteSuccess />;
+  if (quoteCreatedSuccessfully) {
+    return <AddQuoteSuccess authorName={quoteAuthor} />;
   }
   return (
     <>
@@ -43,6 +48,9 @@ const AddQuote = () => {
         <SubmitButton onClick={handleAddQuoteSubmit} />
         <FormValidations />
         <CreateRequestFlow />
+        <CreateAuthor />
+        <CreateTags />
+        <CreateQuote />
       </FormContentContainer>
     </>
   );

@@ -16,10 +16,17 @@ import {
   AQ_REMOVE_VALIDATION_ERROR,
   AQ_VALIDATION_COMPLETE,
   AQ_SET_ANONYMOUS_QUOTE_AUTHOR,
-  AQ_SET_ANONYMOUS_AUTHOR_REQUIRED
+  AQ_SET_ANONYMOUS_AUTHOR_REQUIRED,
+  AQ_CREATE_NEW_AUTHOR,
+  AQ_SET_AUTHOR_TO_STATE,
+  AQ_INITIATE_TAG_CHECK,
+  AQ_CREATE_NEWTAGS_ARRAY,
+  AQ_CREATE_NEW_TAGS,
+  AQ_ADD_NEWTAG_TO_STATE,
+  AQ_INITIATE_ADD_QUOTE,
+  AQ_QUOTE_ADDED_TO_DB
 } from 'Modules/AddQuote/State/types.js';
 import { produce } from 'immer';
-
 export default (state, action) => {
   switch (action.type) {
     case AQ_SET_TAGS:
@@ -133,6 +140,49 @@ export default (state, action) => {
       return produce(state, draftState => {
         draftState.anonymousAuthorRequired = true;
       });
+
+    case AQ_CREATE_NEW_AUTHOR:
+      return produce(state, draftState => {
+        draftState.initiateNewAuthorCreation = true;
+      });
+
+    case AQ_SET_AUTHOR_TO_STATE:
+      return produce(state, draftState => {
+        draftState.quoteAuthorID = action.payload;
+        draftState.initiateTagsCheck = true;
+      });
+
+    case AQ_INITIATE_TAG_CHECK:
+      return produce(state, draftState => {
+        draftState.initiateTagsCheck = true;
+      });
+
+    case AQ_CREATE_NEWTAGS_ARRAY:
+      return produce(state, draftState => {
+        draftState.newTagsAdded = action.payload;
+        draftState.newTagsCount = draftState.newTagsAdded.length;
+      });
+    case AQ_CREATE_NEW_TAGS:
+      return produce(state, draftState => {
+        draftState.initiateNewTagCreation = true;
+      });
+
+    case AQ_ADD_NEWTAG_TO_STATE:
+      return produce(state, draftState => {
+        draftState.newUploadedTags.push(action.payload);
+      });
+
+    case AQ_INITIATE_ADD_QUOTE:
+      return produce(state, draftState => {
+        draftState.initiateQuoteCreation = true;
+      });
+
+    case AQ_QUOTE_ADDED_TO_DB:
+      return produce(state, draftState => {
+        draftState.quoteCreatedSuccessfully = true;
+        draftState.quoteAuthor = draftState.authorSearch.searchString;
+      });
+
     default:
       return {
         ...state

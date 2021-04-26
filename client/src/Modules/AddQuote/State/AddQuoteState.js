@@ -32,13 +32,19 @@ const AddQuoteState = ({ children }) => {
     requiredFieldsError: {
       quote: false
     },
+    newTagsAdded: [],
+    newTagsCount: 0,
+    newUploadedTags: [],
     initiateValidations: false,
     validationsComplete: false,
     initiateRequestCreation: false,
     initiateNewAuthorCreation: false,
     initiateTagsCheck: false,
+    initiateNewTagCreation: false,
     anonymousAuthorSet: false,
-    anonymousAuthorRequired: false
+    anonymousAuthorRequired: false,
+    initiateQuoteCreation: false,
+    quoteCreatedSuccessfully: false
   };
 
   const [state, dispatch] = useReducer(AddQuoteReducer, initialState);
@@ -56,11 +62,17 @@ const AddQuoteState = ({ children }) => {
     applicationData,
     authorSearch,
     requiredFieldsError,
+    newTagsAdded,
+    newTagsCount,
+    newUploadedTags,
     initiateValidations,
     validationsComplete,
     initiateRequestCreation,
     initiateNewAuthorCreation,
-    initiateTagsCheck
+    initiateTagsCheck,
+    initiateNewTagCreation,
+    initiateQuoteCreation,
+    quoteCreatedSuccessfully
   } = state;
 
   const setAuthorsState = authorData => {
@@ -111,11 +123,17 @@ const AddQuoteState = ({ children }) => {
         applicationData,
         authorSearch,
         requiredFieldsError,
+        newTagsAdded,
+        newTagsCount,
+        newUploadedTags,
         initiateValidations,
         validationsComplete,
         initiateRequestCreation,
         initiateNewAuthorCreation,
-        initiateTagsCheck
+        initiateTagsCheck,
+        initiateNewTagCreation,
+        initiateQuoteCreation,
+        quoteCreatedSuccessfully
       }}
     >
       <AddQuoteDispatchContext.Provider value={dispatch}>

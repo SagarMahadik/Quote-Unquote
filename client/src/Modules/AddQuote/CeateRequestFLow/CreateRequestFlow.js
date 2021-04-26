@@ -36,6 +36,11 @@ const CreateRequestFlow = () => {
     if (searchString != '' && quoteAuthorID == '') {
       createAuthorBeforeRequest(searchString);
     }
+    if (quoteAuthorID != '') {
+      dispatch({
+        type: 'AQ_INITIATE_TAG_CHECK'
+      });
+    }
   };
 
   const setAnonymousAuthor = () => {
@@ -46,11 +51,31 @@ const CreateRequestFlow = () => {
   };
 
   const createAuthorBeforeRequest = () => {
-    console.log('create author before POST request');
+    dispatch({ type: 'AQ_CREATE_NEW_AUTHOR' });
   };
 
   const checkTagsArray = tagList => {
-    console.log(tagList);
+    checkForNewTgs(tagList);
+  };
+
+  const checkForNewTgs = tagList => {
+    let newTags = tagList.filter(tag => tag.newTag);
+    let newTagsCount = newTags.length;
+
+    if (newTagsCount > 0) {
+      console.log('new tags added');
+      dispatch({
+        type: 'AQ_CREATE_NEWTAGS_ARRAY',
+        payload: newTags
+      });
+      dispatch({
+        type: 'AQ_CREATE_NEW_TAGS'
+      });
+    } else {
+      dispatch({
+        type: 'AQ_INITIATE_ADD_QUOTE'
+      });
+    }
   };
 
   return <div></div>;

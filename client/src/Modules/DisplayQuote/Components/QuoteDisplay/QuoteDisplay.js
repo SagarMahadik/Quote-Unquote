@@ -3,6 +3,7 @@ import DisplayQuote from 'Modules/DisplayQuote/Components/QuoteDisplay/DisplayQu
 import DisplayTags from 'Modules/DisplayQuote/Components/QuoteDisplay/DisplayTags.js';
 import RandomButton from 'StylesLibrary/Atoms/GlobalQuoteModule/Buttons/RandomButton.js';
 import FilterButton from 'StylesLibrary/Molecules/DisplayQuoteModule/Buttons/FilterButton.js';
+import LogOutButton from 'StylesLibrary/Atoms/GlobalQuoteModule/Buttons/LogoutButton.js';
 import {
   useDisplayQuoteState,
   useDisplayQuoteDispatch

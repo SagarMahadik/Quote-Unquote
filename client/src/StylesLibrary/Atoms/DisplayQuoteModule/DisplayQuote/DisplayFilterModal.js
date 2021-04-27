@@ -15,5 +15,6 @@ export const ModalContainer = styled(
   border-radius: 10px;
   position: absolute;
   top: 0;
-  margin-top: 3em;
+  margin-top: 5em;
+  overflow-y: auto;
 `;

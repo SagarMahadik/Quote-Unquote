@@ -19,6 +19,10 @@ const AddQuote = React.lazy(() =>
   import('Modules/AddQuote/AddQuoteMainComponent.js')
 );
 
+const LoadingCOntiner = React.lazy(() =>
+  import('StylesLibrary/Molecules/LoadingModule/InputButtonLoadingContainer.js')
+);
+
 const Routes = () => {
   return (
     <Router>

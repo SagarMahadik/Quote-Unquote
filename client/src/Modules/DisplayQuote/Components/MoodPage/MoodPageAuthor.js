@@ -8,6 +8,7 @@ import {
   useDisplayQuoteDispatch
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 import PaginationAuthors from 'Modules/DisplayQuote/Components/MoodPage/PaginationAuthors.js';
+import InputButtonLoadingContainer from 'StylesLibrary/Molecules/LoadingModule/InputButtonLoadingContainer';
 
 const MoodPageAuthor = () => {
   const {
@@ -37,6 +38,7 @@ const MoodPageAuthor = () => {
             );
           })}
       </InputButtonContainer>
+      {authorList.length === 0 ? <InputButtonLoadingContainer /> : null}
       <PaginationAuthors />
     </>
   );

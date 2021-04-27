@@ -14,6 +14,7 @@ import {
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 
 import PaginationTags from 'Modules/DisplayQuote/Components/MoodPage/PaginationTags.js';
+import InputButtonLoadingContainer from 'StylesLibrary/Molecules/LoadingModule/InputButtonLoadingContainer';
 
 const MoodPageTags = () => {
   const {
@@ -29,6 +30,7 @@ const MoodPageTags = () => {
   const handleClickOnTag = tagName => {
     dispatch({ type: 'DQ_HANDLE_CLICK_TAG', payload: tagName });
   };
+
   return (
     <>
       <FormSectionHeading sectionName="Tags" />
@@ -45,6 +47,7 @@ const MoodPageTags = () => {
             );
           })}
       </InputButtonContainer>
+      {tagList.length === 0 ? <InputButtonLoadingContainer /> : null}
       <PaginationTags />
     </>
   );

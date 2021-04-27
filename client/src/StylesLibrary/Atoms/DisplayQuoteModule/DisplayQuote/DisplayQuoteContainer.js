@@ -4,3 +4,7 @@ import { CenterAlignedColumnContainer } from 'StylesLibrary/Atoms/GlobalQuoteMod
 export const DisplayQuoteContiner = styled(CenterAlignedColumnContainer)`
   opacity: ${props => (props.showModal ? 0.6 : 1)};
 `;
+
+export const DisplayQuoteMainContainer = styled(CenterAlignedColumnContainer)`
+  position: relative;
+`;

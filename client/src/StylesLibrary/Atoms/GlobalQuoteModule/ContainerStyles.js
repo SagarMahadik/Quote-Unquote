@@ -14,7 +14,7 @@ export const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 600px;
+
   margin: auto;
   border-radius: 5px;
 `;
@@ -30,8 +30,8 @@ export const CenterAlignedColumnContainerWithShadowBackground = styled(
   CenterAlignedColumnContainer
 )`
   height: 100vh;
-  width: 94%;
-  margin-top: 12px;
+  max-width: 600px;
+  width: 98%;
   background: #e7eaef;
   border: 2px solid #e7eaef;
   box-sizing: border-box;
@@ -46,4 +46,8 @@ export const PageContentContainer = styled(
 
 export const LeftAlignedColumnContainer = styled(ColumnContainer)`
   align-items: flex-start;
+`;
+
+export const RightAlignedColumnContainer = styled(ColumnContainer)`
+  align-items: flex-end;
 `;

@@ -6,6 +6,5 @@ export const FormContentContainer = styled(
 )`
   justify-content: flex-start;
   height: ${props => props.containerHeight};
-  width: 96%;
-  margin: 4px;
+  width: 100%;
 `;

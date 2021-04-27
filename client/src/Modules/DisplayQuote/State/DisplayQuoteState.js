@@ -24,6 +24,15 @@ const DisplayQuoteState = ({ children }) => {
       quotesByAuthor: [],
       filterQuotesList: []
     },
+    exploreMore: {
+      exploreMoreTotalCount: 0,
+      exploreMoreCurrentCount: 1,
+      paginationStep: 7,
+      authors: {
+        exploreMoreTotalCount: 0,
+        exploreMoreCurrentCount: 1
+      }
+    },
     displayQuotes: false,
     currentQuote: [],
     displayFilterModal: false,
@@ -36,6 +45,7 @@ const DisplayQuoteState = ({ children }) => {
     authorList,
     selectedData,
     filteredQuotes,
+    exploreMore,
     displayQuotes,
     currentQuote,
     displayFilterModal,
@@ -89,6 +99,7 @@ const DisplayQuoteState = ({ children }) => {
         selectedData,
         filteredQuotes,
         displayQuotes,
+        exploreMore,
         currentQuote,
         displayFilterModal,
         refreshFIlteredQuotes

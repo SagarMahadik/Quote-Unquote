@@ -9,7 +9,10 @@ import {
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 import { generateRandomInteger } from 'Modules/DisplayQuote/State/utils.js';
 
-import { DisplayQuoteContiner } from 'StylesLibrary/Atoms/DisplayQuoteModule/DisplayQuote/DisplayQuoteContainer.js';
+import {
+  DisplayQuoteContiner,
+  DisplayQuoteMainContainer
+} from 'StylesLibrary/Atoms/DisplayQuoteModule/DisplayQuote/DisplayQuoteContainer.js';
 
 import DisplayFilterModal from 'Modules/DisplayQuote/Components/QuoteDisplay/DisplayFilterModal.js';
 
@@ -39,7 +42,7 @@ const QuoteDisplay = () => {
   };
 
   return (
-    <>
+    <DisplayQuoteMainContainer>
       <DisplayQuoteContiner
         showModal={displayFilterModal}
         onClick={() => handleHideModal()}
@@ -51,9 +54,8 @@ const QuoteDisplay = () => {
         <DisplayTags />
         <RandomButton onClick={() => selectRandomQuote()} />
       </DisplayQuoteContiner>
-
       <DisplayFilterModal />
-    </>
+    </DisplayQuoteMainContainer>
   );
 };
 

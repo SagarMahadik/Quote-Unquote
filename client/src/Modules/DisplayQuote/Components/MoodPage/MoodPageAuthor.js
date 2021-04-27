@@ -7,9 +7,16 @@ import {
   useDisplayQuoteState,
   useDisplayQuoteDispatch
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
+import PaginationAuthors from 'Modules/DisplayQuote/Components/MoodPage/PaginationAuthors.js';
 
 const MoodPageAuthor = () => {
-  const { authorList } = useDisplayQuoteState();
+  const {
+    authorList,
+    exploreMore: {
+      authors: { exploreMoreCurrentCount },
+      paginationStep
+    }
+  } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
   const handleClickOnAuthor = authorName => {
     dispatch({ type: 'DQ_HANDLE_CLICK_AUTHOR', payload: authorName });
@@ -18,16 +25,19 @@ const MoodPageAuthor = () => {
     <>
       <FormSectionHeading sectionName="Authors" />
       <InputButtonContainer>
-        {authorList.map(({ authorName, selected }) => {
-          return (
-            <InputButton
-              buttonText={authorName}
-              buttonSelected={selected}
-              onClick={() => handleClickOnAuthor(authorName)}
-            />
-          );
-        })}
+        {authorList
+          .slice(0, paginationStep * exploreMoreCurrentCount)
+          .map(({ authorName, selected }) => {
+            return (
+              <InputButton
+                buttonText={authorName}
+                buttonSelected={selected}
+                onClick={() => handleClickOnAuthor(authorName)}
+              />
+            );
+          })}
       </InputButtonContainer>
+      <PaginationAuthors />
     </>
   );
 };

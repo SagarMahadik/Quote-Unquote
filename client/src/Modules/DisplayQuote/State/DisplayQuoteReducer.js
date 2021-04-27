@@ -8,7 +8,13 @@ import {
   DQ_TOGGLE_MOODPAGE,
   DQ_SET_CURRENT_QUOTE,
   DQ_TOGGLE_FILTERMODAL,
-  DQ_REFRESH_FILTEREDQUOTES
+  DQ_REFRESH_FILTEREDQUOTES,
+  DQ_SET_TAGCONTAINER_SCRLLHEIGHT,
+  DQ_TAG_INC_EXPLOREMORE_COUNT,
+  DQ_SET_TAGCONTAINERHEIGHT,
+  DQ_RESET_TAG_EXPLOREMORE_COUNT,
+  DQ_AUTHOR_INC_EXPLOREMORE_COUNT,
+  DQ_RESET_AUTHOR_EXPLOREMORE_COUNT
 } from 'Modules/DisplayQuote/State/types.js';
 import { produce } from 'immer';
 
@@ -17,11 +23,17 @@ export default (state, action) => {
     case DQ_SET_TAGS:
       return produce(state, draftState => {
         draftState.tagList = action.payload;
+        draftState.exploreMore.explreMoreTotalCount = Math.ceil(
+          draftState.tagList.length / draftState.exploreMore.paginationStep
+        );
       });
 
     case DQ_SET_AUTHORS:
       return produce(state, draftState => {
         draftState.authorList = action.payload;
+        draftState.exploreMore.authors.exploreMoreTotalCount = Math.ceil(
+          draftState.authorList.length / draftState.exploreMore.paginationStep
+        );
       });
     case DQ_SET_QUOTES:
       return produce(state, draftState => {
@@ -106,6 +118,25 @@ export default (state, action) => {
     case DQ_REFRESH_FILTEREDQUOTES:
       return produce(state, draftState => {
         draftState.refreshFIlteredQuotes = true;
+      });
+
+    case DQ_TAG_INC_EXPLOREMORE_COUNT:
+      return produce(state, draftState => {
+        draftState.exploreMore.exploreMoreCurrentCount =
+          draftState.exploreMore.exploreMoreCurrentCount + 1;
+      });
+    case DQ_RESET_TAG_EXPLOREMORE_COUNT:
+      return produce(state, draftState => {
+        draftState.exploreMore.exploreMoreCurrentCount = 1;
+      });
+    case DQ_AUTHOR_INC_EXPLOREMORE_COUNT:
+      return produce(state, draftState => {
+        draftState.exploreMore.authors.exploreMoreCurrentCount =
+          draftState.exploreMore.authors.exploreMoreCurrentCount + 1;
+      });
+    case DQ_RESET_AUTHOR_EXPLOREMORE_COUNT:
+      return produce(state, draftState => {
+        draftState.exploreMore.authors.exploreMoreCurrentCount = 1;
       });
   }
 };

@@ -8,7 +8,7 @@
     "server": "nodemon server",
     "client": "npm start --prefix client",
     "debug": "ndb server.js",
-    "dev": "npm run server & npm run client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "mocha --recursive --timeout 20000 --exit",
     "heroku-postbuild": "cd client && NPM_CONFIG_PRODUCTION=false npm install && npm run build"
   },

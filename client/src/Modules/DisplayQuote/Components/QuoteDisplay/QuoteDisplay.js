@@ -49,13 +49,17 @@ const QuoteDisplay = () => {
     <AnimationContainer
       animate={{
         backgroundImage: [
-          'radial-gradient(154% 68.86% at 132.29% 66.46%, rgba(98, 217, 227, 0.64) 0%, #E7EAEF 87.61%)',
-          'radial-gradient(154% 68.86% at 132.29% 66.46%, #7674CC 0%, #E7EAEF 87.61%)',
-          'radial-gradient(154% 68.86% at 132.29% 66.46%, rgba(37, 218, 185, 0.54) 0%, #E7EAEF 87.61%)'
+          'radial-gradient(189.29% 95% at 169.57% 92.53%, #7674CC 7.16%, rgba(179, 240, 240, 0.84) 85.5%)',
+          'radial-gradient(217% 126.71% at -38.86% 122.53%, #D5D795 7.16%, rgba(179, 240, 240, 0.84) 85.5%)',
+          'radial-gradient(189.29% 95% at 169.57% 92.53%, rgba(255, 90, 115, 0.69) 7.16%, rgba(179, 240, 240, 0.84) 85.5%)',
+          'radial-gradient(189.29% 95% at 169.57% 92.53%, #D5D795 7.16%, rgba(179, 240, 240, 0.84) 85.5%)',   
+          ' radial-gradient(230.86% 95.82% at -38.86% 122.53%, rgba(125, 184, 238, 0.86) 7.16%, #9BD986 85.5%)',     
+          'radial-gradient(230.86% 95.82% at -38.86% 122.53%, rgba(188, 120, 242, 0.37) 7.16%, rgba(179, 240, 240, 0.84) 85.5%)',
+          'radial-gradient(230.86% 95.82% at -38.86% 122.53%, #7FD29B 7.16%, rgba(179, 240, 240, 0.84) 85.5%)'
         ]
       }}
       transition={{
-        duration: 10,
+        duration: 18,
         repeat: Infinity,
         repeatType: 'reverse'
       }}

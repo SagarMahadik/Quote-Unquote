@@ -36,7 +36,8 @@ const DisplayQuoteState = ({ children }) => {
     displayQuotes: false,
     currentQuote: [],
     displayFilterModal: false,
-    refreshFIlteredQuotes: false
+    refreshFIlteredQuotes: false,
+    displayQuote: true
   };
   const [state, dispatch] = useReducer(DisplayQuoteReducer, initialState);
 
@@ -49,7 +50,8 @@ const DisplayQuoteState = ({ children }) => {
     displayQuotes,
     currentQuote,
     displayFilterModal,
-    refreshFIlteredQuotes
+    refreshFIlteredQuotes,
+    displayQuote
   } = state;
 
   const setAuthorsState = authorData => {
@@ -102,7 +104,8 @@ const DisplayQuoteState = ({ children }) => {
         exploreMore,
         currentQuote,
         displayFilterModal,
-        refreshFIlteredQuotes
+        refreshFIlteredQuotes,
+        displayQuote
       }}
     >
       <DisplayQuoteDispatchContext.Provider value={dispatch}>

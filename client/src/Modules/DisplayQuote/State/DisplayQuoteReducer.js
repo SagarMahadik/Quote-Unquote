@@ -14,7 +14,8 @@ import {
   DQ_SET_TAGCONTAINERHEIGHT,
   DQ_RESET_TAG_EXPLOREMORE_COUNT,
   DQ_AUTHOR_INC_EXPLOREMORE_COUNT,
-  DQ_RESET_AUTHOR_EXPLOREMORE_COUNT
+  DQ_RESET_AUTHOR_EXPLOREMORE_COUNT,
+  HIDE_QUOTE
 } from 'Modules/DisplayQuote/State/types.js';
 import { produce } from 'immer';
 
@@ -113,6 +114,7 @@ export default (state, action) => {
       return produce(state, draftState => {
         draftState.currentQuote = [];
         draftState.currentQuote.push(action.payload);
+        draftState.displayQuote = true;
       });
 
     case DQ_REFRESH_FILTEREDQUOTES:
@@ -137,6 +139,10 @@ export default (state, action) => {
     case DQ_RESET_AUTHOR_EXPLOREMORE_COUNT:
       return produce(state, draftState => {
         draftState.exploreMore.authors.exploreMoreCurrentCount = 1;
+      });
+    case HIDE_QUOTE:
+      return produce(state, draftState => {
+        draftState.displayQuote = false;
       });
   }
 };

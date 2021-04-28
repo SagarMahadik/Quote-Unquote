@@ -7,4 +7,10 @@ export const DisplayQuoteContiner = styled(CenterAlignedColumnContainer)`
 
 export const DisplayQuoteMainContainer = styled(CenterAlignedColumnContainer)`
   position: relative;
+  height: 100vh;
+  background-image: radial-gradient(
+    154% 68.86% at 132.29% 66.46%,
+    rgba(98, 217, 227, 0.64) 0%,
+    #e7eaef 87.61%
+  );
 `;

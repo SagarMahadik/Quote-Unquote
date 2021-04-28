@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mollycule/react-anime": "0.0.7",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "animejs": "^3.2.1",
     "axios": "^0.21.1",
     "framer-motion": "^4.1.10",
     "immer": "^9.0.1",
@@ -15,6 +17,7 @@
     "react-query": "^3.13.11",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-transition-group": "^4.4.1",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
   },

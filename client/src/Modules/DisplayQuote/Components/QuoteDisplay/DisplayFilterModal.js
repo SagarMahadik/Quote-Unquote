@@ -7,17 +7,34 @@ import {
 
 import { useDisplayQuoteState } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 
+import { AnimationContainer } from 'StylesLibrary/Animations/FramerAnimations.js';
+
+import { AnimatePresence } from 'framer-motion';
+
+import { Transition, TransitionGroup } from 'react-transition-group';
+
+import anime from 'animejs/lib/anime.es.js';
 const DisplayFilterModal = () => {
   const { displayFilterModal } = useDisplayQuoteState();
 
   return (
-    <>
+    <AnimatePresence>
       {displayFilterModal ? (
-        <ModalContainer containerHeight="600px">
-          <MoodPage />
-        </ModalContainer>
+        <AnimationContainer
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            ease: 'easeOut',
+            duration: 0.8
+          }}
+          exit={{ opacity: 0, height: 0 }}
+        >
+          <ModalContainer containerHeight="600px">
+            <MoodPage />
+          </ModalContainer>
+        </AnimationContainer>
       ) : null}
-    </>
+    </AnimatePresence>
   );
 };
 

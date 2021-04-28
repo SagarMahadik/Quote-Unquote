@@ -16,7 +16,7 @@ const DisplayTags = () => {
   return (
     <TagContainer>
       <TagText>{currentQuote[0].author['authorName']}</TagText>
-      {currentQuote[0].tags.map(({ tagName }) => {
+      {currentQuote[0].tags.slice(0, 3).map(({ tagName }) => {
         return <TagText> | {tagName}</TagText>;
       })}
     </TagContainer>

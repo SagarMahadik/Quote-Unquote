@@ -15,6 +15,8 @@ import {
   DisplayQuoteMainContainer
 } from 'StylesLibrary/Atoms/DisplayQuoteModule/DisplayQuote/DisplayQuoteContainer.js';
 
+import { AnimationContainer } from 'StylesLibrary/Animations/FramerAnimations.js';
+
 import DisplayFilterModal from 'Modules/DisplayQuote/Components/QuoteDisplay/DisplayFilterModal.js';
 
 const QuoteDisplay = () => {
@@ -30,6 +32,7 @@ const QuoteDisplay = () => {
     let randomIndex = generateRandomInteger(1, filterQuotesList.length - 1);
 
     let randomQuote = filterQuotesList[randomIndex];
+
     dispatch({ type: 'DQ_SET_CURRENT_QUOTE', payload: randomQuote });
   };
   useEffect(() => {
@@ -43,20 +46,42 @@ const QuoteDisplay = () => {
   };
 
   return (
-    <DisplayQuoteMainContainer>
-      <DisplayQuoteContiner
-        showModal={displayFilterModal}
-        onClick={() => handleHideModal()}
-      >
-        <FilterButton
-          onClick={() => dispatch({ type: 'DQ_TOGGLE_FILTERMODAL' })}
-        />
-        <DisplayQuote />
-        <DisplayTags />
-        <RandomButton onClick={() => selectRandomQuote()} />
-      </DisplayQuoteContiner>
-      <DisplayFilterModal />
-    </DisplayQuoteMainContainer>
+    <AnimationContainer
+      animate={{
+        backgroundImage: [
+          'radial-gradient(154% 68.86% at 132.29% 66.46%, rgba(98, 217, 227, 0.64) 0%, #E7EAEF 87.61%)',
+          'radial-gradient(154% 68.86% at 132.29% 66.46%, #7674CC 0%, #E7EAEF 87.61%)',
+          'radial-gradient(154% 68.86% at 132.29% 66.46%, rgba(37, 218, 185, 0.54) 0%, #E7EAEF 87.61%)'
+        ]
+      }}
+      transition={{
+        duration: 10,
+        repeat: Infinity,
+        repeatType: 'reverse'
+      }}
+    >
+      <DisplayQuoteMainContainer>
+        <DisplayQuoteContiner
+          showModal={displayFilterModal}
+          onClick={() => handleHideModal()}
+        >
+          <FilterButton
+            onClick={() => dispatch({ type: 'DQ_TOGGLE_FILTERMODAL' })}
+          />
+          <DisplayQuote />
+          <DisplayTags />
+          <RandomButton
+            onClick={() => {
+              dispatch({ type: 'HIDE_QUOTE' });
+              setTimeout(() => {
+                selectRandomQuote();
+              }, 800);
+            }}
+          />
+        </DisplayQuoteContiner>
+        <DisplayFilterModal />
+      </DisplayQuoteMainContainer>
+    </AnimationContainer>
   );
 };
 

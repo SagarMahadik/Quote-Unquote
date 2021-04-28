@@ -12,11 +12,8 @@ import { AnimationContainer } from 'StylesLibrary/Animations/FramerAnimations.js
 
 import { AnimatePresence } from 'framer-motion';
 
-import { Transition, TransitionGroup } from 'react-transition-group';
-
 import anime from 'animejs/lib/anime.es.js';
 
-import Anime from '@mollycule/react-anime';
 const DisplayQuote = () => {
   const transitionKey = useRef();
 

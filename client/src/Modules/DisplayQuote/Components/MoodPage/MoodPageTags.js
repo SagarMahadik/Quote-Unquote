@@ -34,6 +34,7 @@ const MoodPageTags = () => {
   return (
     <>
       <FormSectionHeading sectionName="Tags" />
+
       <InputButtonContainer>
         {tagList
           .slice(0, paginationStep * exploreMoreCurrentCount)
@@ -47,6 +48,7 @@ const MoodPageTags = () => {
             );
           })}
       </InputButtonContainer>
+
       {tagList.length === 0 ? <InputButtonLoadingContainer /> : null}
       <PaginationTags />
     </>

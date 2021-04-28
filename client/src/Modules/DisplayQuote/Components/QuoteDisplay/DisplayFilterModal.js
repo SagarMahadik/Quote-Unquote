@@ -25,7 +25,7 @@ const DisplayFilterModal = () => {
           animate={{ opacity: 1 }}
           transition={{
             ease: 'easeOut',
-            duration: 0.8
+            duration: 0.4
           }}
           exit={{ opacity: 0, height: 0 }}
         >

@@ -6,6 +6,8 @@ import MoodPageAuthor from 'Modules/DisplayQuote/Components/MoodPage/MoodPageAut
 import GoButton from 'StylesLibrary/Molecules/DisplayQuoteModule/Buttons/GoButton.js';
 import { submitVibrations } from 'Utils/vibrations.js';
 
+import { goButtonVibrations } from 'Utils/vibrations.js';
+
 import {
   useDisplayQuoteDispatch,
   useDisplayQuoteState
@@ -25,7 +27,12 @@ const MoodPage = () => {
       <AddQuoteSuccessText>Whats your mood</AddQuoteSuccessText>
       <MoodPageTags />
       <MoodPageAuthor />
-      <GoButton onClick={() => createFilteredQuotes()} />
+      <GoButton
+        onClick={() => {
+          goButtonVibrations();
+          createFilteredQuotes();
+        }}
+      />
     </>
   );
 };

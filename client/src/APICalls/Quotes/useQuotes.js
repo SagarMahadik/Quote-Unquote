@@ -15,8 +15,13 @@ export default function useQuotes() {
     status,
     isError,
     error
-  } = useQuery('quotes', () => getQuotes(), {
-    onSuccess: data => console.log(data)
-  });
+  } = useQuery(
+    'quotes',
+    () => getQuotes(),
+    {
+      onSuccess: data => console.log(data)
+    },
+    { staleTime: 10000 }
+  );
   return { quotes, isQuotesLoaded, status, isError, error };
 }

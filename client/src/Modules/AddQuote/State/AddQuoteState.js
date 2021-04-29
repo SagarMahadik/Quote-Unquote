@@ -4,12 +4,14 @@ import {
   AddQuoteDispatchContext
 } from 'Modules/AddQuote/State/AddQuoteContext.js';
 import AddQuoteReducer from 'Modules/AddQuote/State/AddQuoteReducer.js';
-import { tagsList } from 'Modules/AddQuote/Components/FormSections/Tags/TagSeedData.js';
 import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
 
+import { useStepStatusRequest } from 'APICalls/StepLog/useStepLog.js';
+
 const AddQuoteState = ({ children }) => {
+  const { sendStepStatusRequest } = useStepStatusRequest();
   const {
-    applicationData: { tags, authors, quotes }
+    applicationData: { tags, authors }
   } = useApplicationState();
   const initialState = {
     quote: '',
@@ -81,6 +83,8 @@ const AddQuoteState = ({ children }) => {
         type: 'AQ_SET_AUTHORS',
         payload: authorData
       });
+      sendStepStatusRequest('AddQuoteModule| Authors added to the state');
+
       let anonymousAuthor = authorData.filter(
         author => author.authorName === 'Anonymous'
       );
@@ -88,6 +92,9 @@ const AddQuoteState = ({ children }) => {
         type: 'SET_ANONYMOUSAUTHOR',
         payload: anonymousAuthor[0]._id
       });
+      sendStepStatusRequest(
+        'AddQuoteModule| Anonymous author added to the state'
+      );
     }
   };
 
@@ -97,6 +104,7 @@ const AddQuoteState = ({ children }) => {
         type: 'AQ_SET_TAGS',
         payload: tagsData
       });
+      sendStepStatusRequest('AddQuoteModule| Tags added to the state');
     }
   };
 
@@ -106,6 +114,7 @@ const AddQuoteState = ({ children }) => {
 
   useEffect(() => {
     setAuthorsState(authors);
+    sendStepStatusRequest('AddQuoteModule| Authors added to the state');
   }, [authors]);
 
   return (
@@ -150,7 +159,7 @@ function useAddQuoteState() {
 
   if (context === undefined) {
     throw new Error(
-      'useAddQuoteState must be used within a SupplierDetailsProvider'
+      'useAddQuoteState must be used within a AddQuoteContext Provider'
     );
   }
   return context;
@@ -160,7 +169,7 @@ function useAddQuoteDispatch() {
   const context = useContext(AddQuoteDispatchContext);
   if (context === undefined) {
     throw new Error(
-      'useAddQuoteDispatch must be used within a SupplierDetailsDispatchProvider'
+      'useAddQuoteDispatch must be used within a AddQuoteContextDispatchProvider'
     );
   }
   return context;

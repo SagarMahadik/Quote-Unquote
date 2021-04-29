@@ -27,7 +27,7 @@ const AddQuote = () => {
 
   const handleAddQuoteSubmit = e => {
     e.preventDefault();
-    console.log('In handle add');
+
     dispatch({
       type: 'AQ_INITIATE_VALIDATIONS'
     });

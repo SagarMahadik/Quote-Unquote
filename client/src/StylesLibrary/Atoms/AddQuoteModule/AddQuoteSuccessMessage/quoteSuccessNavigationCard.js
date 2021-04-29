@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
-export const NavigationCardContainer = styled(Link)`
+export const NavigationCardContainer = styled.button`
   display: flex;
   flex-direction: center;
   align-items: center;
@@ -12,6 +12,8 @@ export const NavigationCardContainer = styled(Link)`
   box-shadow: -4px -4px 8px #ffffff, 4px 4px 8px 2px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   margin: 2em;
+  outline: none;
+  border: none;
   text-decoration: none;
 `;
 

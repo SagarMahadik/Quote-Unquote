@@ -4,6 +4,7 @@ import {
   useAddQuoteDispatch
 } from 'Modules/AddQuote/State/AddQuoteState.js';
 import axios from 'axios';
+import { useStepStatusRequest } from 'APICalls/StepLog/useStepLog.js';
 
 const CreateTags = () => {
   const {
@@ -13,6 +14,7 @@ const CreateTags = () => {
     newTagsCount
   } = useAddQuoteState();
   const dispatch = useAddQuoteDispatch();
+  const { sendStepStatusRequest } = useStepStatusRequest();
 
   useEffect(() => {
     if (initiateNewTagCreation) {
@@ -22,6 +24,10 @@ const CreateTags = () => {
 
   useEffect(() => {
     if (newTagsCount !== 0 && newTagsCount === newUploadedTags.length) {
+      sendStepStatusRequest(
+        'AddQuote | New tags added to DB | Initiate quote creation',
+        'success'
+      );
       return dispatch({
         type: 'AQ_INITIATE_ADD_QUOTE'
       });
@@ -47,7 +53,7 @@ const CreateTags = () => {
       }
     };
     const res = await axios.post('/api/v1/tag', body, config);
-    console.log(res);
+    sendStepStatusRequest('Tag added successfully', 'success');
 
     dispatch({
       type: 'AQ_ADD_NEWTAG_TO_STATE',

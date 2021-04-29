@@ -1,14 +1,17 @@
 import { useQuery } from 'react-query';
 import axios from 'axios';
-export const getQuotes = async () => {
-  console.log('In a get qutes');
 
+import { useStepStatusRequest } from 'APICalls/StepLog/useStepLog.js';
+
+export const getQuotes = async () => {
   const response = await axios.get('/api/v1/quote');
-  console.log(response);
+
   return response.data.data.data;
 };
 
 export default function useQuotes() {
+  const { sendStepStatusRequest } = useStepStatusRequest();
+
   const {
     data: quotes,
     isSuccess: isQuotesLoaded,
@@ -19,7 +22,12 @@ export default function useQuotes() {
     'quotes',
     () => getQuotes(),
     {
-      onSuccess: data => console.log(data)
+      onSuccess: data =>
+        sendStepStatusRequest('Quotes fetched successfully', 'success')
+    },
+    {
+      onError: () =>
+        sendStepStatusRequest('Error in fetching Quotes', 'failure')
     },
     { staleTime: 10000 }
   );

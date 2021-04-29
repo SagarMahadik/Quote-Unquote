@@ -1,10 +1,11 @@
 import { useMutation } from 'react-query';
 
 import axios from 'axios';
-export default function useCreateSupplier() {
-  const createAuthor = async body => {
-    console.log(body);
+import { useStepStatusRequest } from 'APICalls/StepLog/useStepLog.js';
 
+export default function useCreateSupplier() {
+  const { sendStepStatusRequest } = useStepStatusRequest();
+  const createAuthor = async body => {
     const config = {
       headers: {
         'Content-Type': 'application/JSON'
@@ -21,12 +22,12 @@ export default function useCreateSupplier() {
   const { mutateAsync, isError, error, status, isSuccess } = useMutation(
     createAuthor,
     {
-      onSuccess: () => {
-        console.log('done');
-      }
+      onSuccess: data =>
+        sendStepStatusRequest('Authors Added successfully', 'success')
     },
     {
-      onError: () => console.log(error)
+      onError: () =>
+        sendStepStatusRequest('Error in creating Author', 'failure')
     }
   );
 

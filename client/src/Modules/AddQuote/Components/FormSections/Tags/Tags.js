@@ -13,7 +13,6 @@ const Tags = () => {
   } = useAddQuoteState();
   const dispatch = useAddQuoteDispatch();
 
-  console.log(tagList);
   return (
     <>
       <FormSectionHeading sectionName="Tags" />

@@ -3,9 +3,9 @@ import {
   NavigationCardContainer,
   NavigatioCardText
 } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteSuccessMessage/quoteSuccessNavigationCard.js';
-const QuoteSuccessNavigatiocard = ({ route, navigationCardText }) => {
+const QuoteSuccessNavigatiocard = ({ onClick, navigationCardText }) => {
   return (
-    <NavigationCardContainer to={`/${route}`}>
+    <NavigationCardContainer onClick={onClick}>
       <NavigatioCardText>{navigationCardText}</NavigatioCardText>
     </NavigationCardContainer>
   );

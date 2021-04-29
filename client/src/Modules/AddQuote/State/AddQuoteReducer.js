@@ -24,7 +24,8 @@ import {
   AQ_CREATE_NEW_TAGS,
   AQ_ADD_NEWTAG_TO_STATE,
   AQ_INITIATE_ADD_QUOTE,
-  AQ_QUOTE_ADDED_TO_DB
+  AQ_QUOTE_ADDED_TO_DB,
+  AQ_QUOTE_RESET_FORM
 } from 'Modules/AddQuote/State/types.js';
 import { produce } from 'immer';
 export default (state, action) => {
@@ -181,6 +182,21 @@ export default (state, action) => {
       return produce(state, draftState => {
         draftState.quoteCreatedSuccessfully = true;
         draftState.quoteAuthor = draftState.authorSearch.searchString;
+      });
+
+    case AQ_QUOTE_RESET_FORM:
+      return produce(state, draftState => {
+        draftState.quoteCreatedSuccessfully = false;
+        draftState.authorSearch.searchString = '';
+        draftState.quote = '';
+        draftState.initiateValidations = false;
+        draftState.validationsComplete = false;
+        draftState.initiateRequestCreation = false;
+        draftState.initiateNewAuthorCreation = false;
+        draftState.initiateTagsCheck = false;
+        draftState.initiateNewTagCreation = false;
+        draftState.initiateQuoteCreation = false;
+        draftState.quoteCreatedSuccessfully = false;
       });
 
     default:

@@ -45,7 +45,6 @@ const ApplicationState = ({ children }) => {
     }
   }, [authors, isAuthorsLoaded]);
 
-  console.log(quotes);
   const { login, applicationData } = state;
   return (
     <ApplicationContext.Provider value={{ login, applicationData }}>

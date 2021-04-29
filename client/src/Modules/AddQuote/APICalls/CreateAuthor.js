@@ -6,7 +6,10 @@ import {
 } from 'Modules/AddQuote/State/AddQuoteState.js';
 import useCreateAuthor from 'APICalls/Authors/useCreateAuthor.js';
 
+import { useStepStatusRequest } from 'APICalls/StepLog/useStepLog.js';
+
 const CreateAuthor = () => {
+  const { sendStepStatusRequest } = useStepStatusRequest();
   const {
     initiateNewAuthorCreation,
     authorSearch: { searchString }
@@ -29,13 +32,13 @@ const CreateAuthor = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log('Done uplaoding Author');
+      sendStepStatusRequest('Author created successfully', 'success');
     }
   }, [isSuccess]);
 
   useEffect(() => {
     if (isError) {
-      console.log('there was error');
+      sendStepStatusRequest('Author creation failed', 'failure');
     }
   }, [isError]);
 

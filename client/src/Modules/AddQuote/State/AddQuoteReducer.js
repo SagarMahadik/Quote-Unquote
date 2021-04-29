@@ -198,6 +198,7 @@ export default (state, action) => {
         draftState.initiateNewTagCreation = false;
         draftState.initiateQuoteCreation = false;
         draftState.quoteCreatedSuccessfully = false;
+        draftState.redirectToReadQuote = false;
       });
 
     case AQ_REDIRECT_READQUOTES:

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { AddQuoteSuccessContainer } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteSuccessMessage/quoteSuccessContainer.js';
 import QuoteSuccessText from 'StylesLibrary/Molecules/AddQuoteModule/AddQuoteSuccessMessage/QuoteSuccessText.js';
-import QuoteSuccessNavigatiocard from 'StylesLibrary/Molecules/AddQuoteModule/AddQuoteSuccessMessage/QuoteSuccessNavigatiocard.js';
+import NavigationPage from 'Modules/Global/Navigation/NavigationPage.js';
 
 import {
   useAddQuoteDispatch,
@@ -34,13 +34,10 @@ const AddQuoteSuccess = ({ authorName }) => {
   return (
     <AddQuoteSuccessContainer>
       <QuoteSuccessText quoteAuthor={authorName}></QuoteSuccessText>
-      <QuoteSuccessNavigatiocard
-        navigationCardText="Add another"
-        onClick={() => resetTheAddquoteForm()}
-      />
-      <QuoteSuccessNavigatiocard
-        onClick={() => dispatch({ type: 'AQ_REDIRECT_READQUOTES' })}
-        navigationCardText="Read"
+      <NavigationPage
+        addQuouteCallBack={() => resetTheAddquoteForm()}
+        readQuoteCallBack={() => dispatch({ type: 'AQ_REDIRECT_READQUOTES' })}
+        addMore={true}
       />
     </AddQuoteSuccessContainer>
   );

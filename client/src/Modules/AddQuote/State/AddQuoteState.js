@@ -46,7 +46,8 @@ const AddQuoteState = ({ children }) => {
     anonymousAuthorSet: false,
     anonymousAuthorRequired: false,
     initiateQuoteCreation: false,
-    quoteCreatedSuccessfully: false
+    quoteCreatedSuccessfully: false,
+    redirectToReadQuote: false
   };
 
   const [state, dispatch] = useReducer(AddQuoteReducer, initialState);
@@ -74,7 +75,8 @@ const AddQuoteState = ({ children }) => {
     initiateTagsCheck,
     initiateNewTagCreation,
     initiateQuoteCreation,
-    quoteCreatedSuccessfully
+    quoteCreatedSuccessfully,
+    redirectToReadQuote
   } = state;
 
   const setAuthorsState = authorData => {
@@ -142,7 +144,8 @@ const AddQuoteState = ({ children }) => {
         initiateTagsCheck,
         initiateNewTagCreation,
         initiateQuoteCreation,
-        quoteCreatedSuccessfully
+        quoteCreatedSuccessfully,
+        redirectToReadQuote
       }}
     >
       <AddQuoteDispatchContext.Provider value={dispatch}>

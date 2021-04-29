@@ -25,7 +25,8 @@ import {
   AQ_ADD_NEWTAG_TO_STATE,
   AQ_INITIATE_ADD_QUOTE,
   AQ_QUOTE_ADDED_TO_DB,
-  AQ_QUOTE_RESET_FORM
+  AQ_QUOTE_RESET_FORM,
+  AQ_REDIRECT_READQUOTES
 } from 'Modules/AddQuote/State/types.js';
 import { produce } from 'immer';
 export default (state, action) => {
@@ -199,6 +200,10 @@ export default (state, action) => {
         draftState.quoteCreatedSuccessfully = false;
       });
 
+    case AQ_REDIRECT_READQUOTES:
+      return produce(state, draftState => {
+        draftState.redirectToReadQuote = true;
+      });
     default:
       return {
         ...state

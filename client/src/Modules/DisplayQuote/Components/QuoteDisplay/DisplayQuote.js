@@ -72,15 +72,37 @@ const DisplayQuote = () => {
     }
   };
 
+  const b64toBlob = (b64Data, contentType = '', sliceSize = 512) => {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, { type: contentType });
+    return blob;
+  };
+
   const printDocument = async () => {
     const input = document.getElementById('divToPrint');
     html2canvas(input).then(canvas => {
       let imgWidth = 208;
       let imgHeight = (canvas.height * imgWidth) / canvas.width;
-      const imgData = canvas.toDataURL('img/jpeg');
-      console.log(imgData);
-      const blob = new Blob([imgData], { type: 'img/jpeg' });
+      const imgData = canvas.toDataURL('img/png');
+      console.log(imgData.split(',').pop());
+      const blob = b64toBlob(imgData.split(',').pop(), 'img/png');
+
       const file = new File([blob], 'fileName.png', { type: blob.type });
+      console.log(file);
       navigator
         .share({
           title: 'title',
@@ -124,11 +146,7 @@ const DisplayQuote = () => {
           <QuotationSymbolText>&#8221;</QuotationSymbolText>
         </QuotationRight>
       </QuoteContainer>
-      {currentQuote.length > 0 ? (
-        <WhatsappShareButton title={currentQuote[0].quote}>
-          <WhatsappIcon size={'2.5rem'} />
-        </WhatsappShareButton>
-      ) : null}
+
       <LogoutButton onClick={printDocument} />
     </>
   );

@@ -73,13 +73,23 @@ const DisplayQuote = () => {
   };
 
   const printDocument = async () => {
-    navigator
-      .share({
-        title: 'title',
-        text: `${currentQuote[0].quote}`
-      })
-      .then(() => console.log('Successful share'))
-      .catch(error => console.log('Error in sharing', error));
+    const input = document.getElementById('divToPrint');
+    html2canvas(input).then(canvas => {
+      let imgWidth = 208;
+      let imgHeight = (canvas.height * imgWidth) / canvas.width;
+      const imgData = canvas.toDataURL('img/jpeg');
+      console.log(imgData);
+      const blob = new Blob([imgData], { type: 'img/jpeg' });
+      const file = new File([blob], 'fileName.png', { type: blob.type });
+      navigator
+        .share({
+          title: 'title',
+          text: `${currentQuote[0].quote}`,
+          files: [file]
+        })
+        .then(() => console.log('Successful share'))
+        .catch(error => console.log('Error in sharing', error));
+    });
   };
 
   return (

@@ -22,7 +22,7 @@ export const ColumnContainer = styled.div`
 export const CenterAlignedColumnContainer = styled(ColumnContainer)`
   align-items: center;
   justify-content: center;
-  margin: 0;
+  max-width: 600px;
   margin-top: ${props => props.marginTop};
 `;
 

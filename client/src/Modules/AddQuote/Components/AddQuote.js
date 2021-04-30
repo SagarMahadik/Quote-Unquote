@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormContentContainer } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormContainer/FormContainer.js';
+import { CenterAlignedColumnContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles.js';
 import PageHeading from 'StylesLibrary/Molecules/AddQuoteModule/PageHeading/index.js';
 
 import QuoteText from './FormSections/QuoteText';
@@ -38,20 +39,22 @@ const AddQuote = () => {
   return (
     <>
       <PageHeading />
-      <FormContentContainer containerHeight="auto">
-        <QuoteText />
-        <AuthorName />
-        <Tags />
-        <AddNewTags />
-        <AddNewTagsText />
-        <FormSectionDivider />
-        <SubmitButton onClick={handleAddQuoteSubmit} />
-        <FormValidations />
-        <CreateRequestFlow />
-        <CreateAuthor />
-        <CreateTags />
-        <CreateQuote />
-      </FormContentContainer>
+      <CenterAlignedColumnContainer>
+        <FormContentContainer containerHeight="auto">
+          <QuoteText />
+          <AuthorName />
+          <Tags />
+          <AddNewTags />
+          <AddNewTagsText />
+          <FormSectionDivider />
+          <SubmitButton onClick={handleAddQuoteSubmit} />
+          <FormValidations />
+          <CreateRequestFlow />
+          <CreateAuthor />
+          <CreateTags />
+          <CreateQuote />
+        </FormContentContainer>
+      </CenterAlignedColumnContainer>
     </>
   );
 };

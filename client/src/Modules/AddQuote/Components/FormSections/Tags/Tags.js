@@ -7,9 +7,17 @@ import {
   useAddQuoteDispatch
 } from 'Modules/AddQuote/State/AddQuoteState.js';
 
+import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
+import PaginationTags from '../PaginationTags';
+
 const Tags = () => {
   const {
-    applicationData: { tagList }
+    applicationData: { tagList },
+    exploreMore: {
+      explreMoreTotalCount,
+      exploreMoreTagsCurrentCount,
+      paginationStep
+    }
   } = useAddQuoteState();
   const dispatch = useAddQuoteDispatch();
 
@@ -17,17 +25,24 @@ const Tags = () => {
     <>
       <FormSectionHeading sectionName="Tags" />
       {tagList ? (
-        <InputButtonContainer>
-          {tagList.map(({ tagName, selected }) => {
-            return (
-              <InputButton
-                buttonText={tagName}
-                buttonSelected={selected}
-                onClick={() => dispatch({ type: 'SET_TAG', payload: tagName })}
-              />
-            );
-          })}
-        </InputButtonContainer>
+        <>
+          <InputButtonContainer>
+            {tagList
+              .slice(0, paginationStep * exploreMoreTagsCurrentCount)
+              .map(({ tagName, selected }) => {
+                return (
+                  <InputButton
+                    buttonText={makeFirstLetterUpperCase(tagName)}
+                    buttonSelected={selected}
+                    onClick={() =>
+                      dispatch({ type: 'SET_TAG', payload: tagName })
+                    }
+                  />
+                );
+              })}
+          </InputButtonContainer>
+          <PaginationTags />
+        </>
       ) : null}
     </>
   );

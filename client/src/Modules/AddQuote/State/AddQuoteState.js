@@ -34,6 +34,11 @@ const AddQuoteState = ({ children }) => {
     requiredFieldsError: {
       quote: false
     },
+    exploreMore: {
+      exploreMoreTagsCurrentCount: 1,
+      exploreMoreTagsTotalCount: 0,
+      paginationStep: 7
+    },
     newTagsAdded: [],
     newTagsCount: 0,
     newUploadedTags: [],
@@ -68,6 +73,7 @@ const AddQuoteState = ({ children }) => {
     newTagsAdded,
     newTagsCount,
     newUploadedTags,
+    exploreMore,
     initiateValidations,
     validationsComplete,
     initiateRequestCreation,
@@ -137,6 +143,7 @@ const AddQuoteState = ({ children }) => {
         newTagsAdded,
         newTagsCount,
         newUploadedTags,
+        exploreMore,
         initiateValidations,
         validationsComplete,
         initiateRequestCreation,

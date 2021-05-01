@@ -1,5 +1,8 @@
 import React from 'react';
-import { FormContentContainer } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormContainer/FormContainer.js';
+import {
+  FormContentContainer,
+  OverLayContainer
+} from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormContainer/FormContainer.js';
 import { CenterAlignedColumnContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles.js';
 import PageHeading from 'StylesLibrary/Molecules/AddQuoteModule/PageHeading/index.js';
 
@@ -23,7 +26,11 @@ import {
 
 import CreateAuthor from 'Modules/AddQuote/APICalls/CreateAuthor.js';
 const AddQuote = () => {
-  const { quoteCreatedSuccessfully, quoteAuthor } = useAddQuoteState();
+  const {
+    quoteCreatedSuccessfully,
+    quoteAuthor,
+    addNewTag
+  } = useAddQuoteState();
   const dispatch = useAddQuoteDispatch();
 
   const handleAddQuoteSubmit = e => {
@@ -41,13 +48,17 @@ const AddQuote = () => {
       <PageHeading />
       <CenterAlignedColumnContainer>
         <FormContentContainer containerHeight="auto">
-          <QuoteText />
-          <AuthorName />
-          <Tags />
+          <OverLayContainer activateOverlay={addNewTag}>
+            <QuoteText />
+            <AuthorName />
+            <Tags />
+          </OverLayContainer>
           <AddNewTags />
           <AddNewTagsText />
-          <FormSectionDivider />
-          <SubmitButton onClick={handleAddQuoteSubmit} />
+          <OverLayContainer activateOverlay={addNewTag}>
+            <FormSectionDivider />
+            <SubmitButton onClick={handleAddQuoteSubmit} />
+          </OverLayContainer>
           <FormValidations />
           <CreateRequestFlow />
           <CreateAuthor />

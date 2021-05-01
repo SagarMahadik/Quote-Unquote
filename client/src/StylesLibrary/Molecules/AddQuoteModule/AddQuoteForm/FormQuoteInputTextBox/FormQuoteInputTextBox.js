@@ -7,7 +7,7 @@ import {
   QuoteText
 } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormQuoteInputTextBox/FormQuoteInputTextBox.js';
 
-const FormQuoteInputTextBox = ({ value, onChange, onClick }) => {
+const FormQuoteInputTextBox = ({ value, onChange, onClick, onBlur }) => {
   return (
     <QuoteContainer>
       <QuotationLeft>
@@ -21,6 +21,7 @@ const FormQuoteInputTextBox = ({ value, onChange, onClick }) => {
           value={value}
           onChange={onChange}
           onClick={onClick}
+          onBlur={onBlur}
         ></QuoteText>
       </div>
 

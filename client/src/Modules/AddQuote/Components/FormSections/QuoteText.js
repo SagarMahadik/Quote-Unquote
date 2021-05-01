@@ -6,6 +6,8 @@ import {
   useAddQuoteDispatch
 } from 'Modules/AddQuote/State/AddQuoteState.js';
 
+import { sanitizeQuoteText } from 'Utils/stringOperations.js';
+
 const QuoteText = () => {
   const { quote } = useAddQuoteState();
   const dispatch = useAddQuoteDispatch();
@@ -30,6 +32,12 @@ const QuoteText = () => {
           dispatch({ type: 'SET_QUOTE', quoteText: e.target.value });
         }}
         onClick={pasteFromClipboard}
+        onBlur={() =>
+          dispatch({
+            type: 'SET_QUOTE',
+            quoteText: sanitizeQuoteText(quote)
+          })
+        }
       />
     </>
   );

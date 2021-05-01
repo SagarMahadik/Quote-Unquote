@@ -26,7 +26,9 @@ import {
   AQ_INITIATE_ADD_QUOTE,
   AQ_QUOTE_ADDED_TO_DB,
   AQ_QUOTE_RESET_FORM,
-  AQ_REDIRECT_READQUOTES
+  AQ_REDIRECT_READQUOTES,
+  AQ_INC_EXPLOREMORE_TAG_COUNT,
+  AQ_RESET_EXPLOREMORE_TAG_COUNT
 } from 'Modules/AddQuote/State/types.js';
 import { produce } from 'immer';
 export default (state, action) => {
@@ -34,6 +36,10 @@ export default (state, action) => {
     case AQ_SET_TAGS:
       return produce(state, draftState => {
         draftState.applicationData.tagList = action.payload;
+        draftState.exploreMore.exploreMoreTagsTotalCount = Math.ceil(
+          draftState.applicationData.tagList.length /
+            draftState.exploreMore.paginationStep
+        );
       });
 
     case AQ_SET_AUTHORS:
@@ -205,6 +211,17 @@ export default (state, action) => {
       return produce(state, draftState => {
         draftState.redirectToReadQuote = true;
       });
+    case AQ_INC_EXPLOREMORE_TAG_COUNT:
+      return produce(state, draftState => {
+        draftState.exploreMore.exploreMoreTagsCurrentCount =
+          draftState.exploreMore.exploreMoreTagsCurrentCount + 1;
+      });
+
+    case AQ_RESET_EXPLOREMORE_TAG_COUNT:
+      return produce(state, draftState => {
+        draftState.exploreMore.exploreMoreTagsCurrentCount = 1;
+      });
+
     default:
       return {
         ...state

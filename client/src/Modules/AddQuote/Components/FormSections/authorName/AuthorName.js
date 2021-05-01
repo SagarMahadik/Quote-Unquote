@@ -13,6 +13,7 @@ import {
   DropDownOptionLine2Text
 } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormDropDownOptions/FormDropDownOptions.js';
 
+import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
 const AuthorName = () => {
   const {
     authorSearch: { searchString, searchResults },
@@ -76,6 +77,10 @@ const AuthorName = () => {
         name="searchString"
         value={searchString}
         onChange={handleSearchText}
+        onBlur={dispatch({
+          type: 'UPDATE_SEARCHSTRING',
+          payload: makeFirstLetterUpperCase(searchString)
+        })}
       />
       {searchResults.length > 0 ? (
         <DropDownOptionsContainer>

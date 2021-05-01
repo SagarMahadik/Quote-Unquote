@@ -25,6 +25,7 @@ import {
 } from 'Modules/AddQuote/State/AddQuoteState.js';
 
 import CreateAuthor from 'Modules/AddQuote/APICalls/CreateAuthor.js';
+import { ButtonContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/Buttons/ButtonContainer';
 const AddQuote = () => {
   const {
     quoteCreatedSuccessfully,
@@ -48,17 +49,24 @@ const AddQuote = () => {
       <PageHeading />
       <CenterAlignedColumnContainer>
         <FormContentContainer containerHeight="auto">
-          <OverLayContainer activateOverlay={addNewTag}>
+          <CenterAlignedColumnContainer style={{ position: 'relative' }}>
+            {addNewTag ? <OverLayContainer displayOverlay={addNewTag} /> : null}
             <QuoteText />
             <AuthorName />
             <Tags />
-          </OverLayContainer>
-          <AddNewTags />
-          <AddNewTagsText />
-          <OverLayContainer activateOverlay={addNewTag}>
+          </CenterAlignedColumnContainer>
+          <CenterAlignedColumnContainer style={{ margin: '1rem' }}>
+            <AddNewTags />
+            <AddNewTagsText />
+          </CenterAlignedColumnContainer>
+          <CenterAlignedColumnContainer style={{ position: 'relative' }}>
+            {addNewTag ? <OverLayContainer displayOverlay={addNewTag} /> : null}
             <FormSectionDivider />
-            <SubmitButton onClick={handleAddQuoteSubmit} />
-          </OverLayContainer>
+            <ButtonContainer>
+              <SubmitButton onClick={handleAddQuoteSubmit} />
+            </ButtonContainer>
+          </CenterAlignedColumnContainer>
+
           <FormValidations />
           <CreateRequestFlow />
           <CreateAuthor />

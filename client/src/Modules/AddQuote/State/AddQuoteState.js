@@ -39,6 +39,9 @@ const AddQuoteState = ({ children }) => {
       exploreMoreTagsTotalCount: 0,
       paginationStep: 7
     },
+    styles: {
+      textAreaHeight: 'auto'
+    },
     newTagsAdded: [],
     newTagsCount: 0,
     newUploadedTags: [],
@@ -74,6 +77,7 @@ const AddQuoteState = ({ children }) => {
     newTagsCount,
     newUploadedTags,
     exploreMore,
+    styles,
     initiateValidations,
     validationsComplete,
     initiateRequestCreation,
@@ -144,6 +148,7 @@ const AddQuoteState = ({ children }) => {
         newTagsCount,
         newUploadedTags,
         exploreMore,
+        styles,
         initiateValidations,
         validationsComplete,
         initiateRequestCreation,

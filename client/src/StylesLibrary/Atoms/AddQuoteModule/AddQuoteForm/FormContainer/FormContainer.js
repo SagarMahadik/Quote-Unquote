@@ -13,6 +13,12 @@ export const FormContentContainer = styled(
 `;
 
 export const OverLayContainer = styled(CenterAlignedColumnContainer)`
-  opacity: ${props => (props.activateOverlay ? 0.4 : 1)};
-  transition: opacity 1.2s ease-out;
+  background-color: ${props =>
+    props.displayOverlay ? 'rgba(0, 0, 0, 0.4)' : 'none'};
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: background-color 0.8s ease-out;
 `;

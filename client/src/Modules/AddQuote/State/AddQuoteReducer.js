@@ -28,7 +28,8 @@ import {
   AQ_QUOTE_RESET_FORM,
   AQ_REDIRECT_READQUOTES,
   AQ_INC_EXPLOREMORE_TAG_COUNT,
-  AQ_RESET_EXPLOREMORE_TAG_COUNT
+  AQ_RESET_EXPLOREMORE_TAG_COUNT,
+  AQ_SET_TEXTAREAHEIGHT
 } from 'Modules/AddQuote/State/types.js';
 import { produce } from 'immer';
 export default (state, action) => {
@@ -97,8 +98,7 @@ export default (state, action) => {
       return produce(state, draftState => {
         draftState.newTagText.split(',').forEach(tag => {
           var obj = { tagName: tag, selected: true, newTag: true };
-          console.log(obj);
-          draftState.applicationData.tagList.push(obj);
+          draftState.applicationData.tagList.unshift(obj);
         });
         draftState.addNewTag = false;
         draftState.newTagText = '';
@@ -222,6 +222,10 @@ export default (state, action) => {
         draftState.exploreMore.exploreMoreTagsCurrentCount = 1;
       });
 
+    case AQ_SET_TEXTAREAHEIGHT:
+      return produce(state, draftState => {
+        draftState.styles.textAreaHeight = action.payload;
+      });
     default:
       return {
         ...state

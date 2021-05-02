@@ -4,12 +4,17 @@ import {
   SubmitButtonBorder,
   SumbitButtonStyle
 } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormButtons/SubmitButton.js';
+import ThreeDotsWave from 'Modules/AddQuote/Components/ThreeDotWave.js';
 
-const SubmitButton = ({ onClick }) => {
+const SubmitButton = ({ onClick, loading }) => {
   return (
     <SubmitButtonBorder onClick={e => onClick(e)}>
       <SumbitButtonStyle>
-        <SubmitButtonText>Add Quote</SubmitButtonText>
+        {loading ? (
+          <ThreeDotsWave />
+        ) : (
+          <SubmitButtonText>Add Quote</SubmitButtonText>
+        )}
       </SumbitButtonStyle>
     </SubmitButtonBorder>
   );

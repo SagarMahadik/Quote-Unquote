@@ -1,3 +1,4 @@
+export const SET_LOADING = 'SET_LOADING';
 export const AQ_SET_TAGS = 'AQ_SET_TAGS';
 export const SET_QUOTE = 'SET_QUOTE';
 export const SET_AUTHOR = 'SET_AUTHOR';

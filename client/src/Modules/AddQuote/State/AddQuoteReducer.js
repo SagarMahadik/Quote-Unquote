@@ -1,4 +1,5 @@
 import {
+  SET_LOADING,
   SET_QUOTE,
   SET_ANONYMOUSAUTHOR,
   SET_AUTHOR,
@@ -211,6 +212,7 @@ export default (state, action) => {
         draftState.applicationData.tagList.forEach(
           tag => (tag.selected = false)
         );
+        draftState.loading = false;
       });
 
     case AQ_REDIRECT_READQUOTES:
@@ -238,6 +240,10 @@ export default (state, action) => {
         draftState.authorSearch.searchString = '';
         draftState.authorSearch.searchResults = [];
         draftState.quoteAuthorID = '';
+      });
+    case SET_LOADING:
+      return produce(state, draftState => {
+        draftState.loading = true;
       });
     default:
       return {

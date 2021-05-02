@@ -55,12 +55,14 @@ const AddQuoteState = ({ children }) => {
     anonymousAuthorRequired: false,
     initiateQuoteCreation: false,
     quoteCreatedSuccessfully: false,
-    redirectToReadQuote: false
+    redirectToReadQuote: false,
+    loading: false
   };
 
   const [state, dispatch] = useReducer(AddQuoteReducer, initialState);
 
   const {
+    loading,
     quote,
     quoteAuthor,
     anonymousAuthorID,
@@ -132,6 +134,7 @@ const AddQuoteState = ({ children }) => {
   return (
     <AddQuoteContext.Provider
       value={{
+        loading,
         quote,
         quoteAuthor,
         anonymousAuthorID,

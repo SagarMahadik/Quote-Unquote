@@ -32,13 +32,16 @@ const AddQuote = () => {
   const {
     quoteCreatedSuccessfully,
     quoteAuthor,
-    addNewTag
+    addNewTag,
+    loading
   } = useAddQuoteState();
   const dispatch = useAddQuoteDispatch();
 
   const handleAddQuoteSubmit = e => {
     e.preventDefault();
-
+    dispatch({
+      type: 'SET_LOADING'
+    });
     dispatch({
       type: 'AQ_INITIATE_VALIDATIONS'
     });
@@ -70,6 +73,7 @@ const AddQuote = () => {
                   submitVibrations();
                   handleAddQuoteSubmit(e);
                 }}
+                loading={loading}
               />
             </ButtonContainer>
           </CenterAlignedColumnContainer>

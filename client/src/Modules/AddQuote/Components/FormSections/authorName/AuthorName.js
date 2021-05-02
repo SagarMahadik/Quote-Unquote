@@ -17,6 +17,8 @@ import { ClearButtonContainer } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuot
 
 import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
 import { CenterAlignedRowContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
+import { formClickVibrations } from 'Utils/vibrations.js';
+
 const AuthorName = () => {
   const {
     authorSearch: { searchString, searchResults },
@@ -64,7 +66,7 @@ const AuthorName = () => {
   const handleSearchItemClick = item => {
     let authorName = item.authorName;
     let authorID = item._id;
-
+    formClickVibrations();
     {
       dispatch({
         type: 'SET_AUTHOR',
@@ -75,6 +77,7 @@ const AuthorName = () => {
 
   const handleClearAuthorNameField = () => {
     console.log('clear search');
+    formClickVibrations();
     dispatch({
       type: 'AQ_RESET_AUTHOR'
     });

@@ -26,6 +26,8 @@ import {
 
 import CreateAuthor from 'Modules/AddQuote/APICalls/CreateAuthor.js';
 import { ButtonContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/Buttons/ButtonContainer';
+import { submitVibrations } from 'Utils/vibrations';
+
 const AddQuote = () => {
   const {
     quoteCreatedSuccessfully,
@@ -63,7 +65,12 @@ const AddQuote = () => {
             {addNewTag ? <OverLayContainer displayOverlay={addNewTag} /> : null}
             <FormSectionDivider />
             <ButtonContainer>
-              <SubmitButton onClick={handleAddQuoteSubmit} />
+              <SubmitButton
+                onClick={e => {
+                  submitVibrations();
+                  handleAddQuoteSubmit(e);
+                }}
+              />
             </ButtonContainer>
           </CenterAlignedColumnContainer>
 

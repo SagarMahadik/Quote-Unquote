@@ -21,7 +21,10 @@ const ToggleMoodDisplay = () => {
     );
   }
   return (
-    <FormContentContainer containerHeight={containerHeight}>
+    <FormContentContainer
+      containerHeight={containerHeight}
+      containerPaddingBottom="2rem"
+    >
       <MoodPage />
     </FormContentContainer>
   );

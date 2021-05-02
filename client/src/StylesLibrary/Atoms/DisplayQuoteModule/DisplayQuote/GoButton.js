@@ -37,4 +37,5 @@ export const GoButtonBorder = styled(CenterAlignedColumnContainer)`
   height: 50px;
   border-radius: 25px;
   margin-bottom: 16px;
+  margin-top: 3rem;
 `;

@@ -11,6 +11,7 @@ export const FormContentContainer = styled(
   height: ${props => props.containerHeight};
   width: 100%;
   overflow-y: auto;
+  padding-bottom: ${props => props.containerPaddingBottom};
 `;
 
 export const OverLayContainer = styled(CenterAlignedColumnContainer)`

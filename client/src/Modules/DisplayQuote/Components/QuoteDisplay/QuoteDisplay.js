@@ -22,6 +22,8 @@ import PeacefulMusic from 'Modules/Sounds/PeacefulMusic.js';
 import { randomButtonVibrations } from 'Utils/vibrations.js';
 import { RightAlignedColumnContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
 
+import { goButtonVibrations } from 'Utils/vibrations';
+
 const QuoteDisplay = () => {
   const {
     filteredQuotes: { filterQuotesList },
@@ -67,11 +69,19 @@ const QuoteDisplay = () => {
         >
           <RightAlignedColumnContainer marginTop="2rem">
             <FilterButton
-              onClick={() => dispatch({ type: 'DQ_TOGGLE_FILTERMODAL' })}
+              onClick={() => {
+                goButtonVibrations();
+                dispatch({ type: 'DQ_TOGGLE_FILTERMODAL' });
+              }}
             />
           </RightAlignedColumnContainer>
           <RightAlignedColumnContainer>
-            <WhatsAppButton onClick={() => printDocument()} />
+            <WhatsAppButton
+              onClick={() => {
+                goButtonVibrations();
+                printDocument();
+              }}
+            />
           </RightAlignedColumnContainer>
           <DisplayQuote />
           <DisplayTags />

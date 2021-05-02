@@ -18,7 +18,7 @@ export const randomButtonVibrations = () => {
   navigator.vibrate = navigator.vibrate;
 
   if (navigator.vibrate) {
-    return navigator.vibrate(6);
+    return navigator.vibrate(9);
   }
 };
 
@@ -26,6 +26,14 @@ export const goButtonVibrations = () => {
   navigator.vibrate = navigator.vibrate;
 
   if (navigator.vibrate) {
-    return navigator.vibrate(4);
+    return navigator.vibrate(9);
+  }
+};
+
+export const formClickVibrations = () => {
+  navigator.vibrate = navigator.vibrate;
+
+  if (navigator.vibrate) {
+    return navigator.vibrate(10);
   }
 };

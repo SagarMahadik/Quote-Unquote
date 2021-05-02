@@ -8,7 +8,9 @@ export const DisplayQuoteContiner = styled(CenterAlignedColumnContainer)`
 
 export const DisplayQuoteMainContainer = styled(CenterAlignedColumnContainer)`
   position: relative;
-  height: 100vh;
+  height: ${props => props.quoteMainContainerHeight};
   margin-top: 0px;
   justify-content: flex-start;
+  width: 98%;
+  padding-bottom: 2rem;
 `;

@@ -4,13 +4,12 @@ import { FormContentContainer } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuot
 import { CenterAlignedColumnContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles.js';
 
 import DisplayQuoteState from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
+
 const DisplayQuoteMainComponent = () => {
   return (
     <DisplayQuoteState>
       <CenterAlignedColumnContainer style={{ alignItems: 'flex-start' }}>
-        <FormContentContainer containerHeight="100vh">
-          <ToggleMoodDisplay />
-        </FormContentContainer>
+        <ToggleMoodDisplay />
       </CenterAlignedColumnContainer>
     </DisplayQuoteState>
   );

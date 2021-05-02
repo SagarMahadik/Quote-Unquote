@@ -29,7 +29,8 @@ import {
   AQ_REDIRECT_READQUOTES,
   AQ_INC_EXPLOREMORE_TAG_COUNT,
   AQ_RESET_EXPLOREMORE_TAG_COUNT,
-  AQ_SET_TEXTAREAHEIGHT
+  AQ_SET_TEXTAREAHEIGHT,
+  AQ_RESET_AUTHOR
 } from 'Modules/AddQuote/State/types.js';
 import { produce } from 'immer';
 export default (state, action) => {
@@ -194,8 +195,9 @@ export default (state, action) => {
     case AQ_QUOTE_RESET_FORM:
       return produce(state, draftState => {
         draftState.quoteCreatedSuccessfully = false;
-        draftState.authorSearch.searchString = '';
         draftState.quote = '';
+        draftState.newTagsAdded = [];
+        draftState.newUploadedTags = [];
         draftState.initiateValidations = false;
         draftState.validationsComplete = false;
         draftState.initiateRequestCreation = false;
@@ -204,7 +206,11 @@ export default (state, action) => {
         draftState.initiateNewTagCreation = false;
         draftState.initiateQuoteCreation = false;
         draftState.quoteCreatedSuccessfully = false;
+        draftState.initiateQuoteCreation = false;
         draftState.redirectToReadQuote = false;
+        draftState.applicationData.tagList.forEach(
+          tag => (tag.selected = false)
+        );
       });
 
     case AQ_REDIRECT_READQUOTES:
@@ -225,6 +231,13 @@ export default (state, action) => {
     case AQ_SET_TEXTAREAHEIGHT:
       return produce(state, draftState => {
         draftState.styles.textAreaHeight = action.payload;
+      });
+
+    case AQ_RESET_AUTHOR:
+      return produce(state, draftState => {
+        draftState.authorSearch.searchString = '';
+        draftState.authorSearch.searchResults = [];
+        draftState.quoteAuthorID = '';
       });
     default:
       return {

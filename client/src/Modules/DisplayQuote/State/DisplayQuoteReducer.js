@@ -15,7 +15,8 @@ import {
   DQ_RESET_TAG_EXPLOREMORE_COUNT,
   DQ_AUTHOR_INC_EXPLOREMORE_COUNT,
   DQ_RESET_AUTHOR_EXPLOREMORE_COUNT,
-  HIDE_QUOTE
+  HIDE_QUOTE,
+  DQ_SET_MAINCONTAINERHEIGHT
 } from 'Modules/DisplayQuote/State/types.js';
 import { produce } from 'immer';
 
@@ -152,6 +153,11 @@ export default (state, action) => {
     case HIDE_QUOTE:
       return produce(state, draftState => {
         draftState.displayQuote = false;
+      });
+
+    case DQ_SET_MAINCONTAINERHEIGHT:
+      return produce(state, draftState => {
+        draftState.styles.containerHeight = action.payload;
       });
   }
 };

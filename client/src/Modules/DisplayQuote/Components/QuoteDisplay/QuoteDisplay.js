@@ -27,7 +27,8 @@ const QuoteDisplay = () => {
     filteredQuotes: { filterQuotesList },
     currentQuote,
     refreshFIlteredQuotes,
-    displayFilterModal
+    displayFilterModal,
+    styles: { containerHeight }
   } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
 
@@ -59,7 +60,7 @@ const QuoteDisplay = () => {
 
   return (
     <GradientContainer>
-      <DisplayQuoteMainContainer>
+      <DisplayQuoteMainContainer quoteMainContainerHeight={containerHeight}>
         <DisplayQuoteContiner
           showModal={displayFilterModal}
           onClick={() => handleHideModal()}

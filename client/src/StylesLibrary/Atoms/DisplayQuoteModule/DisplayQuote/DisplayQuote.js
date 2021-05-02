@@ -26,8 +26,9 @@ export const QuoteContainer = styled(
   align-items: center;
   border-radius: 5px;
   margin-bottom: 20px;
-  margin-top: 0;
   margin-top: 5rem;
+  margin-right: 0px;
+  margin-left: 0px;
   padding: 15px;
   width: 80%;
   height: auto;

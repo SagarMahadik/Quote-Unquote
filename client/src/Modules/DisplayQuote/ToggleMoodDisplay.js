@@ -5,17 +5,25 @@ import {
   useDisplayQuoteDispatch,
   useDisplayQuoteState
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
+import { FormContentContainer } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormContainer/FormContainer.js';
 
 const ToggleMoodDisplay = () => {
-  const { displayQuotes } = useDisplayQuoteState();
+  const {
+    displayQuotes,
+    styles: { containerHeight }
+  } = useDisplayQuoteState();
 
   if (displayQuotes) {
-    return <QuoteDisplay />;
+    return (
+      <FormContentContainer containerHeight={containerHeight}>
+        <QuoteDisplay />
+      </FormContentContainer>
+    );
   }
   return (
-    <>
+    <FormContentContainer containerHeight={containerHeight}>
       <MoodPage />
-    </>
+    </FormContentContainer>
   );
 };
 

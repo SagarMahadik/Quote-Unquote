@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import FormSectionHeading from 'StylesLibrary/Molecules/AddQuoteModule/AddQuoteForm/FormSectionHeading/FormSectionHeading.js';
 import InputTextBox from 'StylesLibrary/Molecules/AddQuoteModule/AddQuoteForm/FormInput/InputTextBox.js';
 import {
@@ -13,13 +13,17 @@ import {
   DropDownOptionLine2Text
 } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormDropDownOptions/FormDropDownOptions.js';
 
+import { ClearButtonContainer } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormButtons/ClearStringButton.js';
+
 import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
+import { CenterAlignedRowContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
 const AuthorName = () => {
   const {
     authorSearch: { searchString, searchResults },
     applicationData: { authorList }
   } = useAddQuoteState();
   const dispatch = useAddQuoteDispatch();
+  const authorNameRef = useRef();
 
   useEffect(() => {
     if (searchString === '') {
@@ -69,19 +73,36 @@ const AuthorName = () => {
     }
   };
 
+  const handleClearAuthorNameField = () => {
+    console.log('clear search');
+    dispatch({
+      type: 'AQ_RESET_AUTHOR'
+    });
+    console.log(authorNameRef.current.placeholder);
+    authorNameRef.current.placeholder = 'Author Name';
+  };
+
+  const placeholderString = 'Author Name';
+
   return (
     <>
       <FormSectionHeading sectionName="Author" />
-      <InputTextBox
-        placeholderText="Author Name"
-        name="searchString"
-        value={searchString}
-        onChange={handleSearchText}
-        onBlur={dispatch({
-          type: 'UPDATE_SEARCHSTRING',
-          payload: makeFirstLetterUpperCase(searchString)
-        })}
-      />
+      <CenterAlignedRowContainer>
+        <InputTextBox
+          placeholderText={placeholderString}
+          name="searchString"
+          value={searchString}
+          onChange={handleSearchText}
+          onBlur={dispatch({
+            type: 'UPDATE_SEARCHSTRING',
+            payload: makeFirstLetterUpperCase(searchString)
+          })}
+          ref={authorNameRef}
+        />
+        <ClearButtonContainer onClick={handleClearAuthorNameField}>
+          X
+        </ClearButtonContainer>
+      </CenterAlignedRowContainer>
       {searchResults.length > 0 ? (
         <DropDownOptionsContainer>
           {searchResults.map(result => {

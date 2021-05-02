@@ -31,7 +31,14 @@ export const DropDownOptionLineText = styled.h1`
   font-weight: normal;
   line-height: 13px;
   font-family: Questrial;
-  color: #828282;
+  background: linear-gradient(
+    279.96deg,
+    #ab7070 -16.21%,
+    rgba(255, 0, 0, 0.37) 134.55%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin: 1px;
   padding: 1px;
 `;

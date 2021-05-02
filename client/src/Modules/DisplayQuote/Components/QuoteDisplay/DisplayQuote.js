@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useLayoutEffect } from 'react';
 import {
   QuotationRight,
   QuotationLeft,
@@ -6,7 +6,10 @@ import {
   QuotationSymbolText,
   QuoteText
 } from 'StylesLibrary/Atoms/DisplayQuoteModule/DisplayQuote/DisplayQuote.js';
-import { useDisplayQuoteState } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
+import {
+  useDisplayQuoteState,
+  useDisplayQuoteDispatch
+} from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 
 import { AnimationContainer } from 'StylesLibrary/Animations/FramerAnimations.js';
 
@@ -14,16 +17,24 @@ import { AnimatePresence } from 'framer-motion';
 
 const DisplayQuote = () => {
   const { currentQuote, displayQuote } = useDisplayQuoteState();
-
-  const printDocument = async () => {
-    navigator
-      .share({
-        title: 'title',
-        text: `${currentQuote[0].quote}-${currentQuote[0].author['authorName']}`
-      })
-      .then(() => console.log('Successful share'))
-      .catch(error => console.log('Error in sharing', error));
-  };
+  const dispatch = useDisplayQuoteDispatch();
+  const quoteTextRef = useRef(null);
+  useLayoutEffect(() => {
+    if (quoteTextRef.current) {
+      console.log(quoteTextRef.current.clientHeight);
+      if (quoteTextRef.current.clientHeight < 400) {
+        dispatch({
+          type: 'DQ_SET_MAINCONTAINERHEIGHT',
+          payload: '100vh'
+        });
+      } else {
+        dispatch({
+          type: 'DQ_SET_MAINCONTAINERHEIGHT',
+          payload: 'auto'
+        });
+      }
+    }
+  }, [quoteTextRef, currentQuote]);
 
   return (
     <>
@@ -48,7 +59,9 @@ const DisplayQuote = () => {
                 }}
                 exit={{ opacity: 0 }}
               >
-                <QuoteText>{currentQuote[0].quote}</QuoteText>
+                <QuoteText ref={quoteTextRef}>
+                  {currentQuote[0].quote}
+                </QuoteText>
               </AnimationContainer>
             ) : null}
           </AnimatePresence>

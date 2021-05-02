@@ -33,6 +33,9 @@ const DisplayQuoteState = ({ children }) => {
         exploreMoreCurrentCount: 1
       }
     },
+    styles: {
+      containerHeight: 'auto'
+    },
     displayQuotes: false,
     currentQuote: [],
     displayFilterModal: false,
@@ -47,6 +50,7 @@ const DisplayQuoteState = ({ children }) => {
     selectedData,
     filteredQuotes,
     exploreMore,
+    styles,
     displayQuotes,
     currentQuote,
     displayFilterModal,
@@ -102,6 +106,7 @@ const DisplayQuoteState = ({ children }) => {
         filteredQuotes,
         displayQuotes,
         exploreMore,
+        styles,
         currentQuote,
         displayFilterModal,
         refreshFIlteredQuotes,

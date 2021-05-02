@@ -14,7 +14,6 @@ export const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-
   margin: auto;
   border-radius: 5px;
 `;
@@ -24,6 +23,7 @@ export const CenterAlignedColumnContainer = styled(ColumnContainer)`
   justify-content: center;
   max-width: 600px;
   margin-top: ${props => props.marginTop};
+  height: auto;
 `;
 
 export const CenterAlignedColumnContainerWithShadowBackground = styled(
@@ -51,4 +51,9 @@ export const LeftAlignedColumnContainer = styled(ColumnContainer)`
 export const RightAlignedColumnContainer = styled(ColumnContainer)`
   align-items: flex-end;
   margin-top: ${props => props.marginTop};
+`;
+
+export const CenterAlignedRowContainer = styled(RowContainer)`
+  justify-content: center;
+  align-items: center;
 `;

@@ -3,6 +3,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { CenterAlignedColumnContainerWithShadowBackground } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
 import { useHistory } from 'react-router-dom';
+import GradientContainer from 'StylesLibrary/Animations/AnimationContainer/GradientContainer.js';
 
 const AdminLandingPage = () => {
   const [redirectToAddQuote, setRedirectToAddQuote] = useState(false);
@@ -20,13 +21,15 @@ const AdminLandingPage = () => {
 
   return (
     <CenterAlignedColumnContainerWithShadowBackground>
-      <NavigationPage
-        addQuouteCallBack={() => {
-          setRedirectToAddQuote(true);
-        }}
-        readQuoteCallBack={() => setRedirectToReadQuote(true)}
-        addMore={false}
-      />
+      <GradientContainer>
+        <NavigationPage
+          addQuouteCallBack={() => {
+            setRedirectToAddQuote(true);
+          }}
+          readQuoteCallBack={() => setRedirectToReadQuote(true)}
+          addMore={false}
+        />
+      </GradientContainer>
     </CenterAlignedColumnContainerWithShadowBackground>
   );
 };

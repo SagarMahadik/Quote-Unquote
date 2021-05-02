@@ -61,4 +61,5 @@ export const QuoteText = styled.h1`
   margin: 0;
   height: auto;
   padding: 30px 25px 30px 25px;
+  min-height: 100px;
 `;

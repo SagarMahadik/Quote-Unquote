@@ -14,5 +14,7 @@ export const sanitizeQuoteText = text => {
     console.log(text.substr(1, text.length - 2));
     temptext = text.substr(1, text.length - 2);
     return temptext;
+  } else {
+    return text;
   }
 };

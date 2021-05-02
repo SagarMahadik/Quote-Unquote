@@ -10,6 +10,7 @@ export const FormContentContainer = styled(
   justify-content: flex-start;
   height: ${props => props.containerHeight};
   width: 100%;
+  overflow-y: auto;
 `;
 
 export const OverLayContainer = styled(CenterAlignedColumnContainer)`

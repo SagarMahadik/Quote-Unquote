@@ -12,7 +12,6 @@ import { AnimationContainer } from 'StylesLibrary/Animations/FramerAnimations.js
 
 import { AnimatePresence } from 'framer-motion';
 
-import LogoutButton from 'StylesLibrary/Atoms/GlobalQuoteModule/Buttons/LogoutButton.js';
 const DisplayQuote = () => {
   const { currentQuote, displayQuote } = useDisplayQuoteState();
 
@@ -58,8 +57,6 @@ const DisplayQuote = () => {
           <QuotationSymbolText>&#8221;</QuotationSymbolText>
         </QuotationRight>
       </QuoteContainer>
-
-      <LogoutButton onClick={printDocument} />
     </>
   );
 };

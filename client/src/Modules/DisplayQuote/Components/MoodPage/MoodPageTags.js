@@ -13,6 +13,8 @@ import {
   useDisplayQuoteDispatch
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 
+import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
+
 import PaginationTags from 'Modules/DisplayQuote/Components/MoodPage/PaginationTags.js';
 import InputButtonLoadingContainer from 'StylesLibrary/Molecules/LoadingModule/InputButtonLoadingContainer';
 
@@ -41,7 +43,7 @@ const MoodPageTags = () => {
           .map(({ tagName, selected }) => {
             return (
               <InputButton
-                buttonText={tagName}
+                buttonText={makeFirstLetterUpperCase(tagName)}
                 buttonSelected={selected}
                 onClick={() => handleClickOnTag(tagName)}
               />

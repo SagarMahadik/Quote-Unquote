@@ -104,7 +104,16 @@ export default (state, action) => {
           )
           .flat();
 
-        let finalArray = [...quotesByAuthorNames, ...quotesByTags];
+        let finalArray = [];
+        if (
+          draftState.selectedData.selectedTags.length === 0 &&
+          draftState.selectedData.selectedAuthors.length === 0
+        ) {
+          finalArray = [...draftState.quotes];
+        } else {
+          finalArray = [...quotesByAuthorNames, ...quotesByTags];
+        }
+
         console.log(finalArray);
         draftState.filteredQuotes.filterQuotesList = [...new Set(finalArray)];
         draftState.refreshFIlteredQuotes = true;

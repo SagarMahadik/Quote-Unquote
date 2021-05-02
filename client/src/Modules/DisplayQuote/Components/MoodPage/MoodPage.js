@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormContentContainer } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormContainer/FormContainer.js';
 import { AddQuoteSuccessText } from 'StylesLibrary/Atoms/DisplayQuoteModule/PageHeading/PageHeading.js';
 import MoodPageTags from 'Modules/DisplayQuote/Components/MoodPage/MoodPageTags.js';
 import MoodPageAuthor from 'Modules/DisplayQuote/Components/MoodPage/MoodPageAuthor.js';
@@ -8,10 +7,7 @@ import { submitVibrations } from 'Utils/vibrations.js';
 
 import { goButtonVibrations } from 'Utils/vibrations.js';
 
-import {
-  useDisplayQuoteDispatch,
-  useDisplayQuoteState
-} from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
+import { useDisplayQuoteDispatch } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 
 const MoodPage = () => {
   const dispatch = useDisplayQuoteDispatch();

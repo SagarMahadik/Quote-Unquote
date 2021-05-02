@@ -4,7 +4,7 @@ import QuoteSuccessNavigatiocard from 'StylesLibrary/Molecules/AddQuoteModule/Ad
 
 const NavigationPage = ({ addQuouteCallBack, readQuoteCallBack, addMore }) => {
   return (
-    <CenterAlignedColumnContainer>
+    <CenterAlignedColumnContainer style={{ height: '100vh' }}>
       <QuoteSuccessNavigatiocard
         navigationCardText={addMore ? 'Add another' : 'Add quote'}
         onClick={addQuouteCallBack}

@@ -50,4 +50,5 @@ export const LeftAlignedColumnContainer = styled(ColumnContainer)`
 
 export const RightAlignedColumnContainer = styled(ColumnContainer)`
   align-items: flex-end;
+  margin-top: ${props => props.marginTop};
 `;

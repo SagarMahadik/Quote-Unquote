@@ -7,7 +7,7 @@ import DisplayQuoteState from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 const DisplayQuoteMainComponent = () => {
   return (
     <DisplayQuoteState>
-      <CenterAlignedColumnContainer>
+      <CenterAlignedColumnContainer style={{ alignItems: 'flex-start' }}>
         <FormContentContainer containerHeight="100vh">
           <ToggleMoodDisplay />
         </FormContentContainer>

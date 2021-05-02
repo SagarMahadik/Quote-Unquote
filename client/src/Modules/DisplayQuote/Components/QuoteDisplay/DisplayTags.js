@@ -5,6 +5,7 @@ import {
 } from 'StylesLibrary/Atoms/DisplayQuoteModule/DisplayQuote/DisplayTag.js';
 import { useDisplayQuoteState } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 import { AnimationContainer } from 'StylesLibrary/Animations/FramerAnimations';
+import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
 
 import { AnimatePresence } from 'framer-motion';
 
@@ -33,7 +34,7 @@ const DisplayTags = () => {
           <TagContainer>
             <TagText>{currentQuote[0].author['authorName']}</TagText>
             {currentQuote[0].tags.slice(0, 3).map(({ tagName }) => {
-              return <TagText> | {tagName}</TagText>;
+              return <TagText> | {makeFirstLetterUpperCase(tagName)}</TagText>;
             })}
           </TagContainer>
         </AnimationContainer>

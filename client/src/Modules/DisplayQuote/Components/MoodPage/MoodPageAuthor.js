@@ -9,6 +9,7 @@ import {
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 import PaginationAuthors from 'Modules/DisplayQuote/Components/MoodPage/PaginationAuthors.js';
 import InputButtonLoadingContainer from 'StylesLibrary/Molecules/LoadingModule/InputButtonLoadingContainer';
+import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
 
 const MoodPageAuthor = () => {
   const {
@@ -31,7 +32,7 @@ const MoodPageAuthor = () => {
           .map(({ authorName, selected }) => {
             return (
               <InputButton
-                buttonText={authorName}
+                buttonText={makeFirstLetterUpperCase(authorName)}
                 buttonSelected={selected}
                 onClick={() => handleClickOnAuthor(authorName)}
               />

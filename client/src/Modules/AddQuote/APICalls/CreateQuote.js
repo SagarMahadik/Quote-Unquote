@@ -14,7 +14,8 @@ const CreateQuote = () => {
     quoteAuthorID,
     applicationData: { tagList },
     newUploadedTags,
-    initiateQuoteCreation
+    initiateQuoteCreation,
+    previousStepTags
   } = useAddQuoteState();
   const dispatch = useAddQuoteDispatch();
 
@@ -28,13 +29,23 @@ const CreateQuote = () => {
 
   const prepareQuoteCreation = (tagList, newUploadedTags) => {
     let tags = [];
+    let tranformTaglist = [];
+    let finalTransformedTagList = [];
+
     let selectedTagsInForm = tagList.filter(tag => tag.selected && !tag.newTag);
 
     if (selectedTagsInForm.length > 0) {
       selectedTagsInForm.map(t => tags.push(t._id));
+      selectedTagsInForm.map(tag => tranformTaglist.push(tag));
     }
 
     let newlyUploadedTagsID = newUploadedTags.map(tag => tags.push(tag._id));
+    newUploadedTags.map(t => tranformTaglist.push(t));
+    console.log(tranformTaglist);
+    dispatch({
+      type: 'AQ_SET_PREVIOUSSTEP_TAGS',
+      payload: tranformTaglist
+    });
 
     sendStepStatusRequest(
       'AddQuote| Quote request created | Call POST quote API',

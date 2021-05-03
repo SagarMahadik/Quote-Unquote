@@ -45,6 +45,7 @@ const AddQuoteState = ({ children }) => {
     newTagsAdded: [],
     newTagsCount: 0,
     newUploadedTags: [],
+    previousStepTags: [],
     initiateValidations: false,
     validationsComplete: false,
     initiateRequestCreation: false,
@@ -78,6 +79,7 @@ const AddQuoteState = ({ children }) => {
     newTagsAdded,
     newTagsCount,
     newUploadedTags,
+    previousStepTags,
     exploreMore,
     styles,
     initiateValidations,
@@ -124,6 +126,7 @@ const AddQuoteState = ({ children }) => {
 
   useEffect(() => {
     setTagsState(tags);
+    console.log('IN set tag');
   }, [tags]);
 
   useEffect(() => {
@@ -151,6 +154,7 @@ const AddQuoteState = ({ children }) => {
         newTagsCount,
         newUploadedTags,
         exploreMore,
+        previousStepTags,
         styles,
         initiateValidations,
         validationsComplete,

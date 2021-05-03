@@ -31,7 +31,9 @@ import {
   AQ_INC_EXPLOREMORE_TAG_COUNT,
   AQ_RESET_EXPLOREMORE_TAG_COUNT,
   AQ_SET_TEXTAREAHEIGHT,
-  AQ_RESET_AUTHOR
+  AQ_RESET_AUTHOR,
+  AQ_SET_PREVIOUSSTEP_TAGS,
+  AQ_TRANSFORM_TAGDATA
 } from 'Modules/AddQuote/State/types.js';
 import { produce } from 'immer';
 export default (state, action) => {
@@ -39,9 +41,34 @@ export default (state, action) => {
     case AQ_SET_TAGS:
       return produce(state, draftState => {
         draftState.applicationData.tagList = action.payload;
+        let tempArray = draftState.applicationData.tagList.map(t => ({
+          ...t,
+          selected: false
+        }));
+        draftState.applicationData.tagList = [...tempArray];
+        if (draftState.previousStepTags.length > 0) {
+          let tempArray = [];
+          let tempUnselectedArray = [];
+          draftState.previousStepTags.forEach(t => tempArray.push(t._id));
+          tempUnselectedArray = draftState.applicationData.tagList.filter(
+            t => -1 == tempArray.indexOf(t._id)
+          );
+          draftState.applicationData.tagList = [
+            ...draftState.previousStepTags,
+            ...tempUnselectedArray
+          ];
+        }
+
         draftState.exploreMore.exploreMoreTagsTotalCount = Math.ceil(
           draftState.applicationData.tagList.length /
             draftState.exploreMore.paginationStep
+        );
+      });
+
+    case AQ_TRANSFORM_TAGDATA:
+      return produce(state, draftState => {
+        draftState.applicationData.tagList = draftState.applicationData.tagList.sort(
+          (a, b) => a.selected - b.selected
         );
       });
 
@@ -79,6 +106,7 @@ export default (state, action) => {
     case SET_TAG:
       return produce(state, draftState => {
         console.log(action.payload);
+
         draftState.applicationData.tagList.forEach(tag => {
           if (tag.tagName === action.payload) {
             tag.selected = !tag.selected;
@@ -209,9 +237,6 @@ export default (state, action) => {
         draftState.quoteCreatedSuccessfully = false;
         draftState.initiateQuoteCreation = false;
         draftState.redirectToReadQuote = false;
-        draftState.applicationData.tagList.forEach(
-          tag => (tag.selected = false)
-        );
         draftState.loading = false;
       });
 
@@ -245,6 +270,22 @@ export default (state, action) => {
       return produce(state, draftState => {
         draftState.loading = true;
       });
+
+    case AQ_SET_PREVIOUSSTEP_TAGS:
+      return produce(state, draftState => {
+        draftState.previousStepTags = action.payload;
+        let tempArray = [];
+        let tempUnselectedTagList = [];
+        tempArray = draftState.previousStepTags;
+        tempUnselectedTagList = draftState.applicationData.tagList.filter(
+          t => !t.selected
+        );
+        draftState.applicationData.tagList = [
+          ...tempArray,
+          ...tempUnselectedTagList
+        ];
+      });
+
     default:
       return {
         ...state

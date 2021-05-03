@@ -55,9 +55,11 @@ const CreateTags = () => {
     const res = await axios.post('/api/v1/tag', body, config);
     sendStepStatusRequest('Tag added successfully', 'success');
 
+    let uploadedTag = res.data.data.data;
+
     dispatch({
       type: 'AQ_ADD_NEWTAG_TO_STATE',
-      payload: res.data.data.data
+      payload: { ...uploadedTag, selected: true }
     });
   };
   return <div></div>;

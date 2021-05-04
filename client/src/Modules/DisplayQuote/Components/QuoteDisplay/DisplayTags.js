@@ -32,7 +32,9 @@ const DisplayTags = () => {
           exit={{ opacity: 0 }}
         >
           <TagContainer>
-            <TagText>{currentQuote[0].author['authorName']}</TagText>
+            <TagText>
+              {makeFirstLetterUpperCase(currentQuote[0].author['authorName'])}
+            </TagText>
             {currentQuote[0].tags.slice(0, 3).map(({ tagName }) => {
               return <TagText> | {makeFirstLetterUpperCase(tagName)}</TagText>;
             })}

@@ -11,6 +11,8 @@ import {
   useDisplayQuoteDispatch
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 
+import { sanitizeQuoteText } from 'Utils/stringOperations.js';
+
 import { AnimationContainer } from 'StylesLibrary/Animations/FramerAnimations.js';
 
 import { AnimatePresence } from 'framer-motion';
@@ -60,7 +62,7 @@ const DisplayQuote = () => {
                 exit={{ opacity: 0 }}
               >
                 <QuoteText ref={quoteTextRef}>
-                  {currentQuote[0].quote}
+                  {sanitizeQuoteText(currentQuote[0].quote)}
                 </QuoteText>
               </AnimationContainer>
             ) : null}

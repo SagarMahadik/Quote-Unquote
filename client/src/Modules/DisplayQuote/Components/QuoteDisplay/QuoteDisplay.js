@@ -9,6 +9,7 @@ import {
   useDisplayQuoteDispatch
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 import { generateRandomInteger } from 'Modules/DisplayQuote/State/utils.js';
+import PageHeading from 'Modules/Global/Components/PageHeading.js';
 
 import {
   DisplayQuoteContiner,
@@ -62,12 +63,13 @@ const QuoteDisplay = () => {
 
   return (
     <GradientContainer>
+      <PageHeading />
       <DisplayQuoteMainContainer quoteMainContainerHeight={containerHeight}>
         <DisplayQuoteContiner
           showModal={displayFilterModal}
           onClick={() => handleHideModal()}
         >
-          <RightAlignedColumnContainer marginTop="2rem">
+          <RightAlignedColumnContainer marginTop="1rem">
             <FilterButton
               onClick={() => {
                 goButtonVibrations();

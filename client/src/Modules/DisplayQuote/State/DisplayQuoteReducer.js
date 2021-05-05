@@ -16,7 +16,12 @@ import {
   DQ_AUTHOR_INC_EXPLOREMORE_COUNT,
   DQ_RESET_AUTHOR_EXPLOREMORE_COUNT,
   HIDE_QUOTE,
-  DQ_SET_MAINCONTAINERHEIGHT
+  DQ_SET_MAINCONTAINERHEIGHT,
+  DQ_TOGGLE_EDIT_QUOTETEXT,
+  DQ_SET_EDIT_QUOTETEXT,
+  DQ_INITIATE_EDITQUOTETEXT,
+  DQ_HANDLE_EDITQUOTESUCCESS,
+  DQ_RSEST_EDIT_QUOTETEXT_STATE
 } from 'Modules/DisplayQuote/State/types.js';
 import { produce } from 'immer';
 
@@ -158,6 +163,44 @@ export default (state, action) => {
     case DQ_SET_MAINCONTAINERHEIGHT:
       return produce(state, draftState => {
         draftState.styles.containerHeight = action.payload;
+      });
+    case DQ_TOGGLE_EDIT_QUOTETEXT:
+      return produce(state, draftState => {
+        draftState.editQuoteText.editQuoteText = !draftState.editQuoteText
+          .editQuoteText;
+      });
+
+    case DQ_RSEST_EDIT_QUOTETEXT_STATE:
+      return produce(state, draftState => {
+        draftState.editQuoteText.editQuoteText = false;
+        draftState.editQuoteText.initiateEditQuoteTextRequest = false;
+      });
+    case DQ_SET_EDIT_QUOTETEXT:
+      return produce(state, draftState => {
+        draftState.editQuoteText.editedText = action.payload;
+      });
+
+    case DQ_INITIATE_EDITQUOTETEXT:
+      return produce(state, draftState => {
+        draftState.editQuoteText.initiateEditQuoteTextRequest = true;
+      });
+
+    case DQ_HANDLE_EDITQUOTESUCCESS:
+      return produce(state, draftState => {
+        draftState.quotes.forEach(q => {
+          if (q._id === action.payload.quoteID) {
+            q.quote = action.payload.quote;
+          }
+        });
+        draftState.filteredQuotes.filterQuotesList.forEach(q => {
+          if (q._id === action.payload.quoteID) {
+            q.quote = action.payload.quote;
+          }
+        });
+        draftState.currentQuote[0].quote = action.payload.quote;
+        draftState.editQuoteText.editQuoteText = false;
+        draftState.editQuoteText.editedText = false;
+        draftState.editQuoteText.initiateEditQuoteTextRequest = false;
       });
   }
 };

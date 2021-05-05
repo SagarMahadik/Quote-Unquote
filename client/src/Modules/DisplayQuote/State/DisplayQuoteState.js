@@ -36,6 +36,11 @@ const DisplayQuoteState = ({ children }) => {
     styles: {
       containerHeight: 'auto'
     },
+    editQuoteText: {
+      editQuoteText: false,
+      editedText: '',
+      initiateEditQuoteTextRequest: false
+    },
     displayQuotes: false,
     currentQuote: [],
     displayFilterModal: false,
@@ -51,6 +56,7 @@ const DisplayQuoteState = ({ children }) => {
     filteredQuotes,
     exploreMore,
     styles,
+    editQuoteText,
     displayQuotes,
     currentQuote,
     displayFilterModal,
@@ -107,6 +113,7 @@ const DisplayQuoteState = ({ children }) => {
         displayQuotes,
         exploreMore,
         styles,
+        editQuoteText,
         currentQuote,
         displayFilterModal,
         refreshFIlteredQuotes,

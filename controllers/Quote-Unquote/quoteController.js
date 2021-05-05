@@ -5,3 +5,5 @@ const factory = require('../handlerFactory');
 exports.createQuote = factory.createOne(Quote);
 
 exports.getAllQuotes = factory.getAllQuotes(Quote, 'author', 'tags');
+
+exports.updateQuote = factory.updateOne(Quote);

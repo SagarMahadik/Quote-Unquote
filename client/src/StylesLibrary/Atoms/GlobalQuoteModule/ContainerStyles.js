@@ -57,3 +57,9 @@ export const CenterAlignedRowContainer = styled(RowContainer)`
   justify-content: center;
   align-items: center;
 `;
+
+export const AdminPageHeadingContainer = styled(RowContainer)`
+  width: 90%;
+  margin-top: 20px;
+  justify-content: space-between;
+`;

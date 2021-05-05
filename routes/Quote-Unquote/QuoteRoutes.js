@@ -8,4 +8,6 @@ router.route('/').get(quoteController.getAllQuotes);
 
 router.route('/').post(quoteController.createQuote);
 
+router.route('/:id').patch(quoteController.updateQuote);
+
 module.exports = router;

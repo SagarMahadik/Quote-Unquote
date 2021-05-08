@@ -11,7 +11,6 @@ import { AnimatePresence } from 'framer-motion';
 
 const DisplayTags = () => {
   const { currentQuote, displayQuote } = useDisplayQuoteState();
-  console.log(currentQuote);
 
   if (currentQuote.length === 0) {
     return null;

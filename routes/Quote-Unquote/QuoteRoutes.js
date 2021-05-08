@@ -10,4 +10,6 @@ router.route('/').post(quoteController.createQuote);
 
 router.route('/:id').patch(quoteController.updateQuote);
 
+router.route('/:id').delete(quoteController.deleteQuote);
+
 module.exports = router;

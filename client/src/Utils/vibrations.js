@@ -2,7 +2,15 @@ export const submitVibrations = () => {
   navigator.vibrate = navigator.vibrate;
 
   if (navigator.vibrate) {
-    return navigator.vibrate(12);
+    return navigator.vibrate([300.2, 200]);
+  }
+};
+
+export const apirequestSuccessVibraions = () => {
+  navigator.vibrate = navigator.vibrate;
+
+  if (navigator.vibrate) {
+    return navigator.vibrate([100, 2, 200]);
   }
 };
 

@@ -11,7 +11,13 @@ const PeacefulMusic = () => {
     'https://res.cloudinary.com/antilibrary/video/upload/v1620029504/Music/Almost-Bliss_nff9tq.mp3',
     'https://res.cloudinary.com/antilibrary/video/upload/v1620029486/Music/herbal-tea_nn106v.mp3',
     'https://res.cloudinary.com/antilibrary/video/upload/v1620029475/Music/ron-gelinas-chillout-lounge-slow-grind_qblkts.mp3',
-    'https://res.cloudinary.com/antilibrary/video/upload/v1620029459/Music/audionautix-trippin-coffee_oclxv3.mp3'
+    'https://res.cloudinary.com/antilibrary/video/upload/v1620029459/Music/audionautix-trippin-coffee_oclxv3.mp3',
+    'https://res.cloudinary.com/antilibrary/video/upload/v1620237842/Music/Warm-Memories-Emotional-Inspiring-Piano_bmbbm5.mp3',
+    'https://res.cloudinary.com/antilibrary/video/upload/v1620470263/Music/ron-gelinas-chillout-lounge-where-will-i-go_s9frts.mp3',
+    'https://res.cloudinary.com/antilibrary/video/upload/v1620470771/Music/precious-memories_zxsfox.mp3',
+    'https://res.cloudinary.com/antilibrary/video/upload/v1620470771/Music/Eternal-Hope_otjs3e.mp3',
+    'https://res.cloudinary.com/antilibrary/video/upload/v1620470770/Music/inossi-sunset-eyes_gg1kad.mp3',
+    'https://res.cloudinary.com/antilibrary/video/upload/v1620470263/Music/ron-gelinas-chillout-lounge-where-will-i-go_s9frts.mp3'
   ];
   useEffect(() => {
     selectRandomMusic();

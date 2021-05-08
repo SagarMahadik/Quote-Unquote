@@ -12,7 +12,6 @@ import { useDisplayQuoteDispatch } from 'Modules/DisplayQuote/State/DisplayQuote
 const MoodPage = () => {
   const dispatch = useDisplayQuoteDispatch();
   const createFilteredQuotes = () => {
-    submitVibrations();
     dispatch({
       type: 'DQ_CREATE_FILTEREDQUOTES'
     });

@@ -39,13 +39,25 @@ const DisplayQuoteState = ({ children }) => {
     editQuoteText: {
       editQuoteText: false,
       editedText: '',
-      initiateEditQuoteTextRequest: false
+      initiateEditQuoteTextRequest: false,
+      editQoteSuccessSound: false
+    },
+    deleteQuote: {
+      deleteQuote: false,
+      dragStart: false,
+      initiateDeleteQuoteRequest: false,
+      deleteRequestSuccess: false,
+      trashAnimatation: false,
+      tickAnimation: false,
+      QuoteID: '',
+      completeDelete: false
     },
     displayQuotes: false,
     currentQuote: [],
     displayFilterModal: false,
     refreshFIlteredQuotes: false,
-    displayQuote: true
+    displayQuote: true,
+    selectQuotePostDelete: false
   };
   const [state, dispatch] = useReducer(DisplayQuoteReducer, initialState);
 
@@ -57,11 +69,13 @@ const DisplayQuoteState = ({ children }) => {
     exploreMore,
     styles,
     editQuoteText,
+    deleteQuote,
     displayQuotes,
     currentQuote,
     displayFilterModal,
     refreshFIlteredQuotes,
-    displayQuote
+    displayQuote,
+    selectQuotePostDelete
   } = state;
 
   const setAuthorsState = authorData => {
@@ -114,10 +128,12 @@ const DisplayQuoteState = ({ children }) => {
         exploreMore,
         styles,
         editQuoteText,
+        deleteQuote,
         currentQuote,
         displayFilterModal,
         refreshFIlteredQuotes,
-        displayQuote
+        displayQuote,
+        selectQuotePostDelete
       }}
     >
       <DisplayQuoteDispatchContext.Provider value={dispatch}>

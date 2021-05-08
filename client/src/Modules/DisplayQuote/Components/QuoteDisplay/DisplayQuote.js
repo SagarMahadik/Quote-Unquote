@@ -1,44 +1,40 @@
-import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
+import React, { useRef, useLayoutEffect, useState } from 'react';
 import {
   QuotationRight,
   QuotationLeft,
   QuoteContainer,
   QuotationSymbolText,
   QuoteText,
-  EditQuoteContainer,
-  EditQuoteInputBox,
-  EditButtonContainer,
-  EditTextContainer
+  TrashIconContainer,
+  DeleteOverlayContainer
 } from 'StylesLibrary/Atoms/DisplayQuoteModule/DisplayQuote/DisplayQuote.js';
 import {
   useDisplayQuoteState,
   useDisplayQuoteDispatch
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
-
 import { sanitizeQuoteText } from 'Utils/stringOperations.js';
-
-import { AnimationContainer } from 'StylesLibrary/Animations/FramerAnimations.js';
-
 import { AnimatePresence } from 'framer-motion';
+import DragToDelete from 'Modules/DisplayQuote/Components/QuoteDisplay/DragToDelete.js';
+import DeleteQuoteComponent from 'Modules/DisplayQuote/Components/QuoteDisplay/DeleteQuoteComponent.js';
+import EditQuoteComponent from './EditQuoteComponent';
+import LoadingQuotes from 'StylesLibrary/Molecules/LoadingModule/LoadingQuotes.js';
 
-import LogoutButton from 'StylesLibrary/Atoms/GlobalQuoteModule/Buttons/LogoutButton.js';
-import EditQuoteText from './APICalls/EditQuoteText';
-import { CenterAlignedColumnContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
+import DeleteSound from 'StylesLibrary/Sounds/DeleteSound.js';
 
 const DisplayQuote = () => {
   const {
     currentQuote,
     displayQuote,
-    editQuoteText: { editQuoteText, editedText }
+    editQuoteText: { editQuoteText },
+    deleteQuote: { deleteQuote, dragStart, deleteRequestSuccess }
   } = useDisplayQuoteState();
   const [inputBoxHeight, setInnputBoxHeight] = useState(200);
   const [editContainerMarginTop, setEditContainerMarginTop] = useState(200);
   const dispatch = useDisplayQuoteDispatch();
   const quoteTextRef = useRef(null);
-  const editQuoteTextRef = useRef(null);
+
   useLayoutEffect(() => {
     if (quoteTextRef.current) {
-      console.log(quoteTextRef.current.clientHeight);
       if (quoteTextRef.current.clientHeight < 400) {
         dispatch({
           type: 'DQ_SET_MAINCONTAINERHEIGHT',
@@ -58,7 +54,7 @@ const DisplayQuote = () => {
       setInnputBoxHeight(Number(quoteTextRef.current.clientHeight) / 2);
       setEditContainerMarginTop(Number(quoteTextRef.current.clientHeight));
     }
-  }, [editQuoteTextRef.current, currentQuote, quoteTextRef]);
+  }, [currentQuote, quoteTextRef]);
 
   return (
     <>
@@ -68,26 +64,19 @@ const DisplayQuote = () => {
         </QuotationLeft>
 
         {currentQuote.length === 0 ? (
-          <h1>Quote loading</h1>
+          <LoadingQuotes />
         ) : (
           <AnimatePresence>
             {displayQuote ? (
-              <AnimationContainer
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1
-                }}
-                transition={{
-                  ease: 'easeOut',
-                  duration: 0.8
-                }}
-                exit={{ opacity: 0 }}
-                onTap={() => dispatch({ type: 'DQ_TOGGLE_EDIT_QUOTETEXT' })}
-              >
-                <QuoteText ref={quoteTextRef}>
-                  {sanitizeQuoteText(currentQuote[0].quote)}
-                </QuoteText>
-              </AnimationContainer>
+              <DragToDelete>
+                {currentQuote.length === 0 ? (
+                  <LoadingQuotes />
+                ) : (
+                  <QuoteText ref={quoteTextRef} dragScale={dragStart}>
+                    {sanitizeQuoteText(currentQuote[0].quote)}
+                  </QuoteText>
+                )}
+              </DragToDelete>
             ) : null}
           </AnimatePresence>
         )}
@@ -95,48 +84,25 @@ const DisplayQuote = () => {
           <QuotationSymbolText>&#8221;</QuotationSymbolText>
         </QuotationRight>
       </QuoteContainer>
+      <TrashIconContainer
+        marginTop={`${Number(editContainerMarginTop) - 20}px`}
+        style={{ zIndex: '300' }}
+      >
+        {deleteQuote ? (
+          <>
+            <DeleteOverlayContainer />
+            <DeleteQuoteComponent />
+            <DeleteSound play={deleteRequestSuccess} />
+          </>
+        ) : null}
+      </TrashIconContainer>
+
       <AnimatePresence>
         {editQuoteText ? (
-          <CenterAlignedColumnContainer style={{ position: 'relative' }}>
-            <EditQuoteContainer
-              onTap={() => dispatch({ type: 'DQ_TOGGLE_EDIT_QUOTETEXT' })}
-            ></EditQuoteContainer>
-            <AnimationContainer
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1
-              }}
-              transition={{
-                ease: 'easeOut',
-                duration: 0.4
-              }}
-              exit={{ opacity: 0 }}
-            >
-              <EditTextContainer marginTop={`-${editContainerMarginTop}px`}>
-                <EditQuoteInputBox
-                  defaultValue={sanitizeQuoteText(currentQuote[0].quote)}
-                  onChange={e =>
-                    dispatch({
-                      type: 'DQ_SET_EDIT_QUOTETEXT',
-                      payload: e.target.value
-                    })
-                  }
-                  ref={editQuoteTextRef}
-                  style={{ height: `${inputBoxHeight}px` }}
-                ></EditQuoteInputBox>
-                <EditButtonContainer>
-                  <LogoutButton
-                    style={{ zIndex: '100' }}
-                    onClick={() =>
-                      dispatch({ type: 'DQ_INITIATE_EDITQUOTETEXT' })
-                    }
-                  />
-                </EditButtonContainer>
-              </EditTextContainer>
-
-              <EditQuoteText />
-            </AnimationContainer>
-          </CenterAlignedColumnContainer>
+          <EditQuoteComponent
+            inputBoxHeight={inputBoxHeight}
+            editContainerMarginTop={editContainerMarginTop}
+          />
         ) : null}
       </AnimatePresence>
     </>

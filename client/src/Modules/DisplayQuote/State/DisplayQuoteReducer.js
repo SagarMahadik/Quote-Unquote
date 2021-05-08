@@ -1,4 +1,6 @@
 import {
+  DQ_QUOTE_DELETE_REQUEST_SUCCESS,
+  DQ_DELETE_DRAGSTART_RESET,
   DQ_SET_TAGS,
   DQ_SET_AUTHORS,
   DQ_SET_QUOTES,
@@ -21,7 +23,12 @@ import {
   DQ_SET_EDIT_QUOTETEXT,
   DQ_INITIATE_EDITQUOTETEXT,
   DQ_HANDLE_EDITQUOTESUCCESS,
-  DQ_RSEST_EDIT_QUOTETEXT_STATE
+  DQ_RSEST_EDIT_QUOTETEXT_STATE,
+  DQ_DELETE_DRAGSTART,
+  DQ_DELETE_DRAGEND,
+  DQ_RESET_QUOTES_POST_DELETE,
+  DQ_RESET_SELECTQUOTES_POST_DELETE,
+  DQ_DELETE_RESET
 } from 'Modules/DisplayQuote/State/types.js';
 import { produce } from 'immer';
 
@@ -120,7 +127,6 @@ export default (state, action) => {
           finalArray = [...quotesByAuthorNames, ...quotesByTags];
         }
 
-        console.log(finalArray);
         draftState.filteredQuotes.filterQuotesList = [...new Set(finalArray)];
         draftState.refreshFIlteredQuotes = true;
       });
@@ -166,8 +172,11 @@ export default (state, action) => {
       });
     case DQ_TOGGLE_EDIT_QUOTETEXT:
       return produce(state, draftState => {
+        console.log('hello');
         draftState.editQuoteText.editQuoteText = !draftState.editQuoteText
           .editQuoteText;
+        draftState.editQuoteText.editQoteSuccessSound = false;
+        //draftState.deleteQuote.deleteRequestSuccess = true;
       });
 
     case DQ_RSEST_EDIT_QUOTETEXT_STATE:
@@ -199,8 +208,68 @@ export default (state, action) => {
         });
         draftState.currentQuote[0].quote = action.payload.quote;
         draftState.editQuoteText.editQuoteText = false;
+        draftState.editQuoteText.editQoteSuccessSound = true;
         draftState.editQuoteText.editedText = false;
         draftState.editQuoteText.initiateEditQuoteTextRequest = false;
+      });
+
+    case DQ_DELETE_DRAGSTART:
+      return produce(state, draftState => {
+        draftState.deleteQuote.deleteQuote = true;
+        draftState.deleteQuote.dragStart = true;
+        draftState.editQuoteText.editQuoteText = false;
+        draftState.deleteQuote.trashAnimatation = true;
+      });
+
+    case DQ_DELETE_DRAGSTART_RESET:
+      return produce(state, draftState => {
+        console.log('in a reset');
+        draftState.deleteQuote.deleteQuote = false;
+        draftState.deleteQuote.dragStart = false;
+        draftState.editQuoteText.editQuoteText = true;
+      });
+
+    case DQ_DELETE_DRAGEND:
+      return produce(state, draftState => {
+        draftState.editQuoteText.editQuoteText = true;
+        draftState.deleteQuote.QuoteID = draftState.currentQuote[0]._id;
+        draftState.currentQuote = [];
+        draftState.deleteQuote.trashAnimatation = false;
+        draftState.deleteQuote.dragStart = false;
+        draftState.deleteQuote.initiateDeleteQuoteRequest = true;
+      });
+
+    case DQ_RESET_QUOTES_POST_DELETE:
+      return produce(state, draftState => {
+        console.log('in post delete');
+        draftState.selectQuotePostDelete = true;
+        draftState.deleteQuote.dragStart = false;
+
+        draftState.filteredQuotes.filterQuotesList = draftState.filteredQuotes.filterQuotesList.filter(
+          q => q._id != action.payload
+        );
+        draftState.quotes = draftState.quotes.filter(
+          q => q._id != action.payload
+        );
+        draftState.deleteQuote.QuoteID = '';
+        draftState.deleteQuote.initiateDeleteQuoteRequest = false;
+        draftState.deleteQuote.deleteRequestSuccess = false;
+
+        draftState.deleteQuote.deleteQuote = false;
+        draftState.deleteQuote.completeDelete = true;
+      });
+
+    case DQ_QUOTE_DELETE_REQUEST_SUCCESS:
+      return produce(state, draftState => {
+        draftState.deleteQuote.deleteRequestSuccess = true;
+        draftState.deleteQuote.tickAnimation = true;
+      });
+
+    case DQ_DELETE_RESET:
+      return produce(state, draftState => {
+        draftState.selectQuotePostDelete = false;
+        draftState.deleteQuote.deleteRequestSuccess = false;
+        draftState.deleteQuote.tickAnimation = false;
       });
   }
 };

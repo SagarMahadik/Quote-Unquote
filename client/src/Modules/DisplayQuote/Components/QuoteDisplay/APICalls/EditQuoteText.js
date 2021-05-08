@@ -4,6 +4,7 @@ import {
   useDisplayQuoteState
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 import axios from 'axios';
+import { apirequestSuccessVibraions } from 'Utils/vibrations.js';
 
 const EditQuoteText = () => {
   const {
@@ -39,6 +40,7 @@ const EditQuoteText = () => {
     const res = await axios.patch(`/api/v1/quote/${quoteID}`, body, config);
     console.log(res);
     if (res.data.status) {
+      apirequestSuccessVibraions();
       dispatch({
         type: 'DQ_HANDLE_EDITQUOTESUCCESS',
         payload: { quoteID: quoteID, quote: editedText }

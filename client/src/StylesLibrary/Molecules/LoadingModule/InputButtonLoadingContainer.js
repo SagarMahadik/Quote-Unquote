@@ -19,7 +19,7 @@ const InputButtonLoadingContainer = () => {
     'coding'
   ];
   return (
-    <CenterAlignedColumnContainer>
+    <CenterAlignedColumnContainer style={{ position: 'relative' }}>
       <InputButtonContainer>
         {tags.map(t => {
           return (

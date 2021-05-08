@@ -31,13 +31,14 @@ const QuoteDisplay = () => {
     currentQuote,
     refreshFIlteredQuotes,
     displayFilterModal,
-    styles: { containerHeight }
+    styles: { containerHeight },
+    selectQuotePostDelete
   } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
 
   const selectRandomQuote = () => {
     let randomIndex = generateRandomInteger(1, filterQuotesList.length - 1);
-
+    console.log(randomIndex);
     let randomQuote = filterQuotesList[randomIndex];
 
     dispatch({ type: 'DQ_SET_CURRENT_QUOTE', payload: randomQuote });
@@ -45,6 +46,12 @@ const QuoteDisplay = () => {
   useEffect(() => {
     selectRandomQuote();
   }, [refreshFIlteredQuotes]);
+
+  useEffect(() => {
+    if (selectQuotePostDelete) {
+      selectRandomQuote();
+    }
+  }, [selectQuotePostDelete]);
 
   const handleHideModal = () => {
     if (displayFilterModal) {
@@ -85,7 +92,7 @@ const QuoteDisplay = () => {
               }}
             />
           </RightAlignedColumnContainer>
-          <DisplayQuote />
+          <DisplayQuote selectRandomQuote={selectRandomQuote} />
           <DisplayTags />
 
           <RandomButton

@@ -27,6 +27,7 @@ import {
 import CreateAuthor from 'Modules/AddQuote/APICalls/CreateAuthor.js';
 import { ButtonContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/Buttons/ButtonContainer';
 import { submitVibrations } from 'Utils/vibrations';
+import DatabaseEntrySound from 'StylesLibrary/Sounds/DatabaseEntrySound.js';
 
 const AddQuote = () => {
   const {
@@ -47,7 +48,12 @@ const AddQuote = () => {
     });
   };
   if (quoteCreatedSuccessfully) {
-    return <AddQuoteSuccess authorName={quoteAuthor} />;
+    return (
+      <>
+        <DatabaseEntrySound play={quoteCreatedSuccessfully} />
+        <AddQuoteSuccess authorName={quoteAuthor} />
+      </>
+    );
   }
   return (
     <>

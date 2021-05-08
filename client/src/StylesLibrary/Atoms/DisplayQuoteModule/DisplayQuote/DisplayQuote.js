@@ -50,13 +50,12 @@ export const QuotationSymbolText = styled.h1`
 `;
 
 export const QuoteText = styled.h1`
-  width: 80%;
-  background: #e7eaef;
+  width:80%;;
+  background: ${props => (props.dragScale ? 'none' : '#e7eaef')};
   font-family: 'Playfair Display', serif;
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
-  line-height: 32px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -67,6 +66,11 @@ export const QuoteText = styled.h1`
   height: auto;
   padding: 30px 25px 30px 25px;
   min-height: 100px;
+  transform: ${props => (props.dragScale ? 'scale(0.05)' : 'none')};
+  transition: ease-out 1.4s;
+  border-radius:${props => (props.dragScale ? '50px' : '')}
+  opacity: ${props => (props.dragScale ? 0 : 1)};
+
 `;
 
 export const EditQuoteContainer = styled(motion.div)`
@@ -114,5 +118,29 @@ export const EditQuoteInputBox = styled.textarea`
 `;
 
 export const EditButtonContainer = styled(CenterAlignedColumnContainer)`
-  margin-top: 2rem;
+  margin-top: -3rem;
+`;
+
+export const TrashIconContainer = styled(CenterAlignedColumnContainer)`
+  position: absolute;
+  top: 30%;
+  margin-top: ${props => props.marginTop};
+  width: 100%;
+  height: auto;
+`;
+
+export const TickIconContainer = styled(CenterAlignedColumnContainer)`
+  margin-top: -120px;
+  width: 100%;
+  height: auto;
+`;
+
+export const DeleteOverlayContainer = styled(CenterAlignedColumnContainer)`
+  height: 100vh;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
 `;

@@ -118,7 +118,7 @@ export const EditQuoteInputBox = styled.textarea`
 `;
 
 export const EditButtonContainer = styled(CenterAlignedColumnContainer)`
-  margin-top: -3rem;
+  margin-top: -3 rem;
 `;
 
 export const TrashIconContainer = styled(CenterAlignedColumnContainer)`

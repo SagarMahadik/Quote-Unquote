@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { CenterAlignedColumnContainerWithShadowBackground } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
 import { useHistory } from 'react-router-dom';
 import GradientContainer from 'StylesLibrary/Animations/AnimationContainer/GradientContainer.js';
-import LoadingQuotes from 'StylesLibrary/Molecules/LoadingModule/LoadingQuotes';
+import PathSVG from 'StylesLibrary/Atoms/AuthenticationModule/CirclePath.js';
 
 const AdminLandingPage = () => {
   const [redirectToAddQuote, setRedirectToAddQuote] = useState(false);

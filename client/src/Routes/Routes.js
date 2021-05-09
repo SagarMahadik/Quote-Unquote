@@ -27,12 +27,17 @@ const AdminLandingPage = React.lazy(() =>
   import('Modules/Authentication/AdminLandingPage/AdminLandingPage.js')
 );
 
+const CoreLandingPage = React.lazy(() =>
+  import('Modules/Authentication/CoreLandingPage/CoreLandingPage.js')
+);
+
 const Routes = () => {
   return (
     <Router>
       <React.Suspense fallback={<p>...Loading</p>}>
         <Switch>
           <Route exact path="/" component={AdminLandingPage} />
+          <Route exact path="/corelanding" component={CoreLandingPage} />
           <Route exact path="/addQuote" component={AddQuote} />
           <Route
             exact

@@ -35,7 +35,7 @@ const PeacefulMusic = () => {
         src={`${musicUrls[musicIndex]}`}
         playing={true}
         onEnd={() => selectRandomMusic}
-        volume={0.5}
+        volume={1.0}
       />
     </div>
   );

@@ -1,7 +1,13 @@
 import React from 'react';
 import { AnimationContainer } from 'StylesLibrary/Animations/FramerAnimations.js';
 
-const HeightAnimationContainer = ({ children }) => {
+const HeightAnimationContainer = ({ children, animationDuration }) => {
+  let timeDuration = animationDuration;
+  if (timeDuration === '') {
+    timeDuration = 0.8;
+  }
+  console.log(timeDuration);
+
   return (
     <AnimationContainer
       initial={{ opacity: 0, scale: 0 }}
@@ -11,7 +17,7 @@ const HeightAnimationContainer = ({ children }) => {
       }}
       transition={{
         ease: 'easeOut',
-        duration: 0.8
+        duration: timeDuration
       }}
       exit={{ opacity: 0, scale: 0 }}
     >

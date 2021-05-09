@@ -50,7 +50,7 @@ export const QuotationSymbolText = styled.h1`
 `;
 
 export const QuoteText = styled.h1`
-  width:80%;;
+  width: 80%;
   background: ${props => (props.dragScale ? 'none' : '#e7eaef')};
   font-family: 'Playfair Display', serif;
   font-style: normal;
@@ -68,9 +68,8 @@ export const QuoteText = styled.h1`
   min-height: 100px;
   transform: ${props => (props.dragScale ? 'scale(0.05)' : 'none')};
   transition: ease-out 1.4s;
-  border-radius:${props => (props.dragScale ? '50px' : '')}
+  border-radius: ${props => (props.dragScale ? '50px' : '')};
   opacity: ${props => (props.dragScale ? 0 : 1)};
-
 `;
 
 export const EditQuoteContainer = styled(motion.div)`
@@ -78,7 +77,10 @@ export const EditQuoteContainer = styled(motion.div)`
   flex-direction: column;
   height: 100vh;
   width: 100%;
-  background: rgba(255, 255, 255, 0.2);
+  background: ${props =>
+    props.editQuoteSuccess
+      ? 'rgba(255, 155, 255, 0.2)'
+      : 'rgba(255, 255, 255, 0.2)'};
   z-index: 10;
   position: fixed;
   top: 0;

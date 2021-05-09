@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import { CenterAlignedColumnContainerWithShadowBackground } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
 
 import {
+  BackgroundCircle,
+  BackgroundCircle1,
   LandingPageBackground,
   OverlayContainer
 } from 'StylesLibrary/Atoms/AuthenticationModule/LandingPage';
@@ -23,7 +25,8 @@ const CoreLandingPage = () => {
   const testRef = useRef(null);
   return (
     <CenterAlignedColumnContainerWithShadowBackground>
-      <LandingPageBackground>
+      <LandingPageBackground style={{ position: 'relative' }}>
+        <BubbleContainer />
         <OverlayContainer>
           <div ref={testRef}>
             <Logo />

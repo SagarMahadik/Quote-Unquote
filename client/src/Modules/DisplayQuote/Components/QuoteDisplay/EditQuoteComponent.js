@@ -37,7 +37,7 @@ const EditQuoteComponent = ({ inputBoxHeight, editContainerMarginTop }) => {
   const {
     currentQuote,
     displayQuote,
-    editQuoteText: { editQoteSuccessSound },
+    editQuoteText: { editQoteSuccessSound, initiateEditQuoteTextRequest },
     deleteQuote: { deleteQuote, dragStart }
   } = useDisplayQuoteState();
 
@@ -91,6 +91,7 @@ const EditQuoteComponent = ({ inputBoxHeight, editContainerMarginTop }) => {
                 style={{
                   height: `${inputBoxHeight}px`
                 }}
+                editQuoteSuccess={initiateEditQuoteTextRequest}
               ></EditQuoteInputBox>
             </>
           )}

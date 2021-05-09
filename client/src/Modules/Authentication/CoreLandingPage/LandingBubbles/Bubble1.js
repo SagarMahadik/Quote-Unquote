@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { BackgroundCircle } from 'StylesLibrary/Atoms/AuthenticationModule/LandingPage.js';
 
 const Bubble1 = () => {
-  const transition = { duration: 50, repeat: Infinity, ease: 'easeInOut' };
+  const transition = { duration: 10, repeat: Infinity, ease: 'easeInOut' };
   return (
     <div
       style={{

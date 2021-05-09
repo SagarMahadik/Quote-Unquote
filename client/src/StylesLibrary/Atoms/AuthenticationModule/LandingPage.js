@@ -201,38 +201,35 @@ const BackgroundCircle = styled(motion.div)`
   display: flex;
   width: 100px;
   height: 100px;
-  margin-top: 10rem;
   background: linear-gradient(
     170.09deg,
     rgba(255, 255, 255, 0.4) 1.88%,
     rgba(255, 255, 255, 0) 99.59%,
     rgba(255, 255, 255, 0.1) 99.59%
   );
+  position: absolute;
+  margin-top: -12rem;
+  margin-left: -15rem;
   border-radius: 50%;
   transform: rotate(117.83deg);
-  position: absolute;
-
-  top: 0;
-  left: 0;
-  offset-path: path(
-    'M375 142c0 22.975-15.783 43.953-41.685 59.243C307.435 216.519 271.617 226 232 226s-75.435-9.481-101.315-24.757C104.783 185.953 89 164.975 89 142s15.783-43.953 41.685-59.243C156.565 67.481 192.383 58 232 58s75.435 9.48 101.315 24.757C359.217 98.047 375 119.025 375 142z'
-  );
 `;
 
 const BackgroundCircle1 = styled(BackgroundCircle)`
   display: flex;
   width: 150px;
   height: 150px;
-  bottom: -30;
-  left: 0;
-  offset-path: path(
-    'M282 114.673l23.321 74.485.11.35h75.887l-61.112 46.077-.282.212.106.336 23.333 74.522-61.062-46.038-.301-.227-.301.227-61.062 46.038 23.333-74.522.106-.336-.282-.212-61.112-46.077h75.887l.11-.35L282 114.673z'
-  );
+  position: absolute;
+  margin-top: -34rem;
+  margin-left: -8rem;
+  transform: rotate(67.66deg);
 `;
 
-const BackgroundCircle2 = styled.div`
+const BackgroundCircle2 = styled(BackgroundCircle)`
+  position: absolute;
   width: 100px;
   height: 100px;
+  margin-top: -24rem;
+  margin-left: 15rem;
 `;
 
 const BackgroundCircle3 = styled(BackgroundCircle)`

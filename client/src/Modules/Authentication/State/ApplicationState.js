@@ -11,15 +11,26 @@ import useAuthors from 'APICalls/Authors/useAuthors';
 
 const ApplicationState = ({ children }) => {
   const initialState = {
-    login: {
+    logindetails: {
       mobileNumber: '',
       password: ''
+    },
+    signupDetails: {
+      userName: '',
+      email: '',
+      mobileNumber: '',
+      password: '',
+      confirmPassword: ''
     },
     applicationData: {
       quotes: [],
       authors: [],
       tags: []
-    }
+    },
+    displayLoginForm: false,
+    displaySignupForm: false,
+    displayCredo: false,
+    scrollToLogo: false
   };
   const [state, dispatch] = useReducer(ApplicationReducer, initialState);
   const { quotes, isQuotesLoaded } = useQuotes();
@@ -45,9 +56,27 @@ const ApplicationState = ({ children }) => {
     }
   }, [authors, isAuthorsLoaded]);
 
-  const { login, applicationData } = state;
+  const {
+    logindetails,
+    signupDetails,
+    displayLoginForm,
+    displaySignupForm,
+    displayCredo,
+    scrollToLogo,
+    applicationData
+  } = state;
   return (
-    <ApplicationContext.Provider value={{ login, applicationData }}>
+    <ApplicationContext.Provider
+      value={{
+        logindetails,
+        signupDetails,
+        displayLoginForm,
+        displaySignupForm,
+        displayCredo,
+        scrollToLogo,
+        applicationData
+      }}
+    >
       <ApplicationDispatchContext.Provider value={dispatch}>
         {children}
       </ApplicationDispatchContext.Provider>

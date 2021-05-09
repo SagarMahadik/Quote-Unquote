@@ -10,13 +10,14 @@ const LandingPageBackground = styled(
   CenterAlignedColumnContainerWithShadowBackground
 )`
   width: 100%;
-  height: 100vh;
+  height: auto;
   padding-bottom: 2rem;
   background: radial-gradient(
     142.29% 99.49% at -10.57% 10.89%,
     #f5b6c1 25.39%,
     #ccd6eb 85.5%
   );
+  padding-bottom: 15vh;
 `;
 
 const TagLineText = styled.h1`
@@ -36,7 +37,7 @@ const TagLineText = styled.h1`
   -webkit-text-fill-color: transparent;
 `;
 
-const SignupLinkButton = styled.button`
+const SignupLinkButton = styled(motion.button)`
   display: flex;
   width: auto;
   height: 20px;
@@ -70,7 +71,9 @@ const OverlayContainer = styled(CenterAlignedColumnContainer)`
   background: rgba(255, 255, 255, 0.5);
   border-radius: 25px;
   justify-content: flex-start;
-  margin-top: 1rem;
+  margin-top: 4rem;
+  border-radius: 25px;
+  padding-bottom: 3rem;
 `;
 
 const ActionBorder = styled(CenterAlignedColumnContainer)`
@@ -81,24 +84,29 @@ const ActionBorder = styled(CenterAlignedColumnContainer)`
     rgba(245, 247, 249, 0.8) 14.56%,
     rgba(245, 247, 249, 0.2) 95.5%
   );
-  margin-top: 10rem;
+  padding: 0.5px;
+  margin-top: 6rem;
+  border-radius: 25px;
+  padding-bottom: 4rem;
 `;
 
 const ActionContainer = styled(CenterAlignedColumnContainer)`
-  width: 100%;
+  width: 98%;
   height: auto;
   background: linear-gradient(
     179.99deg,
     rgba(232, 145, 145, 0.2) 2.3%,
     rgba(255, 255, 255, 0.2) 99.99%
   );
+  border-radius: 25px;
+  padding-bottom: 2rem;
 `;
 
 const LoginPageButton = styled(CenterAlignedColumnContainer)`
   width: 80%;
   height: 48px;
   border-radius: 25px;
-  margin-top: 1.5rem;
+  margin-top: 1.8rem;
 `;
 
 const LoginPageButtonText = styled.h1`
@@ -125,7 +133,17 @@ const EnterLibraryButtonText = styled(LoginPageButtonText)`
   margin: 0;
 `;
 
-const MemberLoginButton = styled(LoginPageButton)`
+const MemberLoginButton = styled(motion.button)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  width: 80%;
+  height: 48px;
+  border-radius: 25px;
+  margin-top: 1.8rem;
   background: linear-gradient(90deg, #40e3be 0%, #6cb5d1 100%);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
@@ -136,25 +154,47 @@ const MemberLoginButtonText = styled(LoginPageButtonText)`
 `;
 
 const LoginPageInputTextBox = styled.input`
+  font-family: Questrial;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  text-indent: 10px;
+  color: #c4c4c4;
   width: 80%;
   height: 32px;
-  margin-top: 1.2rem;
+  margin-top: 1.8rem;
   background: #f3f4f6;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+  border: none;
+  outline: none;
 `;
 
-const LoginPageActionButton = styled.button`
+const LoginPageActionButton = styled(motion.button)`
   width: auto;
   height: 44px;
   padding: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
+  align-content: center;
   background: linear-gradient(90deg, #40e3be 0%, #6cb5d1 100%);
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
+  border: none;
+  outline: none;
+  margin-top: 1.5rem;
+  font-family: PT Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 23px;
+  color: #f3f4f6;
+  padding: 4px 8px;
 `;
 
 const BackgroundCircle = styled(motion.div)`

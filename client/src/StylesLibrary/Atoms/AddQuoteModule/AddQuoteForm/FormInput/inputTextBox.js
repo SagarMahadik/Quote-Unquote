@@ -4,7 +4,6 @@ export const TextBox = styled.input`
   width: 50%;
   height: 2.5em;
   margin-top: 1.5em;
-  text-indent: 5px;
   background: #e7eaef;
   border: 2px solid #e8eced;
   box-shadow: -4px -4px 8px #ffffff, 4px 4px 8px #b9bdcb,

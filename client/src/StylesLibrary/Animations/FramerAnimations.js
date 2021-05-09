@@ -12,6 +12,8 @@ export const container = {
   }
 };
 
+export const buttonTransition = { ease: 'easeOut', duration: 0.8 };
+
 export const listItem = {
   hidden: { opacity: 0, x: -20 },
   show: { opacity: 1, x: 0 }

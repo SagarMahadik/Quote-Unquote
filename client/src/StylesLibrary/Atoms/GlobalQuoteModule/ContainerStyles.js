@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import { motion } from 'framer-motion';
 
 export const RowContainer = styled.div`
   max-width: 500px;
@@ -10,7 +11,7 @@ export const RowContainer = styled.div`
   align-items: center;
 `;
 
-export const ColumnContainer = styled.div`
+export const ColumnContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -29,7 +30,7 @@ export const CenterAlignedColumnContainer = styled(ColumnContainer)`
 export const CenterAlignedColumnContainerWithShadowBackground = styled(
   CenterAlignedColumnContainer
 )`
-  height: 100vh;
+  height: auto;
   max-width: 600px;
   width: 98%;
   background: #e7eaef;

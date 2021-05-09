@@ -45,3 +45,9 @@ export const formClickVibrations = () => {
     return navigator.vibrate(10);
   }
 };
+
+export const playVibrations = time => {
+  if (navigator.vibrate) {
+    return navigator.vibrate(time);
+  }
+};

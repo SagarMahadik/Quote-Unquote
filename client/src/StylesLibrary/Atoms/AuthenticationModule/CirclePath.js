@@ -6,7 +6,6 @@ import Bubble2 from 'Modules/Authentication/CoreLandingPage/LandingBubbles/Bubbl
 import Bubble3 from 'Modules/Authentication/CoreLandingPage/LandingBubbles/Bubble3';
 
 function PathSVG() {
-  const transition = { duration: 50, repeat: Infinity, ease: 'easeInOut' };
   return (
     <LandingPageBackground>
       <Bubble1 />

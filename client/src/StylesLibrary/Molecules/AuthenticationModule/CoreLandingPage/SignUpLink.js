@@ -4,18 +4,15 @@ import {
   SignupLinkButton
 } from 'StylesLibrary/Atoms/AuthenticationModule/LandingPage';
 
-import { buttonTransition } from 'StylesLibrary/Animations/FramerAnimations.js';
-import { playVibrations } from 'Utils/vibrations.js';
+import MotionButtonLanding from 'StylesLibrary/Animations/ButtonAnimations/MotionButtonLanding';
 
 const SignUpLink = ({ linkText, onClick }) => {
   return (
-    <SignupLinkButton
-      onClick={onClick}
-      whileTap={{ scale: 1.2, transition: buttonTransition }}
-      onTapStart={() => playVibrations(20)}
-    >
-      <SignupButtonText>{linkText}</SignupButtonText>
-    </SignupLinkButton>
+    <MotionButtonLanding>
+      <SignupLinkButton onClick={onClick}>
+        <SignupButtonText>{linkText}</SignupButtonText>
+      </SignupLinkButton>
+    </MotionButtonLanding>
   );
 };
 

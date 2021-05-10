@@ -4,14 +4,17 @@ import { FormContentContainer } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuot
 import { CenterAlignedColumnContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles.js';
 
 import DisplayQuoteState from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
+import PageAnimationContainer from 'StylesLibrary/Animations/AnimationContainer/PageAnimations/PageAnimationContainer';
 
 const DisplayQuoteMainComponent = () => {
   return (
-    <DisplayQuoteState>
-      <CenterAlignedColumnContainer style={{ alignItems: 'flex-start' }}>
-        <ToggleMoodDisplay />
-      </CenterAlignedColumnContainer>
-    </DisplayQuoteState>
+    <PageAnimationContainer>
+      <DisplayQuoteState>
+        <CenterAlignedColumnContainer style={{ alignItems: 'flex-start' }}>
+          <ToggleMoodDisplay />
+        </CenterAlignedColumnContainer>
+      </DisplayQuoteState>
+    </PageAnimationContainer>
   );
 };
 

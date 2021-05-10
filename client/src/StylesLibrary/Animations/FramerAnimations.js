@@ -66,6 +66,18 @@ export const AnimationContainer = styled(motion.div)`
   width: 100%;
 `;
 
+export const MotionButtonContainer = styled(motion.button)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+`;
+
 export const gradientArray = [
   'radial-gradient(144% 118.1% at -38.86% 122.53%, rgba(188, 120, 242, 0.37) 25.39%, #A1DCFC 85.5%)',
   '42.29% 99.49% at -10.57% 10.89%, rgba(193, 140, 234, 0.37) 25.39%, #CCEBD6 85.5%)',

@@ -5,6 +5,7 @@ import {
 } from '../GlobalQuoteModule/ContainerStyles';
 
 import { motion } from 'framer-motion';
+import { Button } from 'StylesLibrary/Atoms/GlobalStyles/GlobalStyles.js';
 
 const LandingPageBackground = styled(
   CenterAlignedColumnContainerWithShadowBackground
@@ -13,10 +14,13 @@ const LandingPageBackground = styled(
   height: auto;
   padding-bottom: 2rem;
   background: radial-gradient(
-    142.29% 99.49% at -10.57% 10.89%,
-    #f5b6c1 25.39%,
-    #ccd6eb 85.5%
+    152% 115.43% at -27.14% -9.07%,
+    #6de1e1 25.39%,
+    #7ae3d0 46.12%,
+    #92e6ae 85.5%
   );
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   padding-bottom: 15vh;
 `;
 
@@ -37,17 +41,13 @@ const TagLineText = styled.h1`
   -webkit-text-fill-color: transparent;
 `;
 
-const SignupLinkButton = styled(motion.button)`
+const SignupLinkButton = styled(Button)`
   display: flex;
   width: auto;
   height: 20px;
   margin-top: 1.2rem;
   margin-bottom: 1.2rem;
-  flex-direction: column;
-  align-items: center;
-  outline: none;
-  background: none;
-  border: none;
+
   text-decoration: underline;
   text-decoration-color: #e1d6e4;
 `;
@@ -68,38 +68,39 @@ const SignupButtonUnderline = styled(CenterAlignedColumnContainer)`
 const OverlayContainer = styled(CenterAlignedColumnContainer)`
   width: 90%;
   height: auto;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 25px;
   justify-content: flex-start;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   margin-top: 4rem;
   border-radius: 25px;
-  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
 `;
 
 const ActionBorder = styled(CenterAlignedColumnContainer)`
   width: 100%;
   height: auto;
-  background: linear-gradient(
-    189.43deg,
-    rgba(245, 247, 249, 0.8) 14.56%,
-    rgba(245, 247, 249, 0.2) 95.5%
+  background: radial-gradient(
+    122.15% 120.2% at -16.26% -11.26%,
+    rgba(109, 225, 225, 0.2) 20.37%,
+    rgba(255, 255, 255, 0.2) 100%
   );
   padding: 0.5px;
   margin-top: 6rem;
   border-radius: 25px;
-  padding-bottom: 4rem;
 `;
 
 const ActionContainer = styled(CenterAlignedColumnContainer)`
   width: 98%;
   height: auto;
-  background: linear-gradient(
-    179.99deg,
-    rgba(232, 145, 145, 0.2) 2.3%,
-    rgba(255, 255, 255, 0.2) 99.99%
+  background: radial-gradient(
+    122.15% 120.2% at -16.26% -11.26%,
+    rgba(109, 225, 225, 0.2) 20.37%,
+    rgba(255, 255, 255, 0.2) 100%
   );
   border-radius: 25px;
-  padding-bottom: 2rem;
+  padding-bottom: 6rem;
 `;
 
 const LoginPageButton = styled(CenterAlignedColumnContainer)`
@@ -119,7 +120,11 @@ const LoginPageButtonText = styled.h1`
   padding: 0;
 `;
 
-const EnterLibraryButton = styled(LoginPageButton)`
+const EnterLibraryButton = styled(Button)`
+  width: 80%;
+  height: 48px;
+  border-radius: 25px;
+  margin-top: 1.8rem;
   background: #f3f4f6;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   filter: blur(0.2px);
@@ -133,13 +138,7 @@ const EnterLibraryButtonText = styled(LoginPageButtonText)`
   margin: 0;
 `;
 
-const MemberLoginButton = styled(motion.button)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  outline: none;
+const MemberLoginButton = styled(Button)`
   width: 80%;
   height: 48px;
   border-radius: 25px;
@@ -173,20 +172,13 @@ const LoginPageInputTextBox = styled.input`
   outline: none;
 `;
 
-const LoginPageActionButton = styled(motion.button)`
+const LoginPageActionButton = styled(Button)`
   width: auto;
   height: 44px;
   padding: 4px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
   background: linear-gradient(90deg, #40e3be 0%, #6cb5d1 100%);
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-  border: none;
-  outline: none;
   margin-top: 1.5rem;
   font-family: PT Sans;
   font-style: normal;

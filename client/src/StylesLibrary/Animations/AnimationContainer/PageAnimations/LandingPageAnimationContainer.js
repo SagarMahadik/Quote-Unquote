@@ -1,29 +1,28 @@
 import React from 'react';
 import { AnimationContainer } from 'StylesLibrary/Animations/FramerAnimations.js';
 
-const HeightAnimationContainer = ({ children, animationDuration }) => {
+const LandingPageAnimationContainer = ({ children, animationDuration }) => {
   let timeDuration = animationDuration;
   if (timeDuration === '') {
-    timeDuration = 1.0;
+    timeDuration = 0.9;
   }
   console.log(timeDuration);
 
   return (
     <AnimationContainer
-      initial={{ opacity: 0, scale: 0 }}
+      initial={{ opacity: 0 }}
       animate={{
-        opacity: 1,
-        scale: 1
+        opacity: 1
       }}
       transition={{
         ease: 'easeOut',
         duration: timeDuration
       }}
-      exit={{ opacity: 0, scale: 0 }}
+      exit={{ opacity: 0.6, y: -200 }}
     >
       {children}
     </AnimationContainer>
   );
 };
 
-export default HeightAnimationContainer;
+export default LandingPageAnimationContainer;

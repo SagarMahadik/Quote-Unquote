@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { CenterAlignedColumnContainerWithShadowBackground } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
 import { useHistory } from 'react-router-dom';
 import GradientContainer from 'StylesLibrary/Animations/AnimationContainer/GradientContainer.js';
-import PathSVG from 'StylesLibrary/Atoms/AuthenticationModule/CirclePath.js';
+import PageAnimationContainer from 'StylesLibrary/Animations/AnimationContainer/PageAnimations/PageAnimationContainer';
+import Loader from 'StylesLibrary/Atoms/LoadingModule/Loader.js';
 
 const AdminLandingPage = () => {
   const [redirectToAddQuote, setRedirectToAddQuote] = useState(false);
@@ -21,17 +22,21 @@ const AdminLandingPage = () => {
   }, [redirectToAddQuote, redirectToReadQuote]);
 
   return (
-    <CenterAlignedColumnContainerWithShadowBackground>
-      <GradientContainer>
-        <NavigationPage
-          addQuouteCallBack={() => {
-            setRedirectToAddQuote(true);
-          }}
-          readQuoteCallBack={() => setRedirectToReadQuote(true)}
-          addMore={false}
-        />
-      </GradientContainer>
-    </CenterAlignedColumnContainerWithShadowBackground>
+    <PageAnimationContainer>
+      <CenterAlignedColumnContainerWithShadowBackground
+        style={{ alignItems: 'flex-start' }}
+      >
+        <GradientContainer>
+          <NavigationPage
+            addQuouteCallBack={() => {
+              setRedirectToAddQuote(true);
+            }}
+            readQuoteCallBack={() => setRedirectToReadQuote(true)}
+            addMore={false}
+          />
+        </GradientContainer>
+      </CenterAlignedColumnContainerWithShadowBackground>
+    </PageAnimationContainer>
   );
 };
 

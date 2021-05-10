@@ -6,6 +6,7 @@ import {
   useDisplayQuoteState
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 import { FormContentContainer } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormContainer/FormContainer.js';
+import { AnimatePresence } from 'framer-motion';
 
 const ToggleMoodDisplay = () => {
   const {
@@ -13,19 +14,14 @@ const ToggleMoodDisplay = () => {
     styles: { containerHeight }
   } = useDisplayQuoteState();
 
-  if (displayQuotes) {
-    return (
-      <FormContentContainer containerHeight={containerHeight}>
-        <QuoteDisplay />
-      </FormContentContainer>
-    );
-  }
   return (
     <FormContentContainer
       containerHeight={containerHeight}
       containerPaddingBottom="2rem"
     >
-      <MoodPage />
+      <AnimatePresence>
+        {displayQuotes ? <QuoteDisplay /> : <MoodPage />}
+      </AnimatePresence>
     </FormContentContainer>
   );
 };

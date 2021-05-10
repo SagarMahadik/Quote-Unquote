@@ -25,7 +25,7 @@ function PathSVG() {
             duration: 5,
             repeat: Infinity,
             repeatType: 'reverse',
-            delay: 3
+            delay: 5
           }
         }}
         exit={{ opacity: 0 }}
@@ -37,7 +37,12 @@ function PathSVG() {
           x: 0,
           opacity: 1.2,
           scale: 1,
-          transition: { duration: 5, repeat: Infinity, repeatType: 'reverse' }
+          transition: {
+            duration: 5,
+            repeat: Infinity,
+            repeatType: 'reverse',
+            delay: 5
+          }
         }}
       />
       <BackgroundCircle2
@@ -47,7 +52,12 @@ function PathSVG() {
           x: 0,
           opacity: 1,
           scale: 1,
-          transition: { duration: 8, repeat: Infinity, repeatType: 'reverse' }
+          transition: {
+            duration: 8,
+            repeat: Infinity,
+            repeatType: 'reverse',
+            delay: 5
+          }
         }}
       />
     </>

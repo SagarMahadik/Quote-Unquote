@@ -3,6 +3,7 @@ import { ApplicationState } from 'Modules/Authentication/State/ApplicationState.
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Routes from 'Routes/Routes.js';
+import ScrollToTop from 'Utils/UIutils/ScrollToTop';
 
 const queryClient = new QueryClient();
 
@@ -11,9 +12,11 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ApplicationState className="App">
         <Router>
-          <Switch>
-            <Route component={Routes} />
-          </Switch>
+          <ScrollToTop>
+            <Switch>
+              <Route component={Routes} />
+            </Switch>
+          </ScrollToTop>
         </Router>
       </ApplicationState>
     </QueryClientProvider>

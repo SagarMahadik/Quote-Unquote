@@ -38,11 +38,16 @@ const QuoteDisplay = () => {
 
   const selectRandomQuote = () => {
     let randomIndex = generateRandomInteger(1, filterQuotesList.length - 1);
-    console.log(randomIndex);
+
     let randomQuote = filterQuotesList[randomIndex];
 
     dispatch({ type: 'DQ_SET_CURRENT_QUOTE', payload: randomQuote });
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     selectRandomQuote();
   }, [refreshFIlteredQuotes]);

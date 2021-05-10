@@ -9,6 +9,7 @@ export const FormContentContainer = styled(
 )`
   justify-content: flex-start;
   height: ${props => props.containerHeight};
+  min-height: 120vh;
   width: 100%;
   overflow-y: auto;
   padding-bottom: ${props => props.containerPaddingBottom};

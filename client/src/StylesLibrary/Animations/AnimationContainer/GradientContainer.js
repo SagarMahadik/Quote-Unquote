@@ -17,6 +17,7 @@ const GradientContainer = ({ children }) => {
         repeatType: 'reverse',
         type: 'tween'
       }}
+      style={{ minHeight: '120vh', paddingBottom: '2rem' }}
     >
       {children}
     </AnimationContainer>

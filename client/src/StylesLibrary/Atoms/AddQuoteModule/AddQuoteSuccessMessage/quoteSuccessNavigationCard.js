@@ -11,7 +11,7 @@ export const NavigationCardContainer = styled.button`
   background: #e0e4e9;
   box-shadow: -4px -4px 8px #ffffff, 4px 4px 8px 2px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  margin: 2em;
+  margin: 3rem;
   outline: none;
   border: none;
   text-decoration: none;

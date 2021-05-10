@@ -14,6 +14,7 @@ import {
 } from 'Modules/Authentication/State/ApplicationState.js';
 
 import { getElementIntoView } from 'Utils/UIutils/getElementIntoView.js';
+import { useHistory } from 'react-router-dom';
 
 const LandingPageActions = () => {
   const {
@@ -27,15 +28,6 @@ const LandingPageActions = () => {
     dispatch({
       type: 'TOGGLE_DISPLAY_LOGINFORM'
     });
-    /**
-     *if (loginContainerRef.current) {
-      console.log(loginContainerRef.current);
-      loginContainerRef.current.scrollIntoView({
-        block: 'start',
-        behavior: 'smooth'
-      });
-    } 
-     */
   };
 
   const loginContainerRef = useRef(null);
@@ -49,7 +41,6 @@ const LandingPageActions = () => {
   };
 
   useEffect(() => {
-    console.log('in useffect sign up');
     if (displaySignupForm) {
       getElementIntoView(signUpContainerRef.current);
     }
@@ -61,10 +52,19 @@ const LandingPageActions = () => {
     }
   }, [displayLoginForm]);
 
+  let history = useHistory();
+
+  function handleClick() {
+    history.push('/readQuote');
+  }
+
   return (
     <ActionBorder>
       <ActionContainer>
-        <EnterTheLibrary buttonText="Enter Quote Library" />
+        <EnterTheLibrary
+          buttonText="Enter Quote Library"
+          onClick={handleClick}
+        />
         <MemberLogin
           buttonText="Login as a member"
           onClick={e => handleDisplayLoginForm(e)}

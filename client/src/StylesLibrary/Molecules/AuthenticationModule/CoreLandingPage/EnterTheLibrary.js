@@ -4,20 +4,16 @@ import {
   EnterLibraryButtonText
 } from 'StylesLibrary/Atoms/AuthenticationModule/LandingPage.js';
 
-import { playVibrations } from 'Utils/vibrations.js';
-import { buttonTransition } from 'StylesLibrary/Animations/FramerAnimations.js';
+import MotionButtonLanding from 'StylesLibrary/Animations/ButtonAnimations/MotionButtonLanding';
 
-const EnterTheLibrary = ({ buttonText }) => {
+const EnterTheLibrary = ({ buttonText, onClick }) => {
+  console.log('in enter libeary molecule');
   return (
-    <EnterLibraryButton
-      whileTap={{
-        scale: 1.2,
-        transition: buttonTransition
-      }}
-      onTapStart={() => playVibrations(20)}
-    >
-      <EnterLibraryButtonText>{buttonText}</EnterLibraryButtonText>
-    </EnterLibraryButton>
+    <MotionButtonLanding>
+      <EnterLibraryButton onClick={onClick}>
+        <EnterLibraryButtonText>{buttonText}</EnterLibraryButtonText>
+      </EnterLibraryButton>
+    </MotionButtonLanding>
   );
 };
 

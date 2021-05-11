@@ -28,7 +28,8 @@ import {
   DQ_DELETE_DRAGEND,
   DQ_RESET_QUOTES_POST_DELETE,
   DQ_RESET_SELECTQUOTES_POST_DELETE,
-  DQ_DELETE_RESET
+  DQ_DELETE_RESET,
+  DQ_INITIATE_DELETE_REQUEST
 } from 'Modules/DisplayQuote/State/types.js';
 import { produce } from 'immer';
 
@@ -176,6 +177,7 @@ export default (state, action) => {
         draftState.editQuoteText.editQuoteText = !draftState.editQuoteText
           .editQuoteText;
         draftState.editQuoteText.editQoteSuccessSound = false;
+        draftState.selectQuotePostDelete = false;
         //draftState.deleteQuote.deleteRequestSuccess = true;
       });
 
@@ -243,8 +245,6 @@ export default (state, action) => {
       return produce(state, draftState => {
         console.log('in post delete');
         draftState.selectQuotePostDelete = true;
-        draftState.deleteQuote.dragStart = false;
-
         draftState.filteredQuotes.filterQuotesList = draftState.filteredQuotes.filterQuotesList.filter(
           q => q._id != action.payload
         );
@@ -252,17 +252,17 @@ export default (state, action) => {
           q => q._id != action.payload
         );
         draftState.deleteQuote.QuoteID = '';
+        draftState.editQuoteText.editQuoteText = false;
+        draftState.editQuoteText.editQoteSuccessSound = true;
+        draftState.editQuoteText.editedText = false;
         draftState.deleteQuote.initiateDeleteQuoteRequest = false;
         draftState.deleteQuote.deleteRequestSuccess = false;
-
-        draftState.deleteQuote.deleteQuote = false;
-        draftState.deleteQuote.completeDelete = true;
+        draftState.selectQuotePostDelete = true;
       });
 
     case DQ_QUOTE_DELETE_REQUEST_SUCCESS:
       return produce(state, draftState => {
         draftState.deleteQuote.deleteRequestSuccess = true;
-        draftState.deleteQuote.tickAnimation = true;
       });
 
     case DQ_DELETE_RESET:
@@ -270,6 +270,10 @@ export default (state, action) => {
         draftState.selectQuotePostDelete = false;
         draftState.deleteQuote.deleteRequestSuccess = false;
         draftState.deleteQuote.tickAnimation = false;
+      });
+    case DQ_INITIATE_DELETE_REQUEST:
+      return produce(state, draftState => {
+        draftState.deleteQuote.initiateDeleteQuoteRequest = true;
       });
   }
 };

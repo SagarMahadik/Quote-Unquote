@@ -32,6 +32,8 @@ import DoneSound from 'StylesLibrary/Sounds/DoneSound.js';
 
 import DeleteQuoteComponent from 'Modules/DisplayQuote/Components/QuoteDisplay/DeleteQuoteComponent.js';
 import LoadingQuotes from 'StylesLibrary/Molecules/LoadingModule/LoadingQuotes';
+import DoneButton from 'StylesLibrary/Atoms/GlobalQuoteModule/Buttons/DoneButton';
+import DeleteButton from 'StylesLibrary/Atoms/GlobalQuoteModule/Buttons/DeleteButton';
 
 const EditQuoteComponent = ({ inputBoxHeight, editContainerMarginTop }) => {
   const {
@@ -44,16 +46,7 @@ const EditQuoteComponent = ({ inputBoxHeight, editContainerMarginTop }) => {
   const dispatch = useDisplayQuoteDispatch();
 
   return (
-    <CenterAlignedColumnContainer style={{ position: 'relative' }}>
-      <EditQuoteContainer
-        onTap={() => {
-          if (!deleteQuote) {
-            dispatch({
-              type: 'DQ_TOGGLE_EDIT_QUOTETEXT'
-            });
-          }
-        }}
-      ></EditQuoteContainer>
+    <CenterAlignedColumnContainer>
       <AnimationContainer
         initial={{ opacity: 0 }}
         animate={{
@@ -65,17 +58,23 @@ const EditQuoteComponent = ({ inputBoxHeight, editContainerMarginTop }) => {
         }}
         exit={{ opacity: 0 }}
       >
-        <EditTextContainer marginTop={`-${editContainerMarginTop}px`}>
+        <EditTextContainer>
           {currentQuote.length === 0 ? (
             <LoadingQuotes />
           ) : (
             <>
-              <EditButtonContainer>
-                <LogoutButton
-                  style={{ zIndex: '100' }}
+              <EditButtonContainer style={{ zIndex: '100' }}>
+                <DoneButton
                   onClick={() =>
                     dispatch({
                       type: 'DQ_INITIATE_EDITQUOTETEXT'
+                    })
+                  }
+                />
+                <DeleteButton
+                  onClick={() =>
+                    dispatch({
+                      type: 'DQ_INITIATE_DELETE_REQUEST'
                     })
                   }
                 />

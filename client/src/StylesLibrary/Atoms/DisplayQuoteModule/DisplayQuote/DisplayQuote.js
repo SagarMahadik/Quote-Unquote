@@ -29,7 +29,7 @@ export const QuoteContainer = styled(
   align-items: center;
   border-radius: 5px;
   margin-bottom: 20px;
-  margin-top: 5rem;
+  margin-top: 2rem;
   margin-right: 0px;
   margin-left: 0px;
   padding: 15px;
@@ -89,7 +89,7 @@ export const EditQuoteContainer = styled(motion.div)`
 
 export const EditTextContainer = styled(CenterAlignedColumnContainer)`
   position: absolute;
-  top: 30%;
+  top: 10%;
   margin-top: ${props => props.marginTop};
 `;
 
@@ -109,7 +109,9 @@ export const EditQuoteInputBox = styled.textarea`
   color: #5c5656;
   margin: 0;
   border-radius: 8px;
-  padding: 8px;
+  padding-top: 16px;
+  padding-left: 4px;
+  padding-right: 4px;
   height: 100px;
   border: none;
   z-index: 200;
@@ -119,8 +121,10 @@ export const EditQuoteInputBox = styled.textarea`
   }
 `;
 
-export const EditButtonContainer = styled(CenterAlignedColumnContainer)`
+export const EditButtonContainer = styled(RowContainer)`
   margin-top: -3 rem;
+  width: 50%;
+  justify-content: space-between;
 `;
 
 export const TrashIconContainer = styled(CenterAlignedColumnContainer)`

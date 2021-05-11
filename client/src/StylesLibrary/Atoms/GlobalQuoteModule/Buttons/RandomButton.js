@@ -1,9 +1,9 @@
 import * as React from 'react';
-import MotionButtonLanding from 'StylesLibrary/Animations/ButtonAnimations/MotionButtonLanding';
+import MotionIconsButton from 'StylesLibrary/Animations/ButtonAnimations/MotionIconsButton';
 
 function SvgComponent(props) {
   return (
-    <MotionButtonLanding>
+    <MotionIconsButton>
       <svg
         width={56}
         height={56}
@@ -180,7 +180,7 @@ function SvgComponent(props) {
           </clipPath>
         </defs>
       </svg>
-    </MotionButtonLanding>
+    </MotionIconsButton>
   );
 }
 

@@ -11,12 +11,17 @@ import {
 import { useStepStatusRequest } from 'APICalls/StepLog/useStepLog.js';
 
 import { useHistory } from 'react-router-dom';
+import GradientContainer from 'StylesLibrary/Animations/AnimationContainer/GradientContainer';
 
 const AddQuoteSuccess = ({ authorName }) => {
   const { sendStepStatusRequest } = useStepStatusRequest();
   const { redirectToReadQuote } = useAddQuoteState();
   const dispatch = useAddQuoteDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     if (redirectToReadQuote) {
@@ -33,12 +38,16 @@ const AddQuoteSuccess = ({ authorName }) => {
 
   return (
     <AddQuoteSuccessContainer>
-      <QuoteSuccessText quoteAuthor={authorName}></QuoteSuccessText>
-      <NavigationPage
-        addQuouteCallBack={() => resetTheAddquoteForm()}
-        readQuoteCallBack={() => dispatch({ type: 'AQ_REDIRECT_READQUOTES' })}
-        addMore={true}
-      />
+      <GradientContainer
+        style={{ alignItems: 'flex-start', marginTop: '-8rem' }}
+      >
+        <QuoteSuccessText quoteAuthor={authorName}></QuoteSuccessText>
+        <NavigationPage
+          addQuouteCallBack={() => resetTheAddquoteForm()}
+          readQuoteCallBack={() => dispatch({ type: 'AQ_REDIRECT_READQUOTES' })}
+          addMore={true}
+        />
+      </GradientContainer>
     </AddQuoteSuccessContainer>
   );
 };

@@ -53,7 +53,7 @@ export const StaggerAnimationChildContainer = styled(motion.div)`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
   z-index: 0;
   background: none;
 `;
@@ -76,6 +76,7 @@ export const MotionButtonContainer = styled(motion.button)`
   border: none;
   outline: none;
   width: 100%;
+  padding: 0;
 `;
 
 export const gradientArray = [

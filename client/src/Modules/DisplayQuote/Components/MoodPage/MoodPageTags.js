@@ -40,12 +40,13 @@ const MoodPageTags = () => {
       <InputButtonContainer>
         {tagList
           .slice(0, paginationStep * exploreMoreCurrentCount)
-          .map(({ tagName, selected }) => {
+          .map(({ tagName, selected, _id }) => {
             return (
               <InputButton
                 buttonText={makeFirstLetterUpperCase(tagName)}
                 buttonSelected={selected}
                 onClick={() => handleClickOnTag(tagName)}
+                key={_id}
               />
             );
           })}

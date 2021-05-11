@@ -5,6 +5,7 @@ import {
 } from 'StylesLibrary/Animations/FramerAnimations';
 import { CenterAlignedColumnContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
 import QuoteSuccessNavigatiocard from 'StylesLibrary/Molecules/AddQuoteModule/AddQuoteSuccessMessage/QuoteSuccessNavigatiocard.js';
+import { NavigationPageContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/NavigationPage.js';
 
 const NavigationPage = ({ addQuouteCallBack, readQuoteCallBack, addMore }) => {
   const parentCntainer = {
@@ -26,13 +27,13 @@ const NavigationPage = ({ addQuouteCallBack, readQuoteCallBack, addMore }) => {
   };
 
   return (
-    <StaggerAnimationParentContainer
-      variants={parentCntainer}
-      initial="hidden"
-      animate="show"
-      exit="exit"
-    >
-      <CenterAlignedColumnContainer style={{ height: '100vh' }}>
+    <NavigationPageContainer justifyContent={addMore ? 'flex-start' : 'center'}>
+      <StaggerAnimationParentContainer
+        variants={parentCntainer}
+        initial="hidden"
+        animate="show"
+        exit="exit"
+      >
         <StaggerAnimationChildContainer variants={childContainer}>
           <QuoteSuccessNavigatiocard
             navigationCardText={addMore ? 'Add another' : 'Add quote'}
@@ -45,8 +46,8 @@ const NavigationPage = ({ addQuouteCallBack, readQuoteCallBack, addMore }) => {
             navigationCardText="Read"
           />
         </StaggerAnimationChildContainer>
-      </CenterAlignedColumnContainer>
-    </StaggerAnimationParentContainer>
+      </StaggerAnimationParentContainer>
+    </NavigationPageContainer>
   );
 };
 

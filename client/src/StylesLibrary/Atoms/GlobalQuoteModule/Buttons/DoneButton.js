@@ -26,20 +26,11 @@ function SvgComponent(props) {
           <circle cx={26} cy={26} r={11} fill="url(#prefix__paint0_linear)" />
           <circle cx={26} cy={26} r={10.5} stroke="#E7EAEF" />
         </g>
-        <mask id="prefix__a" fill="#fff">
-          <path d="M23.771 22.524a5 5 0 104.297-.076l-.274.605a4.335 4.335 0 11-3.727.066l-.296-.595z" />
-        </mask>
         <path
-          d="M23.771 22.524a5 5 0 104.297-.076l-.274.605a4.335 4.335 0 11-3.727.066l-.296-.595z"
-          fill="#C4C4C4"
-          stroke="url(#prefix__paint1_linear)"
-          strokeWidth={1.5}
-          strokeLinecap="round"
-          mask="url(#prefix__a)"
-        />
-        <path
-          d="M26.35 20a.35.35 0 10-.7 0h.7zm-.7 5a.35.35 0 10.7 0h-.7zm0-5v5h.7v-5h-.7z"
-          fill="url(#prefix__paint2_linear)"
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M22.633 26.035a.75.75 0 10-1.266.805l2.407 3.781a.75.75 0 001.306-.072.748.748 0 00.228-.172l6.187-6.875a.75.75 0 00-1.115-1.004l-5.857 6.508-1.89-2.971z"
+          fill="url(#prefix__paint1_linear)"
         />
         <defs>
           <linearGradient
@@ -55,25 +46,14 @@ function SvgComponent(props) {
           </linearGradient>
           <linearGradient
             id="prefix__paint1_linear"
-            x1={21}
-            y1={25.044}
-            x2={32.211}
-            y2={26.692}
+            x1={31.688}
+            y1={26.535}
+            x2={21.25}
+            y2={26.535}
             gradientUnits="userSpaceOnUse"
           >
-            <stop stopColor="#494343" />
-            <stop offset={1} stopColor="#131111" stopOpacity={0.35} />
-          </linearGradient>
-          <linearGradient
-            id="prefix__paint2_linear"
-            x1={26}
-            y1={21.522}
-            x2={27.144}
-            y2={21.555}
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor="#494343" />
-            <stop offset={1} stopColor="#131111" stopOpacity={0.35} />
+            <stop stopColor="#40E3BE" />
+            <stop offset={1} stopColor="#6CB5D1" />
           </linearGradient>
           <filter
             id="prefix__filter0_ddi"

@@ -7,6 +7,7 @@ import {
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 import { FormContentContainer } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormContainer/FormContainer.js';
 import { AnimatePresence } from 'framer-motion';
+import GradientContainer from 'StylesLibrary/Animations/AnimationContainer/GradientContainer';
 
 const ToggleMoodDisplay = () => {
   const {
@@ -17,10 +18,16 @@ const ToggleMoodDisplay = () => {
   return (
     <FormContentContainer
       containerHeight={containerHeight}
-      containerPaddingBottom="2rem"
+      style={{ minHeight: '100vh' }}
     >
       <AnimatePresence>
-        {displayQuotes ? <QuoteDisplay /> : <MoodPage />}
+        {displayQuotes ? (
+          <GradientContainer>
+            <QuoteDisplay />
+          </GradientContainer>
+        ) : (
+          <MoodPage />
+        )}
       </AnimatePresence>
     </FormContentContainer>
   );

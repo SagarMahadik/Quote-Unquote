@@ -14,7 +14,8 @@ const DeleteQuote = () => {
       deleteRequestSuccess,
       QuoteID,
       completeDelete
-    }
+    },
+    currentQuote
   } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
 
@@ -45,14 +46,14 @@ const DeleteQuote = () => {
     console.log(QuoteID);
     dispatch({
       type: 'DQ_RESET_QUOTES_POST_DELETE',
-      payload: QuoteID
+      payload: currentQuote[0]._id
     });
   };
 
   const deleteQuote = async () => {
-    //const quoteID = currentQuote[0]._id;
+    const quoteID = currentQuote[0]._id;
 
-    const res = await axios.delete(`/api/v1/quote/${QuoteID}`);
+    const res = await axios.delete(`/api/v1/quote/${quoteID}`);
     console.log(res);
     if (res.status === 204) {
       submitVibrations();

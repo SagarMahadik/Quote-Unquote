@@ -12,12 +12,12 @@ const GradientContainer = ({ children }) => {
         backgroundImage: gradientArray
       }}
       transition={{
-        duration: 50,
+        duration: 20,
         repeat: Infinity,
         repeatType: 'reverse',
-        type: 'tween'
+        ease: 'easeOut'
       }}
-      style={{ minHeight: '120vh', paddingBottom: '2rem' }}
+      style={{ minHeight: '100vh', paddingBottom: '2rem' }}
     >
       {children}
     </AnimationContainer>

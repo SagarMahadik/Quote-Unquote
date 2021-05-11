@@ -7,13 +7,14 @@ import { playVibrations } from 'Utils/vibrations';
 
 const MotionButtonLanding = ({ children }) => {
   const buttonVariants = {
-    scale: 1.2,
+    scale: 0.8,
     transition: buttonTransition
   };
   return (
     <MotionButtonContainer
       whileTap={buttonVariants}
-      onTapStart={() => playVibrations(20)}
+      onTapStart={() => playVibrations(15)}
+      style={{ width: '56px' }}
     >
       {children}
     </MotionButtonContainer>

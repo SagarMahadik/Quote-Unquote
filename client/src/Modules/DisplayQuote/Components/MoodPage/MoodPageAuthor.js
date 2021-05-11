@@ -29,12 +29,13 @@ const MoodPageAuthor = () => {
       <InputButtonContainer>
         {authorList
           .slice(0, paginationStep * exploreMoreCurrentCount)
-          .map(({ authorName, selected }) => {
+          .map(({ authorName, selected, _id }) => {
             return (
               <InputButton
                 buttonText={makeFirstLetterUpperCase(authorName)}
                 buttonSelected={selected}
                 onClick={() => handleClickOnAuthor(authorName)}
+                key={_id}
               />
             );
           })}

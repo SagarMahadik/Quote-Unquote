@@ -58,7 +58,11 @@ const DisplayQuote = () => {
 
   return (
     <>
-      <QuoteContainer id="divToPrint" editText={editQuoteText}>
+      <QuoteContainer
+        id="divToPrint"
+        editText={editQuoteText}
+        style={{ position: 'relative' }}
+      >
         <QuotationLeft>
           <QuotationSymbolText>&#8220;</QuotationSymbolText>
         </QuotationLeft>
@@ -84,25 +88,21 @@ const DisplayQuote = () => {
           <QuotationSymbolText>&#8221;</QuotationSymbolText>
         </QuotationRight>
       </QuoteContainer>
-      <TrashIconContainer
-        marginTop={`${Number(editContainerMarginTop) - 20}px`}
-        style={{ zIndex: '300' }}
-      >
-        {deleteQuote ? (
-          <>
-            <DeleteOverlayContainer />
-            <DeleteQuoteComponent />
-            <DeleteSound play={deleteRequestSuccess} />
-          </>
-        ) : null}
-      </TrashIconContainer>
 
       <AnimatePresence>
         {editQuoteText ? (
-          <EditQuoteComponent
-            inputBoxHeight={inputBoxHeight}
-            editContainerMarginTop={editContainerMarginTop}
-          />
+          <div
+            style={{
+              position: 'absolute',
+              top: '10%',
+              width: '100%'
+            }}
+          >
+            <EditQuoteComponent
+              inputBoxHeight={inputBoxHeight}
+              editContainerMarginTop={editContainerMarginTop}
+            />
+          </div>
         ) : null}
       </AnimatePresence>
     </>

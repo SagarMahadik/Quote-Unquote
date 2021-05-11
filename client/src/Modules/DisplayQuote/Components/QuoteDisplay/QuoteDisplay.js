@@ -13,7 +13,8 @@ import PageHeading from 'Modules/Global/Components/PageHeading.js';
 
 import {
   DisplayQuoteContiner,
-  DisplayQuoteMainContainer
+  DisplayQuoteMainContainer,
+  DisplayQuoteButtonContainer
 } from 'StylesLibrary/Atoms/DisplayQuoteModule/DisplayQuote/DisplayQuoteContainer.js';
 
 import GradientContainer from 'StylesLibrary/Animations/AnimationContainer/GradientContainer.js';
@@ -74,29 +75,29 @@ const QuoteDisplay = () => {
   };
 
   return (
-    <GradientContainer>
+    <>
       <PageHeading />
       <DisplayQuoteMainContainer quoteMainContainerHeight={containerHeight}>
         <DisplayQuoteContiner
           showModal={displayFilterModal}
           onClick={() => handleHideModal()}
         >
-          <RightAlignedColumnContainer marginTop="1rem">
+          <DisplayQuoteButtonContainer>
             <FilterButton
               onClick={() => {
                 goButtonVibrations();
                 dispatch({ type: 'DQ_TOGGLE_FILTERMODAL' });
               }}
             />
-          </RightAlignedColumnContainer>
-          <RightAlignedColumnContainer>
+
             <WhatsAppButton
               onClick={() => {
                 goButtonVibrations();
                 printDocument();
               }}
             />
-          </RightAlignedColumnContainer>
+          </DisplayQuoteButtonContainer>
+
           <DisplayQuote selectRandomQuote={selectRandomQuote} />
           <DisplayTags />
 
@@ -114,7 +115,7 @@ const QuoteDisplay = () => {
         <DisplayFilterModal />
       </DisplayQuoteMainContainer>
       <PeacefulMusic />
-    </GradientContainer>
+    </>
   );
 };
 

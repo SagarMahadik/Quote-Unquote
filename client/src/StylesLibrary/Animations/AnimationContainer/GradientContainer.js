@@ -12,7 +12,7 @@ const GradientContainer = ({ children }) => {
         backgroundImage: gradientArray
       }}
       transition={{
-        duration: 20,
+        duration: 40,
         repeat: Infinity,
         repeatType: 'reverse',
         ease: 'easeOut'

@@ -3,7 +3,6 @@ import { AddQuoteSuccessText } from 'StylesLibrary/Atoms/DisplayQuoteModule/Page
 import MoodPageTags from 'Modules/DisplayQuote/Components/MoodPage/MoodPageTags.js';
 import MoodPageAuthor from 'Modules/DisplayQuote/Components/MoodPage/MoodPageAuthor.js';
 import GoButton from 'StylesLibrary/Molecules/DisplayQuoteModule/Buttons/GoButton.js';
-import { submitVibrations } from 'Utils/vibrations.js';
 
 import { goButtonVibrations } from 'Utils/vibrations.js';
 

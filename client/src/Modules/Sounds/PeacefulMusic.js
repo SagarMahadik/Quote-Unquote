@@ -34,7 +34,7 @@ const PeacefulMusic = () => {
       <ReactHowler
         src={`${musicUrls[musicIndex]}`}
         playing={true}
-        onEnd={() => selectRandomMusic}
+        onEnd={selectRandomMusic}
         volume={1.0}
       />
     </div>

@@ -7,12 +7,6 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const path = require('path');
-const passport = require('passport');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
-
-require('./config/passport')(passport);
-
 var winston = require('winston'),
   expressWinston = require('express-winston');
 
@@ -109,19 +103,6 @@ app.use((req, res, next) => {
   // console.log(req.headers);
   next();
 });
-
-app.use(
-  session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.DATABASE })
-  })
-);
-
-app.use(session({ secret: 'anything' }));
-app.use(passport.initialize());
-app.use(passport.session());
 
 // 3) ROUTES
 

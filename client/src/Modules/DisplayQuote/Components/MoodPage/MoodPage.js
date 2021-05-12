@@ -12,12 +12,7 @@ import {
   StaggerAnimationParentContainer
 } from 'StylesLibrary/Animations/FramerAnimations';
 
-import {
-  useApplicationState,
-  useApplicationDispatch
-} from 'Modules/Authentication/State/ApplicationState.js';
-import { format } from 'prettier';
-import Loader from 'StylesLibrary/Atoms/LoadingModule/Loader';
+import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
 
 const MoodPage = () => {
   const parentCntainer = {

@@ -7,7 +7,10 @@ import {
   TOGGLE_DISPLAY_LOGINFORM,
   TOGGLE_DISPLAY_SIGNUPFORM,
   TOGGLE_DISPLAY_CREDO,
-  TOGGLE_SCROLL_TO_LOGO
+  TOGGLE_SCROLL_TO_LOGO,
+  SET_USER_GOOGLE_LOGIN,
+  SET_AUTH_LOADING,
+  SET_NEW_USER_FLAG
 } from 'Modules/Authentication/State/types.js';
 import produce from 'immer';
 
@@ -58,6 +61,25 @@ export default (state, action) => {
     case SET_QUOTES:
       return produce(state, draftState => {
         draftState.applicationData.quotes = action.payload;
+      });
+
+    case SET_AUTH_LOADING:
+      return produce(state, draftState => {
+        draftState.authLoading = !draftState.authLoading;
+      });
+    case SET_USER_GOOGLE_LOGIN:
+      return produce(state, draftState => {
+        draftState.user = action.payload;
+        draftState.isUserAuthenticated = true;
+        draftState.authLoading = !draftState.authLoading;
+      });
+
+    case SET_NEW_USER_FLAG:
+      return produce(state, draftState => {
+        draftState.user = action.payload;
+        draftState.isUserAuthenticated = true;
+        draftState.authLoading = !draftState.authLoading;
+        draftState.newUser = true;
       });
   }
 };

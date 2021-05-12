@@ -5,6 +5,8 @@ const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const sendEmail = require('./../utils/email');
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const signToken = id => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -30,9 +32,7 @@ const createSendToken = (user, statusCode, res) => {
   res.status(statusCode).json({
     status: 'success',
     token,
-    data: {
-      user
-    }
+    user
   });
 };
 
@@ -48,6 +48,35 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 
   createSendToken(newUser, 201, res);
+});
+
+exports.googleLogin = catchAsync(async (req, res, next) => {
+  console.log(req.body.token);
+  const ticket = await client.verifyIdToken({
+    idToken: req.body.token,
+    audience: process.env.GOOGLE_CLIENT_ID
+  });
+  console.log(ticket.getPayload());
+  const payload = ticket.getPayload();
+  console.log(`User ${payload.name} verfied`);
+  const { sub, given_name, family_name, picture, name, email } = payload;
+
+  let userInRequest = await User.findOne({ googleId: sub });
+  console.log(userInRequest);
+  if (userInRequest) {
+    console.log('User already exists dude');
+    createSendToken(userInRequest, 200, res);
+  } else {
+    const newUser = await User.create({
+      googleId: sub,
+      email,
+      firstName: given_name,
+      lastName: family_name,
+      name,
+      profileImage: picture
+    });
+    createSendToken(newUser, 201, res);
+  }
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -67,7 +96,6 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // 3) If everything ok, send token to client
-  createSendToken(user, 200, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {

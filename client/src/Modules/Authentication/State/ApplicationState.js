@@ -8,6 +8,7 @@ import ApplicationReducer from 'Modules/Authentication/State/ApplicationReducer.
 import useQuotes from 'APICalls/Quotes/useQuotes.js';
 import useTags from 'APICalls/Tags/useTags.js';
 import useAuthors from 'APICalls/Authors/useAuthors';
+import axios from 'axios';
 
 const ApplicationState = ({ children }) => {
   const initialState = {
@@ -27,10 +28,14 @@ const ApplicationState = ({ children }) => {
       authors: [],
       tags: []
     },
+    user: {},
+    isUserAuthenticated: false,
+    authLoading: false,
     displayLoginForm: false,
     displaySignupForm: false,
     displayCredo: false,
-    scrollToLogo: false
+    scrollToLogo: false,
+    newUser: false
   };
   const [state, dispatch] = useReducer(ApplicationReducer, initialState);
   const { quotes, isQuotesLoaded } = useQuotes();
@@ -56,6 +61,40 @@ const ApplicationState = ({ children }) => {
     }
   }, [authors, isAuthorsLoaded]);
 
+  const handleGoogleLogin = async res => {
+    console.log(res);
+
+    const token = res?.tokenId;
+    const body = JSON.stringify({
+      token
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/JSON'
+      }
+    };
+
+    const googleLoginResponse = await axios.post(
+      '/api/v1/users/googleLogin',
+      body,
+      config
+    );
+    console.log(googleLoginResponse);
+    if (googleLoginResponse.status === 200) {
+      dispatch({
+        type: 'SET_USER_GOOGLE_LOGIN',
+        payload: googleLoginResponse.data.user
+      });
+    }
+    if (googleLoginResponse.status === 201) {
+      dispatch({
+        type: 'SET_NEW_USER_FLAG',
+        payload: googleLoginResponse.data.user
+      });
+    }
+  };
+
   const {
     logindetails,
     signupDetails,
@@ -63,7 +102,11 @@ const ApplicationState = ({ children }) => {
     displaySignupForm,
     displayCredo,
     scrollToLogo,
-    applicationData
+    applicationData,
+    user,
+    authLoading,
+    isUserAuthenticated,
+    newUser
   } = state;
   return (
     <ApplicationContext.Provider
@@ -74,7 +117,12 @@ const ApplicationState = ({ children }) => {
         displaySignupForm,
         displayCredo,
         scrollToLogo,
-        applicationData
+        applicationData,
+        user,
+        authLoading,
+        isUserAuthenticated,
+        newUser,
+        handleGoogleLogin
       }}
     >
       <ApplicationDispatchContext.Provider value={dispatch}>

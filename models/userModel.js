@@ -4,10 +4,8 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-  brandName: {
-    type: String,
-    required: [true, 'Please enter brand name!']
-  },
+  googleId: String,
+
   email: {
     type: String,
     required: [true, 'Please provide your email'],
@@ -15,33 +13,40 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid email']
   },
+
+  name: {
+    type: String,
+    required: [true, 'Please provide your name'],
+    lowercase: true
+  },
+
+  firstName: String,
+
+  lastName: String,
+
   mobileNumber: {
     type: Number,
-    required: [true, 'Please enter mobile number'],
     unique: true,
     minlength: 10,
     maxlength: 10
   },
-  userID: {
-    type: Number,
-    required: [true, 'User needs a userID']
-  },
-  photo: String,
+
+  profileImage: String,
+
   role: {
     type: String,
-
     enum: ['user', 'admin'],
     default: 'user'
   },
+
   password: {
     type: String,
-    required: [true, 'Please provide a password'],
     minlength: 8,
     select: false
   },
+
   passwordConfirm: {
     type: String,
-    required: [true, 'Please confirm your password'],
     validate: {
       // This only works on CREATE and SAVE!!!
       validator: function(el) {

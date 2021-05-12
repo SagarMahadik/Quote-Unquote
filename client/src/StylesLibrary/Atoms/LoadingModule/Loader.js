@@ -32,6 +32,36 @@ const Loader = () => {
           ease: 'easeOut'
         }
       }
+    },
+    animateThree: {
+      x: [0, -40],
+      y: [60, -60],
+      transition: {
+        x: {
+          yoyo: Infinity,
+          duration: 1.5
+        },
+        y: {
+          yoyo: Infinity,
+          duration: 1.25,
+          ease: 'easeOut'
+        }
+      }
+    },
+    animateFour: {
+      x: [-40, 40],
+      y: [60, 0],
+      transition: {
+        x: {
+          yoyo: Infinity,
+          duration: 1.5
+        },
+        y: {
+          yoyo: Infinity,
+          duration: 1.25,
+          ease: 'easeOut'
+        }
+      }
     }
   };
   return (
@@ -49,12 +79,12 @@ const Loader = () => {
       ></motion.div>
       <motion.div
         variants={loaderVariants}
-        animate="animateTwo"
+        animate="animateFour"
         style={{
           display: 'flex',
           height: '20px',
           width: '20px',
-          backgroundColor: '#B5DCCD',
+          backgroundColor: '#28b5b5',
           borderRadius: '50%'
         }}
       ></motion.div>

@@ -27,6 +27,12 @@ const CoreLandingPage = React.lazy(() =>
   import('Modules/Authentication/CoreLandingPage/CoreLandingPage.js')
 );
 
+const SignUpSuccess = React.lazy(() =>
+  import(
+    'Modules/Authentication/CoreLandingPage/AuthSuccessPages/SignUpSuccess.js'
+  )
+);
+
 const Routes = () => {
   const location = useLocation();
   return (
@@ -41,6 +47,7 @@ const Routes = () => {
             path="/readQuote"
             component={DisplayQuoteMainComponent}
           />
+          <Route exact path="/signUpSuccess" component={SignUpSuccess} />
         </Switch>
       </AnimatePresence>
     </React.Suspense>

@@ -12,6 +12,13 @@ import {
   StaggerAnimationParentContainer
 } from 'StylesLibrary/Animations/FramerAnimations';
 
+import {
+  useApplicationState,
+  useApplicationDispatch
+} from 'Modules/Authentication/State/ApplicationState.js';
+import { format } from 'prettier';
+import Loader from 'StylesLibrary/Atoms/LoadingModule/Loader';
+
 const MoodPage = () => {
   const parentCntainer = {
     hidden: { opacity: 0 },
@@ -31,6 +38,9 @@ const MoodPage = () => {
     exit: { opacity: 0, y: 20 }
   };
 
+  const {
+    user: { firstName }
+  } = useApplicationState();
   const dispatch = useDisplayQuoteDispatch();
   const createFilteredQuotes = () => {
     dispatch({
@@ -46,7 +56,7 @@ const MoodPage = () => {
         animate="show"
         exit="exit"
       >
-        <AddQuoteSuccessText>Whats your mood</AddQuoteSuccessText>
+        <AddQuoteSuccessText>Whats your mood {firstName}</AddQuoteSuccessText>
         <StaggerAnimationChildContainer variants={childContainer}>
           <MoodPageTags />
         </StaggerAnimationChildContainer>

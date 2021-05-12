@@ -7,6 +7,11 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const path = require('path');
+const passport = require('passport');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
+require('./config/passport')(passport);
 
 var winston = require('winston'),
   expressWinston = require('express-winston');
@@ -17,7 +22,7 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
 const userRouter = require('./routes/userRoutes');
-
+const authRouter = require('./routes/auth');
 //Piatto Routers
 
 const categoryRouter = require('./routes/categoryRoutes');
@@ -105,8 +110,22 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.DATABASE })
+  })
+);
+
+app.use(session({ secret: 'anything' }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 // 3) ROUTES
 
+app.use('/auth', authRouter);
 app.use('/api/v1/users', userRouter);
 
 // Piatto Routes

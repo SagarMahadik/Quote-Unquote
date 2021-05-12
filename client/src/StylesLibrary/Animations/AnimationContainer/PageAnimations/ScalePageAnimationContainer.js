@@ -1,7 +1,7 @@
 import React from 'react';
 import { AnimationContainer } from 'StylesLibrary/Animations/FramerAnimations.js';
 
-const PageAnimationContainer = ({ children, animationDuration }) => {
+const ScalePageAnimationContainer = ({ children, animationDuration }) => {
   let timeDuration = animationDuration;
   if (timeDuration === '') {
     timeDuration = 0.6;
@@ -10,10 +10,9 @@ const PageAnimationContainer = ({ children, animationDuration }) => {
 
   return (
     <AnimationContainer
-      initial={{ y: 200, opacity: 0.6 }}
+      initial={{ scale: 0.5 }}
       animate={{
-        y: 0,
-        opacity: 1
+        scale: 1
       }}
       transition={{
         ease: 'easeOut',
@@ -26,4 +25,4 @@ const PageAnimationContainer = ({ children, animationDuration }) => {
   );
 };
 
-export default PageAnimationContainer;
+export default ScalePageAnimationContainer;

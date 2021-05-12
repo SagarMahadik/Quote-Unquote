@@ -240,6 +240,26 @@ const BackgroundCircle4 = styled.div`
   height: 50px;
 `;
 
+const SignUpSuccessText = styled.h1`
+  font-family: Sofia;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 38px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(
+    124.02deg,
+    #f47373 17.84%,
+    #9cc68e 50.65%,
+    #6a49f0 87.39%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+
 export {
   LandingPageBackground,
   TagLineText,
@@ -259,5 +279,6 @@ export {
   BackgroundCircle4,
   SignupLinkButton,
   SignupButtonText,
-  SignupButtonUnderline
+  SignupButtonUnderline,
+  SignUpSuccessText
 };

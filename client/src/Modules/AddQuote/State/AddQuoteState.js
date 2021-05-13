@@ -126,7 +126,6 @@ const AddQuoteState = ({ children }) => {
 
   useEffect(() => {
     setTagsState(tags);
-    console.log('IN set tag');
   }, [tags]);
 
   useEffect(() => {

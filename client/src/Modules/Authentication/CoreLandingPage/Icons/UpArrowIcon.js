@@ -20,7 +20,7 @@ const UpArrowIcon = ({ logoRef }) => {
       });
     }
   }, [scrollToLogo]);
-  console.log(logoRef);
+
   return (
     <CenterAlignedColumnContainer
       style={{ transform: 'rotate(180deg)', marginTop: '-4rem' }}

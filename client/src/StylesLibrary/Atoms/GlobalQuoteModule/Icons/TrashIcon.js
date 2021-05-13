@@ -19,8 +19,6 @@ function Icon() {
     }
   } = useDisplayQuoteState();
 
-  console.log(tickAnimation);
-
   const pathVariants = {
     deleteQuote: {
       rotate: '-60deg',

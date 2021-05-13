@@ -84,7 +84,6 @@ export default (state, action) => {
 
     case DQ_CREATE_FILTEREDQUOTES:
       return produce(state, draftState => {
-        draftState.displayQuotes = true;
         draftState.displayFilterModal = false;
         draftState.filteredQuotes.filterQuotesList = [];
         draftState.selectedData.selectedTags = [];
@@ -130,6 +129,7 @@ export default (state, action) => {
 
         draftState.filteredQuotes.filterQuotesList = [...new Set(finalArray)];
         draftState.refreshFIlteredQuotes = true;
+        draftState.displayQuotes = true;
       });
 
     case DQ_SET_CURRENT_QUOTE:
@@ -173,7 +173,6 @@ export default (state, action) => {
       });
     case DQ_TOGGLE_EDIT_QUOTETEXT:
       return produce(state, draftState => {
-        console.log('hello');
         draftState.editQuoteText.editQuoteText = !draftState.editQuoteText
           .editQuoteText;
         draftState.editQuoteText.editQoteSuccessSound = false;
@@ -225,7 +224,6 @@ export default (state, action) => {
 
     case DQ_DELETE_DRAGSTART_RESET:
       return produce(state, draftState => {
-        console.log('in a reset');
         draftState.deleteQuote.deleteQuote = false;
         draftState.deleteQuote.dragStart = false;
         draftState.editQuoteText.editQuoteText = true;
@@ -243,7 +241,6 @@ export default (state, action) => {
 
     case DQ_RESET_QUOTES_POST_DELETE:
       return produce(state, draftState => {
-        console.log('in post delete');
         draftState.selectQuotePostDelete = true;
         draftState.filteredQuotes.filterQuotesList = draftState.filteredQuotes.filterQuotesList.filter(
           q => q._id != action.payload

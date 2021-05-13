@@ -6,7 +6,6 @@ const PageAnimationContainer = ({ children, animationDuration }) => {
   if (timeDuration === '') {
     timeDuration = 0.6;
   }
-  console.log(timeDuration);
 
   return (
     <AnimationContainer

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { CenterAlignedColumnContainerWithShadowBackground } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
+import { CenterAlignedColumnContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
 
 import {
   LandingPageBackground,
@@ -18,13 +18,12 @@ import {
 } from 'Modules/Authentication/State/ApplicationState.js';
 import UpArrowIcon from './Icons/UpArrowIcon';
 import LandingPageAnimationContainer from 'StylesLibrary/Animations/AnimationContainer/PageAnimations/LandingPageAnimationContainer.js';
-import GoogleLogin from 'react-google-login';
+
 import { useGoogleLogin } from 'react-google-login';
 import { useHistory } from 'react-router-dom';
 
 import LogoutButton from 'StylesLibrary/Molecules/GlobalModule/LogoutButton.js';
-import FallBackLoader from 'Modules/Global/Components/FallBackLoader';
-import Loader from 'StylesLibrary/Atoms/LoadingModule/Loader';
+
 import LandingPageAuthLoader from 'StylesLibrary/Atoms/LoadingModule/LandingPageAuthLoader';
 
 const CoreLandingPage = () => {
@@ -32,25 +31,43 @@ const CoreLandingPage = () => {
     '806952200431-4k8ilrj5lbmi6js3rqat4f8tlmssvn4j.apps.googleusercontent.com';
   const dispatch = useApplicationDispatch();
   const logoRef = useRef(null);
-  const [token, setToken] = useState('');
-
   const history = useHistory();
 
   const {
     handleGoogleLogin,
     isUserAuthenticated,
     authLoading,
-    newUser
+    newUser,
+    privateRouteAuthentication,
+    privateAuthenticationRoute,
+    user
   } = useApplicationState();
 
   useEffect(() => {
-    if (isUserAuthenticated && !newUser) {
-      history.push('/readQuote');
+    if (privateRouteAuthentication && isUserAuthenticated) {
+      history.push(`${privateAuthenticationRoute}`);
+    }
+  }, [privateRouteAuthentication, isUserAuthenticated]);
+
+  useEffect(() => {
+    if (isUserAuthenticated && user.role === 'admin') {
+      history.push('/corelanding');
+    }
+  }, [isUserAuthenticated, user]);
+
+  useEffect(() => {
+    if (
+      isUserAuthenticated &&
+      !newUser &&
+      !privateRouteAuthentication &&
+      user.role == 'user'
+    ) {
+      history.push('/moodPage');
     }
   }, [isUserAuthenticated, newUser]);
 
   useEffect(() => {
-    if (isUserAuthenticated && newUser) {
+    if (isUserAuthenticated && newUser && !privateRouteAuthentication) {
       history.push('/signUpSuccess');
     }
   }, [isUserAuthenticated, newUser]);
@@ -80,8 +97,13 @@ const CoreLandingPage = () => {
 
   return (
     <LandingPageAnimationContainer>
-      <CenterAlignedColumnContainerWithShadowBackground>
-        <LandingPageBackground style={{ position: 'relative' }}>
+      <CenterAlignedColumnContainer>
+        <LandingPageBackground
+          style={{
+            position: 'relative',
+            opacity: privateRouteAuthentication ? '0' : 1
+          }}
+        >
           <BubbleContainer />
           <OverlayContainer>
             <div ref={logoRef}>
@@ -90,13 +112,13 @@ const CoreLandingPage = () => {
             <Tagline />
             <LandingPageActions />
             {authLoading ? <LandingPageAuthLoader /> : null}
-            <ArrowIcon />
             <LogoutButton onClick={() => signIn()} />
+
             <Credo />
             <UpArrowIcon logoRef={logoRef} />
           </OverlayContainer>
         </LandingPageBackground>
-      </CenterAlignedColumnContainerWithShadowBackground>
+      </CenterAlignedColumnContainer>
     </LandingPageAnimationContainer>
   );
 };

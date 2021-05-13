@@ -7,10 +7,10 @@ import {
 import MotionButtonLanding from 'StylesLibrary/Animations/ButtonAnimations/MotionButtonLanding';
 
 const EnterTheLibrary = ({ buttonText, onClick }) => {
-  console.log('in enter libeary molecule');
+  console.log('I am being Clicked');
   return (
     <MotionButtonLanding>
-      <EnterLibraryButton onClick={onClick}>
+      <EnterLibraryButton onClick={() => onClick}>
         <EnterLibraryButtonText>{buttonText}</EnterLibraryButtonText>
       </EnterLibraryButton>
     </MotionButtonLanding>

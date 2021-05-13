@@ -59,11 +59,11 @@ export const StaggerAnimationChildContainer = styled(motion.div)`
 `;
 
 export const AnimationContainer = styled(motion.div)`
+  width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  flex-direction: column;
-  width: 100%;
 `;
 
 export const MotionButtonContainer = styled(motion.button)`

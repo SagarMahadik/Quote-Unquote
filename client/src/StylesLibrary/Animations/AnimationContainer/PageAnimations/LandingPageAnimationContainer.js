@@ -6,7 +6,6 @@ const LandingPageAnimationContainer = ({ children, animationDuration }) => {
   if (timeDuration === '') {
     timeDuration = 0.9;
   }
-  console.log(timeDuration);
 
   return (
     <AnimationContainer

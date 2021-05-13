@@ -46,7 +46,7 @@ const CreateAuthor = () => {
     let authorName = searchString;
     const body = JSON.stringify({ authorName });
     const res = await createAuthor(body);
-    console.log(res);
+
     setNewAuthorInRequest(res._id);
   };
 

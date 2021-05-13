@@ -2,7 +2,6 @@ import React from 'react';
 import ReactHowler from 'react-howler';
 
 const DoneSound = ({ play }) => {
-  console.log('in react sound');
   return (
     <ReactHowler
       src={

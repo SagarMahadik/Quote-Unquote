@@ -93,12 +93,10 @@ exports.getSearchOutcomes = (Model, fieldsString) =>
 
 exports.getAll = (Model, popOptions, popOption1, fieldsString) =>
   catchAsync(async (req, res, next) => {
-    //console.log(Model);
     let filter = {};
     if (req.params.userID) filter = { userID: req.params.userID };
 
     let selectFields = {};
-    console.log(fieldsString);
 
     let features = Model.find(filter);
     selectFields = fieldsString;
@@ -129,8 +127,6 @@ exports.getAllQuotes = (Model, popOptions, popOption1) =>
 
     let features = Model.find(filter);
 
-    console.log(popOptions);
-
     if (popOptions)
       features = Model.find(filter)
         .populate(popOptions)
@@ -149,12 +145,11 @@ exports.getAllQuotes = (Model, popOptions, popOption1) =>
 
 exports.getAllWithSelectedFields = (Model, fieldsString) =>
   catchAsync(async (req, res, next) => {
-    //console.log(Model);
     let filter = {};
     if (req.params.userID) filter = { userID: req.params.userID };
 
     let selectFields = {};
-    console.log(fieldsString);
+
     selectFields = fieldsString;
     let features = Model.find(filter).select(selectFields);
 

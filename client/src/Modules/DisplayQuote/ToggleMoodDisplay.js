@@ -16,20 +16,9 @@ const ToggleMoodDisplay = () => {
   } = useDisplayQuoteState();
 
   return (
-    <FormContentContainer
-      containerHeight={containerHeight}
-      style={{ minHeight: '100vh' }}
-    >
-      <AnimatePresence>
-        {displayQuotes ? (
-          <GradientContainer>
-            <QuoteDisplay />
-          </GradientContainer>
-        ) : (
-          <MoodPage />
-        )}
-      </AnimatePresence>
-    </FormContentContainer>
+    <AnimatePresence>
+      <MoodPage />
+    </AnimatePresence>
   );
 };
 

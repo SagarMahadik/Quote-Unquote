@@ -41,7 +41,7 @@ const CreateQuote = () => {
 
     let newlyUploadedTagsID = newUploadedTags.map(tag => tags.push(tag._id));
     newUploadedTags.map(t => tranformTaglist.push(t));
-    console.log(tranformTaglist);
+
     dispatch({
       type: 'AQ_SET_PREVIOUSSTEP_TAGS',
       payload: tranformTaglist

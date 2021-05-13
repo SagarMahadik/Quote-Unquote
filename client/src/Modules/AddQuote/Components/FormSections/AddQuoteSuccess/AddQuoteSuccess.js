@@ -25,7 +25,7 @@ const AddQuoteSuccess = ({ authorName }) => {
 
   useEffect(() => {
     if (redirectToReadQuote) {
-      history.push('/');
+      history.push('/moodPage');
     }
   }, [redirectToReadQuote]);
 
@@ -38,9 +38,7 @@ const AddQuoteSuccess = ({ authorName }) => {
 
   return (
     <AddQuoteSuccessContainer>
-      <GradientContainer
-        style={{ alignItems: 'flex-start', marginTop: '-8rem' }}
-      >
+      <GradientContainer style={{ alignItems: 'flex-start' }}>
         <QuoteSuccessText quoteAuthor={authorName}></QuoteSuccessText>
         <NavigationPage
           addQuouteCallBack={() => resetTheAddquoteForm()}

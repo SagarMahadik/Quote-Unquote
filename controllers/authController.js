@@ -51,20 +51,18 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 exports.googleLogin = catchAsync(async (req, res, next) => {
-  console.log(req.body.token);
   const ticket = await client.verifyIdToken({
     idToken: req.body.token,
     audience: process.env.GOOGLE_CLIENT_ID
   });
-  console.log(ticket.getPayload());
+
   const payload = ticket.getPayload();
-  console.log(`User ${payload.name} verfied`);
+
   const { sub, given_name, family_name, picture, name, email } = payload;
 
   let userInRequest = await User.findOne({ googleId: sub });
-  console.log(userInRequest);
+
   if (userInRequest) {
-    console.log('User already exists dude');
     createSendToken(userInRequest, 200, res);
   } else {
     const newUser = await User.create({
@@ -99,7 +97,6 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
-  console.log(req.params);
   // 1) Getting token and check of it's there
   let token;
 
@@ -138,14 +135,13 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   // GRANT ACCESS TO PROTECTED ROUTE
-  console.log(req.params);
+
   req.user = currentUser;
 
   next();
 });
 
 exports.restrictToUser = catchAsync(async (req, res, next) => {
-  console.log(req.params);
   if (req.params.userID != req.user.mobileNumber) {
     return next(
       new AppError('You do not have permission to perform this action', 405)

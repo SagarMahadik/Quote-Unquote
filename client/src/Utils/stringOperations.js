@@ -14,11 +14,9 @@ function capitalizeFirstLetter(string) {
 
 export const sanitizeQuoteText = text => {
   if (text.charAt(0) === '"' && text.charAt(text.length - 1) === '"') {
-    console.log(text.substr(1, text.length - 2));
     text = text.substr(1, text.length - 2);
   }
   if (text.charAt(0) === '“' && text.charAt(text.length - 1) === '”') {
-    console.log(text.substr(1, text.length - 2));
     text = text.substr(1, text.length - 2);
   }
   if (

@@ -5,80 +5,61 @@ import {
 } from 'StylesLibrary/Atoms/AuthenticationModule/LandingPage.js';
 import EnterTheLibrary from 'StylesLibrary/Molecules/AuthenticationModule/CoreLandingPage/EnterTheLibrary';
 import MemberLogin from 'StylesLibrary/Molecules/AuthenticationModule/CoreLandingPage/MemberLogin';
-import SignUpLink from 'StylesLibrary/Molecules/AuthenticationModule/CoreLandingPage/SignUpLink';
-import Login from 'Modules/Authentication/CoreLandingPage/LandingPageActions/Login/Login.js';
-import Signup from './Signup/Signup';
+
 import {
   useApplicationState,
   useApplicationDispatch
 } from 'Modules/Authentication/State/ApplicationState.js';
+import { useGoogleLogin } from 'react-google-login';
+import LogoutButton from 'StylesLibrary/Molecules/GlobalModule/LogoutButton.js';
 
-import { getElementIntoView } from 'Utils/UIutils/getElementIntoView.js';
 import { useHistory } from 'react-router-dom';
 
 const LandingPageActions = () => {
+  const clientId =
+    '806952200431-4k8ilrj5lbmi6js3rqat4f8tlmssvn4j.apps.googleusercontent.com';
   const {
     signupDetails: { userName, email, mobileNumber, password, confirmPassword },
     displaySignupForm,
-    displayLoginForm
+    displayLoginForm,
+    handleGoogleLogin
   } = useApplicationState();
+
   const dispatch = useApplicationDispatch();
 
-  const handleDisplayLoginForm = e => {
+  const onSuccess = res => {
     dispatch({
-      type: 'TOGGLE_DISPLAY_LOGINFORM'
+      type: 'SET_AUTH_LOADING'
     });
+    handleGoogleLogin(res);
   };
 
-  const loginContainerRef = useRef(null);
-  const signUpContainerRef = useRef(null);
-
-  const handleDisplaySignupForm = e => {
-    e.preventDefault();
-    dispatch({
-      type: 'TOGGLE_DISPLAY_SIGNUPFORM'
-    });
+  const onFailure = res => {
+    console.log('Login failed: res:', res);
+    alert(
+      `Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz`
+    );
   };
 
-  useEffect(() => {
-    if (displaySignupForm) {
-      getElementIntoView(signUpContainerRef.current);
-    }
-  }, [displaySignupForm]);
+  const { signIn } = useGoogleLogin({
+    onSuccess,
+    onFailure,
+    clientId
 
-  useEffect(() => {
-    if (displayLoginForm) {
-      getElementIntoView(loginContainerRef.current);
-    }
-  }, [displayLoginForm]);
+    // responseType: 'code',
+    // prompt: 'consent',
+  });
 
   let history = useHistory();
 
   function handleClick() {
-    history.push('/readQuote');
+    history.push('/moodPage');
   }
 
   return (
     <ActionBorder>
       <ActionContainer>
-        <EnterTheLibrary
-          buttonText="Enter Quote Library"
-          onClick={handleClick}
-        />
-        <MemberLogin
-          buttonText="Login as a member"
-          onClick={e => handleDisplayLoginForm(e)}
-        />
-        <div style={{ width: '100%' }} ref={loginContainerRef}>
-          <Login />
-        </div>
-        <SignUpLink
-          linkText="Sign up as member"
-          onClick={e => handleDisplaySignupForm(e)}
-        />
-        <div style={{ width: '100%' }} ref={signUpContainerRef}>
-          <Signup />
-        </div>
+        <MemberLogin buttonText="Enter Quote Library" onClick={handleClick} />
       </ActionContainer>
     </ActionBorder>
   );

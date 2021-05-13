@@ -1,10 +1,7 @@
 import React from 'react';
-import {
-  FormContentContainer,
-  OverLayContainer
-} from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormContainer/FormContainer.js';
+import { OverLayContainer } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormContainer/FormContainer.js';
 import { CenterAlignedColumnContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles.js';
-import PageHeading from 'StylesLibrary/Molecules/AddQuoteModule/PageHeading/index.js';
+import PageHeading from 'Modules/Global/Components/PageHeading';
 
 import QuoteText from './FormSections/QuoteText';
 import AuthorName from './FormSections/authorName/AuthorName';
@@ -57,39 +54,37 @@ const AddQuote = () => {
   }
   return (
     <>
-      <PageHeading />
       <CenterAlignedColumnContainer>
-        <FormContentContainer containerHeight="auto">
-          <CenterAlignedColumnContainer style={{ position: 'relative' }}>
-            {addNewTag ? <OverLayContainer displayOverlay={addNewTag} /> : null}
-            <QuoteText />
-            <AuthorName />
-            <Tags />
-          </CenterAlignedColumnContainer>
-          <CenterAlignedColumnContainer style={{ margin: '1rem' }}>
-            <AddNewTags />
-            <AddNewTagsText />
-          </CenterAlignedColumnContainer>
-          <CenterAlignedColumnContainer style={{ position: 'relative' }}>
-            {addNewTag ? <OverLayContainer displayOverlay={addNewTag} /> : null}
-            <FormSectionDivider />
-            <ButtonContainer>
-              <SubmitButton
-                onClick={e => {
-                  submitVibrations();
-                  handleAddQuoteSubmit(e);
-                }}
-                loading={loading}
-              />
-            </ButtonContainer>
-          </CenterAlignedColumnContainer>
+        <CenterAlignedColumnContainer style={{ position: 'relative' }}>
+          {addNewTag ? <OverLayContainer displayOverlay={addNewTag} /> : null}
+          <PageHeading />
+          <QuoteText />
+          <AuthorName />
+          <Tags />
+        </CenterAlignedColumnContainer>
+        <CenterAlignedColumnContainer style={{ margin: '1rem' }}>
+          <AddNewTags />
+          <AddNewTagsText />
+        </CenterAlignedColumnContainer>
+        <CenterAlignedColumnContainer style={{ position: 'relative' }}>
+          {addNewTag ? <OverLayContainer displayOverlay={addNewTag} /> : null}
+          <FormSectionDivider />
+          <ButtonContainer>
+            <SubmitButton
+              onClick={e => {
+                submitVibrations();
+                handleAddQuoteSubmit(e);
+              }}
+              loading={loading}
+            />
+          </ButtonContainer>
+        </CenterAlignedColumnContainer>
 
-          <FormValidations />
-          <CreateRequestFlow />
-          <CreateAuthor />
-          <CreateTags />
-          <CreateQuote />
-        </FormContentContainer>
+        <FormValidations />
+        <CreateRequestFlow />
+        <CreateAuthor />
+        <CreateTags />
+        <CreateQuote />
       </CenterAlignedColumnContainer>
     </>
   );

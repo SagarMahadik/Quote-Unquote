@@ -22,11 +22,17 @@ import GradientContainer from 'StylesLibrary/Animations/AnimationContainer/Gradi
 import DisplayFilterModal from 'Modules/DisplayQuote/Components/QuoteDisplay/DisplayFilterModal.js';
 import PeacefulMusic from 'Modules/Sounds/PeacefulMusic.js';
 import { randomButtonVibrations } from 'Utils/vibrations.js';
-import { RightAlignedColumnContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
+import { CenterAlignedColumnContainerWithShadowBackground } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
+import QuoteDisplayButtons from './QuoteDisplayButtons';
+import {
+  useApplicationState,
+  useApplicationDispatch
+} from 'Modules/Authentication/State/ApplicationState.js';
 
 import { goButtonVibrations } from 'Utils/vibrations';
 
 const QuoteDisplay = () => {
+  const { isUserAuthenticated } = useApplicationState();
   const {
     filteredQuotes: { filterQuotesList },
     currentQuote,
@@ -64,58 +70,43 @@ const QuoteDisplay = () => {
       dispatch({ type: 'DQ_TOGGLE_FILTERMODAL' });
     }
   };
-  const printDocument = async () => {
-    navigator
-      .share({
-        title: 'title',
-        text: `${currentQuote[0].quote}-${currentQuote[0].author['authorName']}`
-      })
-      .then(() => console.log('Successful share'))
-      .catch(error => console.log('Error in sharing', error));
-  };
 
   return (
-    <>
-      <PageHeading />
-      <DisplayQuoteMainContainer quoteMainContainerHeight={containerHeight}>
-        <DisplayQuoteContiner
-          showModal={displayFilterModal}
-          onClick={() => handleHideModal()}
+    <CenterAlignedColumnContainerWithShadowBackground>
+      <GradientContainer>
+        <PageHeading />
+        <DisplayQuoteMainContainer
+          quoteMainContainerHeight={containerHeight}
+          style={{
+            width: '98%',
+            marginTop: !isUserAuthenticated ? '3rem' : '2rem'
+          }}
         >
-          <DisplayQuoteButtonContainer>
-            <FilterButton
+          <DisplayQuoteContiner
+            showModal={displayFilterModal}
+            onClick={() => handleHideModal()}
+          >
+            <QuoteDisplayButtons />
+
+            <DisplayQuote selectRandomQuote={selectRandomQuote} />
+            <DisplayTags />
+
+            <RandomButton
               onClick={() => {
-                goButtonVibrations();
-                dispatch({ type: 'DQ_TOGGLE_FILTERMODAL' });
+                randomButtonVibrations();
+                dispatch({ type: 'HIDE_QUOTE' });
+                setTimeout(() => {
+                  selectRandomQuote();
+                }, 700);
               }}
+              style={{ marginTop: '1rem' }}
             />
-
-            <WhatsAppButton
-              onClick={() => {
-                goButtonVibrations();
-                printDocument();
-              }}
-            />
-          </DisplayQuoteButtonContainer>
-
-          <DisplayQuote selectRandomQuote={selectRandomQuote} />
-          <DisplayTags />
-
-          <RandomButton
-            onClick={() => {
-              randomButtonVibrations();
-              dispatch({ type: 'HIDE_QUOTE' });
-              setTimeout(() => {
-                selectRandomQuote();
-              }, 700);
-            }}
-            style={{ marginTop: '1rem' }}
-          />
-        </DisplayQuoteContiner>
-        <DisplayFilterModal />
-      </DisplayQuoteMainContainer>
+          </DisplayQuoteContiner>
+          <DisplayFilterModal />
+        </DisplayQuoteMainContainer>
+      </GradientContainer>
       <PeacefulMusic />
-    </>
+    </CenterAlignedColumnContainerWithShadowBackground>
   );
 };
 

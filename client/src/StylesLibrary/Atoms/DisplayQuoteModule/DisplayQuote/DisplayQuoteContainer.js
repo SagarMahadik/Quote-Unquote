@@ -12,11 +12,10 @@ export const DisplayQuoteContiner = styled(CenterAlignedColumnContainer)`
 export const DisplayQuoteMainContainer = styled(CenterAlignedColumnContainer)`
   position: relative;
   height: ${props => props.quoteMainContainerHeight};
-  min-height: '100vh';
+  min-height: 100vh;
   margin-top: 0px;
   justify-content: flex-start;
-  width: 98%;
-  padding-bottom: 2rem;
+  width: 100%;
 `;
 
 export const DisplayQuoteButtonContainer = styled(RowContainer)`

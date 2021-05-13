@@ -18,9 +18,7 @@ const Login = () => {
 
   const dispatch = useApplicationDispatch();
 
-  const handleLoginSubmit = e => {
-    console.log(e);
-  };
+  const handleLoginSubmit = e => {};
   return (
     <AnimatePresence exitBeforeEnter>
       {displayLoginForm && (

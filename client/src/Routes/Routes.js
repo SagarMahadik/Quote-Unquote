@@ -10,9 +10,23 @@ import {
 import { AnimatePresence } from 'framer-motion';
 
 import FallBackLoader from 'Modules/Global/Components/FallBackLoader';
+import PrivateRoute from './PrivateRoutes';
+import {
+  CenterAlignedColumnContainer,
+  CenterAlignedColumnContainerWithShadowBackground
+} from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
+import PageHeading from 'Modules/Global/Components/PageHeading';
+
+const QuoteDisplay = React.lazy(() =>
+  import('Modules/DisplayQuote/Components/QuoteDisplay/QuoteDisplay')
+);
 
 const DisplayQuoteMainComponent = React.lazy(() =>
   import('Modules/DisplayQuote/DisplayQuoteMainComponent.js')
+);
+
+const MoodPage = React.lazy(() =>
+  import('Modules/DisplayQuote/Components/MoodPage/MoodPage.js')
 );
 
 const AddQuote = React.lazy(() =>
@@ -36,21 +50,20 @@ const SignUpSuccess = React.lazy(() =>
 const Routes = () => {
   const location = useLocation();
   return (
-    <React.Suspense fallback={<FallBackLoader />}>
-      <AnimatePresence exitBeforeEnter>
-        <Switch location={location} key={location.pathname}>
-          <Route exact path="/" component={CoreLandingPage} />
-          <Route exact path="/corelanding" component={AdminLandingPage} />
-          <Route exact path="/addQuote" component={AddQuote} />
-          <Route
-            exact
-            path="/readQuote"
-            component={DisplayQuoteMainComponent}
-          />
-          <Route exact path="/signUpSuccess" component={SignUpSuccess} />
-        </Switch>
-      </AnimatePresence>
-    </React.Suspense>
+    <AnimatePresence>
+      <>
+        <React.Suspense fallback={<FallBackLoader />}>
+          <Switch location={location} key={location.pathname}>
+            <Route exact path="/" component={CoreLandingPage} />
+            <Route exact path="/corelanding" component={AdminLandingPage} />
+            <Route exact path="/addQuote" component={AddQuote} />
+            <Route exact path="/readQuote" component={QuoteDisplay} />
+            <Route exact path="/moodPage" component={MoodPage} />
+            <Route exact path="/signUpSuccess" component={SignUpSuccess} />
+          </Switch>
+        </React.Suspense>
+      </>
+    </AnimatePresence>
   );
 };
 

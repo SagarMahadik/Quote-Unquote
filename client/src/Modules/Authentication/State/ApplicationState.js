@@ -9,6 +9,10 @@ import useQuotes from 'APICalls/Quotes/useQuotes.js';
 import useTags from 'APICalls/Tags/useTags.js';
 import useAuthors from 'APICalls/Authors/useAuthors';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
+import { API } from 'APICalls/index.js';
+import setAuthToken from 'Utils/Axios/setAuthToken';
 
 const ApplicationState = ({ children }) => {
   const initialState = {
@@ -35,14 +39,17 @@ const ApplicationState = ({ children }) => {
     displaySignupForm: false,
     displayCredo: false,
     scrollToLogo: false,
-    newUser: false
+    newUser: false,
+    privateRouteAuthentication: false,
+    privateAuthenticationRoute: '',
+    redirectPostLogout: false
   };
   const [state, dispatch] = useReducer(ApplicationReducer, initialState);
   const { quotes, isQuotesLoaded } = useQuotes();
 
   const { tags, isTagsLoaded } = useTags();
   const { authors, isAuthorsLoaded } = useAuthors();
-
+  const history = useHistory();
   useEffect(() => {
     if (isQuotesLoaded && quotes.length > 0) {
       dispatch({ type: 'SET_QUOTES', payload: quotes });
@@ -62,8 +69,6 @@ const ApplicationState = ({ children }) => {
   }, [authors, isAuthorsLoaded]);
 
   const handleGoogleLogin = async res => {
-    console.log(res);
-
     const token = res?.tokenId;
     const body = JSON.stringify({
       token
@@ -80,17 +85,40 @@ const ApplicationState = ({ children }) => {
       body,
       config
     );
-    console.log(googleLoginResponse);
+
     if (googleLoginResponse.status === 200) {
+      localStorage.setItem('token', googleLoginResponse.data.token);
       dispatch({
         type: 'SET_USER_GOOGLE_LOGIN',
         payload: googleLoginResponse.data.user
       });
     }
     if (googleLoginResponse.status === 201) {
+      localStorage.setItem('token', googleLoginResponse.data.token);
       dispatch({
         type: 'SET_NEW_USER_FLAG',
         payload: googleLoginResponse.data.user
+      });
+    }
+  };
+
+  const loadUser = async () => {
+    if (localStorage.getItem('token') != null) {
+      try {
+        const res = await API.get('/api/v1/users/auth');
+
+        dispatch({
+          type: 'LOAD_USER',
+          payload: res.data
+        });
+      } catch (err) {
+        dispatch({
+          type: 'LOAD_USER_FAILED'
+        });
+      }
+    } else {
+      dispatch({
+        type: 'LOAD_USER_FAILED'
       });
     }
   };
@@ -106,8 +134,12 @@ const ApplicationState = ({ children }) => {
     user,
     authLoading,
     isUserAuthenticated,
-    newUser
+    newUser,
+    privateRouteAuthentication,
+    privateAuthenticationRoute,
+    redirectPostLogout
   } = state;
+
   return (
     <ApplicationContext.Provider
       value={{
@@ -122,7 +154,11 @@ const ApplicationState = ({ children }) => {
         authLoading,
         isUserAuthenticated,
         newUser,
-        handleGoogleLogin
+        privateRouteAuthentication,
+        privateAuthenticationRoute,
+        redirectPostLogout,
+        handleGoogleLogin,
+        loadUser
       }}
     >
       <ApplicationDispatchContext.Provider value={dispatch}>

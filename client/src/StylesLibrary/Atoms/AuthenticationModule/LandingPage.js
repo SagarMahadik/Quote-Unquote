@@ -21,7 +21,7 @@ const LandingPageBackground = styled(
   );
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  padding-bottom: 15vh;
+  padding-bottom: 20vh;
 `;
 
 const TagLineText = styled.h1`
@@ -89,6 +89,8 @@ const ActionBorder = styled(CenterAlignedColumnContainer)`
   padding: 0.5px;
   margin-top: 6rem;
   border-radius: 25px;
+
+  padding-bottom: 1rem;
 `;
 
 const ActionContainer = styled(CenterAlignedColumnContainer)`
@@ -100,7 +102,6 @@ const ActionContainer = styled(CenterAlignedColumnContainer)`
     rgba(255, 255, 255, 0.2) 100%
   );
   border-radius: 25px;
-  padding-bottom: 6rem;
 `;
 
 const LoginPageButton = styled(CenterAlignedColumnContainer)`

@@ -27,7 +27,10 @@ const NavigationPage = ({ addQuouteCallBack, readQuoteCallBack, addMore }) => {
   };
 
   return (
-    <NavigationPageContainer justifyContent={addMore ? 'flex-start' : 'center'}>
+    <NavigationPageContainer
+      style={{ marginTop: '-3rem' }}
+      justifyContent={addMore ? 'flex-start' : 'center'}
+    >
       <StaggerAnimationParentContainer
         variants={parentCntainer}
         initial="hidden"

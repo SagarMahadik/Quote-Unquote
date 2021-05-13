@@ -38,7 +38,7 @@ const EditQuoteText = () => {
     const quoteID = currentQuote[0]._id;
 
     const res = await axios.patch(`/api/v1/quote/${quoteID}`, body, config);
-    console.log(res);
+
     if (res.data.status) {
       apirequestSuccessVibraions();
       dispatch({

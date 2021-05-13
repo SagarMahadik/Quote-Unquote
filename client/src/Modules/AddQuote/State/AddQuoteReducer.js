@@ -105,8 +105,6 @@ export default (state, action) => {
 
     case SET_TAG:
       return produce(state, draftState => {
-        console.log(action.payload);
-
         draftState.applicationData.tagList.forEach(tag => {
           if (tag.tagName === action.payload) {
             tag.selected = !tag.selected;

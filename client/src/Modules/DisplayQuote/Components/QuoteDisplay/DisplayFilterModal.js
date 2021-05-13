@@ -22,12 +22,12 @@ const DisplayFilterModal = () => {
           animate={{ opacity: 1 }}
           transition={{
             ease: 'easeOut',
-            duration: 0.4
+            duration: 0.8
           }}
           exit={{ opacity: 0, height: 0 }}
         >
           <ModalContainer containerHeight="600px">
-            <MoodPage />
+            <MoodPage hidePageheading={true} />
           </ModalContainer>
         </AnimationContainer>
       ) : null}

@@ -4,9 +4,18 @@ import {
   useDisplayQuoteDispatch
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 
+import {
+  useApplicationState,
+  useApplicationDispatch
+} from 'Modules/Authentication/State/ApplicationState.js';
+
 import { AnimationContainer } from 'StylesLibrary/Animations/FramerAnimations.js';
 
 const DragToDelete = ({ children }) => {
+  const {
+    user: { role }
+  } = useApplicationState();
+
   const {
     currentQuote,
     displayQuote,
@@ -15,6 +24,7 @@ const DragToDelete = ({ children }) => {
   } = useDisplayQuoteState();
 
   const dispatch = useDisplayQuoteDispatch();
+
   return (
     <AnimationContainer
       initial={{ opacity: 0 }}
@@ -27,7 +37,11 @@ const DragToDelete = ({ children }) => {
       }}
       exit={{ opacity: 0 }}
       onTap={() => {
-        dispatch({ type: 'DQ_TOGGLE_EDIT_QUOTETEXT' });
+        if (role && role == 'admin') {
+          dispatch({ type: 'DQ_TOGGLE_EDIT_QUOTETEXT' });
+        } else {
+          return;
+        }
       }}
       style={{
         ...(dragStart ? { x: 0, y: 0 } : {}),

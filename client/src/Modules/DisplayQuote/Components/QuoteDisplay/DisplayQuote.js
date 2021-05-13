@@ -38,7 +38,7 @@ const DisplayQuote = () => {
       if (quoteTextRef.current.clientHeight < 400) {
         dispatch({
           type: 'DQ_SET_MAINCONTAINERHEIGHT',
-          payload: '100vh'
+          payload: '120vh'
         });
       } else {
         dispatch({

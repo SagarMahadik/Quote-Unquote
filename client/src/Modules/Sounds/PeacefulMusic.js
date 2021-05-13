@@ -32,7 +32,6 @@ const PeacefulMusic = () => {
   const selectRandomMusic = () => {
     let randomIndex = generateRandomInteger(1, musicUrls.length - 1);
     setMusicIndex(randomIndex);
-    console.log(randomIndex);
   };
 
   return (

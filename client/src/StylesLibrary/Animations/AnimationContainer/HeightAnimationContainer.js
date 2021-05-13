@@ -6,7 +6,6 @@ const HeightAnimationContainer = ({ children, animationDuration }) => {
   if (timeDuration === '') {
     timeDuration = 1.0;
   }
-  console.log(timeDuration);
 
   return (
     <AnimationContainer

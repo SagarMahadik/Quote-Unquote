@@ -21,14 +21,11 @@ const DeleteQuote = () => {
 
   useEffect(() => {
     if (initiateDeleteQuoteRequest) {
-      console.log('in delete');
       deleteQuote();
     }
   }, [initiateDeleteQuoteRequest]);
 
   useEffect(() => {
-    console.log('In a useEffecr');
-
     if (deleteRequestSuccess) {
       handleDeleteSuccess();
     }
@@ -43,7 +40,6 @@ const DeleteQuote = () => {
   }, [completeDelete]);
 
   const handleDeleteSuccess = () => {
-    console.log(QuoteID);
     dispatch({
       type: 'DQ_RESET_QUOTES_POST_DELETE',
       payload: currentQuote[0]._id
@@ -54,7 +50,7 @@ const DeleteQuote = () => {
     const quoteID = currentQuote[0]._id;
 
     const res = await axios.delete(`/api/v1/quote/${quoteID}`);
-    console.log(res);
+
     if (res.status === 204) {
       submitVibrations();
       dispatch({

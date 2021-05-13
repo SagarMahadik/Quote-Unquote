@@ -32,7 +32,7 @@ export const CenterAlignedColumnContainerWithShadowBackground = styled(
 )`
   height: auto;
   max-width: 600px;
-  width: 98%;
+  width: 100%;
   background: #e7eaef;
   border: 2px solid #e7eaef;
   box-sizing: border-box;
@@ -61,6 +61,6 @@ export const CenterAlignedRowContainer = styled(RowContainer)`
 
 export const AdminPageHeadingContainer = styled(RowContainer)`
   width: 90%;
-  margin-top: 20px;
   justify-content: space-between;
+  background: none;
 `;

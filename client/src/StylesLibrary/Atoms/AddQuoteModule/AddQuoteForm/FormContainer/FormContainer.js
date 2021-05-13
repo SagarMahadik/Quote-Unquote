@@ -24,4 +24,5 @@ export const OverLayContainer = styled(CenterAlignedColumnContainer)`
   width: 100%;
   height: 100%;
   transition: background-color 0.8s ease-out;
+  z-index: 101;
 `;

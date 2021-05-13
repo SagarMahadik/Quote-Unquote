@@ -10,7 +10,11 @@ import {
   TOGGLE_SCROLL_TO_LOGO,
   SET_USER_GOOGLE_LOGIN,
   SET_AUTH_LOADING,
-  SET_NEW_USER_FLAG
+  SET_NEW_USER_FLAG,
+  LOAD_USER,
+  LOAD_USER_FAILED,
+  SET_PRIVATE_ROUTE_AUTH,
+  LOG_OUT_USER
 } from 'Modules/Authentication/State/types.js';
 import produce from 'immer';
 
@@ -66,20 +70,48 @@ export default (state, action) => {
     case SET_AUTH_LOADING:
       return produce(state, draftState => {
         draftState.authLoading = !draftState.authLoading;
+        draftState.redirectPostLogout = false;
       });
     case SET_USER_GOOGLE_LOGIN:
       return produce(state, draftState => {
         draftState.user = action.payload;
         draftState.isUserAuthenticated = true;
-        draftState.authLoading = !draftState.authLoading;
+        draftState.authLoading = false;
+      });
+
+    case LOG_OUT_USER:
+      return produce(state, draftState => {
+        draftState.isUserAuthenticated = false;
+        draftState.user = {};
+        localStorage.clear();
+        draftState.authLoading = false;
+        draftState.redirectPostLogout = true;
       });
 
     case SET_NEW_USER_FLAG:
       return produce(state, draftState => {
         draftState.user = action.payload;
         draftState.isUserAuthenticated = true;
-        draftState.authLoading = !draftState.authLoading;
+        draftState.authLoading = false;
         draftState.newUser = true;
+      });
+
+    case LOAD_USER:
+      return produce(state, draftState => {
+        draftState.user = action.payload;
+        draftState.isUserAuthenticated = true;
+        draftState.authLoading = false;
+      });
+
+    case LOAD_USER_FAILED:
+      return produce(state, draftState => {
+        draftState.isUserAuthenticated = false;
+        draftState.authLoading = false;
+      });
+    case SET_PRIVATE_ROUTE_AUTH:
+      return produce(state, draftState => {
+        draftState.privateRouteAuthentication = true;
+        draftState.privateAuthenticationRoute = action.payload;
       });
   }
 };

@@ -35,7 +35,6 @@ const QuoteText = () => {
       });
     }
     if (textAreaRef.current && quote != '') {
-      console.log(textAreaRef.current.scrollHeight);
       dispatch({
         type: 'AQ_SET_TEXTAREAHEIGHT',
         payload: `${Number(textAreaRef.current.scrollHeight) - 40}px`
@@ -52,7 +51,6 @@ const QuoteText = () => {
         id="quote"
         ref={textAreaRef}
         onChange={e => {
-          console.log(e.target.scrollHeight);
           dispatch({ type: 'SET_QUOTE', quoteText: e.target.value });
         }}
         onClick={e => pasteFromClipboard(e)}

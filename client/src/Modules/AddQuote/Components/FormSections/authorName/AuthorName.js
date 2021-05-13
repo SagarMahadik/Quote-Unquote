@@ -76,12 +76,11 @@ const AuthorName = () => {
   };
 
   const handleClearAuthorNameField = () => {
-    console.log('clear search');
     formClickVibrations();
     dispatch({
       type: 'AQ_RESET_AUTHOR'
     });
-    console.log(authorNameRef.current.placeholder);
+
     authorNameRef.current.placeholder = 'Author Name';
   };
 

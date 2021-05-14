@@ -10,7 +10,7 @@ import Loader from 'StylesLibrary/Atoms/LoadingModule/Loader';
 import { useLocation } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  const { authLoading, isUserAuthenticated } = useApplicationState();
+  const { authLoading, isUserAuthenticated, user } = useApplicationState();
   const location = useLocation();
 
   const { loadUser } = useApplicationState();
@@ -30,7 +30,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       render={props =>
         authLoading ? (
           <LandingPageAuthLoader />
-        ) : !isUserAuthenticated ? (
+        ) : !isUserAuthenticated && user.role != 'admin' ? (
           <Redirect to="/" />
         ) : (
           <Component {...props} />

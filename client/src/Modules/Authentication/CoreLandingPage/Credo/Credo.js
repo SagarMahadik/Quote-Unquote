@@ -3,10 +3,7 @@ import {
   CenterAlignedColumnContainer,
   CenterAlignedColumnContainerWithShadowBackground
 } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
-import {
-  useApplicationState,
-  useApplicationDispatch
-} from 'Modules/Authentication/State/ApplicationState.js';
+import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { getElementIntoView } from 'Utils/UIutils/getElementIntoView';
@@ -32,7 +29,7 @@ const Credo = () => {
           <CenterAlignedColumnContainerWithShadowBackground
             style={{ height: '80vh', width: '90%', marginBottom: '4rem' }}
           >
-            <HeightAnimationContainer animationDuration="0.6">
+            <HeightAnimationContainer animationDuration="0.5">
               More than seven years ago Aaron Swartz, who spared no risk in
               standing up for what we here urge you to stand up for too, wrote:
               "We need to take information, wherever it is stored, make our

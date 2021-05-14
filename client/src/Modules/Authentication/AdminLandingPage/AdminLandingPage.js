@@ -6,11 +6,14 @@ import GradientContainer from 'StylesLibrary/Animations/AnimationContainer/Gradi
 import PageAnimationContainer from 'StylesLibrary/Animations/AnimationContainer/PageAnimations/PageAnimationContainer';
 import PageHeading from 'Modules/Global/Components/PageHeading';
 import { AdminLandingPageContainer } from './AdminLandingPageStyles';
+import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
 
 const AdminLandingPage = () => {
   const [redirectToAddQuote, setRedirectToAddQuote] = useState(false);
   const [redirectToReadQuote, setRedirectToReadQuote] = useState(false);
   const history = useHistory();
+
+  const { user, isUserAuthenticated } = useApplicationState();
 
   useEffect(() => {
     if (redirectToAddQuote) {
@@ -20,6 +23,12 @@ const AdminLandingPage = () => {
       history.push('/moodPage');
     }
   }, [redirectToAddQuote, redirectToReadQuote]);
+
+  useEffect(() => {
+    if (!isUserAuthenticated || user.role != 'admin') {
+      history.push('/');
+    }
+  }, []);
 
   return (
     <AdminLandingPageContainer>

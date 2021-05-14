@@ -26,8 +26,7 @@ import LandingPageAuthLoader from 'StylesLibrary/Atoms/LoadingModule/LandingPage
 import EnterTheLibrary from 'StylesLibrary/Molecules/AuthenticationModule/CoreLandingPage/EnterTheLibrary';
 
 const CoreLandingPage = () => {
-  const clientId =
-    '806952200431-4k8ilrj5lbmi6js3rqat4f8tlmssvn4j.apps.googleusercontent.com';
+  const clientId = `${process.env.REACT_APP_GOOGLEID}`;
   const dispatch = useApplicationDispatch();
   const logoRef = useRef(null);
   const history = useHistory();
@@ -39,7 +38,8 @@ const CoreLandingPage = () => {
     newUser,
     privateRouteAuthentication,
     privateAuthenticationRoute,
-    user
+    user,
+    adminLogin
   } = useApplicationState();
 
   useEffect(() => {
@@ -49,24 +49,20 @@ const CoreLandingPage = () => {
   }, [privateRouteAuthentication, isUserAuthenticated]);
 
   useEffect(() => {
-    if (isUserAuthenticated && user.role === 'admin') {
+    if (isUserAuthenticated && user.role == 'admin') {
+      console.log('in history posug');
       history.push('/corelanding');
     }
-  }, [isUserAuthenticated, user]);
+  }, [isUserAuthenticated, adminLogin, user]);
 
   useEffect(() => {
-    if (
-      isUserAuthenticated &&
-      !newUser &&
-      !privateRouteAuthentication &&
-      user.role == 'user'
-    ) {
+    if (isUserAuthenticated && !newUser && user.role == 'user') {
       history.push('/moodPage');
     }
   }, [isUserAuthenticated, newUser]);
 
   useEffect(() => {
-    if (isUserAuthenticated && newUser && !privateRouteAuthentication) {
+    if (isUserAuthenticated && newUser) {
       history.push('/signUpSuccess');
     }
   }, [isUserAuthenticated, newUser]);
@@ -87,13 +83,13 @@ const CoreLandingPage = () => {
     onSuccess,
     onFailure,
     clientId
-
-    // responseType: 'code',
-    // prompt: 'consent',
   });
 
   function handleClick() {
     history.push('/moodPage');
+    dispatch({
+      type: 'RESET_DISPLAY_QUOTE_LOGOUT'
+    });
   }
 
   return (

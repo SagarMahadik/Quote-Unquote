@@ -14,7 +14,9 @@ import {
   LOAD_USER,
   LOAD_USER_FAILED,
   SET_PRIVATE_ROUTE_AUTH,
-  LOG_OUT_USER
+  LOG_OUT_USER,
+  SET_ADMINLOGIN,
+  RESET_DISPLAY_QUOTE_LOGOUT
 } from 'Modules/Authentication/State/types.js';
 import produce from 'immer';
 
@@ -81,11 +83,13 @@ export default (state, action) => {
 
     case LOG_OUT_USER:
       return produce(state, draftState => {
+        draftState.resetDisplayQuotes = true;
         draftState.isUserAuthenticated = false;
         draftState.user = {};
         localStorage.clear();
         draftState.authLoading = false;
         draftState.redirectPostLogout = true;
+        draftState.adminLogin = false;
       });
 
     case SET_NEW_USER_FLAG:
@@ -112,6 +116,16 @@ export default (state, action) => {
       return produce(state, draftState => {
         draftState.privateRouteAuthentication = true;
         draftState.privateAuthenticationRoute = action.payload;
+      });
+
+    case SET_ADMINLOGIN:
+      return produce(state, draftState => {
+        draftState.adminLogin = true;
+      });
+
+    case RESET_DISPLAY_QUOTE_LOGOUT:
+      return produce(state, draftState => {
+        draftState.resetDisplayQuotes = true;
       });
   }
 };

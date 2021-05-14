@@ -25,6 +25,9 @@ import CreateAuthor from 'Modules/AddQuote/APICalls/CreateAuthor.js';
 import { ButtonContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/Buttons/ButtonContainer';
 import { submitVibrations } from 'Utils/vibrations';
 import DatabaseEntrySound from 'StylesLibrary/Sounds/DatabaseEntrySound.js';
+import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useApplicationState } from 'Modules/Authentication/State/ApplicationState';
 
 const AddQuote = () => {
   const {
@@ -34,6 +37,10 @@ const AddQuote = () => {
     loading
   } = useAddQuoteState();
   const dispatch = useAddQuoteDispatch();
+  const history = useHistory();
+
+  const { isUserAuthenticated, adminLogin, user } = useApplicationState();
+  console.log(user);
 
   const handleAddQuoteSubmit = e => {
     e.preventDefault();
@@ -44,6 +51,12 @@ const AddQuote = () => {
       type: 'AQ_INITIATE_VALIDATIONS'
     });
   };
+  useEffect(() => {
+    if (!isUserAuthenticated || user.role != 'admin') {
+      history.push('/');
+    }
+  }, []);
+
   if (quoteCreatedSuccessfully) {
     return (
       <>
@@ -52,6 +65,7 @@ const AddQuote = () => {
       </>
     );
   }
+
   return (
     <>
       <CenterAlignedColumnContainer>

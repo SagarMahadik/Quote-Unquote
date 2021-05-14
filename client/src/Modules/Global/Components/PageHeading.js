@@ -29,11 +29,11 @@ const PageHeading = () => {
             <HomeButton />
           </Link>
           <LogoutButton
-            onClick={() =>
+            onClick={() => {
               dispatch({
                 type: 'LOG_OUT_USER'
-              })
-            }
+              });
+            }}
           />
         </AdminPageHeadingContainer>
       ) : null}

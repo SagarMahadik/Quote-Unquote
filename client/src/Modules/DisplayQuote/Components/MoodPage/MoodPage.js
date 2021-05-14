@@ -17,7 +17,7 @@ import StaggerAnimationChild from 'StylesLibrary/Animations/AnimationContainer/P
 
 import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
 import { useHistory } from 'react-router-dom';
-import { CenterAlignedColumnContainerWithShadowBackground } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
+
 import PageHeading from 'Modules/Global/Components/PageHeading';
 
 const MoodPage = ({ hidePageheading }) => {
@@ -25,19 +25,12 @@ const MoodPage = ({ hidePageheading }) => {
 
   const {
     user: { firstName },
-    isUserAuthenticated
+    isUserAuthenticated,
+    resetDisplayQuotes
   } = useApplicationState();
 
   const { displayQuotes } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
-
-  useEffect(() => {
-    if (history.action == 'POP') {
-      dispatch({
-        type: 'DQ_TOGGLE_MOODPAGE'
-      });
-    }
-  }, [history]);
 
   const createFilteredQuotes = () => {
     dispatch({

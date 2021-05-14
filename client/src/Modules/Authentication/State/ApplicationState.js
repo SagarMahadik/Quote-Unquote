@@ -42,7 +42,9 @@ const ApplicationState = ({ children }) => {
     newUser: false,
     privateRouteAuthentication: false,
     privateAuthenticationRoute: '',
-    redirectPostLogout: false
+    redirectPostLogout: false,
+    adminLogin: false,
+    resetDisplayQuotes: false
   };
   const [state, dispatch] = useReducer(ApplicationReducer, initialState);
   const { quotes, isQuotesLoaded } = useQuotes();
@@ -87,6 +89,7 @@ const ApplicationState = ({ children }) => {
     );
 
     if (googleLoginResponse.status === 200) {
+      console.log('in a google response');
       localStorage.setItem('token', googleLoginResponse.data.token);
       dispatch({
         type: 'SET_USER_GOOGLE_LOGIN',
@@ -104,6 +107,7 @@ const ApplicationState = ({ children }) => {
 
   const loadUser = async () => {
     if (localStorage.getItem('token') != null) {
+      console.log('in load user');
       try {
         const res = await API.get('/api/v1/users/auth');
 
@@ -137,7 +141,9 @@ const ApplicationState = ({ children }) => {
     newUser,
     privateRouteAuthentication,
     privateAuthenticationRoute,
-    redirectPostLogout
+    redirectPostLogout,
+    adminLogin,
+    resetDisplayQuotes
   } = state;
 
   return (
@@ -157,6 +163,8 @@ const ApplicationState = ({ children }) => {
         privateRouteAuthentication,
         privateAuthenticationRoute,
         redirectPostLogout,
+        adminLogin,
+        resetDisplayQuotes,
         handleGoogleLogin,
         loadUser
       }}

@@ -17,4 +17,7 @@ export const AddQuoteSuccessText = styled.h1`
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  @media (min-width: 786px) {
+    margin-top: ${props => (props.isGuestUser ? '3rem' : '0rem')};
+  }
 `;

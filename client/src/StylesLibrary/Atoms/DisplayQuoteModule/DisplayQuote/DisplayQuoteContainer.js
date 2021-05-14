@@ -16,6 +16,9 @@ export const DisplayQuoteMainContainer = styled(CenterAlignedColumnContainer)`
   margin-top: 0px;
   justify-content: flex-start;
   width: 100%;
+  @media (min-width: 786px) {
+    margin-top: ${props => (props.isGuestUser ? '3rem' : '0rem')};
+  }
 `;
 
 export const DisplayQuoteButtonContainer = styled(RowContainer)`

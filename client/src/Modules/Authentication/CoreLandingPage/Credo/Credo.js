@@ -32,7 +32,7 @@ const Credo = () => {
           <CenterAlignedColumnContainerWithShadowBackground
             style={{ height: '80vh', width: '90%', marginBottom: '4rem' }}
           >
-            <HeightAnimationContainer animationDuration="1.5">
+            <HeightAnimationContainer animationDuration="0.6">
               More than seven years ago Aaron Swartz, who spared no risk in
               standing up for what we here urge you to stand up for too, wrote:
               "We need to take information, wherever it is stored, make our

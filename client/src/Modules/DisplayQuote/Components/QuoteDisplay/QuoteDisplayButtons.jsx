@@ -29,6 +29,7 @@ const QuoteDisplayButtons = () => {
           goButtonVibrations();
           dispatch({ type: 'DQ_TOGGLE_FILTERMODAL' });
         }}
+        style={{ position: 'absolute', zIndex: '110' }}
       />
 
       <WhatsAppButton

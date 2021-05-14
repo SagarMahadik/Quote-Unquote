@@ -11,18 +11,9 @@ import { AnimatePresence } from 'framer-motion';
 
 import FallBackLoader from 'Modules/Global/Components/FallBackLoader';
 import PrivateRoute from './PrivateRoutes';
-import {
-  CenterAlignedColumnContainer,
-  CenterAlignedColumnContainerWithShadowBackground
-} from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
-import PageHeading from 'Modules/Global/Components/PageHeading';
 
 const QuoteDisplay = React.lazy(() =>
   import('Modules/DisplayQuote/Components/QuoteDisplay/QuoteDisplay')
-);
-
-const DisplayQuoteMainComponent = React.lazy(() =>
-  import('Modules/DisplayQuote/DisplayQuoteMainComponent.js')
 );
 
 const MoodPage = React.lazy(() =>
@@ -50,20 +41,24 @@ const SignUpSuccess = React.lazy(() =>
 const Routes = () => {
   const location = useLocation();
   return (
-    <AnimatePresence>
-      <>
+    <>
+      <AnimatePresence>
         <React.Suspense fallback={<FallBackLoader />}>
           <Switch location={location} key={location.pathname}>
             <Route exact path="/" component={CoreLandingPage} />
-            <Route exact path="/corelanding" component={AdminLandingPage} />
-            <Route exact path="/addQuote" component={AddQuote} />
+            <PrivateRoute
+              exact
+              path="/corelanding"
+              component={AdminLandingPage}
+            />
+            <PrivateRoute exact path="/addQuote" component={AddQuote} />
             <Route exact path="/readQuote" component={QuoteDisplay} />
             <Route exact path="/moodPage" component={MoodPage} />
             <Route exact path="/signUpSuccess" component={SignUpSuccess} />
           </Switch>
         </React.Suspense>
-      </>
-    </AnimatePresence>
+      </AnimatePresence>
+    </>
   );
 };
 

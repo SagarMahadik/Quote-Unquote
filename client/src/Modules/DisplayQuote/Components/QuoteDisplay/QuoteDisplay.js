@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import DisplayQuote from 'Modules/DisplayQuote/Components/QuoteDisplay/DisplayQuote.js';
 import DisplayTags from 'Modules/DisplayQuote/Components/QuoteDisplay/DisplayTags.js';
 import RandomButton from 'StylesLibrary/Atoms/GlobalQuoteModule/Buttons/RandomButton.js';
-import FilterButton from 'StylesLibrary/Molecules/DisplayQuoteModule/Buttons/FilterButton.js';
-import WhatsAppButton from 'StylesLibrary/Molecules/DisplayQuoteModule/Buttons/WhatsAppButton.js';
+
 import {
   useDisplayQuoteState,
   useDisplayQuoteDispatch
@@ -13,8 +12,7 @@ import PageHeading from 'Modules/Global/Components/PageHeading.js';
 
 import {
   DisplayQuoteContiner,
-  DisplayQuoteMainContainer,
-  DisplayQuoteButtonContainer
+  DisplayQuoteMainContainer
 } from 'StylesLibrary/Atoms/DisplayQuoteModule/DisplayQuote/DisplayQuoteContainer.js';
 
 import GradientContainer from 'StylesLibrary/Animations/AnimationContainer/GradientContainer.js';
@@ -24,22 +22,21 @@ import PeacefulMusic from 'Modules/Sounds/PeacefulMusic.js';
 import { randomButtonVibrations } from 'Utils/vibrations.js';
 import { CenterAlignedColumnContainerWithShadowBackground } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
 import QuoteDisplayButtons from './QuoteDisplayButtons';
-import {
-  useApplicationState,
-  useApplicationDispatch
-} from 'Modules/Authentication/State/ApplicationState.js';
+import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
 
-import { goButtonVibrations } from 'Utils/vibrations';
+import { useHistory } from 'react-router-dom';
+import PageAnimationOpacity from 'StylesLibrary/Animations/AnimationContainer/PageAnimations/PageOpacityAnimationContainer.js';
+import { QuotePageContainer } from './QuoteDisplayContainer';
 
 const QuoteDisplay = () => {
   const { isUserAuthenticated } = useApplicationState();
   const {
     filteredQuotes: { filterQuotesList },
-    currentQuote,
     refreshFIlteredQuotes,
     displayFilterModal,
     styles: { containerHeight },
-    selectQuotePostDelete
+    selectQuotePostDelete,
+    displayQuotes
   } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
 
@@ -50,13 +47,21 @@ const QuoteDisplay = () => {
 
     dispatch({ type: 'DQ_SET_CURRENT_QUOTE', payload: randomQuote });
   };
-
+  const history = useHistory();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    selectRandomQuote();
+    if (!displayQuotes) {
+      history.push('/moodPage');
+    }
+  }, [displayQuotes]);
+
+  useEffect(() => {
+    if (refreshFIlteredQuotes) {
+      selectRandomQuote();
+    }
   }, [refreshFIlteredQuotes]);
 
   useEffect(() => {
@@ -72,41 +77,46 @@ const QuoteDisplay = () => {
   };
 
   return (
-    <CenterAlignedColumnContainerWithShadowBackground>
-      <GradientContainer>
-        <PageHeading />
-        <DisplayQuoteMainContainer
-          quoteMainContainerHeight={containerHeight}
-          style={{
-            width: '98%',
-            marginTop: !isUserAuthenticated ? '3rem' : '2rem'
-          }}
-        >
-          <DisplayQuoteContiner
-            showModal={displayFilterModal}
-            onClick={() => handleHideModal()}
-          >
-            <QuoteDisplayButtons />
-
-            <DisplayQuote selectRandomQuote={selectRandomQuote} />
-            <DisplayTags />
-
-            <RandomButton
-              onClick={() => {
-                randomButtonVibrations();
-                dispatch({ type: 'HIDE_QUOTE' });
-                setTimeout(() => {
-                  selectRandomQuote();
-                }, 700);
+    <PageAnimationOpacity>
+      {displayQuotes ? (
+        <QuotePageContainer isGuestUser={!isUserAuthenticated}>
+          <GradientContainer>
+            <PageHeading />
+            <DisplayQuoteMainContainer
+              quoteMainContainerHeight={containerHeight}
+              style={{
+                width: '98%',
+                marginTop: !isUserAuthenticated ? '3rem' : '2rem'
               }}
-              style={{ marginTop: '1rem' }}
-            />
-          </DisplayQuoteContiner>
-          <DisplayFilterModal />
-        </DisplayQuoteMainContainer>
-      </GradientContainer>
-      <PeacefulMusic />
-    </CenterAlignedColumnContainerWithShadowBackground>
+              isGuestUser={!isUserAuthenticated}
+            >
+              <DisplayQuoteContiner
+                showModal={displayFilterModal}
+                onClick={() => handleHideModal()}
+              >
+                <QuoteDisplayButtons />
+
+                <DisplayQuote selectRandomQuote={selectRandomQuote} />
+                <DisplayTags />
+
+                <RandomButton
+                  onClick={() => {
+                    randomButtonVibrations();
+                    dispatch({ type: 'HIDE_QUOTE' });
+                    setTimeout(() => {
+                      selectRandomQuote();
+                    }, 700);
+                  }}
+                  style={{ marginTop: '1rem' }}
+                />
+              </DisplayQuoteContiner>
+              <DisplayFilterModal />
+            </DisplayQuoteMainContainer>
+          </GradientContainer>
+          <PeacefulMusic />
+        </QuotePageContainer>
+      ) : null}
+    </PageAnimationOpacity>
   );
 };
 

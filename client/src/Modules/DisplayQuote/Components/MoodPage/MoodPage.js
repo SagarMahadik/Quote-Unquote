@@ -3,6 +3,7 @@ import { AddQuoteSuccessText } from 'StylesLibrary/Atoms/DisplayQuoteModule/Page
 import MoodPageTags from 'Modules/DisplayQuote/Components/MoodPage/MoodPageTags.js';
 import MoodPageAuthor from 'Modules/DisplayQuote/Components/MoodPage/MoodPageAuthor.js';
 import GoButton from 'StylesLibrary/Molecules/DisplayQuoteModule/Buttons/GoButton.js';
+import { MoodPageContainer } from 'Modules/DisplayQuote/Components/MoodPage/MoodPageContainer.js';
 
 import { goButtonVibrations } from 'Utils/vibrations.js';
 
@@ -21,12 +22,22 @@ import PageHeading from 'Modules/Global/Components/PageHeading';
 
 const MoodPage = ({ hidePageheading }) => {
   const history = useHistory();
+
   const {
-    user: { firstName }
+    user: { firstName },
+    isUserAuthenticated
   } = useApplicationState();
 
   const { displayQuotes } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
+
+  useEffect(() => {
+    if (history.action == 'POP') {
+      dispatch({
+        type: 'DQ_TOGGLE_MOODPAGE'
+      });
+    }
+  }, [history]);
 
   const createFilteredQuotes = () => {
     dispatch({
@@ -37,14 +48,18 @@ const MoodPage = ({ hidePageheading }) => {
   useEffect(() => {
     if (displayQuotes) {
       history.push('/readQuote');
+    } else {
+      return;
     }
   }, [displayQuotes]);
 
   return (
-    <CenterAlignedColumnContainerWithShadowBackground>
+    <MoodPageContainer isGuestUser={!isUserAuthenticated}>
       {hidePageheading ? null : <PageHeading />}
       <StaggerAnimationContainer>
-        <AddQuoteSuccessText>Whats your mood {firstName}?</AddQuoteSuccessText>
+        <AddQuoteSuccessText isGuestUser={!isUserAuthenticated}>
+          Whats your mood {firstName}?
+        </AddQuoteSuccessText>
         <StaggerAnimationChild>
           <MoodPageTags />
         </StaggerAnimationChild>
@@ -60,7 +75,7 @@ const MoodPage = ({ hidePageheading }) => {
           />
         </StaggerAnimationChild>
       </StaggerAnimationContainer>
-    </CenterAlignedColumnContainerWithShadowBackground>
+    </MoodPageContainer>
   );
 };
 

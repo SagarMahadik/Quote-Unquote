@@ -4,9 +4,7 @@ import {
   QuotationLeft,
   QuoteContainer,
   QuotationSymbolText,
-  QuoteText,
-  TrashIconContainer,
-  DeleteOverlayContainer
+  QuoteText
 } from 'StylesLibrary/Atoms/DisplayQuoteModule/DisplayQuote/DisplayQuote.js';
 import {
   useDisplayQuoteState,
@@ -15,30 +13,31 @@ import {
 import { sanitizeQuoteText } from 'Utils/stringOperations.js';
 import { AnimatePresence } from 'framer-motion';
 import DragToDelete from 'Modules/DisplayQuote/Components/QuoteDisplay/DragToDelete.js';
-import DeleteQuoteComponent from 'Modules/DisplayQuote/Components/QuoteDisplay/DeleteQuoteComponent.js';
 import EditQuoteComponent from './EditQuoteComponent';
 import LoadingQuotes from 'StylesLibrary/Molecules/LoadingModule/LoadingQuotes.js';
-
-import DeleteSound from 'StylesLibrary/Sounds/DeleteSound.js';
+import { useHistory } from 'react-router-dom';
 
 const DisplayQuote = () => {
   const {
     currentQuote,
     displayQuote,
     editQuoteText: { editQuoteText },
-    deleteQuote: { deleteQuote, dragStart, deleteRequestSuccess }
+    deleteQuote: { dragStart }
   } = useDisplayQuoteState();
   const [inputBoxHeight, setInnputBoxHeight] = useState(200);
   const [editContainerMarginTop, setEditContainerMarginTop] = useState(200);
   const dispatch = useDisplayQuoteDispatch();
   const quoteTextRef = useRef(null);
+  const history = useHistory();
+
+  console.log(history);
 
   useLayoutEffect(() => {
     if (quoteTextRef.current) {
       if (quoteTextRef.current.clientHeight < 400) {
         dispatch({
           type: 'DQ_SET_MAINCONTAINERHEIGHT',
-          payload: '120vh'
+          payload: '100vh'
         });
       } else {
         dispatch({

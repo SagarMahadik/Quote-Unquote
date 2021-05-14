@@ -22,7 +22,7 @@ export const ColumnContainer = styled(motion.div)`
 export const CenterAlignedColumnContainer = styled(ColumnContainer)`
   align-items: center;
   justify-content: center;
-  max-width: 600px;
+  max-width: 800px;
   margin-top: ${props => props.marginTop};
   height: auto;
 `;

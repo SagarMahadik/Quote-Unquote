@@ -28,7 +28,8 @@ const TagLineText = styled.h1`
   font-family: Questrial;
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
+  font-size: max(16px, 1vw);
+  padding: 4px;
   line-height: 12px;
   background: linear-gradient(
     124.02deg,
@@ -115,10 +116,10 @@ const LoginPageButtonText = styled.h1`
   font-family: Questrial;
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
+  font-size: max(14px, 1vw);
   line-height: 12px;
   margin: 0;
-  padding: 0;
+  padding: 4px;
 `;
 
 const EnterLibraryButton = styled(Button)`
@@ -129,6 +130,9 @@ const EnterLibraryButton = styled(Button)`
   background: #f3f4f6;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   filter: blur(0.2px);
+  @media (min-width: 786px) {
+    width: 60%;
+  }
 `;
 
 const EnterLibraryButtonText = styled(LoginPageButtonText)`
@@ -147,6 +151,9 @@ const MemberLoginButton = styled(Button)`
   background: linear-gradient(90deg, #40e3be 0%, #6cb5d1 100%);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
+  @media (min-width: 786px) {
+    width: 60%;
+  }
 `;
 
 const MemberLoginButtonText = styled(LoginPageButtonText)`

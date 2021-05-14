@@ -8,7 +8,6 @@ const AdminLandingPageContainer = styled(
   justify-items: center;
   width: 100%;
   padding: 4px;
-  margin: 4px;
   height: '100vh';
 `;
 

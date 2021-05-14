@@ -5,13 +5,17 @@ import {
 } from 'StylesLibrary/Atoms/AuthenticationModule/LandingPage.js';
 
 import MotionButtonLanding from 'StylesLibrary/Animations/ButtonAnimations/MotionButtonLanding';
+import { CenterAlignedRowContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
+import GoogleIcon from 'StylesLibrary/Atoms/GlobalQuoteModule/Icons/GoogleIcon';
 
 const EnterTheLibrary = ({ buttonText, onClick }) => {
-  console.log('I am being Clicked');
   return (
     <MotionButtonLanding>
-      <EnterLibraryButton onClick={() => onClick}>
-        <EnterLibraryButtonText>{buttonText}</EnterLibraryButtonText>
+      <EnterLibraryButton onClick={onClick}>
+        <CenterAlignedRowContainer>
+          <GoogleIcon />
+          <EnterLibraryButtonText>{buttonText}</EnterLibraryButtonText>
+        </CenterAlignedRowContainer>
       </EnterLibraryButton>
     </MotionButtonLanding>
   );

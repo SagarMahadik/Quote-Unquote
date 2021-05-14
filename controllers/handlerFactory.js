@@ -39,10 +39,6 @@ exports.updateOne = Model =>
 exports.createLog = Model =>
   catchAsync(async (req, res, next) => {
     //const doc = await Model.create(req.body);
-
-    res.status(201).json({
-      status: 'success'
-    });
   });
 
 exports.createOne = Model =>

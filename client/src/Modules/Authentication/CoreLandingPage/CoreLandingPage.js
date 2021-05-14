@@ -8,7 +8,6 @@ import {
 
 import Logo from 'StylesLibrary/Atoms/GlobalQuoteModule/Logo/Logo';
 import Tagline from 'StylesLibrary/Atoms/GlobalQuoteModule/Logo/Tagline.js';
-import LandingPageActions from 'Modules/Authentication/CoreLandingPage/LandingPageActions/LandingPageActions';
 import BubbleContainer from 'Modules/Authentication/CoreLandingPage/LandingBubbles/BubbleContainer.js';
 import Credo from 'Modules/Authentication/CoreLandingPage/Credo/Credo.js';
 import ArrowIcon from './Icons/ArrowIcon';
@@ -21,10 +20,10 @@ import LandingPageAnimationContainer from 'StylesLibrary/Animations/AnimationCon
 
 import { useGoogleLogin } from 'react-google-login';
 import { useHistory } from 'react-router-dom';
-
-import LogoutButton from 'StylesLibrary/Molecules/GlobalModule/LogoutButton.js';
+import MemberLogin from 'StylesLibrary/Molecules/AuthenticationModule/CoreLandingPage/MemberLogin';
 
 import LandingPageAuthLoader from 'StylesLibrary/Atoms/LoadingModule/LandingPageAuthLoader';
+import EnterTheLibrary from 'StylesLibrary/Molecules/AuthenticationModule/CoreLandingPage/EnterTheLibrary';
 
 const CoreLandingPage = () => {
   const clientId =
@@ -81,9 +80,7 @@ const CoreLandingPage = () => {
 
   const onFailure = res => {
     console.log('Login failed: res:', res);
-    alert(
-      `Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz`
-    );
+    alert(`Failed to login. 😢 Please ping to sgrmhdk51@gmail.com`);
   };
 
   const { signIn } = useGoogleLogin({
@@ -95,13 +92,17 @@ const CoreLandingPage = () => {
     // prompt: 'consent',
   });
 
+  function handleClick() {
+    history.push('/moodPage');
+  }
+
   return (
     <LandingPageAnimationContainer>
       <CenterAlignedColumnContainer>
         <LandingPageBackground
           style={{
             position: 'relative',
-            opacity: privateRouteAuthentication ? '0' : 1
+            opacity: privateRouteAuthentication && authLoading ? '0' : 1
           }}
         >
           <BubbleContainer />
@@ -110,12 +111,24 @@ const CoreLandingPage = () => {
               <Logo />
             </div>
             <Tagline />
-            <LandingPageActions />
-            {authLoading ? <LandingPageAuthLoader /> : null}
-            <LogoutButton onClick={() => signIn()} />
-
+            <MemberLogin
+              buttonText="Enter Quote Library"
+              onClick={handleClick}
+            />
+            <EnterTheLibrary
+              buttonText="Login with Google"
+              onClick={e => {
+                e.preventDefault();
+                signIn();
+              }}
+            ></EnterTheLibrary>
+            <ArrowIcon
+              style={{ marginTop: '4rem' }}
+              onClick={() => dispatch({ type: 'TOGGLE_DISPLAY_CREDO' })}
+            />
             <Credo />
             <UpArrowIcon logoRef={logoRef} />
+            {authLoading ? <LandingPageAuthLoader /> : null}
           </OverlayContainer>
         </LandingPageBackground>
       </CenterAlignedColumnContainer>

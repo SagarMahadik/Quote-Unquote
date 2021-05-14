@@ -22,9 +22,7 @@ function App() {
           <Router>
             <ScrollToTop>
               <Switch>
-                <CenterAlignedColumnContainer>
-                  <Route component={Routes} />
-                </CenterAlignedColumnContainer>
+                <Route component={Routes} />
               </Switch>
             </ScrollToTop>
           </Router>

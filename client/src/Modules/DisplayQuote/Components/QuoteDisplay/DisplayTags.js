@@ -34,8 +34,13 @@ const DisplayTags = () => {
             <TagText>
               {makeFirstLetterUpperCase(currentQuote[0].author['authorName'])}
             </TagText>
-            {currentQuote[0].tags.slice(0, 3).map(({ tagName }) => {
-              return <TagText> | {makeFirstLetterUpperCase(tagName)}</TagText>;
+            {currentQuote[0].tags.slice(0, 3).map(({ tagName, _id }) => {
+              return (
+                <TagText key={_id}>
+                  {' '}
+                  | {makeFirstLetterUpperCase(tagName)}
+                </TagText>
+              );
             })}
           </TagContainer>
         </AnimationContainer>

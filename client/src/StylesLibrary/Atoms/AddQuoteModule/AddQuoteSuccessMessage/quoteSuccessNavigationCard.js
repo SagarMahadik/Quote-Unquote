@@ -26,11 +26,7 @@ export const NavigatioCardText = styled.h1`
   display: flex;
   align-items: center;
   text-align: center;
-  background: linear-gradient(
-    278.38deg,
-    #ab7070 30.83%,
-    rgba(255, 0, 0, 0.37) 66.37%
-  );
+  background: ${props => props.navigatioCardTextColor};
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

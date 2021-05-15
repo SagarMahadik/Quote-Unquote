@@ -3,10 +3,16 @@ import {
   NavigationCardContainer,
   NavigatioCardText
 } from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteSuccessMessage/quoteSuccessNavigationCard.js';
-const QuoteSuccessNavigatiocard = ({ onClick, navigationCardText }) => {
+const QuoteSuccessNavigatiocard = ({
+  onClick,
+  navigationCardText,
+  navigatioCardTextColor
+}) => {
   return (
     <NavigationCardContainer onClick={onClick}>
-      <NavigatioCardText>{navigationCardText}</NavigatioCardText>
+      <NavigatioCardText navigatioCardTextColor={navigatioCardTextColor}>
+        {navigationCardText}
+      </NavigatioCardText>
     </NavigationCardContainer>
   );
 };

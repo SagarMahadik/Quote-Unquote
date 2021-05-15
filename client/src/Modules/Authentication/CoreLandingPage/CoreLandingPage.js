@@ -20,9 +20,9 @@ import LandingPageAnimationContainer from 'StylesLibrary/Animations/AnimationCon
 
 import { useGoogleLogin } from 'react-google-login';
 import { useHistory } from 'react-router-dom';
-import MemberLogin from 'StylesLibrary/Molecules/AuthenticationModule/CoreLandingPage/MemberLogin';
 
 import LandingPageAuthLoader from 'StylesLibrary/Atoms/LoadingModule/LandingPageAuthLoader';
+import GoogleLogin from 'StylesLibrary/Molecules/AuthenticationModule/CoreLandingPage/GoogleLogin';
 import EnterTheLibrary from 'StylesLibrary/Molecules/AuthenticationModule/CoreLandingPage/EnterTheLibrary';
 
 const CoreLandingPage = () => {
@@ -39,7 +39,9 @@ const CoreLandingPage = () => {
     privateRouteAuthentication,
     privateAuthenticationRoute,
     user,
-    adminLogin
+    adminLogin,
+    appThemes,
+    activeTheme
   } = useApplicationState();
 
   useEffect(() => {
@@ -100,24 +102,29 @@ const CoreLandingPage = () => {
             position: 'relative',
             opacity: privateRouteAuthentication && authLoading ? '0' : 1
           }}
+          gradientBackground={appThemes[activeTheme]}
         >
-          <BubbleContainer />
+          <BubbleContainer style={{ zIndex: -1 }} />
           <OverlayContainer>
-            <div ref={logoRef}>
+            <div ref={logoRef} style={{ zIndex: 100 }}>
               <Logo />
             </div>
             <Tagline />
-            <MemberLogin
-              buttonText="Enter Quote Library"
-              onClick={handleClick}
-            />
-            <EnterTheLibrary
-              buttonText="Login with Google"
-              onClick={e => {
-                e.preventDefault();
-                signIn();
-              }}
-            ></EnterTheLibrary>
+            <div style={{ marginTop: '8rem', width: '100%' }}>
+              <EnterTheLibrary
+                buttonText="Enter Quote Library"
+                onClick={handleClick}
+                buttonBackground={appThemes[activeTheme]}
+              />
+              <GoogleLogin
+                buttonText="Login with Google"
+                onClick={e => {
+                  e.preventDefault();
+                  signIn();
+                }}
+                buttonTextColor={appThemes[activeTheme]}
+              ></GoogleLogin>
+            </div>
             <ArrowIcon
               style={{ marginTop: '4rem' }}
               onClick={() => dispatch({ type: 'TOGGLE_DISPLAY_CREDO' })}

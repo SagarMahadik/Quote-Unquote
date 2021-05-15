@@ -16,7 +16,8 @@ import {
   SET_PRIVATE_ROUTE_AUTH,
   LOG_OUT_USER,
   SET_ADMINLOGIN,
-  RESET_DISPLAY_QUOTE_LOGOUT
+  RESET_DISPLAY_QUOTE_LOGOUT,
+  SET_RANDOM_THEME
 } from 'Modules/Authentication/State/types.js';
 import produce from 'immer';
 
@@ -126,6 +127,11 @@ export default (state, action) => {
     case RESET_DISPLAY_QUOTE_LOGOUT:
       return produce(state, draftState => {
         draftState.resetDisplayQuotes = true;
+      });
+
+    case SET_RANDOM_THEME:
+      return produce(state, draftState => {
+        draftState.activeTheme = action.payload;
       });
   }
 };

@@ -13,12 +13,7 @@ const LandingPageBackground = styled(
   width: 100%;
   height: auto;
   padding-bottom: 2rem;
-  background: radial-gradient(
-    152% 115.43% at -27.14% -9.07%,
-    #6de1e1 25.39%,
-    #7ae3d0 46.12%,
-    #92e6ae 85.5%
-  );
+  background: ${props => props.gradientBackground};
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   padding-bottom: 20vh;
@@ -31,15 +26,7 @@ const TagLineText = styled.h1`
   font-size: max(16px, 1vw);
   padding: 4px;
   line-height: 12px;
-  background: linear-gradient(
-    124.02deg,
-    #f47373 17.84%,
-    #9cc68e 50.65%,
-    #6a49f0 87.39%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #ffffff;
 `;
 
 const SignupLinkButton = styled(Button)`
@@ -48,7 +35,6 @@ const SignupLinkButton = styled(Button)`
   height: 20px;
   margin-top: 1.2rem;
   margin-bottom: 1.2rem;
-
   text-decoration: underline;
   text-decoration-color: #e1d6e4;
 `;
@@ -67,8 +53,8 @@ const SignupButtonUnderline = styled(CenterAlignedColumnContainer)`
 `;
 
 const OverlayContainer = styled(CenterAlignedColumnContainer)`
-  width: 90%;
-  height: auto;
+  width: 80%;
+  height: 80vh;
   background: rgba(255, 255, 255, 0.25);
   border-radius: 25px;
   justify-content: flex-start;
@@ -112,7 +98,7 @@ const LoginPageButton = styled(CenterAlignedColumnContainer)`
   margin-top: 1.8rem;
 `;
 
-const LoginPageButtonText = styled.h1`
+const CoreLandingPagebutton = styled.h1`
   font-family: Questrial;
   font-style: normal;
   font-weight: normal;
@@ -122,12 +108,11 @@ const LoginPageButtonText = styled.h1`
   padding: 4px;
 `;
 
-const EnterLibraryButton = styled(Button)`
+const CoreLadningPageButton = styled(Button)`
   width: 80%;
   height: 48px;
   border-radius: 25px;
   margin-top: 1.8rem;
-  background: #f3f4f6;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   filter: blur(0.2px);
   @media (min-width: 786px) {
@@ -135,28 +120,23 @@ const EnterLibraryButton = styled(Button)`
   }
 `;
 
-const EnterLibraryButtonText = styled(LoginPageButtonText)`
-  background: linear-gradient(90deg, #40e3be 0%, #6cb5d1 100%);
+const GoogleLoginButton = styled(CoreLadningPageButton)`
+  background: #f3f4f6;
+`;
+
+const GoogleLoginButtonText = styled(CoreLandingPagebutton)`
+  background: ${props => props.buttonTextColor};
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
 `;
 
-const MemberLoginButton = styled(Button)`
-  width: 80%;
-  height: 48px;
-  border-radius: 25px;
-  margin-top: 1.8rem;
-  background: linear-gradient(90deg, #40e3be 0%, #6cb5d1 100%);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 25px;
-  @media (min-width: 786px) {
-    width: 60%;
-  }
+const EnterLibraryButton = styled(CoreLadningPageButton)`
+  background: ${props => props.buttonBackground};
 `;
 
-const MemberLoginButtonText = styled(LoginPageButtonText)`
+const EnterLibraryButtonText = styled(CoreLandingPagebutton)`
   color: #f3f4f6;
 `;
 
@@ -274,10 +254,10 @@ export {
   OverlayContainer,
   ActionBorder,
   ActionContainer,
+  GoogleLoginButton,
+  GoogleLoginButtonText,
   EnterLibraryButton,
   EnterLibraryButtonText,
-  MemberLoginButton,
-  MemberLoginButtonText,
   LoginPageInputTextBox,
   LoginPageActionButton,
   BackgroundCircle,

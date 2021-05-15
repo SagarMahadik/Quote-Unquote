@@ -10,8 +10,14 @@ import {
 import PaginationAuthors from 'Modules/DisplayQuote/Components/MoodPage/PaginationAuthors.js';
 import InputButtonLoadingContainer from 'StylesLibrary/Molecules/LoadingModule/InputButtonLoadingContainer';
 import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
+import {
+  useApplicationState,
+  useApplicationDispatch
+} from 'Modules/Authentication/State/ApplicationState.js';
 
 const MoodPageAuthor = () => {
+  const { appThemes, activeTheme } = useApplicationState();
+
   const {
     authorList,
     exploreMore: {
@@ -36,6 +42,7 @@ const MoodPageAuthor = () => {
                 buttonSelected={selected}
                 onClick={() => handleClickOnAuthor(authorName)}
                 key={_id}
+                selectedColor={appThemes[activeTheme]}
               />
             );
           })}

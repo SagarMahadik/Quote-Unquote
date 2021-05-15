@@ -7,7 +7,12 @@ import {
 
 import { incomeButtonVibrations } from 'Utils/vibrations.js';
 
-const InputButton = ({ buttonText, buttonSelected, onClick }) => {
+const InputButton = ({
+  buttonText,
+  buttonSelected,
+  onClick,
+  selectedColor
+}) => {
   return (
     <>
       <InputButtonStyle
@@ -17,7 +22,10 @@ const InputButton = ({ buttonText, buttonSelected, onClick }) => {
           onClick(e);
         }}
       >
-        <InputButtonText selected={buttonSelected}>
+        <InputButtonText
+          selected={buttonSelected}
+          selectedColor={selectedColor}
+        >
           {buttonText}
         </InputButtonText>
       </InputButtonStyle>

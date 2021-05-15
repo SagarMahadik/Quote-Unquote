@@ -13,12 +13,18 @@ import {
   useDisplayQuoteDispatch
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 
+import {
+  useApplicationState,
+  useApplicationDispatch
+} from 'Modules/Authentication/State/ApplicationState.js';
 import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
 
 import PaginationTags from 'Modules/DisplayQuote/Components/MoodPage/PaginationTags.js';
 import InputButtonLoadingContainer from 'StylesLibrary/Molecules/LoadingModule/InputButtonLoadingContainer';
 
 const MoodPageTags = () => {
+  const { appThemes, activeTheme } = useApplicationState();
+
   const {
     tagList,
     exploreMore: {
@@ -47,6 +53,7 @@ const MoodPageTags = () => {
                 buttonSelected={selected}
                 onClick={() => handleClickOnTag(tagName)}
                 key={_id}
+                selectedColor={appThemes[activeTheme]}
               />
             );
           })}

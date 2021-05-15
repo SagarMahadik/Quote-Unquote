@@ -7,7 +7,12 @@ import { CenterAlignedColumnContainer } from 'StylesLibrary/Atoms/GlobalQuoteMod
 import QuoteSuccessNavigatiocard from 'StylesLibrary/Molecules/AddQuoteModule/AddQuoteSuccessMessage/QuoteSuccessNavigatiocard.js';
 import { NavigationPageContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/NavigationPage.js';
 
-const NavigationPage = ({ addQuouteCallBack, readQuoteCallBack, addMore }) => {
+const NavigationPage = ({
+  addQuouteCallBack,
+  readQuoteCallBack,
+  addMore,
+  navigatioCardTextColor
+}) => {
   const parentCntainer = {
     hidden: { opacity: 0 },
     show: {
@@ -41,12 +46,14 @@ const NavigationPage = ({ addQuouteCallBack, readQuoteCallBack, addMore }) => {
           <QuoteSuccessNavigatiocard
             navigationCardText={addMore ? 'Add another' : 'Add quote'}
             onClick={addQuouteCallBack}
+            navigatioCardTextColor={navigatioCardTextColor}
           />
         </StaggerAnimationChildContainer>
         <StaggerAnimationChildContainer variants={childContainer}>
           <QuoteSuccessNavigatiocard
             onClick={readQuoteCallBack}
             navigationCardText="Read"
+            navigatioCardTextColor={navigatioCardTextColor}
           />
         </StaggerAnimationChildContainer>
       </StaggerAnimationParentContainer>

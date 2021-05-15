@@ -8,7 +8,8 @@ export const InputButtonStyle = styled.button`
   align-items: center;
   justify-content: center;
   border-radius: 25px;
-  margin: 4px;
+  margin: 8px 4px 8px 4px;
+
   border: none;
   outline: none;
   background: ${({ selected, theme: { colors } }) =>
@@ -26,9 +27,9 @@ export const InputButtonText = styled.h1`
   padding: 0;
   padding-right: 12px;
   padding-left: 12px;
-  background: ${({ selected }) =>
+  background: ${({ selected, selectedColor }) =>
     selected
-      ? `linear-gradient(279.96deg, #AB7070 -16.21%, rgba(255, 0, 0, 0.37) 134.55%)`
+      ? `${selectedColor}`
       : `linear-gradient(98.37deg, #494343 3.9%, rgba(19, 17, 17, 0.35) 103.75%)`};
   font-family: PT Sans;
   font-size: 1rem;

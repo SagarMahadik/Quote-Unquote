@@ -13,7 +13,12 @@ const AdminLandingPage = () => {
   const [redirectToReadQuote, setRedirectToReadQuote] = useState(false);
   const history = useHistory();
 
-  const { user, isUserAuthenticated } = useApplicationState();
+  const {
+    user,
+    isUserAuthenticated,
+    appThemes,
+    activeTheme
+  } = useApplicationState();
 
   useEffect(() => {
     if (redirectToAddQuote) {
@@ -41,6 +46,7 @@ const AdminLandingPage = () => {
             }}
             readQuoteCallBack={() => setRedirectToReadQuote(true)}
             addMore={false}
+            navigatioCardTextColor={appThemes[activeTheme]}
           />
         </GradientContainer>
       </PageAnimationContainer>

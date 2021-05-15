@@ -12,7 +12,8 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 import { API } from 'APICalls/index.js';
-import setAuthToken from 'Utils/Axios/setAuthToken';
+import { themes } from 'StylesLibrary/Themes/theme.js';
+import { generateRandomInteger } from 'Modules/DisplayQuote/State/utils';
 
 const ApplicationState = ({ children }) => {
   const initialState = {
@@ -32,6 +33,8 @@ const ApplicationState = ({ children }) => {
       authors: [],
       tags: []
     },
+    appThemes: [...themes],
+    activeTheme: 13,
     user: {},
     isUserAuthenticated: false,
     authLoading: false,
@@ -54,21 +57,38 @@ const ApplicationState = ({ children }) => {
   const history = useHistory();
   useEffect(() => {
     if (isQuotesLoaded && quotes.length > 0) {
-      dispatch({ type: 'SET_QUOTES', payload: quotes });
+      dispatch({
+        type: 'SET_QUOTES',
+        payload: quotes
+      });
     }
   }, [quotes, isQuotesLoaded]);
 
   useEffect(() => {
     if (isTagsLoaded && tags.length > 0) {
-      dispatch({ type: 'SET_TAGS', payload: tags });
+      dispatch({
+        type: 'SET_TAGS',
+        payload: tags
+      });
     }
   }, [tags, isTagsLoaded]);
 
   useEffect(() => {
     if (isAuthorsLoaded && authors.length > 0) {
-      dispatch({ type: 'SET_AUTHORS', payload: authors });
+      dispatch({
+        type: 'SET_AUTHORS',
+        payload: authors
+      });
     }
   }, [authors, isAuthorsLoaded]);
+
+  useEffect(() => {
+    let randomIndex = generateRandomInteger(0, themes.length);
+    dispatch({
+      type: 'SET_RANDOM_THEME',
+      payload: randomIndex
+    });
+  }, []);
 
   const handleGoogleLogin = async res => {
     const token = res?.tokenId;
@@ -143,7 +163,9 @@ const ApplicationState = ({ children }) => {
     privateAuthenticationRoute,
     redirectPostLogout,
     adminLogin,
-    resetDisplayQuotes
+    resetDisplayQuotes,
+    appThemes,
+    activeTheme
   } = state;
 
   return (
@@ -165,6 +187,8 @@ const ApplicationState = ({ children }) => {
         redirectPostLogout,
         adminLogin,
         resetDisplayQuotes,
+        appThemes,
+        activeTheme,
         handleGoogleLogin,
         loadUser
       }}

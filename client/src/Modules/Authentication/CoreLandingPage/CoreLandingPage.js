@@ -24,6 +24,10 @@ import { useHistory } from 'react-router-dom';
 import LandingPageAuthLoader from 'StylesLibrary/Atoms/LoadingModule/LandingPageAuthLoader';
 import GoogleLogin from 'StylesLibrary/Molecules/AuthenticationModule/CoreLandingPage/GoogleLogin';
 import EnterTheLibrary from 'StylesLibrary/Molecules/AuthenticationModule/CoreLandingPage/EnterTheLibrary';
+import {
+  DisplayQuoteContext,
+  DisplayQuoteDispatchContext
+} from 'Modules/DisplayQuote/State/DisplayQuoteContext.js';
 
 const CoreLandingPage = () => {
   const clientId = `${process.env.REACT_APP_GOOGLEID}`;
@@ -43,19 +47,29 @@ const CoreLandingPage = () => {
     appThemes,
     activeTheme
   } = useApplicationState();
+  useEffect(() => {
+    dispatch({
+      type: 'DQ_UNSET_QUOTE_STATE'
+    });
+  }, []);
 
   useEffect(() => {
+    console.log('in a privateroute auth');
     if (privateRouteAuthentication && isUserAuthenticated) {
       history.push(`${privateAuthenticationRoute}`);
     }
   }, [privateRouteAuthentication, isUserAuthenticated]);
 
   useEffect(() => {
-    if (isUserAuthenticated && user.role == 'admin') {
+    if (
+      isUserAuthenticated &&
+      user.role == 'admin' &&
+      !privateRouteAuthentication
+    ) {
       console.log('in history posug');
       history.push('/corelanding');
     }
-  }, [isUserAuthenticated, adminLogin, user]);
+  }, [isUserAuthenticated, adminLogin, user, privateRouteAuthentication]);
 
   useEffect(() => {
     if (isUserAuthenticated && !newUser && user.role == 'user') {
@@ -88,6 +102,7 @@ const CoreLandingPage = () => {
   });
 
   function handleClick() {
+    console.log('in a handle click');
     history.push('/moodPage');
     dispatch({
       type: 'RESET_DISPLAY_QUOTE_LOGOUT'
@@ -126,7 +141,7 @@ const CoreLandingPage = () => {
               ></GoogleLogin>
             </div>
             <ArrowIcon
-              style={{ marginTop: '4rem' }}
+              style={{ marginTop: '4rem', zIndex: 100 }}
               onClick={() => dispatch({ type: 'TOGGLE_DISPLAY_CREDO' })}
             />
             <Credo />

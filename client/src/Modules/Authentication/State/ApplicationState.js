@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom';
 import { API } from 'APICalls/index.js';
 import { themes } from 'StylesLibrary/Themes/theme.js';
 import { generateRandomInteger } from 'Modules/DisplayQuote/State/utils';
+import setAuthToken from 'Utils/Axios/setAuthToken.js';
 
 const ApplicationState = ({ children }) => {
   const initialState = {
@@ -34,7 +35,7 @@ const ApplicationState = ({ children }) => {
       tags: []
     },
     appThemes: [...themes],
-    activeTheme: 13,
+    activeTheme: 14,
     user: {},
     isUserAuthenticated: false,
     authLoading: false,
@@ -84,6 +85,7 @@ const ApplicationState = ({ children }) => {
 
   useEffect(() => {
     let randomIndex = generateRandomInteger(0, themes.length);
+    console.log(randomIndex);
     dispatch({
       type: 'SET_RANDOM_THEME',
       payload: randomIndex
@@ -126,24 +128,30 @@ const ApplicationState = ({ children }) => {
   };
 
   const loadUser = async () => {
-    if (localStorage.getItem('token') != null) {
-      console.log('in load user');
-      try {
-        const res = await API.get('/api/v1/users/auth');
+    if (isUserAuthenticated) {
+      console.log('user logged in');
+    } else {
+      if (localStorage.getItem('token') != null) {
+        console.log('in load user');
 
-        dispatch({
-          type: 'LOAD_USER',
-          payload: res.data
-        });
-      } catch (err) {
+        setAuthToken(localStorage.getItem('token'));
+        try {
+          const res = await axios.get('/api/v1/users/auth');
+
+          dispatch({
+            type: 'LOAD_USER',
+            payload: res.data
+          });
+        } catch (err) {
+          dispatch({
+            type: 'LOAD_USER_FAILED'
+          });
+        }
+      } else {
         dispatch({
           type: 'LOAD_USER_FAILED'
         });
       }
-    } else {
-      dispatch({
-        type: 'LOAD_USER_FAILED'
-      });
     }
   };
 

@@ -57,6 +57,10 @@ const AddQuote = () => {
     }
   }, []);
 
+  useEffect(() => {
+    window.onpopstate = e => history.push('/corelanding');
+  }, []);
+
   if (quoteCreatedSuccessfully) {
     return (
       <>

@@ -30,7 +30,8 @@ import {
   DQ_RESET_SELECTQUOTES_POST_DELETE,
   DQ_DELETE_RESET,
   DQ_INITIATE_DELETE_REQUEST,
-  DQ_RESET_QUOTE_STATE
+  DQ_RESET_QUOTE_STATE,
+  DQ_UNSET_QUOTE_STATE
 } from 'Modules/DisplayQuote/State/types.js';
 import { produce } from 'immer';
 
@@ -276,8 +277,9 @@ export default (state, action) => {
 
     case DQ_RESET_QUOTE_STATE:
       return produce(state, draftState => {
-        draftState.displayQuotes = false;
         draftState.displayQuote = false;
+        draftState.currentQuote = [];
+        draftState.displayQuotes = false;
       });
   }
 };

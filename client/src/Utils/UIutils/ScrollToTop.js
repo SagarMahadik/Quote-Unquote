@@ -8,6 +8,7 @@ function ScrollToTop({ children }) {
   const { loadUser } = useApplicationState();
 
   useEffect(() => {
+    console.log('in a load user');
     loadUser();
   }, []);
 

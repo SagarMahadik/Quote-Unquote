@@ -54,7 +54,7 @@ const SignupButtonUnderline = styled(CenterAlignedColumnContainer)`
 
 const OverlayContainer = styled(CenterAlignedColumnContainer)`
   width: 80%;
-  height: 80vh;
+  height: auto;
   background: rgba(255, 255, 255, 0.25);
   border-radius: 25px;
   justify-content: flex-start;

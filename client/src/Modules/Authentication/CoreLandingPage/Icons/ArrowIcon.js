@@ -10,6 +10,7 @@ function ArrowIcon(props) {
         transition: { duration: 3, repeat: Infinity, repeatType: 'reverse' }
       }}
       exit={{ opacity: 0 }}
+      {...props}
     >
       <svg
         width="56"

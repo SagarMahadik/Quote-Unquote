@@ -7,10 +7,17 @@ import {
   useAddQuoteDispatch
 } from 'Modules/AddQuote/State/AddQuoteState.js';
 
+import {
+  useApplicationState,
+  useApplicationDispatch
+} from 'Modules/Authentication/State/ApplicationState.js';
+
 import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
 import PaginationTags from '../PaginationTags';
 
 const Tags = () => {
+  const { appThemes, activeTheme } = useApplicationState();
+
   const {
     applicationData: { tagList },
     exploreMore: {
@@ -37,6 +44,7 @@ const Tags = () => {
                     onClick={() =>
                       dispatch({ type: 'SET_TAG', payload: tagName })
                     }
+                    selectedColor={appThemes[activeTheme]}
                   />
                 );
               })}

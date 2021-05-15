@@ -39,10 +39,14 @@ const MoodPage = ({ hidePageheading }) => {
   };
 
   useEffect(() => {
+    window.onpopstate = e => history.push('/');
+  }, []);
+
+  useEffect(() => {
     if (displayQuotes) {
       history.push('/readQuote');
     } else {
-      return;
+      history.push('/moodPage');
     }
   }, [displayQuotes]);
 

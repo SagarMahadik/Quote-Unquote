@@ -29,7 +29,7 @@ import PageAnimationOpacity from 'StylesLibrary/Animations/AnimationContainer/Pa
 import { QuotePageContainer } from './QuoteDisplayContainer';
 
 const QuoteDisplay = () => {
-  const { isUserAuthenticated } = useApplicationState();
+  const { isUserAuthenticated, redirectPostLogout } = useApplicationState();
   const {
     filteredQuotes: { filterQuotesList },
     refreshFIlteredQuotes,
@@ -48,15 +48,25 @@ const QuoteDisplay = () => {
     dispatch({ type: 'DQ_SET_CURRENT_QUOTE', payload: randomQuote });
   };
   const history = useHistory();
+
+  console.log(history);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    if (!displayQuotes) {
+    if (!displayQuotes && !redirectPostLogout) {
+      console.log('i amhere');
       history.push('/moodPage');
     }
-  }, [displayQuotes]);
+    if (!displayQuotes && redirectPostLogout) {
+      history.push('/');
+    }
+  }, [displayQuotes, redirectPostLogout]);
+
+  useEffect(() => {
+    window.onpopstate = e => dispatch({ type: 'DQ_RESET_QUOTE_STATE' });
+  }, []);
 
   useEffect(() => {
     if (refreshFIlteredQuotes) {

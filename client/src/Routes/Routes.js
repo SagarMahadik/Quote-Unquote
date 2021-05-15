@@ -46,8 +46,12 @@ const Routes = () => {
         <React.Suspense fallback={<FallBackLoader />}>
           <Switch location={location} key={location.pathname}>
             <Route exact path="/" component={CoreLandingPage} />
-            <Route exact path="/corelanding" component={AdminLandingPage} />
-            <Route exact path="/addQuote" component={AddQuote} />
+            <PrivateRoute
+              exact
+              path="/corelanding"
+              component={AdminLandingPage}
+            />
+            <PrivateRoute exact path="/addQuote" component={AddQuote} />
             <Route exact path="/readQuote" component={QuoteDisplay} />
             <Route exact path="/moodPage" component={MoodPage} />
             <Route exact path="/signUpSuccess" component={SignUpSuccess} />

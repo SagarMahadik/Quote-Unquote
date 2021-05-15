@@ -30,8 +30,6 @@ const DisplayQuote = () => {
   const quoteTextRef = useRef(null);
   const history = useHistory();
 
-  console.log(history);
-
   useLayoutEffect(() => {
     if (quoteTextRef.current) {
       if (quoteTextRef.current.clientHeight < 400) {

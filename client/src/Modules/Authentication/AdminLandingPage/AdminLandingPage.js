@@ -6,7 +6,10 @@ import GradientContainer from 'StylesLibrary/Animations/AnimationContainer/Gradi
 import PageAnimationContainer from 'StylesLibrary/Animations/AnimationContainer/PageAnimations/PageAnimationContainer';
 import PageHeading from 'Modules/Global/Components/PageHeading';
 import { AdminLandingPageContainer } from './AdminLandingPageStyles';
-import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
+import {
+  useApplicationDispatch,
+  useApplicationState
+} from 'Modules/Authentication/State/ApplicationState.js';
 
 const AdminLandingPage = () => {
   const [redirectToAddQuote, setRedirectToAddQuote] = useState(false);
@@ -20,6 +23,8 @@ const AdminLandingPage = () => {
     activeTheme
   } = useApplicationState();
 
+  const dispatch = useApplicationDispatch();
+
   useEffect(() => {
     if (redirectToAddQuote) {
       history.push('/addQuote');
@@ -28,6 +33,10 @@ const AdminLandingPage = () => {
       history.push('/moodPage');
     }
   }, [redirectToAddQuote, redirectToReadQuote]);
+
+  useEffect(() => {
+    window.onpopstate = e => dispatch({ type: 'LOG_OUT_USER' });
+  }, []);
 
   useEffect(() => {
     if (!isUserAuthenticated || user.role != 'admin') {

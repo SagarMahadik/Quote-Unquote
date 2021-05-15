@@ -12,12 +12,17 @@ import { useStepStatusRequest } from 'APICalls/StepLog/useStepLog.js';
 
 import { useHistory } from 'react-router-dom';
 import GradientContainer from 'StylesLibrary/Animations/AnimationContainer/GradientContainer';
+import {
+  useApplicationState,
+  useApplicationDispatch
+} from 'Modules/Authentication/State/ApplicationState.js';
 
 const AddQuoteSuccess = ({ authorName }) => {
   const { sendStepStatusRequest } = useStepStatusRequest();
   const { redirectToReadQuote } = useAddQuoteState();
   const dispatch = useAddQuoteDispatch();
   const history = useHistory();
+  const { appThemes, activeTheme } = useApplicationState();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,6 +49,7 @@ const AddQuoteSuccess = ({ authorName }) => {
           addQuouteCallBack={() => resetTheAddquoteForm()}
           readQuoteCallBack={() => dispatch({ type: 'AQ_REDIRECT_READQUOTES' })}
           addMore={true}
+          navigatioCardTextColor={appThemes[activeTheme]}
         />
       </GradientContainer>
     </AddQuoteSuccessContainer>

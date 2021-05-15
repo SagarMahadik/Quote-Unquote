@@ -133,7 +133,8 @@ const DisplayQuoteState = ({ children }) => {
         displayFilterModal,
         refreshFIlteredQuotes,
         displayQuote,
-        selectQuotePostDelete
+        selectQuotePostDelete,
+        dispatch
       }}
     >
       <DisplayQuoteDispatchContext.Provider value={dispatch}>

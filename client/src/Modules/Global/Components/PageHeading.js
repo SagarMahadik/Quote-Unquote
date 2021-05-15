@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import HomeButton from 'StylesLibrary/Molecules/GlobalModule/HomeButton';
 import LogoutButton from 'StylesLibrary/Molecules/GlobalModule/LogoutButton.js';
@@ -10,9 +10,14 @@ import {
 } from 'Modules/Authentication/State/ApplicationState.js';
 import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
+import { DisplayQuoteDispatchContext } from 'Modules/DisplayQuote/State/DisplayQuoteContext.js';
 
 const PageHeading = () => {
-  const { isUserAuthenticated, redirectPostLogout } = useApplicationState();
+  const {
+    isUserAuthenticated,
+    redirectPostLogout,
+    user: { role }
+  } = useApplicationState();
   const dispatch = useApplicationDispatch();
   const history = useHistory();
   useEffect(() => {
@@ -21,17 +26,29 @@ const PageHeading = () => {
     }
   }, [redirectPostLogout]);
 
+  const displayQuoteDispatch = useContext(DisplayQuoteDispatchContext);
+
   return (
     <>
       {isUserAuthenticated ? (
         <AdminPageHeadingContainer style={{ zIndex: '100', marginTop: '2rem' }}>
-          <Link to="/">
-            <HomeButton />
-          </Link>
+          {role == 'admin' ? (
+            <Link to="/corelanding">
+              <HomeButton />
+            </Link>
+          ) : (
+            <Link to="/">
+              <HomeButton />
+            </Link>
+          )}
+
           <LogoutButton
             onClick={() => {
               dispatch({
                 type: 'LOG_OUT_USER'
+              });
+              displayQuoteDispatch({
+                type: 'DQ_RESET_QUOTE_STATE'
               });
             }}
           />

@@ -7,6 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const path = require('path');
+const cors = require('cors');
 var winston = require('winston'),
   expressWinston = require('express-winston');
 
@@ -37,6 +38,8 @@ const app = express();
 
 // 1) GLOBAL MIDDLEWARES
 // Set security HTTP headers
+app.use(cors());
+app.options('*', cors());
 app.use(helmet());
 
 // Development logging

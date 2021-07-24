@@ -6,6 +6,8 @@ const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const sendEmail = require('./../utils/email');
 const { OAuth2Client } = require('google-auth-library');
+const urlMetadata = require('url-metadata');
+const ogs = require('open-graph-scraper');
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const signToken = id => {
@@ -51,6 +53,19 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 exports.googleLogin = catchAsync(async (req, res, next) => {
+  urlMetadata(
+    'https://www.worldwidejournals.com/indian-journal-of-applied-research-(IJAR)/article/a-study-of-patients-with-liver-cirrhosis-and-portal-hypertension-with-special-reference-to-hematological-profile/MTUzNjY=/?is=1'
+  ).then(
+    function(metadata) {
+      // success handler
+      console.log(metadata);
+    },
+    function(error) {
+      // failure handler
+      console.log(error);
+    }
+  );
+
   const ticket = await client.verifyIdToken({
     idToken: req.body.token,
     audience: process.env.GOOGLE_CLIENT_ID

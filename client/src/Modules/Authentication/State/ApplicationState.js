@@ -16,6 +16,8 @@ import { themes } from 'StylesLibrary/Themes/theme.js';
 import { generateRandomInteger } from 'Modules/DisplayQuote/State/utils';
 import setAuthToken from 'Utils/Axios/setAuthToken.js';
 
+import urlMetadata from 'url-metadata';
+
 const ApplicationState = ({ children }) => {
   const initialState = {
     logindetails: {
@@ -56,6 +58,13 @@ const ApplicationState = ({ children }) => {
   const { tags, isTagsLoaded } = useTags();
   const { authors, isAuthorsLoaded } = useAuthors();
   const history = useHistory();
+
+  urlMetadata('https://www.npmjs.com/package/url-metadata').then(function(
+    metadata
+  ) {
+    console.log(metadata);
+  });
+
   useEffect(() => {
     if (isQuotesLoaded && quotes.length > 0) {
       dispatch({

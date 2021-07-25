@@ -33,6 +33,7 @@ const logRouter = require('./routes/logRoutes');
 const quoteRouter = require('./routes/Quote-Unquote/QuoteRoutes');
 const authorRouter = require('./routes/Quote-Unquote/AuthorRoutes');
 const tagRouter = require('./routes/Quote-Unquote/TagRoutes');
+const backGroundImageRouter = require('./routes/Quote-Unquote/BackgroundImage');
 const { info } = require('winston');
 const app = express();
 
@@ -133,6 +134,7 @@ app.use('/api/v1/quote', quoteRouter);
 app.use('/api/v1/author', authorRouter);
 app.use('/api/v1/tag', tagRouter);
 app.use('/api/v1/stepLogs', logRouter);
+app.use('/api/v1/images', backGroundImageRouter);
 
 if (process.env.NODE_ENV === 'production') {
   // Serving static files

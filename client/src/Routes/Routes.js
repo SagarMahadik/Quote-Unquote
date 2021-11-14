@@ -38,6 +38,14 @@ const SignUpSuccess = React.lazy(() =>
   )
 );
 
+const DisplayQuotesDarkTheme = React.lazy(() =>
+  import('StyleLibrary1.0/Pages/DisplayQuotesDarkTheme')
+);
+
+const DarkThemeLandingPage = React.lazy(() =>
+  import('StyleLibrary1.0/Pages/DarkThemeLandingPage')
+);
+
 const Routes = () => {
   const location = useLocation();
   return (
@@ -55,6 +63,16 @@ const Routes = () => {
             <Route exact path="/readQuote" component={QuoteDisplay} />
             <Route exact path="/moodPage" component={MoodPage} />
             <Route exact path="/signUpSuccess" component={SignUpSuccess} />
+            <Route
+              exact
+              path="/displayQuotesDarkTheme"
+              component={DisplayQuotesDarkTheme}
+            />
+            <Route
+              exact
+              path="/darkThemeLandingPage"
+              component={DarkThemeLandingPage}
+            />
           </Switch>
         </React.Suspense>
       </AnimatePresence>

@@ -4,7 +4,7 @@ const factory = require('../handlerFactory');
 
 exports.createAuthor = factory.createOne(Author);
 
-exports.getAllAuthors = factory.getAllAuthorDetails({
+exports.getAllAuthors = factory.getAll({
   Model: Author,
   cacheKey: 'authors'
 });

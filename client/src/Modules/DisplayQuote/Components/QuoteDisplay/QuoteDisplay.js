@@ -26,6 +26,9 @@ import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
 import AuthorInfoDrawer from './Styles/Molecules/AuthorInfoDrawer';
 import ActionIcons from './Styles/Molecules/ActionIcons';
 import FilterDrawer from './Styles/Molecules/FilterDrawer';
+
+import { CenterAlignedFlexStartColumnContainer } from 'BennyStyleLibrary/Global/containerStyles';
+
 const QuoteDisplay = () => {
   const [displayAuthorProfile, setDisplayAuthorProfile] = React.useState(false);
   const [displayOverlay, setDisplayOverlay] = React.useState(false);
@@ -37,10 +40,23 @@ const QuoteDisplay = () => {
     displayFilterModal,
     styles: { containerHeight },
     selectQuotePostDelete,
-    displayQuotes
+    displayQuotes,
+    filteredQuotesLoaded
   } = useDisplayQuoteState();
 
   const dispatch = useDisplayQuoteDispatch();
+
+  const {
+    applicationData: { quotes }
+  } = useApplicationState();
+
+  useEffect(() => {
+    if (filterQuotesList.length === 0) {
+      dispatch({
+        type: 'DQ_CREATE_FILTEREDQUOTES'
+      });
+    }
+  }, [filterQuotesList]);
 
   const selectRandomQuote = () => {
     let randomIndex = generateRandomInteger(1, filterQuotesList.length - 1);
@@ -98,94 +114,114 @@ const QuoteDisplay = () => {
   };
 
   const bind = useDoubleTap(event => {
-    // Your action here
     setDisplayActionButtons(!displayActionButtons);
   });
 
   return (
-    <>
-      <QuotePageContainer>
-        <AnimatePresence>
-          {displayOverlay || (displayFilterModal && <QuotePageOverlay />)}
-        </AnimatePresence>
-        <AnimatePresence>
-          <QuoteContainer
-            key={page}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: 'spring', stiffness: 200, damping: 20 },
-              opacity: { duration: 0 }
-            }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
-            onDragEnd={(e, { offset, velocity }) => {
-              const swipe = swipePower(offset.x, velocity.x);
-
-              if (swipe < -swipeConfidenceThreshold) {
-                paginate(1);
-              } else if (swipe > swipeConfidenceThreshold) {
-                paginate(-1);
-              }
-            }}
-            {...bind}
-          >
-            <QuoteText>{filterQuotesList[quoteIndex].quote}</QuoteText>
-            <QuotePageTagContainer>
-              <>
-                <QuotePageTagText
-                  onClick={() => {
-                    setDisplayOverlay(true);
-                    setDisplayAuthorProfile(true);
-                  }}
-                >
-                  {makeFirstLetterUpperCase(
-                    filterQuotesList[quoteIndex].author['authorName']
-                  )}
-                </QuotePageTagText>
-              </>
-              {filterQuotesList[quoteIndex].tags.map(({ tagName, _id }) => {
-                return (
-                  <QuotePageTagText key={_id}>
-                    {' '}
-                    | {makeFirstLetterUpperCase(tagName)}
-                  </QuotePageTagText>
-                );
-              })}
-            </QuotePageTagContainer>
-          </QuoteContainer>
-        </AnimatePresence>
-        <AnimatePresence>
-          {displayAuthorProfile && (
-            <AuthorInfoDrawer
-              authorImageUrl={
-                filterQuotesList[quoteIndex].author['authorImageUrl']
-              }
-              authorBio={filterQuotesList[quoteIndex].author['authorBio']}
-              onClick={() => {
-                setDisplayOverlay(false);
-                setDisplayAuthorProfile(false);
-              }}
-            />
-          )}
-        </AnimatePresence>
-        <AnimatePresence>
-          {displayActionButtons && (
-            <ActionIcons
-              currentQuote={filterQuotesList[quoteIndex].quote}
-              currentAuthor={filterQuotesList[quoteIndex].author['authorName']}
-            />
-          )}
-        </AnimatePresence>
+    <QuotePageContainer>
+      {filterQuotesList.length > 0 ? (
         <>
-          <FilterDrawer />
+          <AnimatePresence>
+            {displayOverlay || (displayFilterModal && <QuotePageOverlay />)}
+          </AnimatePresence>
+          <AnimatePresence>
+            <QuoteContainer
+              key={page}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                x: { type: 'spring', stiffness: 200, damping: 20 },
+                opacity: { duration: 0 }
+              }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={1}
+              onDragEnd={(e, { offset, velocity }) => {
+                const swipe = swipePower(offset.x, velocity.x);
+
+                if (swipe < -swipeConfidenceThreshold) {
+                  paginate(1);
+                } else if (swipe > swipeConfidenceThreshold) {
+                  paginate(-1);
+                }
+              }}
+              {...bind}
+            >
+              {filterQuotesList.length > 0 && (
+                <>
+                  <QuoteText>{filterQuotesList[quoteIndex].quote}</QuoteText>
+                  <QuotePageTagContainer>
+                    <>
+                      <QuotePageTagText
+                        onClick={() => {
+                          setDisplayOverlay(true);
+                          setDisplayAuthorProfile(true);
+                        }}
+                      >
+                        {makeFirstLetterUpperCase(
+                          filterQuotesList[quoteIndex].author['authorName']
+                        )}
+                      </QuotePageTagText>
+                    </>
+                    {filterQuotesList[quoteIndex].tags.map(
+                      ({ tagName, _id }) => {
+                        return (
+                          <QuotePageTagText key={_id}>
+                            {' '}
+                            | {makeFirstLetterUpperCase(tagName)}
+                          </QuotePageTagText>
+                        );
+                      }
+                    )}
+                  </QuotePageTagContainer>
+                </>
+              )}
+            </QuoteContainer>
+          </AnimatePresence>
+          <AnimatePresence>
+            {displayAuthorProfile && (
+              <AuthorInfoDrawer
+                authorImageUrl={
+                  filterQuotesList[quoteIndex].author['authorImageUrl']
+                }
+                authorBio={filterQuotesList[quoteIndex].author['authorBio']}
+                onClick={() => {
+                  setDisplayOverlay(false);
+                  setDisplayAuthorProfile(false);
+                }}
+              />
+            )}
+          </AnimatePresence>
+          <AnimatePresence>
+            {displayActionButtons && (
+              <ActionIcons
+                currentQuote={filterQuotesList[quoteIndex].quote}
+                currentAuthor={
+                  filterQuotesList[quoteIndex].author['authorName']
+                }
+              />
+            )}
+          </AnimatePresence>
+          <>
+            <FilterDrawer />
+          </>
         </>
-      </QuotePageContainer>
-    </>
+      ) : (
+        <CenterAlignedFlexStartColumnContainer
+          width="80%"
+          height="20vh"
+          borderRadius="10px"
+          background="rgba(255,255,255,0.2)"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ repeat: Infinity, repeatType: 'reverse', duration: 1 }}
+        />
+      )}
+    </QuotePageContainer>
   );
 };
 

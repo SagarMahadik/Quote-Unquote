@@ -57,7 +57,7 @@ const Routes = () => {
       <AnimatePresence>
         <React.Suspense fallback={<FallBackLoader />}>
           <Switch location={location} key={location.pathname}>
-            <Route exact path="/" component={CoreLandingPage} />
+            <Route exact path="/" component={AppLandingPage} />
             <PrivateRoute
               exact
               path="/corelanding"
@@ -77,7 +77,6 @@ const Routes = () => {
               path="/darkThemeLandingPage"
               component={DarkThemeLandingPage}
             />
-            <Route exact path="/appLandingPage" component={AppLandingPage} />
           </Switch>
         </React.Suspense>
       </AnimatePresence>

@@ -8,11 +8,6 @@ export const MoodPageContainer = styled(CenterAlignedFlexStartColumnContainer)`
   width: 100%;
   height: auto;
   min-height: 100vh;
-  background: radial-gradient(
-    103.04% 56.47% at 49.87% 50%,
-    #3965a2 30.25%,
-    #1a2949 100%
-  );
   border-top-left-radius: ${props => (props.displayInDrawer ? '25px' : 'none')};
   border-top-right-radius: ${props =>
     props.displayInDrawer ? '25px' : 'none'};
@@ -71,6 +66,13 @@ export const MoodPageButtonText = styled(Text)`
   margin-top: 8px;
   padding-bottom: 8px;
   color: rgba(255, 255, 255, 0.8);
+`;
+
+export const MoodPageSkeletonButton = styled(MoodPageButtonWrapper)`
+  height: 90px;
+  width: 90px;
+  background: rgba(255, 255, 255, 0.2);
+  margin-left: 8px;
 `;
 
 export const MoodPageTagButtonSVG = styled(MotionImage)`

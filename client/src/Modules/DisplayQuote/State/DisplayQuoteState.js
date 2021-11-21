@@ -57,7 +57,8 @@ const DisplayQuoteState = ({ children }) => {
     displayFilterModal: false,
     refreshFIlteredQuotes: false,
     displayQuote: true,
-    selectQuotePostDelete: false
+    selectQuotePostDelete: false,
+    filteredQuotesLoaded: false
   };
   const [state, dispatch] = useReducer(DisplayQuoteReducer, initialState);
 
@@ -75,7 +76,8 @@ const DisplayQuoteState = ({ children }) => {
     displayFilterModal,
     refreshFIlteredQuotes,
     displayQuote,
-    selectQuotePostDelete
+    selectQuotePostDelete,
+    filteredQuotesLoaded
   } = state;
 
   const setAuthorsState = authorData => {
@@ -134,6 +136,7 @@ const DisplayQuoteState = ({ children }) => {
         refreshFIlteredQuotes,
         displayQuote,
         selectQuotePostDelete,
+        filteredQuotesLoaded,
         dispatch
       }}
     >

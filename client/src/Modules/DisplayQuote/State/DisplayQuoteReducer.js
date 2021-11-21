@@ -118,6 +118,17 @@ export default (state, action) => {
           )
           .flat();
 
+        function shuffle(array) {
+          for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+          }
+
+          return array;
+        }
+
         let finalArray = [];
         if (
           draftState.selectedData.selectedTags.length === 0 &&
@@ -128,9 +139,12 @@ export default (state, action) => {
           finalArray = [...quotesByAuthorNames, ...quotesByTags];
         }
 
-        draftState.filteredQuotes.filterQuotesList = [...new Set(finalArray)];
+        draftState.filteredQuotes.filterQuotesList = shuffle([
+          ...new Set(finalArray)
+        ]);
         draftState.refreshFIlteredQuotes = true;
         draftState.displayQuotes = true;
+        draftState.filteredQuotesLoaded = true;
       });
 
     case DQ_SET_CURRENT_QUOTE:

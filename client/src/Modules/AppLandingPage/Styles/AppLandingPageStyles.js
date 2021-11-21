@@ -55,4 +55,5 @@ export const LandingPageEntryButtonContainer = styled(
   height: 89px;
   position: absolute;
   top: 85%;
+  z-index: 3;
 `;

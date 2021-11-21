@@ -15,8 +15,13 @@ import { API } from 'APICalls/index.js';
 import { themes } from 'StylesLibrary/Themes/theme.js';
 import { generateRandomInteger } from 'Modules/DisplayQuote/State/utils';
 import setAuthToken from 'Utils/Axios/setAuthToken.js';
-
 import urlMetadata from 'url-metadata';
+
+import { quQTheme } from 'BennyStyleLibrary/Themes/darkTheme';
+
+const getRandomIndex = () => {
+  return Math.floor(Math.random() * quQTheme.length);
+};
 
 const ApplicationState = ({ children }) => {
   const initialState = {
@@ -50,20 +55,16 @@ const ApplicationState = ({ children }) => {
     privateAuthenticationRoute: '',
     redirectPostLogout: false,
     adminLogin: false,
-    resetDisplayQuotes: false
+    resetDisplayQuotes: false,
+    themeIndex: getRandomIndex()
   };
+
   const [state, dispatch] = useReducer(ApplicationReducer, initialState);
   const { quotes, isQuotesLoaded } = useQuotes();
 
   const { tags, isTagsLoaded } = useTags();
   const { authors, isAuthorsLoaded } = useAuthors();
   const history = useHistory();
-
-  urlMetadata('https://www.npmjs.com/package/url-metadata').then(function(
-    metadata
-  ) {
-    console.log(metadata);
-  });
 
   useEffect(() => {
     if (isQuotesLoaded && quotes.length > 0) {
@@ -182,7 +183,8 @@ const ApplicationState = ({ children }) => {
     adminLogin,
     resetDisplayQuotes,
     appThemes,
-    activeTheme
+    activeTheme,
+    themeIndex
   } = state;
 
   return (
@@ -206,6 +208,7 @@ const ApplicationState = ({ children }) => {
         resetDisplayQuotes,
         appThemes,
         activeTheme,
+        themeIndex,
         handleGoogleLogin,
         loadUser
       }}

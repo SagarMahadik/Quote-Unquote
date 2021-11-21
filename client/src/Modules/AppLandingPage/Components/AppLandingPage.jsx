@@ -21,7 +21,7 @@ const AppLandingPage = () => {
         <QuQLogo />
       </QuQLogoContainer>
       <QuQAuthorCards />
-      <QuQEnterButton onClick={startReadingQuotes} />
+      <QuQEnterButton onClick={() => startReadingQuotes()} />
     </AppLandingPageContainer>
   );
 };

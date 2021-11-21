@@ -4,13 +4,10 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Routes from 'Routes/Routes.js';
 import ScrollToTop from 'Utils/UIutils/ScrollToTop';
-import {
-  CenterAlignedColumnContainer,
-  CenterAlignedColumnContainerWithShadowBackground
-} from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
-import PageHeading from 'Modules/Global/Components/PageHeading';
-import GlobalStyle from 'StylesLibrary/GlobalStyles';
+
+import { CenterAlignedFlexStartColumnContainer } from 'BennyStyleLibrary/Global/containerStyles';
 import DisplayQuoteState from 'Modules/DisplayQuote/State/DisplayQuoteState';
+import ThemeAppBackground from './BennyStyleLibrary/Themes/ThemeAppBackground';
 
 const queryClient = new QueryClient();
 
@@ -19,13 +16,15 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ApplicationState className="App">
         <DisplayQuoteState>
-          <Router>
-            <ScrollToTop>
-              <Switch>
-                <Route component={Routes} />
-              </Switch>
-            </ScrollToTop>
-          </Router>
+          <ThemeAppBackground>
+            <Router>
+              <ScrollToTop>
+                <Switch>
+                  <Route component={Routes} />
+                </Switch>
+              </ScrollToTop>
+            </Router>
+          </ThemeAppBackground>
         </DisplayQuoteState>
       </ApplicationState>
     </QueryClientProvider>

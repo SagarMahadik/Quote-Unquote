@@ -26,8 +26,10 @@ import {
   MoodPageSectionHeader,
   MoodPageTagButtonSVG,
   MoodPageTagButtonText,
-  MoodPageTagButtonWrapper
+  MoodPageTagButtonWrapper,
+  MoodPageSkeletonButton
 } from './Styles/moodpageStyles';
+import MoodPageSkeletons from './Styles/Molecules/MoodPageSkeletons';
 
 const MoodPageTags = () => {
   const { appThemes, activeTheme } = useApplicationState();
@@ -52,22 +54,7 @@ const MoodPageTags = () => {
 
       {tagList.length === 0 ? (
         <MoodPageSectionContainer>
-          <MoodPageTagButtonWrapper background="rgba(255,255,255,0.4)">
-            <MoodPageTagButtonSVG background="rgba(255,255,255,0.8)"></MoodPageTagButtonSVG>
-            <MoodPageTagButtonText></MoodPageTagButtonText>
-          </MoodPageTagButtonWrapper>
-          <MoodPageTagButtonWrapper background="rgba(255,255,255,0.4)">
-            <MoodPageTagButtonSVG background="rgba(255,255,255,0.8)"></MoodPageTagButtonSVG>
-            <MoodPageTagButtonText></MoodPageTagButtonText>
-          </MoodPageTagButtonWrapper>
-          <MoodPageTagButtonWrapper background="rgba(255,255,255,0.4)">
-            <MoodPageTagButtonSVG background="rgba(255,255,255,0.8)"></MoodPageTagButtonSVG>
-            <MoodPageTagButtonText></MoodPageTagButtonText>
-          </MoodPageTagButtonWrapper>
-          <MoodPageTagButtonWrapper background="rgba(255,255,255,0.4)">
-            <MoodPageTagButtonSVG background="rgba(255,255,255,0.8)"></MoodPageTagButtonSVG>
-            <MoodPageTagButtonText></MoodPageTagButtonText>
-          </MoodPageTagButtonWrapper>
+          <MoodPageSkeletons />
         </MoodPageSectionContainer>
       ) : (
         <MoodPageSectionContainer>

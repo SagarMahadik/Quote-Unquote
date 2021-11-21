@@ -5,7 +5,7 @@ import Loader from 'StylesLibrary/Atoms/LoadingModule/Loader';
 
 const FallBackLoader = () => {
   return (
-    <CenterAlignedColumnContainer height="100vh" backgroundColor="black">
+    <CenterAlignedColumnContainer width="100%" height="100vh">
       <Loader />
     </CenterAlignedColumnContainer>
   );

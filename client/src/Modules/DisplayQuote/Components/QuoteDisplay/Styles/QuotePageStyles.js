@@ -9,13 +9,7 @@ import { WrappedRowContainer } from './../../../../../BennyStyleLibrary/Global/c
 
 export const QuotePageContainer = styled(CenterAlignedColumnContainer)`
   width: 100%;
-
   min-height: 100vh;
-  background: radial-gradient(
-    103.04% 56.47% at 49.87% 50%,
-    #3965a2 30.25%,
-    #192747 100%
-  );
 `;
 
 export const QuotePageOverlay = styled(CenterAlignedColumnContainer)`
@@ -100,11 +94,6 @@ export const AuthorInfoDrawerContainer = styled(
   top: 68%;
   left: 0;
   z-index: 3;
-  background: radial-gradient(
-    51.33% 74.07% at 48.67% 46.39%,
-    rgba(57, 101, 162, 0.8) 0%,
-    rgba(26, 41, 74, 0.8) 100%
-  );
   overflow-y: scroll;
 `;
 

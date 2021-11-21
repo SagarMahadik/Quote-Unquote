@@ -73,7 +73,7 @@ const Loader = () => {
           display: 'flex',
           height: '20px',
           width: '20px',
-          backgroundColor: '#cc5079',
+          backgroundColor: 'rgba(255,255,255,0.7)',
           borderRadius: '50%'
         }}
       ></motion.div>
@@ -84,7 +84,7 @@ const Loader = () => {
           display: 'flex',
           height: '20px',
           width: '20px',
-          backgroundColor: '#28b5b5',
+          backgroundColor: 'rgba(255,255,255,0.5)',
           borderRadius: '50%'
         }}
       ></motion.div>

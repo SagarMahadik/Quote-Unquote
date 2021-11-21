@@ -15,6 +15,7 @@ import StaggerAnimationChild from 'StylesLibrary/Animations/AnimationContainer/P
 import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
 import { useHistory } from 'react-router-dom';
 import MoodPageStartReadingButton from 'Modules/DisplayQuote/Components/MoodPage/Styles/Molecules/MoodPageStartReadingButton.jsx';
+import { quQTheme } from 'BennyStyleLibrary/Themes/darkTheme.js';
 
 const MoodPage = ({ hidePageheading }) => {
   const history = useHistory();
@@ -22,7 +23,8 @@ const MoodPage = ({ hidePageheading }) => {
   const {
     user: { firstName },
     isUserAuthenticated,
-    resetDisplayQuotes
+    resetDisplayQuotes,
+    themeIndex
   } = useApplicationState();
 
   const { displayQuotes, displayFilterModal } = useDisplayQuoteState();
@@ -51,7 +53,10 @@ const MoodPage = ({ hidePageheading }) => {
   }, []);
 
   return (
-    <MoodPageContainer displayInDrawer={displayFilterModal}>
+    <MoodPageContainer
+      background={`radial-gradient(103.04% 56.47% at 49.87% 50%, ${quQTheme[themeIndex].primaryColor} 30.25%, ${quQTheme[themeIndex].secondaryColor} 100%)`}
+      displayInDrawer={displayFilterModal}
+    >
       <StaggerAnimationContainer>
         {displayFilterModal ? null : (
           <MoodPageHeader>Whats your mood?</MoodPageHeader>

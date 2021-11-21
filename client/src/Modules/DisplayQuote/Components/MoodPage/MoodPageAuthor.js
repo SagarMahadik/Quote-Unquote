@@ -11,6 +11,13 @@ import PaginationAuthors from 'Modules/DisplayQuote/Components/MoodPage/Paginati
 import InputButtonLoadingContainer from 'StylesLibrary/Molecules/LoadingModule/InputButtonLoadingContainer';
 import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
 import {
+  MoodPageAuthorButtonImage,
+  MoodPageAuthorContainer,
+  MoodPageSectionHeader,
+  MoodPageAuthorButtonWrapper,
+  MoodPageAuthorButtonText
+} from './Styles/moodpageStyles';
+import {
   useApplicationState,
   useApplicationDispatch
 } from 'Modules/Authentication/State/ApplicationState.js';
@@ -31,24 +38,31 @@ const MoodPageAuthor = () => {
   };
   return (
     <>
-      <FormSectionHeading sectionName="Authors" />
-      <InputButtonContainer>
+      <MoodPageSectionHeader>Authors</MoodPageSectionHeader>
+      <MoodPageAuthorContainer>
         {authorList
-          .slice(0, paginationStep * exploreMoreCurrentCount)
-          .map(({ authorName, selected, _id }) => {
+          .filter(author => author.authorImageUrl !== '')
+          .map(({ authorName, selected, _id, authorImageUrl }) => {
             return (
-              <InputButton
+              <MoodPageAuthorButtonWrapper
                 buttonText={makeFirstLetterUpperCase(authorName)}
-                buttonSelected={selected}
+                selected={selected}
                 onClick={() => handleClickOnAuthor(authorName)}
                 key={_id}
+                whileTap={{ scale: 1.2 }}
                 selectedColor={appThemes[activeTheme]}
-              />
+              >
+                <MoodPageAuthorButtonImage
+                  src={authorImageUrl}
+                ></MoodPageAuthorButtonImage>
+                <MoodPageAuthorButtonText>
+                  {authorName}
+                </MoodPageAuthorButtonText>
+              </MoodPageAuthorButtonWrapper>
             );
           })}
-      </InputButtonContainer>
+      </MoodPageAuthorContainer>
       {authorList.length === 0 ? <InputButtonLoadingContainer /> : null}
-      <PaginationAuthors />
     </>
   );
 };

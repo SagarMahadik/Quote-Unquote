@@ -4,6 +4,14 @@ const authorSchema = new mongoose.Schema({
   authorName: {
     type: String,
     required: [true, 'Please enter author name']
+  },
+  authorImageUrl: {
+    type: String,
+    default: ''
+  },
+  authorBio: {
+    type: String,
+    default: ''
   }
 });
 

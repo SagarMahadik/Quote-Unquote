@@ -1,0 +1,80 @@
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
+export const MotionDiv = styled(motion.div)``;
+
+export const MotionButton = styled(motion.button)`
+  width: ${props => props.width || '100%'};
+  height: ${props => props.height || '100%'};
+  max-width: ${props => props.maxWidth || '100%'};
+  min-height: ${props => props.minHeight || '100%'};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: ${props => props.margin || '0'};
+  padding: ${props => props.padding || '0'};
+  margin-top: ${props => props.marginTop || '0'};
+  margin-bottom: ${props => props.marginBottom || '0'};
+  margin-left: ${props => props.marginLeft || '0'};
+  margin-right: ${props => props.marginRight || '0'};
+  padding: ${props => props.padding || '0'};
+  padding-top: ${props => props.paddingTop || '0'};
+  padding-bottom: ${props => props.paddingBottom || '0'};
+  padding-left: ${props => props.paddingLeft || '0'};
+  padding-right: ${props => props.paddingRight || '0'};
+  background-color: ${props => props.backgroundColor || '#FFFFFF'};
+  border-radius: ${props => props.borderRadius || '0px'};
+  border: ${props => props.border || 'none'};
+  box-shadow: ${props => props.boxShadow || 'none'};
+  color: ${props => props.color || '#000000'};
+  font-size: ${props => props.fontSize || '16px'};
+  font-weight: ${props => props.fontWeight || 'normal'};
+  font-family: ${props => props.fontFamily || 'sans-serif'};
+  text-align: ${props => props.textAlign || 'center'};
+  text-decoration: ${props => props.textDecoration || 'none'};
+  text-transform: ${props => props.textTransform || 'none'};
+  text-shadow: ${props => props.textShadow || 'none'};
+`;
+
+export const MotionImage = styled(motion.img)`
+  width: ${props => props.width || '100%'};
+  height: ${props => props.height || '100%'};
+  max-width: ${props => props.maxWidth};
+  min-height: ${props => props.minHeight};
+  margin: ${props => props.margin || '0'};
+  padding: ${props => props.padding || '0'};
+  margin-top: ${props => props.marginTop || '0'};
+  margin-bottom: ${props => props.marginBottom || '0'};
+  margin-left: ${props => props.marginLeft || '0'};
+  margin-right: ${props => props.marginRight || '0'};
+  padding: ${props => props.padding || '0'};
+  padding-top: ${props => props.paddingTop || '0'};
+  padding-bottom: ${props => props.paddingBottom || '0'};
+  padding-left: ${props => props.paddingLeft || '0'};
+  padding-right: ${props => props.paddingRight || '0'};
+  border-radius: ${props => props.borderRadius || '0px'};
+  border: ${props => props.border || 'none'};
+  object-fit: ${props => props.objectFit || 'contain'};
+`;
+
+export const Text = styled.text`
+  margin: ${props => props.margin || '0'};
+  padding: ${props => props.padding || '0'};
+  margin-top: ${props => props.marginTop || '0'};
+  margin-bottom: ${props => props.marginBottom || '0'};
+  margin-left: ${props => props.marginLeft || '0'};
+  margin-right: ${props => props.marginRight || '0'};
+  padding: ${props => props.padding || '0'};
+  padding-top: ${props => props.paddingTop || '0'};
+  padding-bottom: ${props => props.paddingBottom || '0'};
+  padding-left: ${props => props.paddingLeft || '0'};
+  padding-right: ${props => props.paddingRight || '0'};
+  text-align: ${props => props.textAlign || 'center'};
+  text-decoration: ${props => props.textDecoration || 'none'};
+  font-size: ${props => props.fontSize || '16px'};
+  font-weight: ${props => props.fontWeight || 'normal'};
+  font-family: ${props => props.fontFamily || 'sans-serifii'};
+  color: ${props => props.color || '#000000'};
+  line-height: ${props => props.lineHeight || '16px'};
+`;

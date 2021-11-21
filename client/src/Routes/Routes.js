@@ -46,6 +46,10 @@ const DarkThemeLandingPage = React.lazy(() =>
   import('StyleLibrary1.0/Pages/DarkThemeLandingPage')
 );
 
+const AppLandingPage = React.lazy(() =>
+  import('Modules/AppLandingPage/Components/AppLandingPage.jsx')
+);
+
 const Routes = () => {
   const location = useLocation();
   return (
@@ -73,6 +77,7 @@ const Routes = () => {
               path="/darkThemeLandingPage"
               component={DarkThemeLandingPage}
             />
+            <Route exact path="/appLandingPage" component={AppLandingPage} />
           </Switch>
         </React.Suspense>
       </AnimatePresence>

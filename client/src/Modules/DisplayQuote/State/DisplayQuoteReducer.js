@@ -81,7 +81,6 @@ export default (state, action) => {
     case DQ_TOGGLE_FILTERMODAL:
       return produce(state, draftState => {
         draftState.displayFilterModal = !draftState.displayFilterModal;
-        draftState.refreshFIlteredQuotes = false;
       });
 
     case DQ_CREATE_FILTEREDQUOTES:

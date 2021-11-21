@@ -34,7 +34,7 @@ export const goButtonVibrations = () => {
   navigator.vibrate = navigator.vibrate;
 
   if (navigator.vibrate) {
-    return navigator.vibrate(9);
+    return navigator.vibrate(4);
   }
 };
 

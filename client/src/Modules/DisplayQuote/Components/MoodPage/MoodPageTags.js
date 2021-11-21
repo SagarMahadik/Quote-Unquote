@@ -21,6 +21,13 @@ import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
 
 import PaginationTags from 'Modules/DisplayQuote/Components/MoodPage/PaginationTags.js';
 import InputButtonLoadingContainer from 'StylesLibrary/Molecules/LoadingModule/InputButtonLoadingContainer';
+import {
+  MoodPageSectionContainer,
+  MoodPageSectionHeader,
+  MoodPageTagButtonSVG,
+  MoodPageTagButtonText,
+  MoodPageTagButtonWrapper
+} from './Styles/moodpageStyles';
 
 const MoodPageTags = () => {
   const { appThemes, activeTheme } = useApplicationState();
@@ -41,26 +48,45 @@ const MoodPageTags = () => {
 
   return (
     <>
-      <FormSectionHeading sectionName="Tags" />
+      <MoodPageSectionHeader>Tags</MoodPageSectionHeader>
 
-      <InputButtonContainer>
-        {tagList
-          .slice(0, paginationStep * exploreMoreCurrentCount)
-          .map(({ tagName, selected, _id }) => {
-            return (
-              <InputButton
-                buttonText={makeFirstLetterUpperCase(tagName)}
-                buttonSelected={selected}
-                onClick={() => handleClickOnTag(tagName)}
-                key={_id}
-                selectedColor={appThemes[activeTheme]}
-              />
-            );
-          })}
-      </InputButtonContainer>
-
-      {tagList.length === 0 ? <InputButtonLoadingContainer /> : null}
-      <PaginationTags />
+      {tagList.length === 0 ? (
+        <MoodPageSectionContainer>
+          <MoodPageTagButtonWrapper background="rgba(255,255,255,0.4)">
+            <MoodPageTagButtonSVG background="rgba(255,255,255,0.8)"></MoodPageTagButtonSVG>
+            <MoodPageTagButtonText></MoodPageTagButtonText>
+          </MoodPageTagButtonWrapper>
+          <MoodPageTagButtonWrapper background="rgba(255,255,255,0.4)">
+            <MoodPageTagButtonSVG background="rgba(255,255,255,0.8)"></MoodPageTagButtonSVG>
+            <MoodPageTagButtonText></MoodPageTagButtonText>
+          </MoodPageTagButtonWrapper>
+          <MoodPageTagButtonWrapper background="rgba(255,255,255,0.4)">
+            <MoodPageTagButtonSVG background="rgba(255,255,255,0.8)"></MoodPageTagButtonSVG>
+            <MoodPageTagButtonText></MoodPageTagButtonText>
+          </MoodPageTagButtonWrapper>
+          <MoodPageTagButtonWrapper background="rgba(255,255,255,0.4)">
+            <MoodPageTagButtonSVG background="rgba(255,255,255,0.8)"></MoodPageTagButtonSVG>
+            <MoodPageTagButtonText></MoodPageTagButtonText>
+          </MoodPageTagButtonWrapper>
+        </MoodPageSectionContainer>
+      ) : (
+        <MoodPageSectionContainer>
+          {tagList
+            .filter(tag => tag.tagSVGIcon != '')
+            .map(({ tagName, selected, _id, tagSVGIcon }) => {
+              return (
+                <MoodPageTagButtonWrapper
+                  selected={selected}
+                  onClick={() => handleClickOnTag(tagName)}
+                  whileTap={{ scale: 1.2 }}
+                >
+                  <MoodPageTagButtonSVG src={tagSVGIcon}></MoodPageTagButtonSVG>
+                  <MoodPageTagButtonText>{tagName}</MoodPageTagButtonText>
+                </MoodPageTagButtonWrapper>
+              );
+            })}
+        </MoodPageSectionContainer>
+      )}
     </>
   );
 };

@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
-import { AddQuoteSuccessText } from 'StylesLibrary/Atoms/DisplayQuoteModule/PageHeading/PageHeading.js';
 import MoodPageTags from 'Modules/DisplayQuote/Components/MoodPage/MoodPageTags.js';
 import MoodPageAuthor from 'Modules/DisplayQuote/Components/MoodPage/MoodPageAuthor.js';
-import GoButton from 'StylesLibrary/Molecules/DisplayQuoteModule/Buttons/GoButton.js';
-import { MoodPageContainer } from 'Modules/DisplayQuote/Components/MoodPage/MoodPageContainer.js';
-
+import { MoodPageContainer, MoodPageHeader } from './Styles/moodpageStyles.js';
 import { goButtonVibrations } from 'Utils/vibrations.js';
 
 import {
@@ -17,8 +14,7 @@ import StaggerAnimationChild from 'StylesLibrary/Animations/AnimationContainer/P
 
 import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
 import { useHistory } from 'react-router-dom';
-
-import PageHeading from 'Modules/Global/Components/PageHeading';
+import MoodPageStartReadingButton from 'Modules/DisplayQuote/Components/MoodPage/Styles/Molecules/MoodPageStartReadingButton.jsx';
 
 const MoodPage = ({ hidePageheading }) => {
   const history = useHistory();
@@ -29,7 +25,7 @@ const MoodPage = ({ hidePageheading }) => {
     resetDisplayQuotes
   } = useApplicationState();
 
-  const { displayQuotes } = useDisplayQuoteState();
+  const { displayQuotes, displayFilterModal } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
 
   const createFilteredQuotes = () => {
@@ -50,13 +46,16 @@ const MoodPage = ({ hidePageheading }) => {
     }
   }, [displayQuotes]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <MoodPageContainer isGuestUser={!isUserAuthenticated}>
-      {hidePageheading ? null : <PageHeading />}
+    <MoodPageContainer displayInDrawer={displayFilterModal}>
       <StaggerAnimationContainer>
-        <AddQuoteSuccessText isGuestUser={!isUserAuthenticated}>
-          Whats your mood {firstName}?
-        </AddQuoteSuccessText>
+        {displayFilterModal ? null : (
+          <MoodPageHeader>Whats your mood?</MoodPageHeader>
+        )}
         <StaggerAnimationChild>
           <MoodPageTags />
         </StaggerAnimationChild>
@@ -64,7 +63,7 @@ const MoodPage = ({ hidePageheading }) => {
           <MoodPageAuthor />
         </StaggerAnimationChild>
         <StaggerAnimationChild>
-          <GoButton
+          <MoodPageStartReadingButton
             onClick={() => {
               goButtonVibrations();
               createFilteredQuotes();

@@ -2,6 +2,21 @@ const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const APIFeatures = require('./../utils/apiFeatures');
 const { populate } = require('../models/recipeModel');
+const { promisify } = require('util');
+const redis = require('redis');
+
+const setRedisClient = () => {
+  if (process.env.NODE_ENV === 'production') {
+    return redis.createClient(process.env.REDIS_URL);
+  } else {
+    return redis.createClient();
+  }
+};
+
+const redisClient = setRedisClient();
+
+const getAsync = promisify(redisClient.get).bind(redisClient);
+const setAsync = promisify(redisClient.set).bind(redisClient);
 
 exports.deleteOne = Model =>
   catchAsync(async (req, res, next) => {
@@ -90,8 +105,20 @@ exports.getSearchOutcomes = (Model, fieldsString) =>
 
 // This Route return the only selected fields
 
-exports.getAll = (Model, popOptions, popOption1, fieldsString) =>
+exports.getAll = ({ Model, popOptions, popOption1, fieldsString, cacheKey }) =>
   catchAsync(async (req, res, next) => {
+    const reply = await getAsync(cacheKey);
+    if (reply) {
+      console.log(`using cached ${cacheKey} data`);
+      res.status(200).json({
+        status: 'success',
+        results: reply.length,
+        data: {
+          data: JSON.parse(reply)
+        }
+      });
+      return;
+    }
     let filter = {};
     if (req.params.userID) filter = { userID: req.params.userID };
 
@@ -109,30 +136,10 @@ exports.getAll = (Model, popOptions, popOption1, fieldsString) =>
 
     const doc = await features;
 
+    const saveResults = await setAsync(cacheKey, JSON.stringify(doc), 'EX', 60);
+    console.log(`new ${cacheKey} data cached`);
+
     // SEND RESPONSE
-    res.status(200).json({
-      status: 'success',
-      results: doc.length,
-      data: {
-        data: doc
-      }
-    });
-  });
-
-exports.getAllQuotes = (Model, popOptions, popOption1) =>
-  catchAsync(async (req, res, next) => {
-    let filter = {};
-    if (req.params.userID) filter = { userID: req.params.userID };
-
-    let features = Model.find(filter);
-
-    if (popOptions)
-      features = Model.find(filter)
-        .populate(popOptions)
-        .populate(popOption1);
-
-    const doc = await features;
-
     res.status(200).json({
       status: 'success',
       results: doc.length,

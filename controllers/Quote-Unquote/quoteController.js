@@ -4,7 +4,12 @@ const factory = require('../handlerFactory');
 
 exports.createQuote = factory.createOne(Quote);
 
-exports.getAllQuotes = factory.getAllQuotes(Quote, 'author', 'tags');
+exports.getAllQuotes = factory.getAll({
+  Model: Quote,
+  cacheKey: 'quotes',
+  popOption1: 'tags',
+  popOptions: 'author'
+});
 
 exports.updateQuote = factory.updateOne(Quote);
 

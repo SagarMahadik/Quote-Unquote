@@ -1,35 +1,36 @@
-import React, { useEffect } from 'react';
-import DisplayQuote from 'Modules/DisplayQuote/Components/QuoteDisplay/DisplayQuote.js';
-import DisplayTags from 'Modules/DisplayQuote/Components/QuoteDisplay/DisplayTags.js';
-import RandomButton from 'StylesLibrary/Atoms/GlobalQuoteModule/Buttons/RandomButton.js';
+import React, { useEffect, useState } from 'react';
 
 import {
   useDisplayQuoteState,
   useDisplayQuoteDispatch
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 import { generateRandomInteger } from 'Modules/DisplayQuote/State/utils.js';
-import PageHeading from 'Modules/Global/Components/PageHeading.js';
 
-import {
-  DisplayQuoteContiner,
-  DisplayQuoteMainContainer
-} from 'StylesLibrary/Atoms/DisplayQuoteModule/DisplayQuote/DisplayQuoteContainer.js';
-
-import GradientContainer from 'StylesLibrary/Animations/AnimationContainer/GradientContainer.js';
-
-import DisplayFilterModal from 'Modules/DisplayQuote/Components/QuoteDisplay/DisplayFilterModal.js';
-import PeacefulMusic from 'Modules/Sounds/PeacefulMusic.js';
-import { randomButtonVibrations } from 'Utils/vibrations.js';
-import { CenterAlignedColumnContainerWithShadowBackground } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles';
-import QuoteDisplayButtons from './QuoteDisplayButtons';
 import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
 
 import { useHistory } from 'react-router-dom';
-import PageAnimationOpacity from 'StylesLibrary/Animations/AnimationContainer/PageAnimations/PageOpacityAnimationContainer.js';
-import { QuotePageContainer } from './QuoteDisplayContainer';
+import { AnimatePresence } from 'framer-motion';
+import { wrap } from 'popmotion';
 
+import {
+  QuoteContainer,
+  QuotePageContainer,
+  QuotePageOverlay,
+  QuotePageTagContainer,
+  QuotePageTagText,
+  QuoteText
+} from './Styles/QuotePageStyles';
+import { useDoubleTap } from 'use-double-tap';
+import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
+
+import AuthorInfoDrawer from './Styles/Molecules/AuthorInfoDrawer';
+import ActionIcons from './Styles/Molecules/ActionIcons';
+import FilterDrawer from './Styles/Molecules/FilterDrawer';
 const QuoteDisplay = () => {
+  const [displayAuthorProfile, setDisplayAuthorProfile] = React.useState(false);
+  const [displayOverlay, setDisplayOverlay] = React.useState(false);
   const { isUserAuthenticated, redirectPostLogout } = useApplicationState();
+  const [displayActionButtons, setDisplayActionButtons] = useState(false);
   const {
     filteredQuotes: { filterQuotesList },
     refreshFIlteredQuotes,
@@ -38,6 +39,7 @@ const QuoteDisplay = () => {
     selectQuotePostDelete,
     displayQuotes
   } = useDisplayQuoteState();
+
   const dispatch = useDisplayQuoteDispatch();
 
   const selectRandomQuote = () => {
@@ -49,36 +51,13 @@ const QuoteDisplay = () => {
   };
   const history = useHistory();
 
-  console.log(history);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    if (!displayQuotes && !redirectPostLogout) {
-      console.log('i amhere');
-      history.push('/moodPage');
-    }
-    if (!displayQuotes && redirectPostLogout) {
-      history.push('/');
-    }
-  }, [displayQuotes, redirectPostLogout]);
-
-  useEffect(() => {
     window.onpopstate = e => dispatch({ type: 'DQ_RESET_QUOTE_STATE' });
   }, []);
-
-  useEffect(() => {
-    if (refreshFIlteredQuotes) {
-      selectRandomQuote();
-    }
-  }, [refreshFIlteredQuotes]);
-
-  useEffect(() => {
-    if (selectQuotePostDelete) {
-      selectRandomQuote();
-    }
-  }, [selectQuotePostDelete]);
 
   const handleHideModal = () => {
     if (displayFilterModal) {
@@ -86,47 +65,127 @@ const QuoteDisplay = () => {
     }
   };
 
+  const variants = {
+    enter: direction => {
+      return {
+        x: direction == 1 ? 100 : -100
+      };
+    },
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1
+    },
+    exit: direction => {
+      return {
+        opacity: 0
+      };
+    }
+  };
+
+  const swipeConfidenceThreshold = 10000;
+
+  const swipePower = (offset, velocity) => {
+    return Math.abs(offset) * velocity;
+  };
+
+  const [[page, direction], setPage] = useState([0, 0]);
+
+  const quoteIndex = wrap(0, filterQuotesList.length, page);
+
+  const paginate = newDirection => {
+    setPage([page + newDirection, newDirection]);
+  };
+
+  const bind = useDoubleTap(event => {
+    // Your action here
+    setDisplayActionButtons(!displayActionButtons);
+  });
+
   return (
-    <PageAnimationOpacity>
-      {displayQuotes ? (
-        <QuotePageContainer isGuestUser={!isUserAuthenticated}>
-          <GradientContainer>
-            <PageHeading />
-            <DisplayQuoteMainContainer
-              quoteMainContainerHeight={containerHeight}
-              style={{
-                width: '98%',
-                marginTop: !isUserAuthenticated ? '3rem' : '2rem'
-              }}
-              isGuestUser={!isUserAuthenticated}
-            >
-              <DisplayQuoteContiner
-                showModal={displayFilterModal}
-                onClick={() => handleHideModal()}
-              >
-                <QuoteDisplayButtons />
+    <>
+      <QuotePageContainer>
+        <AnimatePresence>
+          {displayOverlay || (displayFilterModal && <QuotePageOverlay />)}
+        </AnimatePresence>
+        <AnimatePresence>
+          <QuoteContainer
+            key={page}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: 'spring', stiffness: 200, damping: 20 },
+              opacity: { duration: 0 }
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = swipePower(offset.x, velocity.x);
 
-                <DisplayQuote selectRandomQuote={selectRandomQuote} />
-                <DisplayTags />
-
-                <RandomButton
+              if (swipe < -swipeConfidenceThreshold) {
+                paginate(1);
+              } else if (swipe > swipeConfidenceThreshold) {
+                paginate(-1);
+              }
+            }}
+            {...bind}
+          >
+            <QuoteText>{filterQuotesList[quoteIndex].quote}</QuoteText>
+            <QuotePageTagContainer>
+              <>
+                <QuotePageTagText
                   onClick={() => {
-                    randomButtonVibrations();
-                    dispatch({ type: 'HIDE_QUOTE' });
-                    setTimeout(() => {
-                      selectRandomQuote();
-                    }, 700);
+                    setDisplayOverlay(true);
+                    setDisplayAuthorProfile(true);
                   }}
-                  style={{ marginTop: '1rem' }}
-                />
-              </DisplayQuoteContiner>
-              <DisplayFilterModal />
-            </DisplayQuoteMainContainer>
-          </GradientContainer>
-          <PeacefulMusic />
-        </QuotePageContainer>
-      ) : null}
-    </PageAnimationOpacity>
+                >
+                  {makeFirstLetterUpperCase(
+                    filterQuotesList[quoteIndex].author['authorName']
+                  )}
+                </QuotePageTagText>
+              </>
+              {filterQuotesList[quoteIndex].tags.map(({ tagName, _id }) => {
+                return (
+                  <QuotePageTagText key={_id}>
+                    {' '}
+                    | {makeFirstLetterUpperCase(tagName)}
+                  </QuotePageTagText>
+                );
+              })}
+            </QuotePageTagContainer>
+          </QuoteContainer>
+        </AnimatePresence>
+        <AnimatePresence>
+          {displayAuthorProfile && (
+            <AuthorInfoDrawer
+              authorImageUrl={
+                filterQuotesList[quoteIndex].author['authorImageUrl']
+              }
+              authorBio={filterQuotesList[quoteIndex].author['authorBio']}
+              onClick={() => {
+                setDisplayOverlay(false);
+                setDisplayAuthorProfile(false);
+              }}
+            />
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {displayActionButtons && (
+            <ActionIcons
+              currentQuote={filterQuotesList[quoteIndex].quote}
+              currentAuthor={filterQuotesList[quoteIndex].author['authorName']}
+            />
+          )}
+        </AnimatePresence>
+        <>
+          <FilterDrawer />
+        </>
+      </QuotePageContainer>
+    </>
   );
 };
 

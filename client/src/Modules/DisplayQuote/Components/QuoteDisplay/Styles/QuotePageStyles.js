@@ -33,7 +33,7 @@ export const QuoteContainer = styled(CenterAlignedColumnContainer)`
   text-align: center;
   line-height: 34px;
   color: rgba(255, 255, 255, 0.87);
-  height: auto;
+
   padding: 12px;
   padding-top: 25px;
   padding-bottom: 25px;

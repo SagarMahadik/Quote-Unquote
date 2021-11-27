@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   QuQLogoContainer,
   AppLandingPageContainer
@@ -8,6 +8,8 @@ import QuQAuthorCards from 'Modules/AppLandingPage/Styles/Molecules/QuQAuthorCar
 import QuQEnterButton from 'Modules/AppLandingPage/Styles/Molecules/QuQEnteryButton.jsx';
 import { useHistory } from 'react-router-dom';
 import OverlayAnimation from 'Modules/Global/Components/OverlayAnimation';
+import ReactGA from 'react-ga';
+
 const AppLandingPage = () => {
   const history = useHistory();
 

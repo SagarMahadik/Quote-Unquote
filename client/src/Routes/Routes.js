@@ -9,6 +9,7 @@ import {
 
 import { AnimatePresence } from 'framer-motion';
 
+import useGaTracker from './../Utils/useGATracker';
 import FallBackLoader from 'Modules/Global/Components/FallBackLoader';
 import PrivateRoute from './PrivateRoutes';
 
@@ -52,6 +53,7 @@ const AppLandingPage = React.lazy(() =>
 
 const Routes = () => {
   const location = useLocation();
+  useGaTracker();
   return (
     <>
       <AnimatePresence>

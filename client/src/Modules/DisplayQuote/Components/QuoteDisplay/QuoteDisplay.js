@@ -97,7 +97,7 @@ const QuoteDisplay = () => {
           <AnimatePresence>
             {displayOverlay || (displayFilterModal && <QuotePageOverlay />)}
           </AnimatePresence>
-          <AnimatePresence>
+          <AnimatePresence initial="false">
             <QuoteContainer
               key={page}
               custom={direction}
@@ -130,7 +130,34 @@ const QuoteDisplay = () => {
               {filterQuotesList.length > 0 && (
                 <>
                   <QuoteText>{filterQuotesList[quoteIndex].quote}</QuoteText>
-                  <QuotePageTagContainer>
+                  <QuotePageTagContainer
+                    key={page}
+                    custom={direction}
+                    variants={variants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                    transition={{
+                      x: {
+                        type: 'spring',
+                        stiffness: 200,
+                        damping: 20
+                      },
+                      opacity: { duration: 0 }
+                    }}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={1}
+                    onDragEnd={(e, { offset, velocity }) => {
+                      const swipe = swipePower(offset.x, velocity.x);
+
+                      if (swipe < -swipeConfidenceThreshold) {
+                        paginate(1);
+                      } else if (swipe > swipeConfidenceThreshold) {
+                        paginate(-1);
+                      }
+                    }}
+                  >
                     <>
                       <QuotePageTagText
                         onClick={() => {

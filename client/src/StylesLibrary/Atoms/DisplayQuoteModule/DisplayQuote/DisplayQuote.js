@@ -30,11 +30,10 @@ export const QuoteContainer = styled(
   border-radius: 5px;
   margin-bottom: 20px;
   margin-top: 2rem;
-  margin-right: 0px;
-  margin-left: 0px;
   padding: 15px;
   width: 80%;
-  height: auto;
+  height: 70vh;
+  border: 1px solid #e6e6e6;
   justify-content: flex-start;
   filter: ${props => (props.editText ? 'blur(4px)' : 'none')};
 `;

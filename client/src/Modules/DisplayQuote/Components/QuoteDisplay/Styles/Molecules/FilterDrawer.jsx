@@ -26,7 +26,7 @@ const FilterDrawer = () => {
           initial={{ opacity: 0, y: 700 }}
           key="filterDrawer"
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
           exit={{ opacity: 0, y: 700 }}
         >
           <FilterDrawerCloseIcon>

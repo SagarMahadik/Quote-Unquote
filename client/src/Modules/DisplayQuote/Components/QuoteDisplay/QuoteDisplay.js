@@ -21,14 +21,17 @@ import AuthorInfoDrawer from './Styles/Molecules/AuthorInfoDrawer';
 import ActionIcons from './Styles/Molecules/ActionIcons';
 import FilterDrawer from './Styles/Molecules/FilterDrawer';
 import { CenterAlignedFlexStartColumnContainer } from 'BennyStyleLibrary/Global/containerStyles';
+import IntroAnimation from './IntroAnimation';
+import QuotePageOverlayAnimation from './Styles/Molecules/QuotePageOverlayAnimation';
 
 const QuoteDisplay = () => {
-  const [displayAuthorProfile, setDisplayAuthorProfile] = React.useState(false);
-  const [displayOverlay, setDisplayOverlay] = React.useState(false);
-  const [displayActionButtons, setDisplayActionButtons] = useState(false);
   const {
     filteredQuotes: { filterQuotesList },
-    displayFilterModal
+    displayFilterModal,
+    displayIntroAnimation,
+    displayActionButtons,
+    displayOverlay,
+    displayAuthorProfile
   } = useDisplayQuoteState();
 
   const dispatch = useDisplayQuoteDispatch();
@@ -87,7 +90,7 @@ const QuoteDisplay = () => {
   };
 
   const bind = useDoubleTap(event => {
-    setDisplayActionButtons(!displayActionButtons);
+    dispatch({ type: 'DQ_TOGGLE_ACTIONBUTTONS' });
   });
 
   return (
@@ -95,8 +98,11 @@ const QuoteDisplay = () => {
       {filterQuotesList.length > 0 ? (
         <>
           <AnimatePresence>
-            {displayOverlay || (displayFilterModal && <QuotePageOverlay />)}
+            <QuotePageOverlayAnimation display={displayOverlay} />
           </AnimatePresence>
+
+          {displayIntroAnimation && <IntroAnimation />}
+
           <AnimatePresence initial="false">
             <QuoteContainer
               key={page}
@@ -140,8 +146,8 @@ const QuoteDisplay = () => {
                     transition={{
                       x: {
                         type: 'spring',
-                        stiffness: 200,
-                        damping: 20
+                        stiffness: 300,
+                        damping: 30
                       },
                       opacity: { duration: 0 }
                     }}
@@ -160,10 +166,9 @@ const QuoteDisplay = () => {
                   >
                     <>
                       <QuotePageTagText
-                        onClick={() => {
-                          setDisplayOverlay(true);
-                          setDisplayAuthorProfile(true);
-                        }}
+                        onClick={() =>
+                          dispatch({ type: 'DQ_TOGGLE_AUTHORPROFILEDRAWER' })
+                        }
                       >
                         {makeFirstLetterUpperCase(
                           filterQuotesList[quoteIndex].author['authorName']
@@ -192,10 +197,9 @@ const QuoteDisplay = () => {
                   filterQuotesList[quoteIndex].author['authorImageUrl']
                 }
                 authorBio={filterQuotesList[quoteIndex].author['authorBio']}
-                onClick={() => {
-                  setDisplayOverlay(false);
-                  setDisplayAuthorProfile(false);
-                }}
+                onClick={() =>
+                  dispatch({ type: 'DQ_TOGGLE_AUTHORPROFILEDRAWER' })
+                }
               />
             )}
           </AnimatePresence>

@@ -2,7 +2,7 @@ import React from 'react';
 import { AnimationContainer } from 'StylesLibrary/Animations/FramerAnimations.js';
 import { StaggerAnimationParentContainer } from 'StylesLibrary/Animations/FramerAnimations.js';
 
-const StaggerAnimationContainer = ({ children, animationDuration }) => {
+const MoodPageStaggerParent = ({ children, animationDuration }) => {
   let timeDuration = animationDuration;
   if (timeDuration === '') {
     timeDuration = 0.6;
@@ -12,8 +12,8 @@ const StaggerAnimationContainer = ({ children, animationDuration }) => {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 1,
-        duration: 1.8
+        staggerChildren: 0.5,
+        duration: 1
       }
     },
     exit: { opacity: 0 }
@@ -31,4 +31,4 @@ const StaggerAnimationContainer = ({ children, animationDuration }) => {
   );
 };
 
-export default StaggerAnimationContainer;
+export default MoodPageStaggerParent;

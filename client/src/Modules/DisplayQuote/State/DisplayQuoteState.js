@@ -11,6 +11,14 @@ const DisplayQuoteState = ({ children }) => {
     applicationData: { tags, authors, quotes }
   } = useApplicationState();
 
+  const setIntroAnimationDisplayState = () => {
+    if (localStorage.getItem('hasSeenIntroAnimation') === 'Y') {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const initialState = {
     tagList: [],
     authorList: [],
@@ -55,10 +63,14 @@ const DisplayQuoteState = ({ children }) => {
     displayQuotes: false,
     currentQuote: [],
     displayFilterModal: false,
+    displayOverlay: false,
     refreshFIlteredQuotes: false,
     displayQuote: true,
     selectQuotePostDelete: false,
-    filteredQuotesLoaded: false
+    filteredQuotesLoaded: false,
+    displayAuthorProfile: false,
+    displayActionButtons: false,
+    displayIntroAnimation: setIntroAnimationDisplayState()
   };
   const [state, dispatch] = useReducer(DisplayQuoteReducer, initialState);
 
@@ -77,7 +89,11 @@ const DisplayQuoteState = ({ children }) => {
     refreshFIlteredQuotes,
     displayQuote,
     selectQuotePostDelete,
-    filteredQuotesLoaded
+    filteredQuotesLoaded,
+    displayIntroAnimation,
+    displayOverlay,
+    displayAuthorProfile,
+    displayActionButtons
   } = state;
 
   const setAuthorsState = authorData => {
@@ -137,6 +153,10 @@ const DisplayQuoteState = ({ children }) => {
         displayQuote,
         selectQuotePostDelete,
         filteredQuotesLoaded,
+        displayIntroAnimation,
+        displayOverlay,
+        displayAuthorProfile,
+        displayActionButtons,
         dispatch
       }}
     >

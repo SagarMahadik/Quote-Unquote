@@ -8,6 +8,7 @@ import { useDisplayQuoteDispatch } from 'Modules/DisplayQuote/State/DisplayQuote
 const ActionIcons = ({ currentQuote, currentAuthor, onClick }) => {
   const dispatch = useDisplayQuoteDispatch();
   const sendText = async () => {
+    dispatch({ type: 'DQ_TOGGLE_ACTIONBUTTONS' });
     navigator
       .share({
         title: 'title',
@@ -17,7 +18,6 @@ const ActionIcons = ({ currentQuote, currentAuthor, onClick }) => {
       .catch(error => console.log('Error in sharing', error));
   };
   const handleHideModal = () => {
-    console.log('handleHideModal');
     dispatch({ type: 'DQ_TOGGLE_FILTERMODAL' });
   };
   return (
@@ -29,15 +29,17 @@ const ActionIcons = ({ currentQuote, currentAuthor, onClick }) => {
     >
       <FilterIcon
         onClick={() => {
-          console.log('Hello');
+          dispatch({ type: 'DQ_TOGGLE_ACTIONBUTTONS' });
           handleHideModal();
         }}
+        style={{ width: '35px', height: '35px' }}
       />
       <ShareIcon
         onClick={() => {
           goButtonVibrations();
           sendText();
         }}
+        style={{ width: '24px', height: '30px' }}
       />
     </QuotePageIconContainer>
   );

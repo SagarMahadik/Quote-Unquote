@@ -31,7 +31,10 @@ import {
   DQ_DELETE_RESET,
   DQ_INITIATE_DELETE_REQUEST,
   DQ_RESET_QUOTE_STATE,
-  DQ_UNSET_QUOTE_STATE
+  DQ_UNSET_QUOTE_STATE,
+  DQ_HIDE_INTROANIMATION,
+  DQ_TOGGLE_ACTIONBUTTONS,
+  DQ_TOGGLE_AUTHORPROFILEDRAWER
 } from 'Modules/DisplayQuote/State/types.js';
 import { produce } from 'immer';
 
@@ -81,11 +84,13 @@ export default (state, action) => {
     case DQ_TOGGLE_FILTERMODAL:
       return produce(state, draftState => {
         draftState.displayFilterModal = !draftState.displayFilterModal;
+        draftState.displayOverlay = !draftState.displayOverlay;
       });
 
     case DQ_CREATE_FILTEREDQUOTES:
       return produce(state, draftState => {
         draftState.displayFilterModal = false;
+        draftState.displayOverlay = false;
         draftState.filteredQuotes.filterQuotesList = [];
         draftState.selectedData.selectedTags = [];
         draftState.selectedData.selectedAuthors = [];
@@ -293,6 +298,20 @@ export default (state, action) => {
         draftState.displayQuotes = false;
         draftState.displayQuote = false;
         draftState.currentQuote = [];
+      });
+    case DQ_HIDE_INTROANIMATION:
+      return produce(state, draftState => {
+        draftState.displayIntroAnimation = false;
+      });
+    case DQ_TOGGLE_ACTIONBUTTONS:
+      return produce(state, draftState => {
+        draftState.displayActionButtons = !draftState.displayActionButtons;
+      });
+
+    case DQ_TOGGLE_AUTHORPROFILEDRAWER:
+      return produce(state, draftState => {
+        draftState.displayOverlay = !draftState.displayOverlay;
+        draftState.displayAuthorProfile = !draftState.displayAuthorProfile;
       });
   }
 };

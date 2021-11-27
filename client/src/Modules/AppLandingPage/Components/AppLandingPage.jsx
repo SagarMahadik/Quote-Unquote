@@ -8,7 +8,7 @@ import QuQAuthorCards from 'Modules/AppLandingPage/Styles/Molecules/QuQAuthorCar
 import QuQEnterButton from 'Modules/AppLandingPage/Styles/Molecules/QuQEnteryButton.jsx';
 import { useHistory } from 'react-router-dom';
 import OverlayAnimation from 'Modules/Global/Components/OverlayAnimation';
-import ReactGA from 'react-ga';
+import { goButtonVibrations } from './../../../Utils/vibrations';
 
 const AppLandingPage = () => {
   const history = useHistory();
@@ -23,7 +23,12 @@ const AppLandingPage = () => {
         <QuQLogo />
       </QuQLogoContainer>
       <QuQAuthorCards />
-      <QuQEnterButton onClick={() => startReadingQuotes()} />
+      <QuQEnterButton
+        onClick={() => {
+          goButtonVibrations();
+          startReadingQuotes();
+        }}
+      />
     </AppLandingPageContainer>
   );
 };

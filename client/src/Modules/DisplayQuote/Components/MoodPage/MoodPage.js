@@ -16,6 +16,8 @@ import { useApplicationState } from 'Modules/Authentication/State/ApplicationSta
 import { useHistory } from 'react-router-dom';
 import MoodPageStartReadingButton from 'Modules/DisplayQuote/Components/MoodPage/Styles/Molecules/MoodPageStartReadingButton.jsx';
 import { quQTheme } from 'BennyStyleLibrary/Themes/darkTheme.js';
+import MoodPageStaggerParent from './Styles/Molecules/MoodPageStaggerParent.jsx';
+import MoodPageStaggerChild from './Styles/Molecules/MoodPageStaggerChild';
 
 const MoodPage = ({ hidePageheading }) => {
   const history = useHistory();
@@ -52,25 +54,25 @@ const MoodPage = ({ hidePageheading }) => {
       background={`radial-gradient(103.04% 56.47% at 49.87% 50%, ${quQTheme[themeIndex].primaryColor} 30.25%, ${quQTheme[themeIndex].secondaryColor} 100%)`}
       displayInDrawer={displayFilterModal}
     >
-      <StaggerAnimationContainer>
+      <MoodPageStaggerParent>
         {displayFilterModal ? null : (
           <MoodPageHeader>Whats your mood?</MoodPageHeader>
         )}
-        <StaggerAnimationChild>
+        <MoodPageStaggerChild>
           <MoodPageTags />
-        </StaggerAnimationChild>
-        <StaggerAnimationChild>
+        </MoodPageStaggerChild>
+        <MoodPageStaggerChild>
           <MoodPageAuthor />
-        </StaggerAnimationChild>
-        <StaggerAnimationChild>
+        </MoodPageStaggerChild>
+        <MoodPageStaggerChild>
           <MoodPageStartReadingButton
             onClick={() => {
               goButtonVibrations();
               createFilteredQuotes();
             }}
           />
-        </StaggerAnimationChild>
-      </StaggerAnimationContainer>
+        </MoodPageStaggerChild>
+      </MoodPageStaggerParent>
     </MoodPageContainer>
   );
 };

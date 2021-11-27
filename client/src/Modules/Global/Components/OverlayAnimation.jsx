@@ -16,7 +16,7 @@ const OverlayAnimation = () => {
         initial={{ opacity: 0.8 }}
         animate={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
-        exdit={{ opacity: 0 }}
+        exit={{ opacity: 0 }}
       />
     </div>
   );

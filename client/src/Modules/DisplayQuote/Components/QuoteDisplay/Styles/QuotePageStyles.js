@@ -19,7 +19,7 @@ export const QuotePageOverlay = styled(CenterAlignedColumnContainer)`
   width: 100%;
   min-height: 100vh;
   height: auto;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 2;
 `;
 
@@ -86,13 +86,13 @@ export const AuthorInfoDrawerContainer = styled(
   CenterAlignedFlexStartColumnContainer
 )`
   width: 99%;
-  height: 40vh;
+  height: 50vh;
   background: ${props => props.backgroundColor};
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
   position: fixed;
-  top: 68%;
+  top: 56%;
   left: 0;
   z-index: 3;
   overflow-y: scroll;
@@ -169,4 +169,29 @@ export const FilterDrawerCloseIcon = styled(CenterAlignedColumnContainer)`
   width: 40px;
   height: 40px;
   z-index: 5;
+`;
+
+export const IntroAnimationText = styled.h1`
+  font-family: Indie Flower;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  width: ${props => props.width};
+`;
+
+export const IntroAnimationButtonText = styled.h1`
+  font-family: Noto Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
 `;

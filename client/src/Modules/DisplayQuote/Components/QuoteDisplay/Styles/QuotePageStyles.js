@@ -25,6 +25,7 @@ export const QuotePageOverlay = styled(CenterAlignedColumnContainer)`
 
 export const QuoteContainer = styled(CenterAlignedColumnContainer)`
   width: 80%;
+  max-width: 800px;
   font-family: Noto Sans;
   font-style: normal;
   font-weight: 500;

@@ -4,6 +4,7 @@ import {
   LandingPageAuthorImageRow,
   LandingPageAuthorImageWrapper
 } from 'Modules/AppLandingPage/Styles/AppLandingPageStyles.js';
+import { CenterAlignedColumnContainer } from 'BennyStyleLibrary/Global/containerStyles';
 
 const QuQAuthorCards = () => {
   const authorCardDetails = [
@@ -40,8 +41,8 @@ const QuQAuthorCards = () => {
   ];
 
   return (
-    <>
-      <LandingPageAuthorImageRow width="90%">
+    <CenterAlignedColumnContainer width="100%" maxWidth="600px">
+      <LandingPageAuthorImageRow width="90%" maxWidth="500px">
         <LandingPageAuthorImageWrapper
           background={authorCardDetails[0].cardBackgroundColor}
         >
@@ -53,7 +54,12 @@ const QuQAuthorCards = () => {
           <LandingPageAuthorImage src={authorCardDetails[1].authorImage} />
         </LandingPageAuthorImageWrapper>
       </LandingPageAuthorImageRow>
-      <LandingPageAuthorImageRow width="70%" position="relative" top="-80px">
+      <LandingPageAuthorImageRow
+        maxWidth="320px"
+        width="70%"
+        position="relative"
+        top="-80px"
+      >
         <LandingPageAuthorImageWrapper
           background={authorCardDetails[2].cardBackgroundColor}
         >
@@ -72,7 +78,7 @@ const QuQAuthorCards = () => {
           <LandingPageAuthorImage src={authorCardDetails[4].authorImage} />
         </LandingPageAuthorImageWrapper>
       </LandingPageAuthorImageRow>
-    </>
+    </CenterAlignedColumnContainer>
   );
 };
 

@@ -4,14 +4,9 @@ import {
   useDisplayQuoteState,
   useDisplayQuoteDispatch
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
-import { generateRandomInteger } from 'Modules/DisplayQuote/State/utils.js';
-
-import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
-
 import { useHistory } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { wrap } from 'popmotion';
-
 import {
   QuoteContainer,
   QuotePageContainer,
@@ -22,33 +17,21 @@ import {
 } from './Styles/QuotePageStyles';
 import { useDoubleTap } from 'use-double-tap';
 import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
-
 import AuthorInfoDrawer from './Styles/Molecules/AuthorInfoDrawer';
 import ActionIcons from './Styles/Molecules/ActionIcons';
 import FilterDrawer from './Styles/Molecules/FilterDrawer';
-
 import { CenterAlignedFlexStartColumnContainer } from 'BennyStyleLibrary/Global/containerStyles';
 
 const QuoteDisplay = () => {
   const [displayAuthorProfile, setDisplayAuthorProfile] = React.useState(false);
   const [displayOverlay, setDisplayOverlay] = React.useState(false);
-  const { isUserAuthenticated, redirectPostLogout } = useApplicationState();
   const [displayActionButtons, setDisplayActionButtons] = useState(false);
   const {
     filteredQuotes: { filterQuotesList },
-    refreshFIlteredQuotes,
-    displayFilterModal,
-    styles: { containerHeight },
-    selectQuotePostDelete,
-    displayQuotes,
-    filteredQuotesLoaded
+    displayFilterModal
   } = useDisplayQuoteState();
 
   const dispatch = useDisplayQuoteDispatch();
-
-  const {
-    applicationData: { quotes }
-  } = useApplicationState();
 
   useEffect(() => {
     if (filterQuotesList.length === 0) {
@@ -58,13 +41,6 @@ const QuoteDisplay = () => {
     }
   }, [filterQuotesList]);
 
-  const selectRandomQuote = () => {
-    let randomIndex = generateRandomInteger(1, filterQuotesList.length - 1);
-
-    let randomQuote = filterQuotesList[randomIndex];
-
-    dispatch({ type: 'DQ_SET_CURRENT_QUOTE', payload: randomQuote });
-  };
   const history = useHistory();
 
   useEffect(() => {
@@ -72,14 +48,11 @@ const QuoteDisplay = () => {
   }, []);
 
   useEffect(() => {
-    window.onpopstate = e => dispatch({ type: 'DQ_RESET_QUOTE_STATE' });
+    window.onpopstate = e => {
+      dispatch({ type: 'DQ_RESET_QUOTE_STATE' });
+      history.push('/moodPage');
+    };
   }, []);
-
-  const handleHideModal = () => {
-    if (displayFilterModal) {
-      dispatch({ type: 'DQ_TOGGLE_FILTERMODAL' });
-    }
-  };
 
   const variants = {
     enter: direction => {
@@ -133,7 +106,11 @@ const QuoteDisplay = () => {
               animate="center"
               exit="exit"
               transition={{
-                x: { type: 'spring', stiffness: 200, damping: 20 },
+                x: {
+                  type: 'spring',
+                  stiffness: 200,
+                  damping: 20
+                },
                 opacity: { duration: 0 }
               }}
               drag="x"

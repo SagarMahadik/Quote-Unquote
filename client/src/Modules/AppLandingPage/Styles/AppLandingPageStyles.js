@@ -18,6 +18,7 @@ export const AppLandingPageContainer = styled(
   CenterAlignedFlexStartColumnContainer
 )`
   width: 100%;
+
   background-color: black;
   height: 100%;
   min-height: 100vh;

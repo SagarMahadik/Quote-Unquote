@@ -29,7 +29,7 @@ export default function useQuotes() {
       onError: () =>
         sendStepStatusRequest('Error in fetching Quotes', 'failure')
     },
-    { staleTime: 10000 }
+    { staleTime: 10000 * 60 }
   );
   return { quotes, isQuotesLoaded, status, isError, error };
 }

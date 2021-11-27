@@ -290,9 +290,9 @@ export default (state, action) => {
 
     case DQ_RESET_QUOTE_STATE:
       return produce(state, draftState => {
+        draftState.displayQuotes = false;
         draftState.displayQuote = false;
         draftState.currentQuote = [];
-        draftState.displayQuotes = false;
       });
   }
 };

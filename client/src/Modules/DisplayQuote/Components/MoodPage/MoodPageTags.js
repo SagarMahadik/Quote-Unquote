@@ -1,47 +1,21 @@
 import React, { useRef, useState, useEffect } from 'react';
-import FormSectionHeading from 'StylesLibrary/Molecules/AddQuoteModule/AddQuoteForm/FormSectionHeading/FormSectionHeading.js';
-import {
-  InputButtonContainer,
-  ExploreMoreButton,
-  ExploreMoreButtonContainer
-} from 'StylesLibrary/Atoms/AddQuoteModule/AddQuoteForm/FormInput/inputButton.js';
-import InputButton from 'StylesLibrary/Molecules/AddQuoteModule/AddQuoteForm/FormInput/InputButton.js';
-import { RightAlignedColumnContainer } from 'StylesLibrary/Atoms/GlobalQuoteModule/ContainerStyles.js';
-import { tagsList } from 'Modules/DisplayQuote/Components/MoodPage/MoodPageSeed.js';
 import {
   useDisplayQuoteState,
   useDisplayQuoteDispatch
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 
-import {
-  useApplicationState,
-  useApplicationDispatch
-} from 'Modules/Authentication/State/ApplicationState.js';
-import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
-
-import PaginationTags from 'Modules/DisplayQuote/Components/MoodPage/PaginationTags.js';
-import InputButtonLoadingContainer from 'StylesLibrary/Molecules/LoadingModule/InputButtonLoadingContainer';
+import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
 import {
   MoodPageSectionContainer,
   MoodPageSectionHeader,
   MoodPageTagButtonSVG,
   MoodPageTagButtonText,
-  MoodPageTagButtonWrapper,
-  MoodPageSkeletonButton
+  MoodPageTagButtonWrapper
 } from './Styles/moodpageStyles';
 import MoodPageSkeletons from './Styles/Molecules/MoodPageSkeletons';
 
 const MoodPageTags = () => {
-  const { appThemes, activeTheme } = useApplicationState();
-
-  const {
-    tagList,
-    exploreMore: {
-      explreMoreTotalCount,
-      exploreMoreCurrentCount,
-      paginationStep
-    }
-  } = useDisplayQuoteState();
+  const { tagList } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
 
   const handleClickOnTag = tagName => {

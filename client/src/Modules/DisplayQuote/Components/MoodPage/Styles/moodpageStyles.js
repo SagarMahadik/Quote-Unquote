@@ -31,6 +31,7 @@ export const MoodPageSectionHeader = styled(Text)`
 
 export const MoodPageSectionContainer = styled(WrappedRowContainer)`
   width: 90%;
+  max-width: 800px;
   height: 30vh;
   margin-top: 20px;
   overflow-y: scroll;

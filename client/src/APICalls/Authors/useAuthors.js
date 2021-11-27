@@ -27,7 +27,8 @@ export default function useAuthors() {
     {
       onError: () =>
         sendStepStatusRequest('Error in fetching Authors', 'failure')
-    }
+    },
+    { staleTime: 10000 * 60 }
   );
   return { authors, isAuthorsLoaded, status, isError, error };
 }

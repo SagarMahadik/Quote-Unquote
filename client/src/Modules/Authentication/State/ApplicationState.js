@@ -11,11 +11,9 @@ import useAuthors from 'APICalls/Authors/useAuthors';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-import { API } from 'APICalls/index.js';
 import { themes } from 'StylesLibrary/Themes/theme.js';
 import { generateRandomInteger } from 'Modules/DisplayQuote/State/utils';
 import setAuthToken from 'Utils/Axios/setAuthToken.js';
-import urlMetadata from 'url-metadata';
 
 import { quQTheme } from 'BennyStyleLibrary/Themes/darkTheme';
 
@@ -64,7 +62,6 @@ const ApplicationState = ({ children }) => {
 
   const { tags, isTagsLoaded } = useTags();
   const { authors, isAuthorsLoaded } = useAuthors();
-  const history = useHistory();
 
   useEffect(() => {
     if (isQuotesLoaded && quotes.length > 0) {
@@ -95,7 +92,6 @@ const ApplicationState = ({ children }) => {
 
   useEffect(() => {
     let randomIndex = generateRandomInteger(0, themes.length);
-    console.log(randomIndex);
     dispatch({
       type: 'SET_RANDOM_THEME',
       payload: randomIndex
@@ -121,7 +117,6 @@ const ApplicationState = ({ children }) => {
     );
 
     if (googleLoginResponse.status === 200) {
-      console.log('in a google response');
       localStorage.setItem('token', googleLoginResponse.data.token);
       dispatch({
         type: 'SET_USER_GOOGLE_LOGIN',
@@ -139,11 +134,8 @@ const ApplicationState = ({ children }) => {
 
   const loadUser = async () => {
     if (isUserAuthenticated) {
-      console.log('user logged in');
     } else {
       if (localStorage.getItem('token') != null) {
-        console.log('in load user');
-
         setAuthToken(localStorage.getItem('token'));
         try {
           const res = await axios.get('/api/v1/users/auth');

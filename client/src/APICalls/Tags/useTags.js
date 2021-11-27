@@ -26,7 +26,8 @@ export default function useTags() {
     },
     {
       onError: () => sendStepStatusRequest('Error in fetching Tags', 'failure')
-    }
+    },
+    { staleTime: 10000 * 60 }
   );
   return { tags, isTagsLoaded, status, isError, error };
 }

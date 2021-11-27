@@ -20,12 +20,7 @@ import { quQTheme } from 'BennyStyleLibrary/Themes/darkTheme.js';
 const MoodPage = ({ hidePageheading }) => {
   const history = useHistory();
 
-  const {
-    user: { firstName },
-    isUserAuthenticated,
-    resetDisplayQuotes,
-    themeIndex
-  } = useApplicationState();
+  const { themeIndex } = useApplicationState();
 
   const { displayQuotes, displayFilterModal } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
@@ -44,7 +39,7 @@ const MoodPage = ({ hidePageheading }) => {
     if (displayQuotes) {
       history.push('/readQuote');
     } else {
-      history.push('/moodPage');
+      return;
     }
   }, [displayQuotes]);
 

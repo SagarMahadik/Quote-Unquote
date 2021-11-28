@@ -79,6 +79,7 @@ const Routes = () => {
               path="/darkThemeLandingPage"
               component={DarkThemeLandingPage}
             />
+            <Route exact path="/adminLogin" component={CoreLandingPage} />
           </Switch>
         </React.Suspense>
       </AnimatePresence>

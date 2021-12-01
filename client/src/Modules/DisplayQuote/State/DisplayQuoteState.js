@@ -5,6 +5,7 @@ import {
 } from 'Modules/DisplayQuote/State/DisplayQuoteContext.js';
 import DisplayQuoteReducer from 'Modules/DisplayQuote/State/DisplayQuoteReducer.js';
 import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
+import { shuffleArray } from './../../../Utils/shuffleArray';
 
 const DisplayQuoteState = ({ children }) => {
   const {
@@ -100,7 +101,7 @@ const DisplayQuoteState = ({ children }) => {
     if (authorData.length > 0) {
       dispatch({
         type: 'DQ_SET_AUTHORS',
-        payload: authorData
+        payload: shuffleArray([...authorData])
       });
     }
   };
@@ -109,7 +110,7 @@ const DisplayQuoteState = ({ children }) => {
     if (tagsData.length > 0) {
       dispatch({
         type: 'DQ_SET_TAGS',
-        payload: tagsData
+        payload: shuffleArray([...tagsData])
       });
     }
   };

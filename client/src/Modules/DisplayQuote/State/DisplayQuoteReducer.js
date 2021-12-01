@@ -38,6 +38,8 @@ import {
 } from 'Modules/DisplayQuote/State/types.js';
 import { produce } from 'immer';
 
+import { shuffleArray } from 'Utils/shuffleArray';
+
 export default (state, action) => {
   switch (action.type) {
     case DQ_SET_TAGS:
@@ -50,6 +52,7 @@ export default (state, action) => {
 
     case DQ_SET_AUTHORS:
       return produce(state, draftState => {
+        console.log(action.payload);
         draftState.authorList = action.payload;
         draftState.exploreMore.authors.exploreMoreTotalCount = Math.ceil(
           draftState.authorList.length / draftState.exploreMore.paginationStep

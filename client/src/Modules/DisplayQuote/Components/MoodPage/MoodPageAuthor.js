@@ -15,6 +15,7 @@ import {
 } from './Styles/moodpageStyles';
 import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
 import MoodPageSkeletons from './Styles/Molecules/MoodPageSkeletons';
+import { CenterAlignedColumnContainer } from 'BennyStyleLibrary/Global/containerStyles';
 
 const MoodPageAuthor = () => {
   const { appThemes, activeTheme } = useApplicationState();
@@ -48,9 +49,11 @@ const MoodPageAuthor = () => {
                   <MoodPageAuthorButtonImage
                     src={authorImageUrl}
                   ></MoodPageAuthorButtonImage>
-                  <MoodPageAuthorButtonText>
-                    {authorName}
-                  </MoodPageAuthorButtonText>
+                  <CenterAlignedColumnContainer height="60px">
+                    <MoodPageAuthorButtonText>
+                      {authorName}
+                    </MoodPageAuthorButtonText>
+                  </CenterAlignedColumnContainer>
                 </MoodPageAuthorButtonWrapper>
               );
             })}

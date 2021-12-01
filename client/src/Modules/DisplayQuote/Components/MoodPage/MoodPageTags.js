@@ -37,6 +37,7 @@ const MoodPageTags = () => {
             .map(({ tagName, selected, _id, tagSVGIcon }) => {
               return (
                 <MoodPageTagButtonWrapper
+                  key={_id}
                   selected={selected}
                   onClick={() => handleClickOnTag(tagName)}
                   whileTap={{ scale: 1.2 }}

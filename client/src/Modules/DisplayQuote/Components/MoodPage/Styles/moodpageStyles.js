@@ -48,14 +48,15 @@ export const MoodPageAuthorContainer = styled(MoodPageSectionContainer)``;
 export const MoodPageButtonWrapper = styled(
   CenterAlignedFlexStartColumnContainer
 )`
-  width: 100px;
-  height: 100px;
+  width: 94px;
+  height: 94px;
   background: ${props =>
     props.selected ? 'rgba(255, 255, 255, 0.2)' : 'none'};
   border: ${props =>
     props.selected ? '2px solid #ffffff' : '2px solid rgba(255,255,255,0)'};
-  border-radius: 20px;
+  border-radius: 12px;
   margin-top: 8px;
+  padding: 4px;
   transition: all 0.5s ease-out;
 `;
 
@@ -63,9 +64,8 @@ export const MoodPageTagButtonWrapper = styled(MoodPageButtonWrapper)``;
 
 export const MoodPageButtonText = styled(Text)`
   font-family: 'Noto Sans';
-  font-size: 16px;
+  font-size: 14px;
   margin-top: 8px;
-  padding-bottom: 8px;
   color: rgba(255, 255, 255, 0.8);
 `;
 
@@ -84,7 +84,7 @@ export const MoodPageTagButtonSVG = styled(MotionImage)`
 `;
 
 export const MoodPageAuthorButtonWrapper = styled(MoodPageButtonWrapper)`
-  height: auto;
+  height: 120px;
 `;
 
 export const MoodPageAuthorButtonImage = styled(MotionImage)`

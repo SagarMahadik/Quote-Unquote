@@ -4,4 +4,7 @@ const factory = require('../handlerFactory');
 
 exports.createBackgroundImage = factory.createOne(BackgroundImage);
 
-exports.getAllBackgroundImages = factory.getAll(BackgroundImage);
+exports.getAllBackgroundImages = factory.getAll({
+  Model: BackgroundImage,
+  cacheKey: 'backgroundImage'
+});

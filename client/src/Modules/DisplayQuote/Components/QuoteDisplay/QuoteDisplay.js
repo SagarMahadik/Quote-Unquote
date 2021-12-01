@@ -20,7 +20,10 @@ import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
 import AuthorInfoDrawer from './Styles/Molecules/AuthorInfoDrawer';
 import ActionIcons from './Styles/Molecules/ActionIcons';
 import FilterDrawer from './Styles/Molecules/FilterDrawer';
-import { CenterAlignedFlexStartColumnContainer } from 'BennyStyleLibrary/Global/containerStyles';
+import {
+  CenterAlignedColumnContainer,
+  CenterAlignedFlexStartColumnContainer
+} from 'BennyStyleLibrary/Global/containerStyles';
 import IntroAnimation from './IntroAnimation';
 import QuotePageOverlayAnimation from './Styles/Molecules/QuotePageOverlayAnimation';
 
@@ -164,7 +167,7 @@ const QuoteDisplay = () => {
                       }
                     }}
                   >
-                    <>
+                    <CenterAlignedColumnContainer marginTop="4px">
                       <QuotePageTagText
                         onClick={() =>
                           dispatch({ type: 'DQ_TOGGLE_AUTHORPROFILEDRAWER' })
@@ -174,14 +177,26 @@ const QuoteDisplay = () => {
                           filterQuotesList[quoteIndex].author['authorName']
                         )}
                       </QuotePageTagText>
-                    </>
+                      <CenterAlignedFlexStartColumnContainer
+                        height="1px"
+                        backgroundColor="rgba(255,255,255,0.9)"
+                        width="98%"
+                      ></CenterAlignedFlexStartColumnContainer>
+                    </CenterAlignedColumnContainer>
                     {filterQuotesList[quoteIndex].tags.map(
                       ({ tagName, _id }) => {
                         return (
-                          <QuotePageTagText key={_id}>
-                            {' '}
-                            | {makeFirstLetterUpperCase(tagName)}
-                          </QuotePageTagText>
+                          <CenterAlignedColumnContainer marginTop="4px">
+                            <QuotePageTagText key={_id}>
+                              | {makeFirstLetterUpperCase(tagName)}
+                            </QuotePageTagText>
+                            <CenterAlignedFlexStartColumnContainer
+                              height="1px"
+                              backgroundColor="rgba(255,255,255,0.9)"
+                              width="80%"
+                              marginLeft="8px"
+                            ></CenterAlignedFlexStartColumnContainer>
+                          </CenterAlignedColumnContainer>
                         );
                       }
                     )}

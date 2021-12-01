@@ -56,7 +56,7 @@ export const QuoteText = styled.h1`
 export const QuotePageTagContainer = styled(FlexRowContainer)`
   width: auto;
   height: auto;
-  overflow-x: scroll;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   margin-top: 10px;
@@ -65,6 +65,7 @@ export const QuotePageTagContainer = styled(FlexRowContainer)`
 
 export const QuotePageTagText = styled.h1`
   display: flex;
+  margin: 0;
   flex-direction: row;
   justify-content: flex-start;
   font-family: Noto Sans;
@@ -78,8 +79,6 @@ export const QuotePageTagText = styled.h1`
   color: rgba(255, 255, 255, 0.9);
   width: auto;
   height: auto;
-  margin-right: 4px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
 `;
 
 export const AuthorInfoDrawerContainer = styled(

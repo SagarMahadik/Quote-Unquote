@@ -5,6 +5,8 @@ import {
   DQ_SET_AUTHORS,
   DQ_SET_QUOTES,
   DQ_HANDLE_CLICK_TAG,
+  DQ_HANDLE_TAP_SET_AUTHORTAG,
+  DQ_HANDLE_TAP_REMOVE_AUTHORTAG,
   DQ_HANDLE_CLICK_AUTHOR,
   DQ_CREATE_FILTEREDQUOTES,
   DQ_TOGGLE_MOODPAGE,
@@ -34,7 +36,8 @@ import {
   DQ_UNSET_QUOTE_STATE,
   DQ_HIDE_INTROANIMATION,
   DQ_TOGGLE_ACTIONBUTTONS,
-  DQ_TOGGLE_AUTHORPROFILEDRAWER
+  DQ_TOGGLE_AUTHORPROFILEDRAWER,
+  DQ_MOODPAGE_SET_ACTIVETAB
 } from 'Modules/DisplayQuote/State/types.js';
 import { produce } from 'immer';
 
@@ -70,6 +73,25 @@ export default (state, action) => {
           }
         });
       });
+
+    case DQ_HANDLE_TAP_SET_AUTHORTAG:
+      return produce(state, draftState => {
+        draftState.authorList.forEach(author => {
+          if (author.authorName === action.payload) {
+            author.tapped = true;
+          }
+        });
+      });
+
+    case DQ_HANDLE_TAP_REMOVE_AUTHORTAG:
+      return produce(state, draftState => {
+        draftState.authorList.forEach(author => {
+          if (author.authorName === action.payload) {
+            author.tapped = false;
+          }
+        });
+      });
+
     case DQ_HANDLE_CLICK_AUTHOR:
       return produce(state, draftState => {
         draftState.authorList.forEach(author => {
@@ -315,6 +337,11 @@ export default (state, action) => {
       return produce(state, draftState => {
         draftState.displayOverlay = !draftState.displayOverlay;
         draftState.displayAuthorProfile = !draftState.displayAuthorProfile;
+      });
+
+    case DQ_MOODPAGE_SET_ACTIVETAB:
+      return produce(state, draftState => {
+        draftState.moodPageActiveTab = action.payload;
       });
   }
 };

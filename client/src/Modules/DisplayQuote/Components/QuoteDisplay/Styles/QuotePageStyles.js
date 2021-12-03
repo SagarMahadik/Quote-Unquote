@@ -9,7 +9,8 @@ import { WrappedRowContainer } from './../../../../../BennyStyleLibrary/Global/c
 
 export const QuotePageContainer = styled(CenterAlignedColumnContainer)`
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
+  overflow: hidden;
 `;
 
 export const QuotePageOverlay = styled(CenterAlignedColumnContainer)`
@@ -24,7 +25,7 @@ export const QuotePageOverlay = styled(CenterAlignedColumnContainer)`
 `;
 
 export const QuoteContainer = styled(CenterAlignedColumnContainer)`
-  width: 80%;
+  width: 88%;
   max-width: 800px;
   font-family: Noto Sans;
   font-style: normal;
@@ -33,11 +34,37 @@ export const QuoteContainer = styled(CenterAlignedColumnContainer)`
   text-align: center;
   line-height: 34px;
   color: rgba(255, 255, 255, 0.87);
-
   padding: 12px;
   padding-top: 25px;
   padding-bottom: 25px;
   z-index: 1;
+  min-height: 50vh;
+`;
+
+export const QuoteAuthorImageContainer = styled(CenterAlignedColumnContainer)`
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  border-radius: 180px;
+  margin-top: -100px;
+  position: relative;
+`;
+
+export const QuoteAuthorImage = styled(MotionImage)`
+  object-fit: cover;
+  border-radius: 180px;
+  filter: grayscale(100%);
+  opacity: 0.4;
+`;
+
+export const AuthorImageOverLay = styled(CenterAlignedColumnContainer)`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 180px;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.2);
 `;
 
 export const QuoteText = styled.h1`
@@ -50,6 +77,8 @@ export const QuoteText = styled.h1`
   color: rgba(255, 255, 255, 0.87);
   height: auto;
   padding: 12px;
+  display: flex;
+  text-align: center;
   z-index: 1;
 `;
 
@@ -59,7 +88,6 @@ export const QuotePageTagContainer = styled(FlexRowContainer)`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
   margin-bottom: 10px;
 `;
 
@@ -76,7 +104,7 @@ export const QuotePageTagText = styled.h1`
   align-items: center;
   text-align: center;
   padding-right: 3px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.8);
   width: auto;
   height: auto;
 `;

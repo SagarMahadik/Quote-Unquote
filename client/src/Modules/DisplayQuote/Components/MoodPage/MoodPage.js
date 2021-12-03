@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import MoodPageTags from 'Modules/DisplayQuote/Components/MoodPage/MoodPageTags.js';
 import MoodPageAuthor from 'Modules/DisplayQuote/Components/MoodPage/MoodPageAuthor.js';
-import { MoodPageContainer, MoodPageHeader } from './Styles/moodpageStyles.js';
+import {
+  MoodPageContainer,
+  MoodPageHeader,
+  MoodPageTagContainer
+} from './Styles/moodpageStyles.js';
 import { goButtonVibrations } from 'Utils/vibrations.js';
 
 import {
@@ -18,13 +22,29 @@ import MoodPageStartReadingButton from 'Modules/DisplayQuote/Components/MoodPage
 import { quQTheme } from 'BennyStyleLibrary/Themes/darkTheme.js';
 import MoodPageStaggerParent from './Styles/Molecules/MoodPageStaggerParent.jsx';
 import MoodPageStaggerChild from './Styles/Molecules/MoodPageStaggerChild';
+import {
+  OverflowScrollContainer,
+  WrappedRowContainer
+} from './../../../../BennyStyleLibrary/Global/containerStyles';
+import {
+  CenterAlignedColumnContainer,
+  FlexRowContainer,
+  SpaceBetweenRowContainer
+} from 'BennyStyleLibrary/Global/containerStyles.js';
+
+import MoodPageTabContainer from './MoodPageTabContainer.jsx';
+import SelectedTagsAuthorContainer from './SelectedTagsAuthorContainer';
 
 const MoodPage = ({ hidePageheading }) => {
   const history = useHistory();
 
   const { themeIndex } = useApplicationState();
 
-  const { displayQuotes, displayFilterModal } = useDisplayQuoteState();
+  const {
+    displayQuotes,
+    displayFilterModal,
+    moodPageActiveTab
+  } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
 
   const createFilteredQuotes = () => {
@@ -55,23 +75,27 @@ const MoodPage = ({ hidePageheading }) => {
       displayInDrawer={displayFilterModal}
     >
       <MoodPageStaggerParent>
-        {displayFilterModal ? null : (
+        {displayFilterModal ? (
+          <MoodPageHeader>Your selections</MoodPageHeader>
+        ) : (
           <MoodPageHeader>Whats your mood?</MoodPageHeader>
         )}
-        <MoodPageStaggerChild>
-          <MoodPageTags />
-        </MoodPageStaggerChild>
-        <MoodPageStaggerChild>
+
+        <SelectedTagsAuthorContainer />
+        <MoodPageTabContainer />
+
+        {moodPageActiveTab === 'authors' ? (
           <MoodPageAuthor />
-        </MoodPageStaggerChild>
-        <MoodPageStaggerChild>
-          <MoodPageStartReadingButton
-            onClick={() => {
-              goButtonVibrations();
-              createFilteredQuotes();
-            }}
-          />
-        </MoodPageStaggerChild>
+        ) : (
+          <MoodPageTags />
+        )}
+
+        <MoodPageStartReadingButton
+          onClick={() => {
+            goButtonVibrations();
+            createFilteredQuotes();
+          }}
+        />
       </MoodPageStaggerParent>
     </MoodPageContainer>
   );

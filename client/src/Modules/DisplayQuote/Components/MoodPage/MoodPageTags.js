@@ -15,7 +15,7 @@ import {
 import MoodPageSkeletons from './Styles/Molecules/MoodPageSkeletons';
 
 const MoodPageTags = () => {
-  const { tagList } = useDisplayQuoteState();
+  const { tagList, displayFilterModal } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
 
   const handleClickOnTag = tagName => {
@@ -24,14 +24,12 @@ const MoodPageTags = () => {
 
   return (
     <>
-      <MoodPageSectionHeader>Tags</MoodPageSectionHeader>
-
       {tagList.length === 0 ? (
         <MoodPageSectionContainer>
           <MoodPageSkeletons />
         </MoodPageSectionContainer>
       ) : (
-        <MoodPageSectionContainer>
+        <MoodPageSectionContainer height={displayFilterModal ? '48vh' : '56vh'}>
           {tagList
             .filter(tag => tag.tagSVGIcon != '')
             .map(({ tagName, selected, _id, tagSVGIcon }) => {

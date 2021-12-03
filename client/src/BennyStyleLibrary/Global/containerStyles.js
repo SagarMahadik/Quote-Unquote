@@ -64,8 +64,22 @@ export const WrappedRowContainer = styled(FlexRowContainer)`
   flex-wrap: wrap;
 `;
 
+export const OverflowScrollContainer = styled(FlexRowContainer)`
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow-x: scroll;
+  width: 98%;
+  justify-items: center;
+  align-items: center;
+`;
+
 export const SpaceBetweenRowContainer = styled(FlexRowContainer)`
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+`;
+
+export const RowGridContainer = styled(Container)`
+  display: grid;
+  width: auto;
 `;

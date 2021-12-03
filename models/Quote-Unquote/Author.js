@@ -12,6 +12,10 @@ const authorSchema = new mongoose.Schema({
   authorBio: {
     type: String,
     default: ''
+  },
+  authorTag: {
+    type: String,
+    default: ''
   }
 });
 

@@ -61,6 +61,7 @@ const DisplayQuoteState = ({ children }) => {
       QuoteID: '',
       completeDelete: false
     },
+    moodPageActiveTab: 'authors',
     displayQuotes: false,
     currentQuote: [],
     displayFilterModal: false,
@@ -94,14 +95,19 @@ const DisplayQuoteState = ({ children }) => {
     displayIntroAnimation,
     displayOverlay,
     displayAuthorProfile,
-    displayActionButtons
+    displayActionButtons,
+    moodPageActiveTab
   } = state;
 
   const setAuthorsState = authorData => {
     if (authorData.length > 0) {
       dispatch({
         type: 'DQ_SET_AUTHORS',
-        payload: shuffleArray([...authorData])
+        payload: [...authorData].sort((a, b) =>
+          (a['authorName'] || '')
+            .toString()
+            .localeCompare((b['authorName'] || '').toString())
+        )
       });
     }
   };
@@ -158,7 +164,8 @@ const DisplayQuoteState = ({ children }) => {
         displayOverlay,
         displayAuthorProfile,
         displayActionButtons,
-        dispatch
+        dispatch,
+        moodPageActiveTab
       }}
     >
       <DisplayQuoteDispatchContext.Provider value={dispatch}>

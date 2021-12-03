@@ -106,7 +106,7 @@ export const MoodPageAuthorButtonImage = styled(MotionImage)`
 
 export const MoodPageAuthorButtonText = styled(MoodPageButtonText)`
   margin-bottom: 8px;
-  margin-top: 8px;
+  margin-top: 16px;
 `;
 
 export const MoodPageTagButtonText = styled(MoodPageButtonText)``;
@@ -115,7 +115,7 @@ export const MoodPageTab = styled(CenterAlignedColumnContainer)`
   width: 47%;
   height: 30px;
   background: ${props => (props.selected ? 'rgba(255,255,255,0.3)' : 'none')};
-  border: 2px solid rgb(255, 255, 255, 0.87);
+  border: 2px solid rgb(255, 255, 255, 0.6);
   color: rgba(255, 255, 255, 0.87);
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;

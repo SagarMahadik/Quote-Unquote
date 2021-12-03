@@ -25,7 +25,7 @@ export const QuotePageOverlay = styled(CenterAlignedColumnContainer)`
 `;
 
 export const QuoteContainer = styled(CenterAlignedColumnContainer)`
-  width: 88%;
+  width: 96%;
   max-width: 800px;
   font-family: Noto Sans;
   font-style: normal;
@@ -45,14 +45,14 @@ export const QuoteAuthorImageContainer = styled(CenterAlignedColumnContainer)`
   width: 100%;
   height: 480px;
   overflow: hidden;
-  border-radius: 180px;
+  border-radius: 120px;
   margin-top: -100px;
   position: relative;
 `;
 
 export const QuoteAuthorImage = styled(MotionImage)`
   object-fit: cover;
-  border-radius: 180px;
+  border-radius: 120px;
   filter: grayscale(100%);
   opacity: 0.4;
 `;
@@ -62,7 +62,7 @@ export const AuthorImageOverLay = styled(CenterAlignedColumnContainer)`
   top: 0;
   width: 100%;
   height: 100%;
-  border-radius: 180px;
+  border-radius: 120px;
   z-index: 1;
   background: rgba(0, 0, 0, 0.2);
 `;
@@ -89,6 +89,7 @@ export const QuotePageTagContainer = styled(FlexRowContainer)`
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
+  margin-top: 8px;
 `;
 
 export const QuotePageTagText = styled.h1`

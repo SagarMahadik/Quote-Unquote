@@ -106,6 +106,7 @@ export const MoodPageAuthorButtonImage = styled(MotionImage)`
 
 export const MoodPageAuthorButtonText = styled(MoodPageButtonText)`
   margin-bottom: 8px;
+  margin-top: 8px;
 `;
 
 export const MoodPageTagButtonText = styled(MoodPageButtonText)``;

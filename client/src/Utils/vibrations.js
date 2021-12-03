@@ -42,7 +42,7 @@ export const formClickVibrations = () => {
   navigator.vibrate = navigator.vibrate;
 
   if (navigator.vibrate) {
-    return navigator.vibrate(10);
+    return navigator.vibrate(8);
   }
 };
 

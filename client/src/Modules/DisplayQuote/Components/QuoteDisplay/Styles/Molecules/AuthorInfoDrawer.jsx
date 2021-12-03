@@ -10,6 +10,7 @@ import {
 
 import { quQTheme } from 'BennyStyleLibrary/Themes/darkTheme.js';
 import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
+import { playVibrations } from './../../../../../../Utils/vibrations';
 
 const AuthorInfoDrawer = ({ authorImageUrl, onClick, authorBio }) => {
   const { themeIndex } = useApplicationState();
@@ -22,7 +23,12 @@ const AuthorInfoDrawer = ({ authorImageUrl, onClick, authorBio }) => {
         exit={{ opacity: 0, y: 200 }}
         backgroundColor={`radial-gradient(51.33% 74.07% at 48.67% 46.39%, ${quQTheme[themeIndex].primaryColor} 0%,${quQTheme[themeIndex].secondaryColor} 100%)`}
       >
-        <AuthorInfoDrawerCloseIcon onClick={() => onClick()}>
+        <AuthorInfoDrawerCloseIcon
+          onClick={() => {
+            playVibrations(6);
+            onClick();
+          }}
+        >
           <CloseIcon />
         </AuthorInfoDrawerCloseIcon>
         <AuthorInfoDrawerImage src={authorImageUrl}></AuthorInfoDrawerImage>

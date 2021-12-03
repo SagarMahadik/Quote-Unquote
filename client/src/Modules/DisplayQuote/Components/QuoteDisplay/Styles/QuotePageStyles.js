@@ -64,7 +64,11 @@ export const AuthorImageOverLay = styled(CenterAlignedColumnContainer)`
   height: 100%;
   border-radius: 120px;
   z-index: 1;
-  background: rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.4) 38.06%,
+    rgba(0, 0, 0, 0) 80.39%
+  );
 `;
 
 export const QuoteText = styled.h1`

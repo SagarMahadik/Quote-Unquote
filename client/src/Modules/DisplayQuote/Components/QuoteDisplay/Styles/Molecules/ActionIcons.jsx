@@ -4,6 +4,7 @@ import ShareIcon from './ShareIcon';
 import FilterIcon from './FilterIcon';
 import { goButtonVibrations } from 'Utils/vibrations.js';
 import { useDisplayQuoteDispatch } from 'Modules/DisplayQuote/State/DisplayQuoteState';
+import { playVibrations } from './../../../../../../Utils/vibrations';
 
 const ActionIcons = ({ currentQuote, currentAuthor, onClick }) => {
   const dispatch = useDisplayQuoteDispatch();
@@ -18,6 +19,7 @@ const ActionIcons = ({ currentQuote, currentAuthor, onClick }) => {
       .catch(error => console.log('Error in sharing', error));
   };
   const handleHideModal = () => {
+    playVibrations(8);
     dispatch({ type: 'DQ_TOGGLE_FILTERMODAL' });
   };
   return (

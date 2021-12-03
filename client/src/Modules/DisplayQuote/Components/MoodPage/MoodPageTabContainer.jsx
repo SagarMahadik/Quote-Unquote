@@ -5,6 +5,7 @@ import {
   CenterAlignedColumnContainer
 } from 'BennyStyleLibrary/Global/containerStyles';
 import { MoodPageTab } from './Styles/moodpageStyles';
+import { playVibrations } from './../../../../Utils/vibrations';
 
 const MoodPageTabContainer = () => {
   const { dispatch, moodPageActiveTab } = useDisplayQuoteState();
@@ -13,17 +14,19 @@ const MoodPageTabContainer = () => {
       <WrappedRowContainer width="92%" marginTop="36px">
         <MoodPageTab
           selected={moodPageActiveTab === 'authors'}
-          onClick={() =>
-            dispatch({ type: 'DQ_MOODPAGE_SET_ACTIVETAB', payload: 'authors' })
-          }
+          onClick={() => {
+            playVibrations(6);
+            dispatch({ type: 'DQ_MOODPAGE_SET_ACTIVETAB', payload: 'authors' });
+          }}
         >
           Authors
         </MoodPageTab>
         <MoodPageTab
           selected={moodPageActiveTab === 'tags'}
-          onClick={() =>
-            dispatch({ type: 'DQ_MOODPAGE_SET_ACTIVETAB', payload: 'tags' })
-          }
+          onClick={() => {
+            playVibrations(6);
+            dispatch({ type: 'DQ_MOODPAGE_SET_ACTIVETAB', payload: 'tags' });
+          }}
         >
           Tags
         </MoodPageTab>

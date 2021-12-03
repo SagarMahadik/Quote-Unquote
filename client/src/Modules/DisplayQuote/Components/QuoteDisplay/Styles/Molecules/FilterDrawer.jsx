@@ -9,6 +9,7 @@ import CloseIcon from 'StyleLibrary1.0/Icons/CloseIcon.js';
 import { useDisplayQuoteDispatch } from 'Modules/DisplayQuote/State/DisplayQuoteState';
 import { useDisplayQuoteState } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 import { AnimatePresence } from 'framer-motion';
+import { playVibrations } from './../../../../../../Utils/vibrations';
 
 const FilterDrawer = () => {
   const dispatch = useDisplayQuoteDispatch();
@@ -30,7 +31,12 @@ const FilterDrawer = () => {
           exit={{ opacity: 0, y: 700 }}
         >
           <FilterDrawerCloseIcon>
-            <CloseIcon onClick={() => handleModalClose()} />
+            <CloseIcon
+              onClick={() => {
+                playVibrations(6);
+                handleModalClose();
+              }}
+            />
           </FilterDrawerCloseIcon>
           <MoodPage />
         </FilterDrawerContainer>

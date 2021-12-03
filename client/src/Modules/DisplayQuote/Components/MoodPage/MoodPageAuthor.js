@@ -18,6 +18,7 @@ import {
 import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
 import MoodPageSkeletons from './Styles/Molecules/MoodPageSkeletons';
 import { CenterAlignedColumnContainer } from 'BennyStyleLibrary/Global/containerStyles';
+import { formClickVibrations } from 'Utils/vibrations.js';
 
 const MoodPageAuthor = () => {
   const { appThemes, activeTheme } = useApplicationState();
@@ -25,6 +26,7 @@ const MoodPageAuthor = () => {
   const { authorList, displayFilterModal } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
   const handleClickOnAuthor = authorName => {
+    formClickVibrations();
     dispatch({ type: 'DQ_HANDLE_CLICK_AUTHOR', payload: authorName });
   };
   return (

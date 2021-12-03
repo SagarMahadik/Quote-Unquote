@@ -33,6 +33,7 @@ import Div100vh from 'react-div-100vh';
 import { MotionImage } from 'BennyStyleLibrary/Global/rootStyles';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { playVibrations } from './../../../../Utils/vibrations';
 
 const QuoteDisplay = () => {
   const {
@@ -196,9 +197,10 @@ const QuoteDisplay = () => {
                     >
                       <CenterAlignedColumnContainer marginTop="4px">
                         <QuotePageTagText
-                          onClick={() =>
-                            dispatch({ type: 'DQ_TOGGLE_AUTHORPROFILEDRAWER' })
-                          }
+                          onClick={() => {
+                            playVibrations(6);
+                            dispatch({ type: 'DQ_TOGGLE_AUTHORPROFILEDRAWER' });
+                          }}
                         >
                           {makeFirstLetterUpperCase(
                             filterQuotesList[quoteIndex].author['authorName']

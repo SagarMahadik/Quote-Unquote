@@ -13,12 +13,14 @@ import {
   MoodPageTagButtonWrapper
 } from './Styles/moodpageStyles';
 import MoodPageSkeletons from './Styles/Molecules/MoodPageSkeletons';
+import { formClickVibrations } from 'Utils/vibrations.js';
 
 const MoodPageTags = () => {
   const { tagList, displayFilterModal } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
 
   const handleClickOnTag = tagName => {
+    formClickVibrations();
     dispatch({ type: 'DQ_HANDLE_CLICK_TAG', payload: tagName });
   };
 

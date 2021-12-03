@@ -21,6 +21,7 @@ import MoodPageSelectedItemCloseIcon from './Styles/Molecules/MoodPageSelectedIt
 import { AnimatePresence } from 'framer-motion';
 import SelectedAuthorIcon from './Styles/Molecules/SelectedAuthorIcon';
 import SelectedTagIcon from './Styles/Molecules/SelectedTagIcon';
+import { playVibrations } from './../../../../Utils/vibrations';
 
 const MoodPageSelectedFilter = ({ filter, keyIndex, onClick }) => {
   return (
@@ -66,12 +67,13 @@ const SelectedTagsAuthorContainer = () => {
                     <MoodPageSelectedFilter
                       filter={author.authorName}
                       key={author._id}
-                      onClick={() =>
+                      onClick={() => {
+                        playVibrations(6);
                         dispatch({
                           type: 'DQ_HANDLE_CLICK_AUTHOR',
                           payload: author.authorName
-                        })
-                      }
+                        });
+                      }}
                     />
                   </AnimatePresence>
                 ))}
@@ -100,12 +102,13 @@ const SelectedTagsAuthorContainer = () => {
                     <MoodPageSelectedFilter
                       filter={tag.tagName}
                       key={tag._id}
-                      onClick={() =>
+                      onClick={() => {
+                        playVibrations(6);
                         dispatch({
                           type: 'DQ_HANDLE_CLICK_TAG',
                           payload: tag.tagName
-                        })
-                      }
+                        });
+                      }}
                     />
                   </AnimatePresence>
                 ))}

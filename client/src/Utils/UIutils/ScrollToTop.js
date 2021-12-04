@@ -14,7 +14,6 @@ function ScrollToTop({ children }) {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    console.log('pathname', pathname);
     if (pathname === '/readQuote') {
       console.log('scroll to top');
       return;

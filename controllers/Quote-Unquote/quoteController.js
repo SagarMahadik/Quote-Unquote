@@ -6,9 +6,7 @@ exports.createQuote = factory.createOne(Quote);
 
 exports.getAllQuotes = factory.getAll({
   Model: Quote,
-  cacheKey: 'quotes',
-  popOption1: 'tags',
-  popOptions: 'author'
+  cacheKey: 'quotes'
 });
 
 exports.updateQuote = factory.updateOne(Quote);

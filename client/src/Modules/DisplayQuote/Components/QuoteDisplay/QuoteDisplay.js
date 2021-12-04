@@ -42,7 +42,9 @@ const QuoteDisplay = () => {
     displayIntroAnimation,
     displayActionButtons,
     displayOverlay,
-    displayAuthorProfile
+    displayAuthorProfile,
+    authorList,
+    tagList
   } = useDisplayQuoteState();
 
   const dispatch = useDisplayQuoteDispatch();
@@ -104,10 +106,18 @@ const QuoteDisplay = () => {
     dispatch({ type: 'DQ_TOGGLE_ACTIONBUTTONS' });
   });
 
+  const getQuoteTagName = tagId => {
+    return tagList.filter(({ _id }) => _id === tagId)[0].tagName;
+  };
+
+  const getAuthorDetails = (authorId, detail) => {
+    return authorList.filter(({ _id }) => _id === authorId)[0][detail];
+  };
+
   return (
     <Div100vh>
       <QuotePageContainer>
-        {filterQuotesList.length > 0 ? (
+        {authorList && filterQuotesList.length > 0 ? (
           <>
             <AnimatePresence>
               <QuotePageOverlayAnimation display={displayOverlay} />
@@ -153,9 +163,10 @@ const QuoteDisplay = () => {
                         initial="enter"
                         animate="center"
                         exit="exit"
-                        src={
-                          filterQuotesList[quoteIndex].author['authorImageUrl']
-                        }
+                        src={getAuthorDetails(
+                          filterQuotesList[quoteIndex].author,
+                          'authorImageUrl'
+                        )}
                       />
                     </QuoteAuthorImageContainer>
                     <CenterAlignedColumnContainer
@@ -203,7 +214,10 @@ const QuoteDisplay = () => {
                           }}
                         >
                           {makeFirstLetterUpperCase(
-                            filterQuotesList[quoteIndex].author['authorName']
+                            getAuthorDetails(
+                              filterQuotesList[quoteIndex].author,
+                              'authorName'
+                            )
                           )}
                         </QuotePageTagText>
                         <CenterAlignedFlexStartColumnContainer
@@ -212,23 +226,21 @@ const QuoteDisplay = () => {
                           width="98%"
                         ></CenterAlignedFlexStartColumnContainer>
                       </CenterAlignedColumnContainer>
-                      {filterQuotesList[quoteIndex].tags.map(
-                        ({ tagName, _id }) => {
-                          return (
-                            <CenterAlignedColumnContainer marginTop="4px">
-                              <QuotePageTagText key={_id}>
-                                | {makeFirstLetterUpperCase(tagName)}
-                              </QuotePageTagText>
-                              <CenterAlignedFlexStartColumnContainer
-                                height="1px"
-                                backgroundColor="rgba(255,255,255,0.9)"
-                                width="80%"
-                                marginLeft="8px"
-                              ></CenterAlignedFlexStartColumnContainer>
-                            </CenterAlignedColumnContainer>
-                          );
-                        }
-                      )}
+                      {filterQuotesList[quoteIndex].tags.map((tag, index) => {
+                        return (
+                          <CenterAlignedColumnContainer marginTop="4px">
+                            <QuotePageTagText key={index}>
+                              | {makeFirstLetterUpperCase(getQuoteTagName(tag))}
+                            </QuotePageTagText>
+                            <CenterAlignedFlexStartColumnContainer
+                              height="1px"
+                              backgroundColor="rgba(255,255,255,0.9)"
+                              width="80%"
+                              marginLeft="8px"
+                            ></CenterAlignedFlexStartColumnContainer>
+                          </CenterAlignedColumnContainer>
+                        );
+                      })}
                     </QuotePageTagContainer>
                   </>
                 )}
@@ -238,9 +250,19 @@ const QuoteDisplay = () => {
               {displayAuthorProfile && (
                 <AuthorInfoDrawer
                   authorImageUrl={
-                    filterQuotesList[quoteIndex].author['authorImageUrl']
+                    getAuthorDetails(
+                      filterQuotesList[quoteIndex].author,
+                      'authorImageUrl'
+                    )
+                    //filterQuotesList[quoteIndex].author['authorImageUrl']
                   }
-                  authorBio={filterQuotesList[quoteIndex].author['authorBio']}
+                  authorBio={
+                    getAuthorDetails(
+                      filterQuotesList[quoteIndex].author,
+                      'authorBio'
+                    )
+                    //filterQuotesList[quoteIndex].author['authorBio']}
+                  }
                   onClick={() =>
                     dispatch({ type: 'DQ_TOGGLE_AUTHORPROFILEDRAWER' })
                   }
@@ -251,9 +273,10 @@ const QuoteDisplay = () => {
               {displayActionButtons && (
                 <ActionIcons
                   currentQuote={filterQuotesList[quoteIndex].quote}
-                  currentAuthor={
-                    filterQuotesList[quoteIndex].author['authorName']
-                  }
+                  currentAuthor={getAuthorDetails(
+                    filterQuotesList[quoteIndex].author,
+                    'authorName'
+                  )}
                 />
               )}
             </AnimatePresence>

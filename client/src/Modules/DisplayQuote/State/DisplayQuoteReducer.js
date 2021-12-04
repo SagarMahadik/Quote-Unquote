@@ -55,7 +55,6 @@ export default (state, action) => {
 
     case DQ_SET_AUTHORS:
       return produce(state, draftState => {
-        console.log(action.payload);
         draftState.authorList = action.payload;
         draftState.exploreMore.authors.exploreMoreTotalCount = Math.ceil(
           draftState.authorList.length / draftState.exploreMore.paginationStep
@@ -119,6 +118,7 @@ export default (state, action) => {
         draftState.filteredQuotes.filterQuotesList = [];
         draftState.selectedData.selectedTags = [];
         draftState.selectedData.selectedAuthors = [];
+
         draftState.selectedTags = draftState.tagList.filter(
           tag => tag.selected
         );
@@ -128,23 +128,20 @@ export default (state, action) => {
         );
 
         draftState.selectedTags.forEach(tag =>
-          draftState.selectedData.selectedTags.push(tag.tagName)
+          draftState.selectedData.selectedTags.push(tag._id)
         );
 
-        draftState.selectedAuthors.forEach(({ authorName }) =>
-          draftState.selectedData.selectedAuthors.push(authorName)
+        draftState.selectedAuthors.forEach(({ _id }) =>
+          draftState.selectedData.selectedAuthors.push(_id)
         );
 
         let quotesByAuthorNames = draftState.selectedData.selectedAuthors
-          .map(a =>
-            draftState.quotes.filter(quote => quote.author.authorName === a)
-          )
+          .map(a => draftState.quotes.filter(quote => quote.author === a))
           .flat();
+
         let quotesByTags = draftState.selectedData.selectedTags
           .map(t =>
-            draftState.quotes.filter(quote =>
-              quote.tags.find(tg => tg.tagName === t)
-            )
+            draftState.quotes.filter(quote => quote.tags.find(tg => tg === t))
           )
           .flat();
 

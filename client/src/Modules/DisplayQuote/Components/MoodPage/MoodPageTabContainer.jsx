@@ -4,14 +4,14 @@ import {
   WrappedRowContainer,
   CenterAlignedColumnContainer
 } from 'BennyStyleLibrary/Global/containerStyles';
-import { MoodPageTab } from './Styles/moodpageStyles';
+import { MoodPageTab, MoodPageTabWrapper } from './Styles/moodpageStyles';
 import { playVibrations } from './../../../../Utils/vibrations';
 
 const MoodPageTabContainer = () => {
   const { dispatch, moodPageActiveTab } = useDisplayQuoteState();
   return (
     <>
-      <WrappedRowContainer width="92%" marginTop="36px">
+      <MoodPageTabWrapper width="92%" marginTop="36px">
         <MoodPageTab
           selected={moodPageActiveTab === 'authors'}
           onClick={() => {
@@ -30,7 +30,7 @@ const MoodPageTabContainer = () => {
         >
           Tags
         </MoodPageTab>
-      </WrappedRowContainer>
+      </MoodPageTabWrapper>
     </>
   );
 };

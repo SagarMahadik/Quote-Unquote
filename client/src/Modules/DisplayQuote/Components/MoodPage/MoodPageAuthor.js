@@ -36,7 +36,7 @@ const MoodPageAuthor = () => {
           <MoodPageSkeletons />
         </MoodPageAuthorContainer>
       ) : (
-        <MoodPageAuthorContainer height={displayFilterModal ? '48vh' : '56vh'}>
+        <MoodPageAuthorContainer height={displayFilterModal ? '48vh' : '58vh'}>
           {authorList
             .filter(author => author.authorImageUrl !== '')
             .map(

@@ -13,24 +13,11 @@ import {
   useDisplayQuoteState
 } from 'Modules/DisplayQuote/State/DisplayQuoteState.js';
 
-import StaggerAnimationContainer from 'StylesLibrary/Animations/AnimationContainer/PageAnimations/StaggerAnimationContainer.js';
-import StaggerAnimationChild from 'StylesLibrary/Animations/AnimationContainer/PageAnimations/StaggerAnimationChild.js';
-
 import { useApplicationState } from 'Modules/Authentication/State/ApplicationState.js';
 import { useHistory } from 'react-router-dom';
 import MoodPageStartReadingButton from 'Modules/DisplayQuote/Components/MoodPage/Styles/Molecules/MoodPageStartReadingButton.jsx';
 import { quQTheme } from 'BennyStyleLibrary/Themes/darkTheme.js';
 import MoodPageStaggerParent from './Styles/Molecules/MoodPageStaggerParent.jsx';
-import MoodPageStaggerChild from './Styles/Molecules/MoodPageStaggerChild';
-import {
-  OverflowScrollContainer,
-  WrappedRowContainer
-} from './../../../../BennyStyleLibrary/Global/containerStyles';
-import {
-  CenterAlignedColumnContainer,
-  FlexRowContainer,
-  SpaceBetweenRowContainer
-} from 'BennyStyleLibrary/Global/containerStyles.js';
 
 import MoodPageTabContainer from './MoodPageTabContainer.jsx';
 import SelectedTagsAuthorContainer from './SelectedTagsAuthorContainer';

@@ -38,7 +38,7 @@ export const MoodPageSectionHeader = styled(Text)`
 
 export const MoodPageSectionContainer = styled(WrappedRowContainer)`
   width: 90%;
-  max-width: 800px;
+  max-width: 776px;
   height: ${props => (props.height ? props.height : 'auto')};
   overflow-y: scroll;
   background: rgba(231, 234, 239, 0.19);
@@ -111,6 +111,15 @@ export const MoodPageAuthorButtonText = styled(MoodPageButtonText)`
 
 export const MoodPageTagButtonText = styled(MoodPageButtonText)``;
 
+export const MoodPageTabWrapper = styled(WrappedRowContainer)`
+  width: 92%;
+  margin-top: 36px;
+  max-width: 800px;
+  @media (min-width: 1200px) {
+    width: 98%;
+  }
+`;
+
 export const MoodPageTab = styled(CenterAlignedColumnContainer)`
   width: 47%;
   height: 30px;
@@ -120,6 +129,9 @@ export const MoodPageTab = styled(CenterAlignedColumnContainer)`
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   transition: all 0.5s ease-out;
+  @media (min-width: 1200px) {
+    width: 47%;
+  }
 `;
 
 export const MoodPageFilterScrollContainer = styled(OverflowScrollContainer)`
@@ -141,6 +153,7 @@ export const MoodPageSelectedItemContainer = styled(RowGridContainer)`
   column-gap: 10px;
   align-items: center;
   background: rgba(255, 255, 255, 0.2);
+  max-width: 600px;
 `;
 
 export const MoodPageSelectedItemText = styled(Text)`

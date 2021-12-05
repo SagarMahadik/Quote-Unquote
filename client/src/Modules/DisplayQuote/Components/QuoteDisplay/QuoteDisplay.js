@@ -11,12 +11,13 @@ import {
   QuoteAuthorImageContainer,
   QuoteContainer,
   QuotePageContainer,
-  QuotePageOverlay,
   QuotePageTagContainer,
   QuotePageTagText,
   QuoteText,
   QuoteAuthorImage,
-  AuthorImageOverLay
+  AuthorImageOverLay,
+  QuotePageDesktopActionButton,
+  QuotePageDesktopButtonContainer
 } from './Styles/QuotePageStyles';
 import { useDoubleTap } from 'use-double-tap';
 import { makeFirstLetterUpperCase } from 'Utils/stringOperations.js';
@@ -30,15 +31,13 @@ import {
 import IntroAnimation from './IntroAnimation';
 import QuotePageOverlayAnimation from './Styles/Molecules/QuotePageOverlayAnimation';
 import Div100vh from 'react-div-100vh';
-import { MotionImage } from 'BennyStyleLibrary/Global/rootStyles';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { playVibrations } from './../../../../Utils/vibrations';
+import { WrappedRowContainer } from './../../../../BennyStyleLibrary/Global/containerStyles';
 
 const QuoteDisplay = () => {
   const {
     filteredQuotes: { filterQuotesList },
-    displayFilterModal,
     displayIntroAnimation,
     displayActionButtons,
     displayOverlay,
@@ -48,6 +47,13 @@ const QuoteDisplay = () => {
   } = useDisplayQuoteState();
 
   const dispatch = useDisplayQuoteDispatch();
+
+  React.useEffect(() => {
+    console.log('window.innerWidth', window.innerWidth);
+    if (window.innerWidth > 768) {
+      dispatch({ type: 'DQ_TOGGLE_ACTIONBUTTONS' });
+    }
+  }, [window.innerWidth]);
 
   useEffect(() => {
     if (filterQuotesList.length === 0) {
@@ -117,7 +123,7 @@ const QuoteDisplay = () => {
   return (
     <Div100vh>
       <QuotePageContainer>
-        {authorList && filterQuotesList.length > 0 ? (
+        {authorList.length > 0 && filterQuotesList.length > 0 ? (
           <>
             <AnimatePresence>
               <QuotePageOverlayAnimation display={displayOverlay} />
@@ -283,6 +289,28 @@ const QuoteDisplay = () => {
             <>
               <FilterDrawer />
             </>
+            <QuotePageDesktopButtonContainer width="100%">
+              <WrappedRowContainer width="60%">
+                <QuotePageDesktopActionButton
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.8 }}
+                  onClick={() => {
+                    paginate(-1);
+                  }}
+                >
+                  Previous
+                </QuotePageDesktopActionButton>
+                <QuotePageDesktopActionButton
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.8 }}
+                  onClick={() => {
+                    paginate(1);
+                  }}
+                >
+                  Next
+                </QuotePageDesktopActionButton>
+              </WrappedRowContainer>
+            </QuotePageDesktopButtonContainer>
           </>
         ) : (
           <CenterAlignedFlexStartColumnContainer

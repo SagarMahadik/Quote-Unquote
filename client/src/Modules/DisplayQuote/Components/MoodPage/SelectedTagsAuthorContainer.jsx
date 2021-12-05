@@ -48,7 +48,11 @@ const SelectedTagsAuthorContainer = () => {
     <>
       <AnimatePresence>
         {authorList.filter(author => author.selected).length > 0 && (
-          <FlexRowContainer alignItems="baseline" width="100%">
+          <FlexRowContainer
+            alignItems="baseline"
+            width="100%"
+            style={{ maxWidth: '800px' }}
+          >
             <MoodPageSelectedItemIconContainer>
               <SelectedAuthorIcon
                 style={{ width: '30px', height: '30px', marginTop: '8px' }}
@@ -83,7 +87,11 @@ const SelectedTagsAuthorContainer = () => {
       </AnimatePresence>
       <AnimatePresence>
         {tagList.filter(tag => tag.selected).length > 0 && (
-          <FlexRowContainer alignItems="center" width="100%">
+          <FlexRowContainer
+            alignItems="center"
+            width="100%"
+            style={{ maxWidth: '800px' }}
+          >
             <MoodPageSelectedItemIconContainer>
               <SelectedTagIcon
                 style={{ width: '30px', height: '30px', marginTop: '16px' }}

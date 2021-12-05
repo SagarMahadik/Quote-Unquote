@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import StaggerAnimationChild from 'Modules/DisplayQuote/Components/QuoteDisplay/IntroAnimationComponents/IntroStaggerAnimationChild.jsx';
 import StaggerAnimationContainer from './../../../../StylesLibrary/Animations/AnimationContainer/PageAnimations/StaggerAnimationContainer';
 import SwipeLeftHand from 'Modules/DisplayQuote/Components/QuoteDisplay/IntroAnimationComponents/SwipeLeftHand.jsx';
@@ -13,7 +13,21 @@ import {
 } from './Styles/QuotePageStyles';
 
 const IntroAnimation = () => {
+  const [hideAnimation, setHideAnimation] = React.useState(false);
+
+  useEffect(() => {
+    const width = window.innerWidth;
+    if (width > 768) {
+      setHideAnimation(true);
+    }
+  }, []);
+
   const dispatch = useDisplayQuoteDispatch();
+
+  if (hideAnimation) {
+    return null;
+  }
+
   return (
     <CenterAlignedFlexStartColumnContainer
       position="absolute"

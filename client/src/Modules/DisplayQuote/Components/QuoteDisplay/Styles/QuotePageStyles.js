@@ -11,6 +11,7 @@ export const QuotePageContainer = styled(CenterAlignedColumnContainer)`
   width: 100%;
   height: 100%;
   overflow: hidden;
+  max-width: 800px;
 `;
 
 export const QuotePageOverlay = styled(CenterAlignedColumnContainer)`
@@ -43,11 +44,16 @@ export const QuoteContainer = styled(CenterAlignedColumnContainer)`
 
 export const QuoteAuthorImageContainer = styled(CenterAlignedColumnContainer)`
   width: 100%;
+  max-width: 400px;
   height: 480px;
   overflow: hidden;
   border-radius: 120px;
   margin-top: -100px;
   position: relative;
+  @media (min-width: 800px) {
+    margin-top: -30px;
+    height: 400px;
+  }
 `;
 
 export const QuoteAuthorImage = styled(MotionImage)`
@@ -84,6 +90,7 @@ export const QuoteText = styled.h1`
   display: flex;
   text-align: center;
   z-index: 1;
+  max-width: 400px;
 `;
 
 export const QuotePageTagContainer = styled(FlexRowContainer)`
@@ -114,6 +121,34 @@ export const QuotePageTagText = styled.h1`
   height: auto;
 `;
 
+export const QuotePageDesktopButtonContainer = styled(
+  CenterAlignedColumnContainer
+)`
+  width: 100%;
+
+  @media (max-width: 799px) {
+    display: none;
+  }
+
+  @media (min-width: 800px) {
+    margin-top: -20px;
+  }
+  @media (min-width: 1660px) {
+    margin-top: 20px;
+  }
+`;
+
+export const QuotePageDesktopActionButton = styled(
+  CenterAlignedColumnContainer
+)`
+  width: 40%;
+  height: 60px;
+  border-radius: 30px;
+  background: #f5f5f5;
+  opacity: 0.7;
+  border: 1px solid #e0e0e0;
+`;
+
 export const AuthorInfoDrawerContainer = styled(
   CenterAlignedFlexStartColumnContainer
 )`
@@ -128,6 +163,10 @@ export const AuthorInfoDrawerContainer = styled(
   left: 0;
   z-index: 3;
   overflow-y: scroll;
+  @media (min-width: 800px) {
+    width: 30%;
+    left: 35%;
+  }
 `;
 
 export const AuthorInfoDrawerImage = styled(MotionImage)`
@@ -149,6 +188,9 @@ export const AuthorInfoDrawerTextContainer = styled(
   height: 150px;
   margin-bottom: 16px;
   overflow-y: scroll;
+  @media (min-width: 800px) {
+    width: 70%;
+  }
 `;
 
 export const AuthorInfoDrawerText = styled.h1`
@@ -176,7 +218,15 @@ export const QuotePageIconContainer = styled(WrappedRowContainer)`
   align-items: center;
   border-radius: 25px;
   position: absolute;
+  z-index: 2;
   top: 80%;
+  @media (min-width: 800px) {
+    top: 92%;
+  }
+  @media (min-width: 1600px) {
+    top: 68%;
+    width: 10%;
+  }
 `;
 
 export const FilterDrawerContainer = styled(
@@ -186,12 +236,23 @@ export const FilterDrawerContainer = styled(
   width: 98%;
   height: auto;
   min-height: 90vh;
+  overflow-y: scroll;
   top: 10%;
   z-index: 5;
   justify-content: flex-start;
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
   border: 1px solid rgba(255, 255, 255, 0.6);
+  @media (min-width: 800px) {
+    width: 30%;
+    left: 35%;
+    top: 0;
+  }
+  @media (min-width: 1200px) {
+    width: 30%;
+    left: 35%;
+    top: 10%;
+  }
 `;
 
 export const FilterDrawerCloseIcon = styled(CenterAlignedColumnContainer)`

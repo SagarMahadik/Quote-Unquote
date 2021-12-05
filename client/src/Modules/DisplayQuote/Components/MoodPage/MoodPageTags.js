@@ -14,12 +14,15 @@ import {
 } from './Styles/moodpageStyles';
 import MoodPageSkeletons from './Styles/Molecules/MoodPageSkeletons';
 import { formClickVibrations } from 'Utils/vibrations.js';
+import useGAEventTracker from './../../../../Utils/UIutils/useGAEventTracker';
 
 const MoodPageTags = () => {
   const { tagList, displayFilterModal } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
+  const GAEventsTracker = useGAEventTracker('MoodPageTags');
 
   const handleClickOnTag = tagName => {
+    GAEventsTracker.trackEvent('ClickOnTag', tagName);
     formClickVibrations();
     dispatch({ type: 'DQ_HANDLE_CLICK_TAG', payload: tagName });
   };

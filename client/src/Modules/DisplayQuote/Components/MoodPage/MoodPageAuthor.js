@@ -19,13 +19,18 @@ import { useApplicationState } from 'Modules/Authentication/State/ApplicationSta
 import MoodPageSkeletons from './Styles/Molecules/MoodPageSkeletons';
 import { CenterAlignedColumnContainer } from 'BennyStyleLibrary/Global/containerStyles';
 import { formClickVibrations } from 'Utils/vibrations.js';
+import useGAEventTracker from './../../../../Utils/UIutils/useGAEventTracker';
 
 const MoodPageAuthor = () => {
   const { appThemes, activeTheme } = useApplicationState();
 
   const { authorList, displayFilterModal } = useDisplayQuoteState();
   const dispatch = useDisplayQuoteDispatch();
+
+  const GAEventsTracker = useGAEventTracker('MoodPageAuthor');
+
   const handleClickOnAuthor = authorName => {
+    GAEventsTracker('ClickonAUthor', authorName);
     formClickVibrations();
     dispatch({ type: 'DQ_HANDLE_CLICK_AUTHOR', payload: authorName });
   };

@@ -34,6 +34,7 @@ import Div100vh from 'react-div-100vh';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { playVibrations } from './../../../../Utils/vibrations';
 import { WrappedRowContainer } from './../../../../BennyStyleLibrary/Global/containerStyles';
+import useGAEventTracker from './../../../../Utils/UIutils/useGAEventTracker';
 
 const QuoteDisplay = () => {
   const {
@@ -48,8 +49,9 @@ const QuoteDisplay = () => {
 
   const dispatch = useDisplayQuoteDispatch();
 
+  const GAEventsTracker = useGAEventTracker('QuoteDisplay');
+
   React.useEffect(() => {
-    console.log('window.innerWidth', window.innerWidth);
     if (window.innerWidth > 768) {
       dispatch({ type: 'DQ_TOGGLE_ACTIONBUTTONS' });
     }
@@ -215,6 +217,13 @@ const QuoteDisplay = () => {
                       <CenterAlignedColumnContainer marginTop="4px">
                         <QuotePageTagText
                           onClick={() => {
+                            GAEventsTracker(
+                              'AuhtorMoreInfoCLicked',
+                              getAuthorDetails(
+                                filterQuotesList[quoteIndex].author,
+                                'authorName'
+                              )
+                            );
                             playVibrations(6);
                             dispatch({ type: 'DQ_TOGGLE_AUTHORPROFILEDRAWER' });
                           }}

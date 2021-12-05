@@ -21,6 +21,7 @@ import MoodPageStaggerParent from './Styles/Molecules/MoodPageStaggerParent.jsx'
 
 import MoodPageTabContainer from './MoodPageTabContainer.jsx';
 import SelectedTagsAuthorContainer from './SelectedTagsAuthorContainer';
+import useGAEventTracker from './../../../../Utils/UIutils/useGAEventTracker';
 
 const MoodPage = ({ hidePageheading }) => {
   const history = useHistory();
@@ -56,6 +57,8 @@ const MoodPage = ({ hidePageheading }) => {
     window.scrollTo(0, 0);
   }, []);
 
+  const GAEventTracker = useGAEventTracker('MoodPage');
+
   return (
     <MoodPageContainer
       background={`radial-gradient(103.04% 56.47% at 49.87% 50%, ${quQTheme[themeIndex].primaryColor} 30.25%, ${quQTheme[themeIndex].secondaryColor} 100%)`}
@@ -79,6 +82,7 @@ const MoodPage = ({ hidePageheading }) => {
 
         <MoodPageStartReadingButton
           onClick={() => {
+            GAEventTracker('MoodPage', 'StartReadingButton');
             goButtonVibrations();
             createFilteredQuotes();
           }}

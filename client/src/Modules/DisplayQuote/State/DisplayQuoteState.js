@@ -61,7 +61,7 @@ const DisplayQuoteState = ({ children }) => {
       QuoteID: '',
       completeDelete: false
     },
-    moodPageActiveTab: 'authors',
+    moodPageActiveTab: 'tags',
     displayQuotes: false,
     currentQuote: [],
     displayFilterModal: false,

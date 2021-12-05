@@ -113,6 +113,7 @@ export const MoodPageTagButtonText = styled(MoodPageButtonText)``;
 
 export const MoodPageTabWrapper = styled(WrappedRowContainer)`
   width: 92%;
+  flex-direction: row-reverse;
   margin-top: 36px;
   max-width: 800px;
   @media (min-width: 1200px) {

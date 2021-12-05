@@ -74,11 +74,7 @@ const MoodPage = ({ hidePageheading }) => {
         <SelectedTagsAuthorContainer />
         <MoodPageTabContainer />
 
-        {moodPageActiveTab === 'authors' ? (
-          <MoodPageAuthor />
-        ) : (
-          <MoodPageTags />
-        )}
+        {moodPageActiveTab === 'tags' ? <MoodPageTags /> : <MoodPageAuthor />}
 
         <MoodPageStartReadingButton
           onClick={() => {

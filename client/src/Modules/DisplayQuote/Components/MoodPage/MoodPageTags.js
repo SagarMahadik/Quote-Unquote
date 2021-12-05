@@ -22,7 +22,7 @@ const MoodPageTags = () => {
   const GAEventsTracker = useGAEventTracker('MoodPageTags');
 
   const handleClickOnTag = tagName => {
-    GAEventsTracker.trackEvent('ClickOnTag', tagName);
+    GAEventsTracker('ClickOnTag', tagName);
     formClickVibrations();
     dispatch({ type: 'DQ_HANDLE_CLICK_TAG', payload: tagName });
   };

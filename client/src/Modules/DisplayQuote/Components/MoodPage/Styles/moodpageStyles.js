@@ -43,6 +43,8 @@ export const MoodPageSectionContainer = styled(WrappedRowContainer)`
   overflow-y: scroll;
   background: rgba(231, 234, 239, 0.19);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
 `;
 
 export const MoodPageTagContainer = styled(MoodPageSectionContainer)``;
@@ -196,4 +198,24 @@ export const MoodPageAuthorTagText = styled(Text)`
   align-items: center;
   text-align: center;
   color: rgba(255, 255, 255, 0.85);
+`;
+
+export const StartReadingButton = styled(CenterAlignedColumnContainer)`
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 15px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  width: 182px;
+  height: 47px;
+  margin-top: 16px;
+`;
+
+export const StartReadingButtonText = styled(Text)`
+  font-family: Tomorrow;
+  font-style: normal;
+  font-weight: 900;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  color: rgba(255, 255, 255, 0.87);
 `;

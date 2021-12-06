@@ -4,7 +4,9 @@ import MoodPageAuthor from 'Modules/DisplayQuote/Components/MoodPage/MoodPageAut
 import {
   MoodPageContainer,
   MoodPageHeader,
-  MoodPageTagContainer
+  MoodPageTagContainer,
+  StartReadingButton,
+  StartReadingButtonText
 } from './Styles/moodpageStyles.js';
 import { goButtonVibrations } from 'Utils/vibrations.js';
 
@@ -68,7 +70,7 @@ const MoodPage = ({ hidePageheading }) => {
         {displayFilterModal ? (
           <MoodPageHeader>Your selections</MoodPageHeader>
         ) : (
-          <MoodPageHeader>Whats your mood?</MoodPageHeader>
+          <MoodPageHeader>Select your kind of Genre :</MoodPageHeader>
         )}
 
         <SelectedTagsAuthorContainer />
@@ -76,13 +78,15 @@ const MoodPage = ({ hidePageheading }) => {
 
         {moodPageActiveTab === 'tags' ? <MoodPageTags /> : <MoodPageAuthor />}
 
-        <MoodPageStartReadingButton
+        <StartReadingButton
           onClick={() => {
             GAEventTracker('MoodPage', 'StartReadingButton');
             goButtonVibrations();
             createFilteredQuotes();
           }}
-        />
+        >
+          <StartReadingButtonText>Start Reading</StartReadingButtonText>
+        </StartReadingButton>
       </MoodPageStaggerParent>
     </MoodPageContainer>
   );

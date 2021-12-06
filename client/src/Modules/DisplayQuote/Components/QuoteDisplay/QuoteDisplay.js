@@ -108,6 +108,7 @@ const QuoteDisplay = () => {
 
   const paginate = newDirection => {
     setPage([page + newDirection, newDirection]);
+    GAEventsTracker('Quote_Swipe');
   };
 
   const bind = useDoubleTap(event => {

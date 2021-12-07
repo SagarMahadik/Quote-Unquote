@@ -100,15 +100,13 @@ export const MoodPageAuthorButtonImage = styled(MotionImage)`
   min-height: 70px;
   border-radius: 50%;
   object-fit: cover;
-  margin-top: 8px;
   background: rgba(255, 255, 255, 0.2);
   border: 2px solid #ffffff;
   filter: grayscale(100%);
 `;
 
 export const MoodPageAuthorButtonText = styled(MoodPageButtonText)`
-  margin-bottom: 8px;
-  margin-top: 16px;
+  margin-top: 20px;
 `;
 
 export const MoodPageTagButtonText = styled(MoodPageButtonText)``;
@@ -175,18 +173,12 @@ export const MoodPageSelectedItemIconContainer = styled(
   height: 50px;
 `;
 
-export const MoodPageAuthorTagContainer = styled(CenterAlignedColumnContainer)`
-  background: rgba(255, 255, 255, 0.1);
-  border: 0.5px solid rgba(255, 255, 255, 0.46);
-  box-sizing: border-box;
-  border-radius: 5px;
+export const MoodPageAuthorTagContainer = styled(WrappedRowContainer)`
+  height: 30px;
   width: auto;
-  height: 14px;
-  padding-left: 4px;
-  padding-right: 4px;
   position: absolute;
   top: 74%;
-  margin-top: -12px;
+  margin-top: -24px;
   opacity: ${props => (props.tagPresent ? '1' : '0')};
 `;
 

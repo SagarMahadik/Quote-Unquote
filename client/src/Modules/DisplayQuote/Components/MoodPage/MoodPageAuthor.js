@@ -20,6 +20,7 @@ import MoodPageSkeletons from './Styles/Molecules/MoodPageSkeletons';
 import { CenterAlignedColumnContainer } from 'BennyStyleLibrary/Global/containerStyles';
 import { formClickVibrations } from 'Utils/vibrations.js';
 import useGAEventTracker from './../../../../Utils/UIutils/useGAEventTracker';
+import MoodPageAuthorInfoIcons from './Styles/Molecules/MoodPageAuthorInfoIcons';
 
 const MoodPageAuthor = () => {
   const { appThemes, activeTheme } = useApplicationState();
@@ -34,6 +35,14 @@ const MoodPageAuthor = () => {
     formClickVibrations();
     dispatch({ type: 'DQ_HANDLE_CLICK_AUTHOR', payload: authorName });
   };
+
+  //const authorTags = ['Brainy', 'Relax', 'Dark'];
+
+  const createAuthorTagArray = string => {
+    var array = string.split(',');
+    return array;
+  };
+
   return (
     <>
       {authorList.length === 0 ? (
@@ -73,14 +82,18 @@ const MoodPageAuthor = () => {
                     }
                     selectedColor={appThemes[activeTheme]}
                   >
-                    <MoodPageAuthorTagContainer tagPresent={authorTag != ''}>
-                      <MoodPageAuthorTagText>{authorTag}</MoodPageAuthorTagText>
-                    </MoodPageAuthorTagContainer>
+                    {authorTag != '' ? (
+                      <MoodPageAuthorTagContainer tagPresent={authorTag != ''}>
+                        {createAuthorTagArray(authorTag).map(tag => {
+                          return <MoodPageAuthorInfoIcons tag={tag} />;
+                        })}
+                      </MoodPageAuthorTagContainer>
+                    ) : null}
 
                     <MoodPageAuthorButtonImage
                       src={authorImageUrl}
                     ></MoodPageAuthorButtonImage>
-                    <CenterAlignedColumnContainer height="60px">
+                    <CenterAlignedColumnContainer height="60px" marginTop="6px">
                       <MoodPageAuthorButtonText>
                         {authorName}
                       </MoodPageAuthorButtonText>

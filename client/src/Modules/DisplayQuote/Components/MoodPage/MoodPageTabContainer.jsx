@@ -30,7 +30,7 @@ const MoodPageTabContainer = () => {
             dispatch({ type: 'DQ_MOODPAGE_SET_ACTIVETAB', payload: 'tags' });
           }}
         >
-          Tags
+          Genres
         </MoodPageTab>
       </MoodPageTabWrapper>
     </>

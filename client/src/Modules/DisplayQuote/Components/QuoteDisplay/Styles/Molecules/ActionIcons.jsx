@@ -5,9 +5,13 @@ import FilterIcon from './FilterIcon';
 import { goButtonVibrations } from 'Utils/vibrations.js';
 import { useDisplayQuoteDispatch } from 'Modules/DisplayQuote/State/DisplayQuoteState';
 import { playVibrations } from './../../../../../../Utils/vibrations';
+import useGAEventTracker from './../../../../../../Utils/UIutils/useGAEventTracker';
 
 const ActionIcons = ({ currentQuote, currentAuthor, onClick }) => {
   const dispatch = useDisplayQuoteDispatch();
+
+  const GAEventTracker = useGAEventTracker('Quote Display_Actions');
+
   const sendText = async () => {
     dispatch({ type: 'DQ_TOGGLE_ACTIONBUTTONS' });
     navigator
@@ -31,6 +35,7 @@ const ActionIcons = ({ currentQuote, currentAuthor, onClick }) => {
     >
       <FilterIcon
         onClick={() => {
+          GAEventTracker('QuoteDisplay_Icon', 'Filter');
           dispatch({ type: 'DQ_TOGGLE_ACTIONBUTTONS' });
           handleHideModal();
         }}
@@ -38,6 +43,7 @@ const ActionIcons = ({ currentQuote, currentAuthor, onClick }) => {
       />
       <ShareIcon
         onClick={() => {
+          GAEventTracker('QuoteDisplay_Icon', 'Share');
           goButtonVibrations();
           sendText();
         }}

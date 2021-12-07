@@ -286,15 +286,13 @@ const QuoteDisplay = () => {
               )}
             </AnimatePresence>
             <AnimatePresence>
-              {displayActionButtons && (
-                <ActionIcons
-                  currentQuote={filterQuotesList[quoteIndex].quote}
-                  currentAuthor={getAuthorDetails(
-                    filterQuotesList[quoteIndex].author,
-                    'authorName'
-                  )}
-                />
-              )}
+              <ActionIcons
+                currentQuote={filterQuotesList[quoteIndex].quote}
+                currentAuthor={getAuthorDetails(
+                  filterQuotesList[quoteIndex].author,
+                  'authorName'
+                )}
+              />
             </AnimatePresence>
             <>
               <FilterDrawer />

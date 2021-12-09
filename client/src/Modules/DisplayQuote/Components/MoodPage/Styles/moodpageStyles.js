@@ -66,7 +66,18 @@ export const MoodPageButtonWrapper = styled(
   transition: all 0.5s ease-out;
 `;
 
-export const MoodPageTagButtonWrapper = styled(MoodPageButtonWrapper)``;
+export const MoodPageTagButtonWrapper = styled(MoodPageButtonWrapper)`
+  height: auto;
+  width: 90px;
+  padding: 16px;
+  background: ${props =>
+    props.selected ? 'rgba(255, 255, 255, 0.2)' : 'none'};
+  box-shadow: ${props =>
+    props.selected ? '0px 4px 4px rgba(0, 0, 0, 0.25)' : 'none'};
+
+  border-radius: 20px;
+  border: none;
+`;
 
 export const MoodPageButtonText = styled(Text)`
   font-family: 'Noto Sans';
@@ -83,8 +94,8 @@ export const MoodPageSkeletonButton = styled(MoodPageButtonWrapper)`
 `;
 
 export const MoodPageTagButtonSVG = styled(MotionImage)`
-  width: 70px;
-  height: 70px;
+  width: 109px;
+  height: 109px;
   min-height: 70px;
   object-fit: contain;
 `;
@@ -109,7 +120,11 @@ export const MoodPageAuthorButtonText = styled(MoodPageButtonText)`
   margin-top: 20px;
 `;
 
-export const MoodPageTagButtonText = styled(MoodPageButtonText)``;
+export const MoodPageTagButtonText = styled(MoodPageButtonText)`
+  margin-top: 4px;
+  font-style: ${props => (props.selected ? 'bold' : 'normal')};
+  font-weight: ${props => (props.selected ? 'bold' : 'normal')};
+`;
 
 export const MoodPageTabWrapper = styled(WrappedRowContainer)`
   width: 92%;
@@ -171,6 +186,7 @@ export const MoodPageSelectedItemIconContainer = styled(
 )`
   width: 50px;
   height: 50px;
+  margin-top: 16px;
 `;
 
 export const MoodPageAuthorTagContainer = styled(WrappedRowContainer)`

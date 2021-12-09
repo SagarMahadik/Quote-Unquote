@@ -16,6 +16,9 @@ const authorSchema = new mongoose.Schema({
   authorTag: {
     type: String,
     default: ''
+  },
+  createdAt: {
+    type: String
   }
 });
 

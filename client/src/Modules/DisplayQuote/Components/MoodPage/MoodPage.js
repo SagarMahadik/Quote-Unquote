@@ -70,7 +70,11 @@ const MoodPage = ({ hidePageheading }) => {
         {displayFilterModal ? (
           <MoodPageHeader>Your selections</MoodPageHeader>
         ) : (
-          <MoodPageHeader>Select your kind of Genre :</MoodPageHeader>
+          <MoodPageHeader>
+            {moodPageActiveTab === 'tags'
+              ? 'Select your kind of Genre :'
+              : 'Select Author :'}
+          </MoodPageHeader>
         )}
 
         <SelectedTagsAuthorContainer />

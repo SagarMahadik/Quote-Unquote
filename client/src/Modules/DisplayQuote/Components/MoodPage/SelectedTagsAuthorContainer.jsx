@@ -49,14 +49,14 @@ const SelectedTagsAuthorContainer = () => {
       <AnimatePresence>
         {authorList.filter(author => author.selected).length > 0 && (
           <FlexRowContainer
-            alignItems="baseline"
+            alignItems="center"
             width="100%"
             style={{ maxWidth: '800px' }}
+            borderBottom="1px solid #e6e6e6"
+            borderTop="1px solid #e6e6e6"
           >
             <MoodPageSelectedItemIconContainer>
-              <SelectedAuthorIcon
-                style={{ width: '30px', height: '30px', marginTop: '8px' }}
-              />
+              <SelectedAuthorIcon style={{ width: '30px', height: '30px' }} />
             </MoodPageSelectedItemIconContainer>
             <MoodPageFilterScrollContainer
               initial={{ opacity: 0, y: -20 }}
@@ -93,9 +93,7 @@ const SelectedTagsAuthorContainer = () => {
             style={{ maxWidth: '800px' }}
           >
             <MoodPageSelectedItemIconContainer>
-              <SelectedTagIcon
-                style={{ width: '30px', height: '30px', marginTop: '16px' }}
-              />
+              <SelectedTagIcon style={{ width: '30px', height: '30px' }} />
             </MoodPageSelectedItemIconContainer>
             <MoodPageFilterScrollContainer
               initial={{ opacity: 0, y: -20 }}

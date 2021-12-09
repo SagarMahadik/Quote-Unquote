@@ -15,6 +15,7 @@ import {
 import MoodPageSkeletons from './Styles/Molecules/MoodPageSkeletons';
 import { formClickVibrations } from 'Utils/vibrations.js';
 import useGAEventTracker from './../../../../Utils/UIutils/useGAEventTracker';
+import MoodPageTagIcons from './Styles/Molecules/MoodPageTagIcons/MoodPageTagIcons';
 
 const MoodPageTags = () => {
   const { tagList, displayFilterModal } = useDisplayQuoteState();
@@ -37,7 +38,7 @@ const MoodPageTags = () => {
         <MoodPageSectionContainer height={displayFilterModal ? '48vh' : '56vh'}>
           {tagList
             .filter(tag => tag.tagSVGIcon != '')
-            .map(({ tagName, selected, _id, tagSVGIcon }) => {
+            .map(({ tagName, selected, _id, tagSVGIcon, tagQuoteCount }) => {
               return (
                 <MoodPageTagButtonWrapper
                   key={_id}
@@ -46,7 +47,12 @@ const MoodPageTags = () => {
                   whileTap={{ scale: 1.2 }}
                 >
                   <MoodPageTagButtonSVG src={tagSVGIcon}></MoodPageTagButtonSVG>
-                  <MoodPageTagButtonText>{tagName}</MoodPageTagButtonText>
+                  <MoodPageTagButtonText selected={selected}>
+                    {tagName}
+                  </MoodPageTagButtonText>
+                  <MoodPageTagButtonText>
+                    ({tagQuoteCount})
+                  </MoodPageTagButtonText>
                 </MoodPageTagButtonWrapper>
               );
             })}

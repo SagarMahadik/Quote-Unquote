@@ -8,6 +8,9 @@ const tagSchema = new mongoose.Schema({
   tagSVGIcon: {
     type: String,
     default: ''
+  },
+  tagQuoteCount: {
+    type: Number
   }
 });
 

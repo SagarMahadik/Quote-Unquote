@@ -44,9 +44,9 @@ const CreateAuthor = () => {
 
   const addAuthorToDB = async searchString => {
     let authorName = searchString;
-    const body = JSON.stringify({ authorName });
+    let createdAt = new Date().toJSON().slice(0, 10);
+    const body = JSON.stringify({ authorName, createdAt });
     const res = await createAuthor(body);
-
     setNewAuthorInRequest(res._id);
   };
 

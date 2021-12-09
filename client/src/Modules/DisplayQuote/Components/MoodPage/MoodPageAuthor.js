@@ -21,6 +21,7 @@ import { CenterAlignedColumnContainer } from 'BennyStyleLibrary/Global/container
 import { formClickVibrations } from 'Utils/vibrations.js';
 import useGAEventTracker from './../../../../Utils/UIutils/useGAEventTracker';
 import MoodPageAuthorInfoIcons from './Styles/Molecules/MoodPageAuthorInfoIcons';
+import NewlyAddedAuthor from './Styles/Molecules/MoodPageAuthorIcons/NewlyAddedAuthor';
 
 const MoodPageAuthor = () => {
   const { appThemes, activeTheme } = useApplicationState();
@@ -43,6 +44,19 @@ const MoodPageAuthor = () => {
     return array;
   };
 
+  const addedInThisWeek = createdAt => {
+    const today = new Date();
+    const authorAddedDate = new Date(createdAt);
+    const oneWeek = 1000 * 60 * 60 * 24 * 7;
+    const diff = Math.abs(today - authorAddedDate);
+    const diffDays = Math.ceil(diff / oneWeek);
+    if (diffDays <= 7) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <>
       {authorList.length === 0 ? (
@@ -60,7 +74,8 @@ const MoodPageAuthor = () => {
                 _id,
                 authorImageUrl,
                 authorTag,
-                tapped
+                tapped,
+                createdAt
               }) => {
                 return (
                   <MoodPageAuthorButtonWrapper
@@ -93,6 +108,11 @@ const MoodPageAuthor = () => {
                     <MoodPageAuthorButtonImage
                       src={authorImageUrl}
                     ></MoodPageAuthorButtonImage>
+                    <CenterAlignedColumnContainer
+                      style={{ position: 'absolute', top: '40%' }}
+                    >
+                      {addedInThisWeek(createdAt) ? <NewlyAddedAuthor /> : null}
+                    </CenterAlignedColumnContainer>
                     <CenterAlignedColumnContainer height="60px" marginTop="6px">
                       <MoodPageAuthorButtonText>
                         {authorName}

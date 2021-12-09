@@ -20,6 +20,7 @@ const MoodPageAuthorInfoIcons = ({ tag }) => {
         margin: iconMargin,
         border: '1px solid rgba(255, 255, 255, 0.6)',
         borderRadius: '50%',
+        backgroundColor: 'rgba(255, 255, 255, 0.3)',
         padding: '1px'
       }}
     >

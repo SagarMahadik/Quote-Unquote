@@ -17,6 +17,7 @@
     "react-google-login": "^5.2.2",
     "react-howler": "^5.0.0",
     "react-lazy-load-image-component": "^1.5.1",
+    "react-onesignal": "^2.0.2",
     "react-query": "^3.13.11",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",

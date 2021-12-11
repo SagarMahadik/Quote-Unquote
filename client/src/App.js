@@ -7,10 +7,16 @@ import ScrollToTop from 'Utils/UIutils/ScrollToTop';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import DisplayQuoteState from 'Modules/DisplayQuote/State/DisplayQuoteState';
 import ThemeAppBackground from './BennyStyleLibrary/Themes/ThemeAppBackground';
+import OneSignal from 'react-onesignal';
+import React from 'react';
 
 const queryClient = new QueryClient();
 
 function App() {
+  React.useEffect(() => {
+    OneSignal.init({ appId: `${process.env.REACT_APP_ONESIGNALID}` });
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ApplicationState className="App">

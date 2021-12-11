@@ -14,7 +14,7 @@ const queryClient = new QueryClient();
 
 function App() {
   React.useEffect(() => {
-    OneSignal.init({ appId: `${process.env.REACT_APP_ONESIGNALID}` });
+    OneSignal.init({ appId: 'cd28358b-79e3-4755-a2ba-032c93ede52e' });
   }, []);
 
   return (

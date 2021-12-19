@@ -75,22 +75,22 @@ const QuoteDisplay = () => {
   }, [query.get('quoteId'), quoteList]);
 
   React.useEffect(() => {
-    if (query.get('author') && authorList.length > 0) {
+    if (query.get('author') && authorList.length > 0 && quoteList.length > 0) {
       dispatch({
         type: 'DQ_HANDLE_DISPLAYQUOTE_BYAUTHOR',
         payload: getAuthorId(query.get('author'))
       });
     }
-  }, [query.get('author'), authorList]);
+  }, [query.get('author'), authorList, quoteList]);
 
   React.useEffect(() => {
-    if (query.get('tag') && tagList.length > 0) {
+    if (query.get('tag') && tagList.length > 0 && quoteList.length > 0) {
       dispatch({
         type: 'DQ_HANDLE_DISPLAYQUOTE_BYTAG',
         payload: getTagId(query.get('tag'))
       });
     }
-  }, [query.get('tag'), tagList]);
+  }, [query.get('tag'), tagList, quoteList]);
 
   const getTagId = tagInUrl => {
     return tagList.filter(tag => tag.tagName === tagInUrl)[0]['_id'];

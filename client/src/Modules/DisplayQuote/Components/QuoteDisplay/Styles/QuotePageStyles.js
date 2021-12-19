@@ -45,9 +45,9 @@ export const QuoteContainer = styled(CenterAlignedColumnContainer)`
 export const QuoteAuthorImageContainer = styled(CenterAlignedColumnContainer)`
   width: 100%;
   max-width: 400px;
-  height: 480px;
+  height: 420px;
   overflow: hidden;
-  border-radius: 120px;
+  border-radius: 36px;
   margin-top: -100px;
   position: relative;
   @media (min-width: 800px) {
@@ -58,9 +58,9 @@ export const QuoteAuthorImageContainer = styled(CenterAlignedColumnContainer)`
 
 export const QuoteAuthorImage = styled(MotionImage)`
   object-fit: cover;
-  border-radius: 120px;
+  border-radius: 36px;
   filter: grayscale(100%);
-  opacity: 0.4;
+  opacity: 0.3;
 `;
 
 export const AuthorImageOverLay = styled(CenterAlignedColumnContainer)`
@@ -68,7 +68,7 @@ export const AuthorImageOverLay = styled(CenterAlignedColumnContainer)`
   top: 0;
   width: 100%;
   height: 100%;
-  border-radius: 120px;
+  border-radius: 36px;
   z-index: 1;
   background: linear-gradient(
     0deg,

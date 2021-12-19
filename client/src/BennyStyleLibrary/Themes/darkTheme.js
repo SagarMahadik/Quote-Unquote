@@ -18,8 +18,6 @@ export const quQTheme = [
   { primaryColor: '#D1437C', secondaryColor: '#3E041B' },
   { primaryColor: '#3AB265', secondaryColor: '#02270F' },
   { primaryColor: '#0EAED4', secondaryColor: '#03313D' },
-  { primaryColor: '#DD5C9D', secondaryColor: '#31041A' },
-  { primaryColor: '#BB55A6', secondaryColor: '#510541' },
   { primaryColor: '#C53888', secondaryColor: '#270017' },
   { primaryColor: '#E55156', secondaryColor: '#581114' },
   { primaryColor: '#3BBE8B', secondaryColor: '#09412B' },

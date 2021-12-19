@@ -77,6 +77,7 @@ const DisplayQuoteState = ({ children }) => {
   const [state, dispatch] = useReducer(DisplayQuoteReducer, initialState);
 
   const {
+    quotes: quoteList,
     tagList,
     authorList,
     selectedData,
@@ -145,6 +146,7 @@ const DisplayQuoteState = ({ children }) => {
   return (
     <DisplayQuoteContext.Provider
       value={{
+        quoteList,
         tagList,
         authorList,
         selectedData,

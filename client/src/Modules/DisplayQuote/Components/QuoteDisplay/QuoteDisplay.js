@@ -35,6 +35,8 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { playVibrations } from './../../../../Utils/vibrations';
 import { WrappedRowContainer } from './../../../../BennyStyleLibrary/Global/containerStyles';
 import useGAEventTracker from './../../../../Utils/UIutils/useGAEventTracker';
+import { useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Link, useLocation } from 'react-router-dom';
 
 const QuoteDisplay = () => {
   const {
@@ -44,26 +46,84 @@ const QuoteDisplay = () => {
     displayOverlay,
     displayAuthorProfile,
     authorList,
-    tagList
+    tagList,
+    quoteList
   } = useDisplayQuoteState();
 
   const dispatch = useDisplayQuoteDispatch();
 
   const GAEventsTracker = useGAEventTracker('QuoteDisplay');
 
+  //  const { quoteId } = useParams();
+
+  function useQuery() {
+    const { search } = useLocation();
+
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  }
+
+  let query = useQuery();
+
+  React.useEffect(() => {
+    if (query.get('quoteId') && quoteList.length > 0) {
+      dispatch({
+        type: 'DQ_HANDLE_DISPLAYQUOTE_BYID',
+        payload: query.get('quoteId'),
+        quoteTags: getQuoteTags(query.get('quoteId'))
+      });
+    }
+  }, [query.get('quoteId'), quoteList]);
+
+  React.useEffect(() => {
+    if (query.get('author') && authorList.length > 0) {
+      dispatch({
+        type: 'DQ_HANDLE_DISPLAYQUOTE_BYAUTHOR',
+        payload: getAuthorId(query.get('author'))
+      });
+    }
+  }, [query.get('author'), authorList]);
+
+  React.useEffect(() => {
+    if (query.get('tag') && tagList.length > 0) {
+      dispatch({
+        type: 'DQ_HANDLE_DISPLAYQUOTE_BYTAG',
+        payload: getTagId(query.get('tag'))
+      });
+    }
+  }, [query.get('tag'), tagList]);
+
+  const getTagId = tagInUrl => {
+    return tagList.filter(tag => tag.tagName === tagInUrl)[0]['_id'];
+  };
+
+  const getQuoteTags = quoteID => {
+    console.log(quoteList.filter(quote => quote._id === quoteID)[0]['tags']);
+    return quoteList.filter(quote => quote._id === quoteID)[0]['tags'];
+  };
+
+  useEffect(() => {
+    if (
+      filterQuotesList.length === 0 &&
+      query.get('quoteId') === null &&
+      query.get('author') === null &&
+      query.get('tag') === null
+    ) {
+      dispatch({
+        type: 'DQ_CREATE_FILTEREDQUOTES'
+      });
+    }
+  }, [
+    filterQuotesList,
+    query.get('quoteId'),
+    query.get('author'),
+    query.get('tag')
+  ]);
+
   React.useEffect(() => {
     if (window.innerWidth > 768) {
       dispatch({ type: 'DQ_TOGGLE_ACTIONBUTTONS' });
     }
   }, [window.innerWidth]);
-
-  useEffect(() => {
-    if (filterQuotesList.length === 0) {
-      dispatch({
-        type: 'DQ_CREATE_FILTEREDQUOTES'
-      });
-    }
-  }, [filterQuotesList]);
 
   const history = useHistory();
 
@@ -91,7 +151,7 @@ const QuoteDisplay = () => {
     },
     exit: direction => {
       return {
-        opacity: 0
+        opacity: 0.8
       };
     }
   };
@@ -119,8 +179,43 @@ const QuoteDisplay = () => {
     return tagList.filter(({ _id }) => _id === tagId)[0].tagName;
   };
 
+  const getAuthorId = authorNameInQuery => {
+    console.log('authorName', authorNameInQuery);
+    console.log(
+      authorList.filter(
+        ({ authorName }) => authorName === authorNameInQuery
+      )[0]['_id']
+    );
+    return authorList.filter(
+      ({ authorName }) => authorName === authorNameInQuery
+    )[0]['_id'];
+  };
+
   const getAuthorDetails = (authorId, detail) => {
     return authorList.filter(({ _id }) => _id === authorId)[0][detail];
+  };
+
+  const getQuoteBackgroundImage = authorId => {
+    const codingImages = [
+      'https://res.cloudinary.com/antilibrary/image/upload/v1639912137/Antilibrary/nasa-Q1p7bh3SHj8-unsplash_sice0h.jpg',
+      'https://res.cloudinary.com/antilibrary/image/upload/v1639911554/Antilibrary/joshua-reddekopp-GkFQEOubrCo-unsplash_snybnh.jpg',
+      'https://res.cloudinary.com/antilibrary/image/upload/v1639912203/Antilibrary/robynne-hu-HOrhCnQsxnQ-unsplash_o8snfp.jpg',
+      'https://res.cloudinary.com/antilibrary/image/upload/v1639912285/Antilibrary/maximalfocus-VT4rx775FT4-unsplash_zil2bp.jpg'
+    ];
+
+    const authorImage = authorList.filter(({ _id }) => _id === authorId)[0][
+      'authorImageUrl'
+    ];
+
+    const finalImageArray = codingImages.concat(authorImage);
+
+    console.log(finalImageArray);
+
+    //get random image from finalImageArray
+    const randomImage =
+      finalImageArray[Math.floor(Math.random() * finalImageArray.length)];
+    console.log(randomImage);
+    return randomImage;
   };
 
   return (
@@ -151,7 +246,10 @@ const QuoteDisplay = () => {
                   opacity: { duration: 0 }
                 }}
                 drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
+                dragConstraints={{
+                  left: 0,
+                  right: 0
+                }}
                 dragElastic={1}
                 onDragEnd={(e, { offset, velocity }) => {
                   const swipe = swipePower(offset.x, velocity.x);
@@ -203,7 +301,10 @@ const QuoteDisplay = () => {
                         opacity: { duration: 0 }
                       }}
                       drag="x"
-                      dragConstraints={{ left: 0, right: 0 }}
+                      dragConstraints={{
+                        left: 0,
+                        right: 0
+                      }}
                       dragElastic={1}
                       onDragEnd={(e, { offset, velocity }) => {
                         const swipe = swipePower(offset.x, velocity.x);
@@ -226,7 +327,9 @@ const QuoteDisplay = () => {
                               )
                             );
                             playVibrations(6);
-                            dispatch({ type: 'DQ_TOGGLE_AUTHORPROFILEDRAWER' });
+                            dispatch({
+                              type: 'DQ_TOGGLE_AUTHORPROFILEDRAWER'
+                            });
                           }}
                         >
                           {makeFirstLetterUpperCase(
@@ -280,7 +383,9 @@ const QuoteDisplay = () => {
                     //filterQuotesList[quoteIndex].author['authorBio']}
                   }
                   onClick={() =>
-                    dispatch({ type: 'DQ_TOGGLE_AUTHORPROFILEDRAWER' })
+                    dispatch({
+                      type: 'DQ_TOGGLE_AUTHORPROFILEDRAWER'
+                    })
                   }
                 />
               )}

@@ -67,6 +67,7 @@ const Routes = () => {
             />
             <PrivateRoute exact path="/addQuote" component={AddQuote} />
             <Route exact path="/readQuote" component={QuoteDisplay} />
+            <Route exact path="/readQuote/:quoteId" component={QuoteDisplay} />
             <Route exact path="/moodPage" component={MoodPage} />
             <Route exact path="/signUpSuccess" component={SignUpSuccess} />
             <Route
